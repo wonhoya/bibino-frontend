@@ -11,6 +11,7 @@ import SplashAnimation from "./screens/SplashAnimation/SplashAnimation";
 import Intro from "./screens/Intro/Intro";
 
 export default function App() {
+  var a = 3;
   const [isAnimationFinished, setIsAnimationFinished] = useState(false);
   let [fontsLoaded] = useFonts({
     Rubik_400Regular,
