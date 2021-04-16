@@ -10,9 +10,6 @@
     "web": "expo start --web",
     "eject": "expo eject"
   },
-  "eslintConfig": {
-    "extends": "@react-native-community"
-  },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/native": "^5.9.4",
