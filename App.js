@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { View } from "react-native";
 import AppLoading from "expo-app-loading";
 import {
   useFonts,
@@ -9,6 +10,7 @@ import {
 
 import SplashAnimation from "./screens/SplashAnimation/SplashAnimation";
 import Intro from "./screens/Intro/Intro";
+import RatingBoard from "./components/shared/RatingBoard/RatingBoard";
 
 export default function App() {
   const [isAnimationFinished, setIsAnimationFinished] = useState(false);
@@ -27,12 +29,25 @@ export default function App() {
   };
 
   return (
-    <>
-      {!isAnimationFinished ? (
-        <SplashAnimation handleAnimationFinish={handleAnimationFinish} />
-      ) : (
-        <Intro />
-      )}
-    </>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "yellow",
+      }}
+    >
+      <RatingBoard mode="static" rating="3" total="5" size="30" />
+    </View>
   );
+
+  // return (
+  //   <>
+  //     {!isAnimationFinished ? (
+  //       <SplashAnimation handleAnimationFinish={handleAnimationFinish} />
+  //     ) : (
+  //       <Intro />
+  //     )}
+  //   </>
+  // );
 }
