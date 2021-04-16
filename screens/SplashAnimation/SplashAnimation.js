@@ -1,5 +1,5 @@
 import React from "react";
-import { View, ImageBackground, StyleSheet } from "react-native";
+import { View, ImageBackground } from "react-native";
 import LottieView from "lottie-react-native";
 import splash from "../../assets/splashScreen.png";
 import styles from "./styles";
