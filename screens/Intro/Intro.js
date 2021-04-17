@@ -10,7 +10,7 @@ import styles from "./styles";
 import Button from "../../components/shared/Button/Button";
 import { ScrollView } from "react-native-gesture-handler";
 
-const { width, height } = Dimensions.get("window");
+const windowWidth = Dimensions.get("window").width;
 
 const Intro = () => {
   const [sliderState, setSliderState] = useState({ currentPage: 0 });
@@ -19,7 +19,7 @@ const Intro = () => {
   const setSliderPage = (event) => {
     const { currentPage } = sliderState;
     const { x } = event.nativeEvent.contentOffset;
-    const indexOfNextScreen = Math.floor(x / width);
+    const indexOfNextScreen = Math.floor(x / windowWidth);
     if (indexOfNextScreen !== currentPage) {
       setSliderState({
         ...sliderState,
@@ -44,7 +44,7 @@ const Intro = () => {
             setSliderPage(event);
           }}
         >
-          <View style={{ width, height }}>
+          <View style={styles.windowContainer}>
             <View style={styles.container}>
               <View style={styles.imageContainer}>
                 <ImageBackground
@@ -61,7 +61,7 @@ const Intro = () => {
               </View>
             </View>
           </View>
-          <View style={{ width, height }}>
+          <View style={styles.windowContainer}>
             <View style={styles.container}>
               <View style={styles.imageContainer}>
                 <ImageBackground
@@ -78,7 +78,7 @@ const Intro = () => {
               </View>
             </View>
           </View>
-          <View style={{ width, height }}>
+          <View style={styles.windowContainer}>
             <View style={styles.container}>
               <View style={styles.imageContainer}>
                 <ImageBackground
