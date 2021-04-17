@@ -1,8 +1,17 @@
 import { StyleSheet, Platform, StatusBar, Dimensions } from "react-native";
 
+import { Rubik_medium, Rubik_bold } from "../../constants/font";
+import {
+  paragraph_textFontSize,
+  main_title_textFon,
+} from "../../constants/size";
+
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
+
 const styles = StyleSheet.create({
   font: {
-    fontFamily: "Rubik_700Bold",
+    fontFamily: Rubik_bold,
     fontSize: 50,
   },
   androidSafeArea: {
@@ -10,20 +19,23 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   screen: {
-    width: Dimensions.get("window").width * 0.91,
+    width: windowWidth * 0.91,
     alignSelf: "center",
   },
   profileContainer: {
     marginTop: 10,
   },
+  profileImageContainer: {
+    borderRadius: 10,
+  },
   upperProfileContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    height: Dimensions.get("window").height * 0.2,
+    height: windowHeight * 0.5,
   },
   hashTagContainer: {},
   contentsContainer: {
-    height: Dimensions.get("window").height * 0.4,
+    height: windowHeight * 0.4,
   },
 });
 

@@ -15,7 +15,7 @@ const Main = () => {
             <Text>이상엽님</Text>
           </View>
           <View>
-            <ProfileIcon />
+            <View style={styles.profileImageContainer} />
           </View>
         </View>
         <View style={styles.hashTagContainer}>
