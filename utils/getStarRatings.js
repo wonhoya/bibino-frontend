@@ -7,28 +7,21 @@ import {
 } from "../assets/svgs/icon";
 
 const getStarRatings = (rate, total, size) => {
-  const FullStar = () => <RatingStarFilledIcon size={size} />;
-  const HalfStar = () => <RatingStarhalfFilledIcon size={size} />;
-  const EmptyStar = () => <RatingStarUnfilledIcon size={size} />;
-
-  const ratingNum = Number(rate);
-  const totalNum = Number(total);
-
   let stars;
 
-  if (Number.isInteger(ratingNum)) {
-    stars = Array(totalNum)
+  if (Number.isInteger(rate)) {
+    stars = Array(total)
       .fill("empty")
       .map((elem, index) => {
-        if (index < ratingNum) {
+        if (index < rate) {
           return "full";
         }
 
         return elem;
       });
   } else {
-    const floorRating = Math.floor(ratingNum);
-    stars = Array(totalNum)
+    const floorRating = Math.floor(rate);
+    stars = Array(total)
       .fill("empty")
       .map((elem, index) => {
         if (index < floorRating) {
@@ -46,11 +39,11 @@ const getStarRatings = (rate, total, size) => {
 
     switch (elem) {
       case "full":
-        return <FullStar key={key} />;
+        return <RatingStarFilledIcon size={size} key={key} />;
       case "half":
-        return <HalfStar key={key} />;
+        return <RatingStarhalfFilledIcon size={size} key={key} />;
       default:
-        return <EmptyStar key={key} />;
+        return <RatingStarUnfilledIcon size={size} key={key} />;
     }
   });
 };
