@@ -1,42 +1,69 @@
 import { StyleSheet, Platform, StatusBar, Dimensions } from "react-native";
 
-import { Rubik_medium, Rubik_bold } from "../../constants/font";
+import { RUBIK_REGULAR, RUBIK_BOLD } from "../../constants/font";
 import {
-  paragraph_textFontSize,
-  main_title_textFon,
+  MAIN_USERNAME_FONT_SIZE,
+  MAIN_PARAGRAPH_FONT_SIZE,
 } from "../../constants/size";
+import { PRIMARY_BLACK, PRIMARY_DARK_GREY } from "../../constants/colors";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
-  font: {
-    fontFamily: Rubik_bold,
-    fontSize: 50,
+  darkGrey: {
+    color: PRIMARY_DARK_GREY,
+  },
+  black: {
+    color: PRIMARY_BLACK,
+  },
+  usernameFont: {
+    fontFamily: RUBIK_BOLD,
+    fontSize: MAIN_USERNAME_FONT_SIZE,
+  },
+  mainParagraphFont: {
+    fontFamily: RUBIK_REGULAR,
+    fontSize: MAIN_PARAGRAPH_FONT_SIZE,
   },
   androidSafeArea: {
     flex: 1,
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   screen: {
-    width: windowWidth * 0.91,
+    width: windowWidth * 0.89,
     alignSelf: "center",
   },
   profileContainer: {
-    marginTop: 10,
+    height: windowHeight * 0.2,
   },
-  profileImageContainer: {
-    borderRadius: 10,
-  },
+
   upperProfileContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    height: windowHeight * 0.5,
+    alignItems: "baseline",
+    paddingTop: 30,
+    flex: 3,
   },
-  hashTagContainer: {},
+  profileImageContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: 10,
+  },
+  hashTagContainer: {
+    flex: 1,
+  },
   contentsContainer: {
     height: windowHeight * 0.4,
   },
+  mainParagraphContainer: {
+    marginVertical: 9,
+  },
 });
+
+styles.userImage = {
+  width: 48,
+  height: 48,
+  borderRadius: 24,
+};
 
 export default styles;

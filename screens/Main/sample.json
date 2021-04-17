@@ -1,0 +1,50 @@
+[
+  {
+    "username": "이상엽",
+    "userImagePath": null,
+    "userPreferences": {},
+    "beerImagePath": "../assets/pngs/beerSample1.png",
+    "beerName": "beerSample1",
+    "beerDescription": "AAAAA1111"
+  },
+  {
+    "username": "정주형",
+    "userImagePath": null,
+    "userPreferences": {},
+    "beerImagePath": "../assets/pngs/beerSample2.png",
+    "beerName": "beerSample2",
+    "beerDescription": "BBBB@@@@"
+  },
+  {
+    "username": "이원호",
+    "userImagePath": null,
+    "userPreferences": {},
+    "beerImagePath": "../assets/pngs/beerSample3.png",
+    "beerName": "beerSample3",
+    "beerDescription": "CCCCC33333"
+  },
+  {
+    "username": "박정빈",
+    "userImagePath": null,
+    "userPreferences": {},
+    "beerImagePath": "../assets/pngs/beerSample4.png",
+    "beerName": "beerSample4",
+    "beerDescription": "DDDDD444444"
+  },
+  {
+    "username": "전유림",
+    "userImagePath": null,
+    "userPreferences": {},
+    "beerImagePath": "../assets/pngs/beerSample5.png",
+    "beerName": "beerSample5",
+    "beerDescription": "EEEEEEE5555"
+  },
+  {
+    "username": "김탁현",
+    "userImagePath": null,
+    "userPreferences": {},
+    "beerImagePath": "../assets/pngs/beerSample6.png",
+    "beerName": "beerSample6",
+    "beerDescription": "F666666666"
+  }
+]
