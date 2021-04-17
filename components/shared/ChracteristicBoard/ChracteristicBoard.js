@@ -2,51 +2,40 @@ import React, { useState } from "react";
 import { View, Text } from "react-native";
 import Slider from "@react-native-community/slider";
 
-const CharacteristicBoard = ({ rating = 3 }) => {
-  const [slideVal, setSlideVal] = useState(rating);
-  const sliderStyle = {
-    sliderDummy: {
-      backgroundColor: "#d3d3d3",
-      width: 300,
-      height: 20,
-      borderRadius: 50,
-      position: "absolute",
-    },
-    sliderReal: {
-      backgroundColor: "#119EC2",
-      width: (slideVal / 50) * 300,
-      height: 20,
-    },
-  };
+import getStyles from "./styles";
+import { PRIMARY_ORAGNE } from "../../../constants/colors";
+
+const CharacteristicBoard = ({
+  titles = { title: "Hello", leftSubTitle: "Left", rightSubTitle: "right" },
+  rating = 3,
+  options = { size: 500, color: PRIMARY_ORAGNE, isDisabled: true },
+}) => {
+  const [rate, setRate] = useState(rating);
+
+  const { title, leftSubTitle, rightSubTitle } = titles;
+  const { size, color, isDisabled } = options;
+
+  const styles = getStyles(size, color, rate);
+
   return (
-    <View>
-      <Text
-        style={{
-          position: "relative",
-          backgroundColor: "red",
-          right: 10,
-          bottom: 15,
-          fontSize: 30,
-        }}
-      >
-        Aroma
-      </Text>
-      <View style={{ borderRadius: 50, overflow: "hidden" }}>
-        <View style={{ flexDirection: "row", position: "absolute" }}>
-          <View style={sliderStyle.sliderDummy} />
-          <View style={sliderStyle.sliderReal} />
+    <View style={styles.container}>
+      <Text style={styles.title}>{title}</Text>
+      <View style={styles.sliderContainer}>
+        <Text style={styles.leftSubTitle}>{leftSubTitle}</Text>
+        <Text style={styles.rightSubTitle}>{rightSubTitle}</Text>
+        <View style={styles.silderStyleContainer}>
+          <View style={styles.sliderDummy} />
+          <View style={styles.sliderReal} />
         </View>
         <Slider
-          style={{
-            width: 300,
-            height: 20,
-          }}
+          style={styles.sliderCore}
           minimumValue={0}
-          maximumValue={48}
-          value={slideVal}
-          onValueChange={(value) => setSlideVal(value)}
+          maximumValue={10}
+          value={rate}
+          onValueChange={(value) => setRate(value)}
           maximumTrackTintColor="transparent"
           minimumTrackTintColor="transparent"
+          disabled={isDisabled ? true : false}
         />
       </View>
     </View>
