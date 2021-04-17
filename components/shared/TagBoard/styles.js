@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     color: PRIMARY_WHITE,
     fontSize: TAG_FONT_SIZE,
     margin: 5,
+    paddingHorizontal: 10,
   },
 });
 
