@@ -1,7 +1,13 @@
-const primary_orange = "#F2994A";
-const yellow = "#F2C94C";
-const dark_grey = "#4F4F4F";
-const light_grey = "#F8F8F8";
-const black = "#3C3A36";
+const PRIMARY_ORAGNE = "#F2994A";
+const PRIMARY_YELLOW = "#F2C94C";
+const PRIMARY_DARK_GREY = "#4F4F4F";
+const PRIMARY_LIGHT_GREY = "#F8F8F8";
+const PRIMARY_BLACK = "#3C3A36";
 
-export { primary_orange, yellow, dark_grey, light_grey, black };
+export {
+  PRIMARY_ORAGNE,
+  PRIMARY_YELLOW,
+  PRIMARY_DARK_GREY,
+  PRIMARY_LIGHT_GREY,
+  PRIMARY_BLACK,
+};
