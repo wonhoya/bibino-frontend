@@ -1,12 +1,12 @@
-const primary_buttonFontSize = 15;
-const small_buttonFontSize = 10;
+const PRIMARY_BUTTON_FONT_SIZE = 15;
+const SMALL_BUTTON_FONT_SIZE = 10;
 
-const title_textFontSize = 40;
-const paragraph_textFontSize = 18;
+const INTRO_TITLE_FONT_SIZE = 40;
+const INTRO_PARAGRAPH_FONT_SIZE = 18;
 
 export {
-  primary_buttonFontSize,
-  small_buttonFontSize,
-  title_textFontSize,
-  paragraph_textFontSize,
+  PRIMARY_BUTTON_FONT_SIZE,
+  SMALL_BUTTON_FONT_SIZE,
+  INTRO_TITLE_FONT_SIZE,
+  INTRO_PARAGRAPH_FONT_SIZE,
 };
