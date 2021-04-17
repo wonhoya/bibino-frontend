@@ -1,4 +1,4 @@
-import { StyleSheet, Platform, StatusBar, Dimensions } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 
 import { RUBIK_REGULAR, RUBIK_BOLD } from "../../constants/font";
 import {
@@ -25,23 +25,19 @@ const styles = StyleSheet.create({
     fontFamily: RUBIK_REGULAR,
     fontSize: MAIN_PARAGRAPH_FONT_SIZE,
   },
-  androidSafeArea: {
-    flex: 1,
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-  },
-  screen: {
+  mainViewWidth: {
     width: windowWidth * 0.89,
     alignSelf: "center",
   },
   profileContainer: {
-    height: windowHeight * 0.2,
+    height: windowHeight * 0.17,
   },
 
   upperProfileContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "baseline",
-    paddingTop: 30,
+    paddingTop: 19,
     flex: 3,
   },
   profileImageContainer: {
@@ -53,17 +49,15 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   contentsContainer: {
-    height: windowHeight * 0.4,
+    marginTop: 10,
+    height: windowHeight * 0.6,
   },
   mainParagraphContainer: {
     marginVertical: 9,
   },
+  carouselContainer: {
+    marginTop: 20,
+  },
 });
-
-styles.userImage = {
-  width: 48,
-  height: 48,
-  borderRadius: 24,
-};
 
 export default styles;
