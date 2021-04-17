@@ -1,21 +1,14 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import {
   TAG_LIGHT_PURPLE,
   TAG_RED,
   TAG_LIGHT_BLUE,
   TAG_BLACK,
+  PRIMARY_WHITE,
 } from "../../../constants/colors";
-
-const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
+import { TAG_FONT_SIZE } from "../../../constants/size";
 
 const styles = StyleSheet.create({
-  testConatainer: {
-    width: windowWidth,
-    height: windowHeight / 20,
-    backgroundColor: "green",
-    overflow: "hidden",
-  },
   container: {
     flex: 1,
   },
@@ -28,13 +21,12 @@ const styles = StyleSheet.create({
     minWidth: 50,
     margin: 3,
     borderRadius: 12,
-    backgroundColor: "blue",
     justifyContent: "center",
     alignItems: "center",
   },
   tagFont: {
-    color: "white",
-    fontSize: 10,
+    color: PRIMARY_WHITE,
+    fontSize: TAG_FONT_SIZE,
     margin: 5,
   },
 });
