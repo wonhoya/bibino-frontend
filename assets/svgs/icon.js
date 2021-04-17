@@ -19,14 +19,14 @@ const ConfigurationIcon = () => {
   return <SvgXml xml={svgPath} />;
 };
 
-const FacebookIcon = () => {
+const FacebookIcon = ({ size }) => {
   const svgPath = `<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect width="40" height="40" rx="8" fill="#3C3A36"/>
   <path d="M20.8878 16.5765V13.8214C20.8878 13.061 21.5049 12.4439 22.2653 12.4439H23.6429V9H20.8878C18.6052 9 16.7551 10.8501 16.7551 13.1327V16.5765H14V20.0204H16.7551V31.0408H20.8878V20.0204H23.6429L25.0204 16.5765H20.8878Z" fill="#F2994A"/>
   </svg>
   `;
 
-  return <SvgXml xml={svgPath} />;
+  return <SvgXml xml={svgPath} width={size} height={size} />;
 };
 
 const FailureIcon = () => {
@@ -38,7 +38,7 @@ const FailureIcon = () => {
   return <SvgXml xml={svgPath} />;
 };
 
-const GoogleIcon = () => {
+const GoogleIcon = ({ size }) => {
   const svgPath = `<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect width="40" height="40" rx="8" fill="#3C3A36"/>
   <path d="M28.5715 19V16H27.0715V19H24.0715V20.5H27.0715V23.5H28.5715V20.5H31.5715V19H28.5715Z" fill="#F2994A"/>
@@ -46,10 +46,10 @@ const GoogleIcon = () => {
   </svg>
   `;
 
-  return <SvgXml xml={svgPath} />;
+  return <SvgXml xml={svgPath} width={size} height={size} />;
 };
 
-const InstagramIcon = () => {
+const InstagramIcon = ({ size }) => {
   const svgPath = `<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect width="40" height="40" rx="8" fill="#3C3A36"/>
   <path d="M24.4504 20.9796C24.4504 23.1724 22.6726 24.9502 20.4798 24.9502C18.287 24.9502 16.5092 23.1724 16.5092 20.9796C16.5092 18.7868 18.287 17.009 20.4798 17.009C22.6726 17.009 24.4504 18.7868 24.4504 20.9796Z" fill="#F2994A"/>
@@ -57,7 +57,7 @@ const InstagramIcon = () => {
   </svg>
   `;
 
-  return <SvgXml xml={svgPath} />;
+  return <SvgXml xml={svgPath} width={size} height={size} />;
 };
 
 const NotificationIcon = () => {
