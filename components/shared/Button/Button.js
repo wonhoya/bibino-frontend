@@ -4,7 +4,7 @@ import styles from "./styles";
 
 const Button = ({ text, onPress, mode }) => {
   return (
-    <TouchableOpacity onPress={() => console.log("hi")}>
+    <TouchableOpacity onPress={onPress}>
       <View
         style={
           mode === "primary"
