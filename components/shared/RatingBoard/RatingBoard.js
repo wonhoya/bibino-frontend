@@ -1,65 +1,56 @@
 import React, { useState } from "react";
 import { View, Dimensions } from "react-native";
-import {
-  RatingStarFilledIcon,
-  RatingStarhalfFilledIcon,
-  RatingStarUnfilledIcon,
-} from "../../../assets/svgs/icon";
 
 import getStarRatings from "../../../utils/getStarRatings";
+import styles from "./styles";
 
-const RatingBoard = ({ mode, rating = 3, total = 5, size = 50 }) => {
+const RatingBoard = ({ mode = "static", rating = 3, total = 5, size = 50 }) => {
   const [rate, setRate] = useState(rating);
+
   if (mode === "static") {
     const stars = getStarRatings(rating, total, size);
 
-    return (
-      <View
-        style={{
-          flexDirection: "row",
-        }}
-      >
-        {stars}
-      </View>
-    );
+    return <View style={styles.container}>{stars}</View>;
   }
 
   if (mode === "dynamic") {
     const { width: screenWidth } = Dimensions.get("window");
-    const first = (screenWidth - size * total) / 2;
-    const sizes = Array(total * 2)
+    const firstStarOffsetX = (screenWidth - size * total) / 2;
+    const starsForCalculate = Array(total * 2)
       .fill(null)
       .map((elem, index) => {
         return {
-          starX: first + (index * size) / 2,
-          rating: (index + 1) / 2,
+          starOffsetX: firstStarOffsetX + (index * size) / 2,
+          calculatedRating: (index + 1) / 2,
         };
       });
 
     const stars = getStarRatings(rate, total, size);
+
+    const handleTouchStart = (event) => {
+      const pageX = Math.floor(event.nativeEvent.pageX);
+
+      for (const { starOffsetX, calculatedRating } of starsForCalculate) {
+        if (starOffsetX <= pageX && pageX < starOffsetX + size) {
+          setRate(calculatedRating);
+        }
+      }
+    };
+    const handleTouchMove = (event) => {
+      const pageX = Math.floor(event.nativeEvent.pageX);
+
+      for (const { starOffsetX, calculatedRating } of starsForCalculate) {
+        if (starOffsetX <= pageX && pageX < starOffsetX + size) {
+          setRate(calculatedRating);
+        }
+      }
+    };
+
     return (
       <View
-        style={{
-          flexDirection: "row",
-        }}
-        onTouchStart={(eve) => {
-          const pageX = Math.floor(eve.nativeEvent.pageX);
-
-          for (const { starX, rating } of sizes) {
-            if (starX <= pageX && pageX < starX + size) {
-              setRate(rating);
-            }
-          }
-        }}
-        onTouchMove={(eve) => {
-          const pageX = Math.floor(eve.nativeEvent.pageX);
-
-          for (const { starX, rating } of sizes) {
-            if (starX <= pageX && pageX < starX + size) {
-              setRate(rating);
-            }
-          }
-        }}
+        style={styles.container}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
       >
         {stars}
       </View>
