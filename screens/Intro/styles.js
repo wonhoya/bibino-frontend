@@ -1,10 +1,10 @@
-import { StyleSheet } from "react-native";
-import { black } from "../../constants/colors";
-import { Rubik_regular, Rubik_bold } from "../../constants/font";
-import { Dimensions } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
+import { PRIMARY_BLACK } from "../../constants/colors";
+import { RUBIK_REGULAR, RUBIK_BOLD } from "../../constants/font";
 import {
-  title_textFontSize,
-  paragraph_textFontSize,
+  INTRO_TITLE_FONT_SIZE,
+  INTRO_PARAGRAPH_FONT_SIZE,
 } from "../../constants/size";
 
 const windowWidth = Dimensions.get("window").width;
@@ -32,16 +32,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    color: black,
-    fontSize: title_textFontSize,
-    fontFamily: Rubik_bold,
+    color: PRIMARY_BLACK,
+    fontSize: INTRO_TITLE_FONT_SIZE,
+    fontFamily: RUBIK_BOLD,
     margin: 25,
     textAlign: "center",
   },
   descripton: {
-    color: black,
-    fontSize: paragraph_textFontSize,
-    fontFamily: Rubik_regular,
+    color: PRIMARY_BLACK,
+    fontSize: INTRO_PARAGRAPH_FONT_SIZE,
+    fontFamily: RUBIK_REGULAR,
     margin: 20,
     textAlign: "center",
   },
