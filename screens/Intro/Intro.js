@@ -6,9 +6,10 @@ import {
   Dimensions,
   ImageBackground,
 } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
+
 import styles from "./styles";
 import Button from "../../components/shared/Button/Button";
-import { ScrollView } from "react-native-gesture-handler";
 
 const windowWidth = Dimensions.get("window").width;
 
@@ -20,6 +21,7 @@ const Intro = () => {
     const { currentPage } = sliderState;
     const { x } = event.nativeEvent.contentOffset;
     const indexOfNextScreen = Math.floor(x / windowWidth);
+
     if (indexOfNextScreen !== currentPage) {
       setSliderState({
         ...sliderState,

@@ -15,13 +15,11 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 10,
   },
-
   primaryTextStyle: {
     color: black,
     fontSize: primary_buttonFontSize,
     fontFamily: Rubik_bold,
   },
-
   secondaryContainer: {
     justifyContent: "center",
     alignItems: "center",
@@ -31,7 +29,6 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 10,
   },
-
   secondaryTextStyle: {
     color: primary_orange,
     fontSize: primary_buttonFontSize,

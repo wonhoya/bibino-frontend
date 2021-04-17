@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   paginationDots: {
     height: 10,
     width: 10,
-    borderRadius: 10 / 2,
+    borderRadius: 5,
     backgroundColor: "#0898A0",
     marginLeft: 10,
   },
