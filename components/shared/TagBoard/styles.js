@@ -46,7 +46,7 @@ styles.tagBackgroundColor = (tagType) => {
       return { backgroundColor: TAG_BLACK };
 
     default:
-      break;
+      return { backgroundColor: TAG_BLACK };
   }
 };
 
