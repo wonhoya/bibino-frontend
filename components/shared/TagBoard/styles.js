@@ -9,11 +9,11 @@ import {
 import { TAG_FONT_SIZE } from "../../../constants/size";
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   scrollViewContainer: {
+    flex: 1,
     flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
   tag: {
     height: 24,
