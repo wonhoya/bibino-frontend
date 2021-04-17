@@ -9,6 +9,8 @@ import {
 
 import SplashAnimation from "./screens/SplashAnimation/SplashAnimation";
 import Intro from "./screens/Intro/Intro";
+// TO BE DELETED
+import TagBoard from "./components/shared/TagBoard/TagBoard";
 
 export default function App() {
   const [isAnimationFinished, setIsAnimationFinished] = useState(false);
@@ -31,7 +33,8 @@ export default function App() {
       {!isAnimationFinished ? (
         <SplashAnimation handleAnimationFinish={handleAnimationFinish} />
       ) : (
-        <Intro />
+        // <Intro />
+        <TagBoard />
       )}
     </>
   );
