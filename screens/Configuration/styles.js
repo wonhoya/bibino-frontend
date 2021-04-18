@@ -1,7 +1,7 @@
 import { PRIMARY_WHITE } from "../../constants/colors";
-import { RUBIK_REGULAR, RUBIK_BOLD, RUBIK_MEDIUM } from "../../constants/font";
+import { RUBIK_BOLD, RUBIK_MEDIUM } from "../../constants/font";
 import {
-  SUCCESS_TITLE_FONT_SIZE,
+  CONFIGURATION_TITLE_FONT_SIZE,
   SUCCESS_DESCRIPTION_FONT_SIZE,
 } from "../../constants/size";
 
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     marginLeft: 30,
   },
   title: {
-    fontSize: 30,
+    fontSize: CONFIGURATION_TITLE_FONT_SIZE,
     fontFamily: RUBIK_BOLD,
   },
   buttonTitle: {

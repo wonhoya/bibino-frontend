@@ -1,16 +1,26 @@
 import React from "react";
-import { SafeAreaView, Text, View } from "react-native";
+import LottieView from "lottie-react-native";
+import { View } from "react-native";
 import styles from "./styles";
 
-const Main = () => {
+const Loading = () => {
+  const handleAnimationFinish = () => {
+    console.log("finished");
+  };
   return (
     <>
-      <SafeAreaView />
-      <View>
-        <Text style={styles.font}>This is Rubik text!</Text>
+      <View style={styles.container}>
+        <LottieView
+          source={require("../../assets/animations/loadingAnimation.json")}
+          style={styles.animation}
+          autoPlay
+          loop={true}
+          speed={0.6}
+          onAnimationFinish={handleAnimationFinish}
+        />
       </View>
     </>
   );
 };
 
-export default Main;
+export default Loading;

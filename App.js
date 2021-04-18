@@ -8,8 +8,8 @@ import {
 } from "@expo-google-fonts/rubik";
 
 import SplashAnimation from "./screens/SplashAnimation/SplashAnimation";
-// import Intro from "./screens/Intro/Intro";
-import AppNav from "./navigations/AppNavigation";
+import Intro from "./screens/Intro/Intro";
+import Loading from "./screens/Loading/Loading";
 
 export default function App() {
   const [isAnimationFinished, setIsAnimationFinished] = useState(false);
@@ -33,7 +33,7 @@ export default function App() {
         <SplashAnimation handleAnimationFinish={handleAnimationFinish} />
       ) : (
         // <Intro />
-        <AppNav />
+        <Loading />
       )}
     </>
   );
