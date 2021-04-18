@@ -51,17 +51,18 @@ const data = [
 ];
 
 const numColumns = 3;
-const formatData = (data, numColumns) => {
-  const fullRowsNumber = Math.floor(data.length / numColumns);
-  let lastRowElementsNumber = data.length - fullRowsNumber * numColumns;
-  while (lastRowElementsNumber !== numColumns && lastRowElementsNumber !== 0) {
-    data.push({
+const formatItems = (items, columns) => {
+  const copyItems = items.slice();
+  const fullRowsNumber = Math.floor(copyItems.length / columns);
+  let lastRowElementsNumber = copyItems.length - fullRowsNumber * columns;
+  while (lastRowElementsNumber !== columns && lastRowElementsNumber !== 0) {
+    copyItems.push({
       id: `blank-${lastRowElementsNumber}`,
       empty: true,
     });
     lastRowElementsNumber = lastRowElementsNumber + 1;
   }
-  return data;
+  return copyItems;
 };
 
 const Profile = () => {
@@ -92,7 +93,7 @@ const Profile = () => {
           <Text style={styles.sortDescription}>Sorted by: Date</Text>
           <View style={styles.gallery}>
             <FlatList
-              data={formatData(data, numColumns)}
+              data={formatItems(data, numColumns)}
               renderItem={renderItem}
               keyExtractor={(item) => item.id}
               numColumns={numColumns}
