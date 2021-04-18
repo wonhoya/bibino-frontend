@@ -1,11 +1,13 @@
 import React from "react";
 import { Image } from "react-native";
 
+import styles from "./styles";
+
 const BeerCard = ({ uri }) => {
   return (
     <>
       <Image
-        style={{ width: 80, height: 150, marginHorizontal: 15 }}
+        style={styles.image}
         source={require("../../../assets/pngs/beerSample7.png")}
       />
     </>
