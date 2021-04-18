@@ -11,8 +11,7 @@ import {
   PRIMARY_ORAGNE,
 } from "../../constants/colors";
 
-const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
+const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 const ITEM_WIDTH = Math.round(windowWidth * 0.8);
 const ITEM_HEIGHT = Math.round(windowHeight * 0.46);
 

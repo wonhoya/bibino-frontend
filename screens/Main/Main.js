@@ -20,8 +20,7 @@ const DATA = sample.map(({ beerImagePath, beerName, beerDescription }) => ({
   beerDescription,
 }));
 
-const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
+const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 const ITEM_WIDTH = Math.round(windowWidth * 0.84);
 const carouselHeight = Math.round(windowHeight * 0.3);
 

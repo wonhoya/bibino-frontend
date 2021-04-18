@@ -7,7 +7,7 @@ import {
 } from "../../constants/colors";
 import { RUBIK_REGULAR } from "../../constants/font";
 
-const windowWidth = Dimensions.get("window").width;
+const { width: windowWidth } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   tabsContainer: {

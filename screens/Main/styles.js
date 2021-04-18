@@ -7,8 +7,7 @@ import {
 } from "../../constants/size";
 import { PRIMARY_BLACK, PRIMARY_DARK_GREY } from "../../constants/colors";
 
-const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
+const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   darkGrey: {
