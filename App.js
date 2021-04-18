@@ -10,7 +10,7 @@ import {
 import SplashAnimation from "./screens/SplashAnimation/SplashAnimation";
 // import Intro from "./screens/Intro/Intro";
 import Success from "./screens/Success/Success";
-import Profile from "./screens/Profile/Profile";
+import Failure from "./screens/Failure/Failure";
 
 export default function App() {
   const [isAnimationFinished, setIsAnimationFinished] = useState(false);
@@ -34,8 +34,8 @@ export default function App() {
         <SplashAnimation handleAnimationFinish={handleAnimationFinish} />
       ) : (
         // <Intro />
-        // <Success />
-        <Profile />
+        <Failure />
+        // <Profile />
       )}
     </>
   );

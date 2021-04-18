@@ -1,13 +1,25 @@
 import React from "react";
-import { SafeAreaView, Text } from "react-native";
-import styles from "./styles";
+import { SafeAreaView, Text, View } from "react-native";
 
-const Search = () => {
+import styles from "./styles";
+import { FailureIcon } from "../../assets/svgs/icon";
+import { PretzelSvg } from "../../assets/svgs/ilusts";
+
+const Failure = () => {
   return (
-    <SafeAreaView>
-      <Text style={styles.font}>This is Rubik text!</Text>
-    </SafeAreaView>
+    <>
+      <View style={styles.container}>
+        <FailureIcon />
+        <Text style={styles.title}>Oops! Something happend..</Text>
+        <Text style={styles.description}>
+          Could you please take picture again?
+        </Text>
+      </View>
+      <View style={styles.svgContainer}>
+        <PretzelSvg />
+      </View>
+    </>
   );
 };
 
-export default Search;
+export default Failure;

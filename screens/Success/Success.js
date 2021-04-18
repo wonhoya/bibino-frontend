@@ -16,7 +16,7 @@ const Success = () => {
         </Text>
       </View>
       <View style={styles.svgContainer}>
-        <BeercanSvg style={styles.beercan} />
+        <BeercanSvg />
       </View>
     </>
   );
