@@ -5,16 +5,16 @@ import {
   RUBIK_REGULAR,
 } from "../../../constants/font";
 
-const { width } = Dimensions.get("window");
+const { width: windowWidth } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
-    width: width / 1.2,
-    height: width / 4.8,
+    width: windowWidth / 1.2,
+    height: windowWidth / 4.8,
     borderRadius: 5,
     backgroundColor: "#FFFFFF",
     flexDirection: "row",
-    marginVertical: width / 50,
+    marginVertical: windowWidth / 50,
   },
   imageContainer: {
     flex: 0.8,
@@ -24,8 +24,8 @@ const styles = StyleSheet.create({
     marginLeft: "2%",
   },
   image: {
-    width: width / 6,
-    height: width / 6,
+    width: windowWidth / 6,
+    height: windowWidth / 6,
     borderRadius: 50,
     borderWidth: 2,
   },

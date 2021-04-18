@@ -5,7 +5,7 @@ import styles from "./styles";
 
 import RatingBoard from "../../shared/RatingBoard/RatingBoard";
 
-const { width } = Dimensions.get("window");
+const { width: windowWidth } = Dimensions.get("window");
 
 const CommentCard = ({ user }) => {
   const { id, username, work, rating, comment } = user;
@@ -21,7 +21,7 @@ const CommentCard = ({ user }) => {
         <Text style={styles.comment}>{comment}</Text>
       </View>
       <View style={styles.ratingBoardContainer}>
-        <RatingBoard mode="static" rating={rating} size={width / 20} />
+        <RatingBoard mode="static" rating={rating} size={windowWidth / 20} />
       </View>
     </View>
   );
