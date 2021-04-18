@@ -72,11 +72,7 @@ const Profile = () => {
 
     return (
       <View style={styles.photo}>
-        <Image
-          source={beerSameple2}
-          style={styles.image}
-          resizeMode={"cover"}
-        />
+        <Image source={beerSameple2} style={styles.image} resizeMode="cover" />
       </View>
     );
   };
