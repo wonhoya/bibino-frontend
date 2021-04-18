@@ -1,8 +1,9 @@
 import { PRIMARY_WHITE } from "../../constants/colors";
-import { RUBIK_BOLD, RUBIK_MEDIUM } from "../../constants/font";
+import { RUBIK_BOLD, RUBIK_MEDIUM, RUBIK_REGULAR } from "../../constants/font";
 import {
   CONFIGURATION_TITLE_FONT_SIZE,
-  SUCCESS_DESCRIPTION_FONT_SIZE,
+  CONFIGURATION_BUTTON_TITLE_FONT_SIZE,
+  CONFIGURATION_BUTTON_DESCRIPTION_FONT_SIZE,
 } from "../../constants/size";
 
 import { StyleSheet } from "react-native";
@@ -22,9 +23,13 @@ const styles = StyleSheet.create({
     fontFamily: RUBIK_BOLD,
   },
   buttonTitle: {
-    fontSize: 20,
+    fontSize: CONFIGURATION_BUTTON_TITLE_FONT_SIZE,
     fontFamily: RUBIK_MEDIUM,
     marginBottom: 5,
+  },
+  buttonDescription: {
+    fontSize: CONFIGURATION_BUTTON_DESCRIPTION_FONT_SIZE,
+    fontFamily: RUBIK_REGULAR,
   },
   buttonContainer: {
     flex: 8,

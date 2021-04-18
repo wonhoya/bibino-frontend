@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, Text, View } from "react-native";
+import { Text, View } from "react-native";
 
 import styles from "./styles";
 import { SuccessIcon } from "../../assets/svgs/icon";

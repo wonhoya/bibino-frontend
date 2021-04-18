@@ -13,21 +13,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-
   title: {
     color: PRIMARY_BLACK,
     fontFamily: RUBIK_BOLD,
     fontSize: FAILURE_TITLE_FONT_SIZE,
     marginTop: 40,
   },
-
   description: {
     fontSize: FAILURE_DESCRIPTION_FONT_SIZE,
     color: PRIMARY_GREY,
     fontFamily: RUBIK_REGULAR,
     marginTop: 10,
   },
-
   svgContainer: {
     position: "absolute",
     alignSelf: "center",
