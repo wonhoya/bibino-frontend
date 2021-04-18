@@ -5,18 +5,10 @@ import styles from "./styles";
 
 import RatingBoard from "../../shared/RatingBoard/RatingBoard";
 
-const userMock = {
-  id: 1,
-  username: "Juhyung",
-  work: "Software engineer",
-  rating: 4,
-  comment: "와 이거 완전 시원!",
-};
-
 const { width } = Dimensions.get("window");
 
-const CommentCard = (user) => {
-  const { id, username, work, rating, comment } = userMock;
+const CommentCard = ({ user }) => {
+  const { id, username, work, rating, comment } = user;
 
   return (
     <View style={styles.container}>
