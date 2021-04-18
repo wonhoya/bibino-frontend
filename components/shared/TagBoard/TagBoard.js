@@ -8,12 +8,15 @@ const mockTagData = ["#Aromatic", "#Body", "#TOK", "#SUCK"];
 const TagBoard = () => {
   return (
     <ScrollView
-      style={styles.container}
+      horizontal={true}
       contentContainerStyle={styles.scrollViewContainer}
     >
       {mockTagData.map((tag, index) => {
         return (
-          <View style={[styles.tag, styles.tagBackgroundColor(tag)]}>
+          <View
+            style={[styles.tag, styles.tagBackgroundColor(tag)]}
+            key={index}
+          >
             <Text style={styles.tagFont}>{tag}</Text>
           </View>
         );
