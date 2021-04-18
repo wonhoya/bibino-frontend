@@ -6,6 +6,7 @@ import Header from "../components/shared/Header/Header";
 import Main from "../screens/Main/Main";
 import Search from "../screens/Search/Search";
 import Profile from "../screens/Profile/Profile";
+import Configuration from "../screens/Configuration/Configuration";
 
 const Stack = createStackNavigator();
 
@@ -13,6 +14,13 @@ const AppNavigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen
+          name="Configuration"
+          component={Configuration}
+          options={{
+            header: (navigation) => <Header navigation={navigation} />,
+          }}
+        />
         <Stack.Screen
           name="Profile"
           component={Profile}
