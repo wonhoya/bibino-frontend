@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import Carousel from "react-native-snap-carousel";
 import { SafeAreaView, View, Text, Dimensions } from "react-native";
 
+import styles from "./styles";
 import { ProfileIcon } from "../../assets/svgs/icon";
 import { TodayPickLogoSvg } from "../../assets/svgs/ilusts";
 import TagBoard from "../../components/shared/TagBoard/TagBoard";
@@ -10,7 +11,6 @@ import {
   animatedStyles,
 } from "../../utils/carouselAnimations";
 import BeerCard from "../../components/BeerCard/BeerCard";
-import styles from "./styles";
 
 //mockData (should delete later)
 import sample from "./sample.json";
@@ -21,14 +21,14 @@ const DATA = sample.map(({ beerImagePath, beerName, beerDescription }) => ({
 }));
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
-const ITEM_WIDTH = Math.round(windowWidth * 0.84);
+const itemWidth = Math.round(windowWidth * 0.84);
 const carouselHeight = Math.round(windowHeight * 0.3);
 
 const Main = () => {
   const [state, setState] = useState({ index: 0 });
   const carousel = useRef(null);
 
-  const _renderItem = ({
+  const renderItem = ({
     item: { beerImagePath, beerName, beerDescription },
   }) => {
     return (
@@ -41,17 +41,17 @@ const Main = () => {
   };
 
   return (
-    <View>
+    <>
       <SafeAreaView />
       <View style={[styles.mainViewWidth, styles.profileContainer]}>
         <View style={styles.upperProfileContainer}>
           <View>
             <View style={styles.mainParagraphContainer}>
-              <Text style={[styles.darkGrey, styles.mainParagraphFont]}>
+              <Text style={[styles.darkGrey, styles.mainParagraph]}>
                 Hello,
               </Text>
             </View>
-            <Text style={[styles.darkGrey, styles.usernameFont]}>이상엽님</Text>
+            <Text style={[styles.darkGrey, styles.username]}>이상엽님</Text>
           </View>
           <View style={styles.profileImageContainer}>
             <ProfileIcon />
@@ -66,7 +66,7 @@ const Main = () => {
       <View style={styles.contentsContainer}>
         <View style={styles.mainViewWidth}>
           <View style={styles.mainParagraphContainer}>
-            <Text style={[styles.black, styles.mainParagraphFont]}>
+            <Text style={[styles.black, styles.mainParagraph]}>
               Beer recommended just for you
             </Text>
           </View>
@@ -75,10 +75,10 @@ const Main = () => {
         <Carousel
           ref={(c) => (carousel.current = c)}
           data={DATA}
-          renderItem={_renderItem}
+          renderItem={renderItem}
           sliderWidth={windowWidth}
           sliderHeight={carouselHeight}
-          itemWidth={ITEM_WIDTH}
+          itemWidth={itemWidth}
           containerCustomStyle={styles.carouselContainer}
           inactiveSlideShift={0}
           onSnapToItem={(index) => setState({ index })}
@@ -87,7 +87,7 @@ const Main = () => {
           useScrollView={true}
         />
       </View>
-    </View>
+    </>
   );
 };
 

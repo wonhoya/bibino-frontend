@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from "react-native";
+
 import {
   PRIMARY_ORAGNE,
   TAB_GREY,
@@ -20,12 +21,15 @@ const styles = StyleSheet.create({
     padding: 28,
     paddingHorizontal: 60,
   },
-  tab: {},
-  tabFont: {
+  tab: {
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  tabName: {
     fontFamily: RUBIK_REGULAR,
     color: PURE_WHITE,
   },
-  cameraFont: {
+  cameraName: {
     position: "absolute",
     bottom: 10,
     fontFamily: RUBIK_REGULAR,
@@ -43,10 +47,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: TAB_GREY,
     borderRadius: 38,
-  },
-  columnCenter: {
-    flexDirection: "column",
-    alignItems: "center",
   },
 });
 

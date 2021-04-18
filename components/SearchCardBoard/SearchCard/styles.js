@@ -23,17 +23,17 @@ const styles = StyleSheet.create({
     height: "100%",
     borderRadius: 8,
   },
-  nameFont: {
+  name: {
     fontFamily: RUBIK_BOLD,
     fontSize: SEARCH_CARD_TITLE_FONT_SIZE,
     color: PURE_BLACK,
   },
-  dateFont: {
+  date: {
     fontFamily: RUBIK_REGULAR,
     fontSize: SEARCH_CARD_PARAGRAPH_FONT_SIZE,
     color: SEARCH_DARK_GREEN,
   },
-  descriptionFont: {
+  description: {
     fontFamily: RUBIK_REGULAR,
     fontSize: SEARCH_CARD_PARAGRAPH_FONT_SIZE,
     color: PURE_BLACK,

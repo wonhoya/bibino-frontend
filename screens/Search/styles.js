@@ -57,38 +57,36 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: "100%",
     height: 76,
-  },
-  titleFont: {
-    fontFamily: RUBIK_BOLD,
-    fontSize: SEARCH_TITLE_FONT_SIZE,
-    color: SERACH_BLACK,
-  },
-  indicatorFont: {
-    fontFamily: RUBIK_REGULAR,
-    fontSize: SEARCH_INDICATOR_FONT_SIZE,
-    color: SEARCH_GREY,
-  },
-  inputFont: {
     fontFamily: RUBIK_REGULAR,
     fontSize: SEARCH_INPUT_FONT_SIZE,
     color: PRIMARY_WHITE,
   },
-  dropdownFont: {
+  title: {
+    fontFamily: RUBIK_BOLD,
+    fontSize: SEARCH_TITLE_FONT_SIZE,
+    color: SERACH_BLACK,
+  },
+  indicator: {
+    fontFamily: RUBIK_REGULAR,
+    fontSize: SEARCH_INDICATOR_FONT_SIZE,
+    color: SEARCH_GREY,
+  },
+  dropdownText: {
     fontFamily: RUBIK_REGULAR,
     fontSize: SEARCH_INDICATOR_FONT_SIZE,
     color: PRIMARY_ORAGNE,
   },
-  cardTitleFont: {
+  cardTitle: {
     fontFamily: RUBIK_BOLD,
     fontSize: SEARCH_CARD_TITLE_FONT_SIZE,
     color: PURE_BLACK,
   },
-  cardDateFont: {
+  cardDate: {
     fontFamily: RUBIK_REGULAR,
     fontSize: SEARCH_CARD_PARAGRAPH_FONT_SIZE,
     color: SEARCH_DARK_GREEN,
   },
-  cardDescriptionFont: {
+  cardDescription: {
     fontFamily: RUBIK_REGULAR,
     fontSize: SEARCH_CARD_PARAGRAPH_FONT_SIZE,
     color: PURE_BLACK,

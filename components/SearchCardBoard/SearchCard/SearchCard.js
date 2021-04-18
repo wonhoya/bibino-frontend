@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Image, Text } from "react-native";
+
 import styles from "./styles";
 
 const SearchCard = ({
@@ -12,9 +13,9 @@ const SearchCard = ({
         <Image source={imageSource} style={styles.image} resizeMode="cover" />
       </View>
       <View style={styles.textContainer(backgroundColor)}>
-        <Text style={styles.dateFont}>{manufacturingDate}</Text>
-        <Text style={styles.nameFont}>{name}</Text>
-        <Text style={styles.descriptionFont}>{description}</Text>
+        <Text style={styles.date}>{manufacturingDate}</Text>
+        <Text style={styles.name}>{name}</Text>
+        <Text style={styles.description}>{description}</Text>
       </View>
     </View>
   );

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { View, Text, FlatList } from "react-native";
 
 import styles from "./styles";
-
 import SearchCard from "./SearchCard/SearchCard";
 import {
   PRIMARY_DARK_GREY,
@@ -17,7 +16,7 @@ const SearchCardBoard = () => {
 
   //이거 만약 ranking일때만 위 3개 색칠해주는거면 props받아온 후에
   //로직 조금 수정해줘야함
-  const _renderItem = ({ item, index }) => {
+  const renderItem = ({ item, index }) => {
     let backgroundColor = null;
 
     switch (index) {
@@ -54,7 +53,7 @@ const SearchCardBoard = () => {
       {!isLoading && beers.length ? (
         <FlatList
           data={beers}
-          renderItem={_renderItem}
+          renderItem={renderItem}
           keyExtractor={({ id }) => "" + id}
         />
       ) : null}

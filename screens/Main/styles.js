@@ -16,11 +16,11 @@ const styles = StyleSheet.create({
   black: {
     color: PRIMARY_BLACK,
   },
-  usernameFont: {
+  username: {
     fontFamily: RUBIK_BOLD,
     fontSize: MAIN_USERNAME_FONT_SIZE,
   },
-  mainParagraphFont: {
+  mainParagraph: {
     fontFamily: RUBIK_REGULAR,
     fontSize: MAIN_PARAGRAPH_FONT_SIZE,
   },
