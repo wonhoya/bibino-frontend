@@ -1,8 +1,10 @@
 import { StyleSheet, Dimensions } from "react-native";
 
+const { width: windowWidth } = Dimensions.get("window");
+
 const styles = StyleSheet.create({
   header: {
-    width: Dimensions.get("window").width * 0.9,
+    width: windowWidth * 0.9,
     height: 97,
     flexDirection: "row",
     alignSelf: "center",
