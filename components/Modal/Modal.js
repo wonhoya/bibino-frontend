@@ -9,13 +9,15 @@ import ChracteristicContainer from "./CharacteristicContainer/CharacteristicCont
 import CommentInput from "./CommentInput/CommentInput";
 import EditButton from "./EditButton/EditButton";
 
+const ratings = require("./ratingsMock.json");
+
 const Modal = () => {
   return (
     <View style={styles.modal}>
       <View style={styles.container}>
         <RatingContainer />
         <HorizonBar />
-        <ChracteristicContainer />
+        <ChracteristicContainer ratings={ratings} />
         <CommentInput />
         <EditButton />
       </View>

@@ -10,15 +10,9 @@ import styles from "./styles";
 
 import CharacteristicBoard from "../../shared/ChracteristicBoard/ChracteristicBoard";
 
-const ratingsMock = {
-  aroma: 3.5,
-  body: 7,
-  flavor: 5,
-};
-
 const { width: windowWidth } = Dimensions.get("window");
 
-const ChracteristicContainer = (ratings) => {
+const ChracteristicContainer = ({ ratings: { aroma, body, flavor } }) => {
   return (
     <View style={styles.container}>
       <CharacteristicBoard
@@ -27,7 +21,7 @@ const ChracteristicContainer = (ratings) => {
           leftSubTitle: "Plain",
           rightSubTitle: "Rich",
         }}
-        rating={ratingsMock.aroma}
+        rating={aroma}
         options={{
           size: windowWidth * 1.3,
           color: PRIMARY_ORANGE,
@@ -40,7 +34,7 @@ const ChracteristicContainer = (ratings) => {
           leftSubTitle: "Light",
           rightSubTitle: "Heavy",
         }}
-        rating={ratingsMock.body}
+        rating={body}
         options={{
           size: windowWidth * 1.3,
           color: PRIMARY_BLACK,
@@ -53,7 +47,7 @@ const ChracteristicContainer = (ratings) => {
           leftSubTitle: "Sweat",
           rightSubTitle: "Bitter",
         }}
-        rating={ratingsMock.flavor}
+        rating={flavor}
         options={{
           size: windowWidth * 1.3,
           color: PRIMARY_YELLOW,
