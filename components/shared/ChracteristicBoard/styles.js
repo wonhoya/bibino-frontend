@@ -7,7 +7,7 @@ const getStyles = (size, color, rate) => {
   const HEIGHT = WIDTH / 15;
 
   return StyleSheet.create({
-    container: { position: "absolute" },
+    container: { position: "relative" },
     title: {
       fontSize: WIDTH / 10,
       fontFamily: RUBIK_REGULAR,

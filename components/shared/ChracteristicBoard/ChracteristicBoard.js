@@ -3,12 +3,12 @@ import { View, Text } from "react-native";
 import Slider from "@react-native-community/slider";
 
 import getStyles from "./styles";
-import { PRIMARY_ORAGNE } from "../../../constants/colors";
+import { PRIMARY_ORANGE } from "../../../constants/colors";
 
 const CharacteristicBoard = ({
   titles = { title: "Hello", leftSubTitle: "Left", rightSubTitle: "right" },
   rating = 3,
-  options = { size: 500, color: PRIMARY_ORAGNE, isDisabled: true },
+  options = { size: 500, color: PRIMARY_ORANGE, isDisabled: true },
 }) => {
   const [rate, setRate] = useState(rating);
 
