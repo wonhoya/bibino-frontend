@@ -152,13 +152,13 @@ const UseIcon = () => {
   return <SvgXml xml={svgPath} />;
 };
 
-const SearchIcon = () => {
+const SearchIcon = ({ size }) => {
   const svgPath = `<svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path fill-rule="evenodd" clip-rule="evenodd" d="M8.52484 17.0497C3.8167 17.0497 0 13.233 0 8.52484C0 3.8167 3.8167 0 8.52484 0C13.233 0 17.0497 3.8167 17.0497 8.52484C17.0497 10.4948 16.3815 12.3088 15.2593 13.7523L21.0001 19.4931L19.4931 21.0001L13.7523 15.2593C12.3088 16.3815 10.4948 17.0497 8.52484 17.0497ZM14.9185 8.52484C14.9185 12.0559 12.0559 14.9185 8.52484 14.9185C4.99374 14.9185 2.13121 12.0559 2.13121 8.52484C2.13121 4.99374 4.99374 2.13121 8.52484 2.13121C12.0559 2.13121 14.9185 4.99374 14.9185 8.52484Z" fill="white"/>
   </svg>
   `;
 
-  return <SvgXml xml={svgPath} />;
+  return <SvgXml xml={svgPath} width={size} height={size} />;
 };
 
 const CameraIcon = () => {

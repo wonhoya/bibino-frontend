@@ -10,14 +10,14 @@ const Header = ({ navigation }) => {
     <View style={styles.header}>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.goBack()}
+        onPress={() => navigation.navigation.goBack()}
       >
         <BackIcon />
       </TouchableOpacity>
       <HeaderLogoSvg />
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("config")}
+        onPress={() => navigation.navigation.navigate("config")}
       >
         <ConfigurationIcon />
       </TouchableOpacity>

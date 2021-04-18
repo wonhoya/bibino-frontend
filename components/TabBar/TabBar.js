@@ -9,15 +9,15 @@ const TabBar = ({ navigation }) => {
     <View style={styles.tabsContainer}>
       <TouchableOpacity
         style={[styles.columnCenter, styles.tab]}
-        onPress={() => navigation.navigate("Search")}
+        onPress={() => navigation.navigation.navigate("Search")}
       >
-        <SearchIcon />
+        <SearchIcon size={21} />
         <Text style={styles.tabFont}>Search</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.goBack()}
+        onPress={() => navigation.navigation.goBack()}
       >
         <View style={[styles.columnCenter, styles.cameraContainer]}>
           <CameraIcon />
@@ -27,7 +27,7 @@ const TabBar = ({ navigation }) => {
 
       <TouchableOpacity
         style={[styles.columnCenter, styles.tab]}
-        onPress={() => navigation.navigate("Profile")}
+        onPress={() => navigation.navigation.navigate("Profile")}
       >
         <ProfileIcon />
         <Text style={styles.tabFont}>Profile</Text>

@@ -2,7 +2,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import TabBar from "../components/TabBar/TabBar";
-import MainStackNavigator from "./MainStackNavigator";
+import Main from "../screens/Main/Main";
 
 const MainTab = createBottomTabNavigator();
 
@@ -11,7 +11,7 @@ const MainTabNavigator = () => {
     <MainTab.Navigator
       tabBar={(navigation) => <TabBar navigation={navigation} />}
     >
-      <MainTab.Screen name="Main" component={MainStackNavigator} />
+      <MainTab.Screen name="Main" component={Main} />
     </MainTab.Navigator>
   );
 };
