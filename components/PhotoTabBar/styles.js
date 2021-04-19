@@ -11,11 +11,13 @@ const { width: windowWidth } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   tabsContainer: {
+    position: "absolute",
     flexDirection: "row",
     justifyContent: "space-between",
     backgroundColor: PRIMARY_ORAGNE,
     width: "100%",
-    height: null,
+    bottom: 0,
+
     borderTopStartRadius: 20,
     borderTopEndRadius: 20,
     padding: 28,
@@ -27,7 +29,6 @@ const styles = StyleSheet.create({
     color: PURE_WHITE,
   },
   cameraFont: {
-    position: "absolute",
     bottom: 10,
     fontFamily: RUBIK_REGULAR,
     color: TAB_ORANGE,
@@ -48,6 +49,7 @@ const styles = StyleSheet.create({
   columnCenter: {
     flexDirection: "column",
     alignItems: "center",
+    justifyContent: "center",
   },
 });
 

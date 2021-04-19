@@ -1,38 +1,88 @@
 import React from "react";
 import { View, TouchableOpacity, Text } from "react-native";
+import * as Animatable from "react-native-animatable";
 
-import { ProfileIcon, SearchIcon, CameraIcon } from "../../assets/svgs/icon";
+import {
+  ProfileIcon,
+  SearchIcon,
+  CameraIcon,
+  UseIcon,
+  RetakeIcon,
+} from "../../assets/svgs/icon";
 import styles from "./styles";
 
-const PhotoTabBar = () => {
+Animatable.initializeRegistryWithDefinitions({
+  changeHeight: {
+    from: {
+      height: null,
+    },
+    to: {
+      height: 150,
+    },
+  },
+  changeCameraButtonHeight: {
+    from: {
+      top: -40,
+    },
+    to: {
+      top: 20,
+    },
+  },
+  changeButtonsHeight: {
+    from: {
+      marginTop: null,
+    },
+    to: {
+      marginTop: 5,
+    },
+  },
+});
+
+const PhotoTabBar = ({ handleTakePicture, isPreview }) => {
+  console.log("isPreview?", isPreview);
   return (
-    <View style={styles.tabsContainer}>
-      <TouchableOpacity
+    <Animatable.View animation="changeHeight" style={styles.tabsContainer}>
+      <Animatable.View
+        animation="changeButtonsHeight"
         style={[styles.columnCenter, styles.tab]}
-        onPress={() => console.log("Search Pressed")}
       >
-        <SearchIcon />
+        <TouchableOpacity onPress={() => console.log("Camera Pressed")}>
+          <SearchIcon />
+        </TouchableOpacity>
         <Text style={styles.tabFont}>Search</Text>
-      </TouchableOpacity>
+      </Animatable.View>
 
-      <TouchableOpacity
+      <Animatable.View
+        animation="changeCameraButtonHeight"
         style={styles.button}
-        onPress={() => console.log("Camera Pressed")}
       >
-        <View style={[styles.columnCenter, styles.cameraContainer]}>
-          <CameraIcon />
-          <Text style={styles.cameraFont}>Camera</Text>
-        </View>
-      </TouchableOpacity>
+        {isPreview ? (
+          <View style={[styles.columnCenter, styles.cameraContainer]}>
+            <TouchableOpacity onPress={handleTakePicture}>
+              <RetakeIcon />
+            </TouchableOpacity>
+            {/* <Text style={styles.cameraFont}>Retake</Text> */}
+          </View>
+        ) : (
+          <View style={[styles.columnCenter, styles.cameraContainer]}>
+            <TouchableOpacity onPress={handleTakePicture}>
+              <CameraIcon />
+            </TouchableOpacity>
+            <Text style={styles.cameraFont}>Camera</Text>
+          </View>
+        )}
+      </Animatable.View>
 
-      <TouchableOpacity
+      <Animatable.View
+        animation="changeButtonsHeight"
         style={[styles.columnCenter, styles.tab]}
-        onPress={() => console.log("Profile Pressed")}
       >
-        <ProfileIcon />
+        <TouchableOpacity onPress={() => console.log("Camera Pressed")}>
+          <ProfileIcon />
+        </TouchableOpacity>
         <Text style={styles.tabFont}>Profile</Text>
-      </TouchableOpacity>
-    </View>
+      </Animatable.View>
+    </Animatable.View>
   );
 };
 
