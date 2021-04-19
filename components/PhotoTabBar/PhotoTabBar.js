@@ -47,7 +47,7 @@ const PhotoTabBar = ({ handleTakePicture, isPreview }) => {
         style={[styles.columnCenter, styles.tab]}
       >
         <TouchableOpacity onPress={() => console.log("Camera Pressed")}>
-          <SearchIcon />
+          <SearchIcon size={21} />
         </TouchableOpacity>
         <Text style={styles.tabFont}>Search</Text>
       </Animatable.View>
@@ -61,7 +61,6 @@ const PhotoTabBar = ({ handleTakePicture, isPreview }) => {
             <TouchableOpacity onPress={handleTakePicture}>
               <RetakeIcon />
             </TouchableOpacity>
-            {/* <Text style={styles.cameraFont}>Retake</Text> */}
           </View>
         ) : (
           <View style={[styles.columnCenter, styles.cameraContainer]}>

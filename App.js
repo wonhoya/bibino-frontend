@@ -34,7 +34,7 @@ export default function App() {
         <SplashAnimation handleAnimationFinish={handleAnimationFinish} />
       ) : (
         // <Intro />
-        <Photo />
+        <AppNavigation />
       )}
     </>
   );
