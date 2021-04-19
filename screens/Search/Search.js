@@ -17,30 +17,32 @@ const Search = () => {
     <>
       <SafeAreaView />
       <View style={styles.container}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>{SEARCH_TITLE_TEXT}</Text>
-        </View>
-        <View style={styles.indicatorContainer}>
-          <Text style={[styles.paragraph, styles.indicator]}>sorted by:</Text>
-          <ModalDropdown
-            options={data}
-            defaultValue={data[0]}
-            dropdownStyle={styles.dropdown}
-            textStyle={styles.dropdownText}
-            onSelect={() => console.log("selected")}
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <View style={styles.iconContainer}>
-            <SearchIcon size={30} />
+        <View style={styles.innerContainer}>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>{SEARCH_TITLE_TEXT}</Text>
           </View>
-          <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            style={styles.input}
-          />
+          <View style={styles.indicatorContainer}>
+            <Text style={[styles.paragraph, styles.indicator]}>sorted by:</Text>
+            <ModalDropdown
+              options={data}
+              defaultValue={data[0]}
+              dropdownStyle={styles.dropdown}
+              textStyle={styles.dropdownText}
+              onSelect={() => console.log("selected")}
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <View style={styles.iconContainer}>
+              <SearchIcon size={30} />
+            </View>
+            <TextInput
+              autoCapitalize="none"
+              autoCorrect={false}
+              style={styles.input}
+            />
+          </View>
+          <SearchCardBoard />
         </View>
-        <SearchCardBoard />
       </View>
     </>
   );

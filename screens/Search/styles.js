@@ -19,8 +19,12 @@ const { width: windowWidth } = Dimensions.get("window");
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: PRIMARY_WHITE,
+  },
+  innerContainer: {
     alignSelf: "center",
     width: windowWidth * 0.89,
+    height: "100%",
   },
   titleContainer: {
     flex: 1,
