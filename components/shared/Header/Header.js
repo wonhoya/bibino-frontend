@@ -17,7 +17,7 @@ const Header = ({ navigation: { navigation } }) => {
       <HeaderLogoSvg />
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("Config")}
+        onPress={() => navigation.navigate("Configuration")}
       >
         <ConfigurationIcon />
       </TouchableOpacity>

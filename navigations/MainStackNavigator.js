@@ -42,7 +42,7 @@ const MainStackNavigator = () => {
         }}
       /> */}
       <MainStack.Screen
-        name="Config"
+        name="Configuration"
         component={Configuration}
         options={{
           header: (navigation) => <Header navigation={navigation} />,

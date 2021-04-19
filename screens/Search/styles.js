@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     width: windowWidth * 0.89,
   },
   titleContainer: {
-    flex: 0.7,
+    flex: 1,
     marginVertical: 18,
   },
   indicatorContainer: {

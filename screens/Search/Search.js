@@ -5,6 +5,7 @@ import ModalDropdown from "react-native-modal-dropdown";
 import styles from "./styles";
 import { SearchIcon } from "../../assets/svgs/icon";
 import SearchCardBoard from "../../components/SearchCardBoard/SearchCardBoard";
+import { SEARCH_TITLE_TEXT } from "../../constants/texts";
 
 //mockup
 //https://github.com/RazaShehryar/react-native-modal-dropdown#api
@@ -17,7 +18,7 @@ const Search = () => {
       <SafeAreaView />
       <View style={styles.container}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Search</Text>
+          <Text style={styles.title}>{SEARCH_TITLE_TEXT}</Text>
         </View>
         <View style={styles.indicatorContainer}>
           <Text style={[styles.paragraph, styles.indicator]}>sorted by:</Text>

@@ -1,3 +1,5 @@
 const MAIN_RECOMMENDATION_TEXT = "Beer recommended just for you";
 
-export { MAIN_RECOMMENDATION_TEXT };
+const SEARCH_TITLE_TEXT = "Search";
+
+export { MAIN_RECOMMENDATION_TEXT, SEARCH_TITLE_TEXT };

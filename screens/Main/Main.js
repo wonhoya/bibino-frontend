@@ -4,6 +4,7 @@ import { SafeAreaView, View, Text } from "react-native";
 import styles from "./styles";
 import ProfileContainer from "./ProfileContainer/ProfileContainer";
 import ContentsContainer from "./ContentsContainer/ContentsContainer";
+import Loading from "../Loading/Loading";
 
 const Main = () => {
   const [beers, setBeers] = useState([]);
@@ -28,7 +29,7 @@ const Main = () => {
     <>
       <SafeAreaView />
       <View style={styles.container}>
-        {isLoading ? <Text>Loading...</Text> : null}
+        {isLoading ? <Loading /> : null}
         {!isLoading && beers.length ? (
           <>
             <ProfileContainer user={user} />

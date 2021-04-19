@@ -3,6 +3,7 @@ import { View, Text, FlatList } from "react-native";
 
 import styles from "./styles";
 import SearchCard from "./SearchCard/SearchCard";
+import Loading from "../../screens/Loading/Loading";
 import {
   PRIMARY_DARK_GREY,
   PRIMARY_ORAGNE,
@@ -49,7 +50,7 @@ const SearchCardBoard = () => {
 
   return (
     <View style={styles.container}>
-      {isLoading ? <Text>Loading...</Text> : null}
+      {isLoading ? <Loading /> : null}
       {!isLoading && beers.length ? (
         <FlatList
           data={beers}
