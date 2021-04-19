@@ -1,43 +1,36 @@
 import React from "react";
-import { View, ScrollView, Image, Text, Dimensions } from "react-native";
+import { View, ScrollView, Image, Text } from "react-native";
 
-import { RUBIK_MEDIUM } from "../../constants/font";
+import styles from "./styles";
 
-import { ShareIcon } from "../../assets/svgs/icon";
 import Header from "../../components/shared/Header/Header";
-import RatingBoard from "../../components/shared/RatingBoard/RatingBoard";
-import TagBoard from "../../components/shared/TagBoard/TagBoard";
-
-const { width: windowWidth } = Dimensions.get("window");
+import TitleContainer from "./TitleContainer/TitleContainer";
+import RatingBoardContainer from "./RatingBoardContainer/RatingBoardContainer";
+import TagBoardContainer from "./TagBoardContainer/TagBoardContainer";
+import CharacteristicContainer from "./CharacteristicContainer/CharacteristicContainer";
+import CommentBoardContainer from "./CommentBoardContainer/CommentBoardContainer";
+import RecommendationBoardContainer from "./RecommendationBoardContainer/RecommendationBoardContainer";
 
 const Beer = ({ navigation }) => {
   return (
-    <ScrollView style={{ flex: 1 }}>
-      <Header />
-      <Image
-        style={{ width: windowWidth, height: windowWidth / 1.1 }}
-        source={require("../../assets/pngs/beerSample8.png")}
-      />
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginTop: windowWidth / 25,
-          paddingHorizontal: windowWidth / 12,
-        }}
-      >
-        <Text style={{ fontFamily: RUBIK_MEDIUM, fontSize: windowWidth / 12 }}>
-          RAEA BEER
+    <ScrollView style={styles.scrollContainer}>
+      <View style={styles.container}>
+        <Header />
+        <Image
+          style={styles.image}
+          source={require("../../assets/pngs/beerSample8.png")}
+        />
+        <TitleContainer title="RAEA BEER" />
+        <RatingBoardContainer rating={4} />
+        <TagBoardContainer />
+        <CharacteristicContainer />
+        <Text style={styles.description}>
+          숙성에서부터 여과까지 생산 전 공정을 맥주가 얼기 직전, 영하의 온도에서
+          제조하여 시원하고 청량한 페일라거 맥주 본연의 맛을 극대화
         </Text>
-        <ShareIcon size={windowWidth / 15} />
+        <CommentBoardContainer />
       </View>
-      <View style={{ marginLeft: windowWidth / 12 }}>
-        <RatingBoard rating={4} />
-      </View>
-      <View style={{ width: windowWidth / 1.05, marginTop: windowWidth / 60 }}>
-        <TagBoard />
-      </View>
+      <RecommendationBoardContainer />
     </ScrollView>
   );
 };

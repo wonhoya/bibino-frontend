@@ -10,8 +10,7 @@ const RecommendationBoard = () => {
   const [beers, setBeers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const imageWidth = windowWidth / 5;
-  const imageMarginWidth = windowWidth / 24;
+  const imageWidth = windowWidth / 8;
 
   useEffect(() => {
     setTimeout(() => {
@@ -31,11 +30,12 @@ const RecommendationBoard = () => {
           keyExtractor={({ id }) => "" + id}
           horizontal={true}
           getItemLayout={(data, index) => ({
-            length: (imageWidth + imageMarginWidth) * beers.length,
-            offset: imageWidth + 3,
+            length: imageWidth * beers.length,
+            offset: imageWidth,
             index,
           })}
           initialScrollIndex={Math.floor(beers.length / 2)}
+          showsHorizontalScrollIndicator={false}
         />
       ) : null}
       {!isLoading && !beers.length ? <Text>추천 맥주가 없어요...</Text> : null}
