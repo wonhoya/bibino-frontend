@@ -11,6 +11,7 @@ const MainTab = createBottomTabNavigator();
 const MainTabNavigator = () => {
   return (
     <MainTab.Navigator
+      backBehavior="initialRoute"
       tabBar={(navigation) => <TabBar navigation={navigation} />}
     >
       <MainTab.Screen name="Main" component={Main} />

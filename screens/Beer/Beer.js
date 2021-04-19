@@ -2,8 +2,6 @@ import React from "react";
 import { View, ScrollView, Image, Text } from "react-native";
 
 import styles from "./styles";
-
-import Header from "../../components/shared/Header/Header";
 import TitleContainer from "./TitleContainer/TitleContainer";
 import RatingBoardContainer from "./RatingBoardContainer/RatingBoardContainer";
 import TagBoardContainer from "./TagBoardContainer/TagBoardContainer";
@@ -13,9 +11,11 @@ import RecommendationBoardContainer from "./RecommendationBoardContainer/Recomme
 
 const Beer = ({ navigation }) => {
   return (
-    <ScrollView style={styles.scrollContainer}>
+    <ScrollView
+      style={styles.scrollContainer}
+      showsVerticalScrollIndicator={false}
+    >
       <View style={styles.container}>
-        <Header />
         <Image
           style={styles.image}
           source={require("../../assets/pngs/beerSample8.png")}
