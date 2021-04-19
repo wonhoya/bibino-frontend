@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, ImageBackground } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import styles from "./styles";
 
 /**
@@ -7,20 +8,26 @@ import styles from "./styles";
  * Network Requests for Images 검색어로 검색 ㄲ
  */
 
-const BeerCard = ({ beerImagePath, beerName, beerDescription }) => {
+const BeerCard = ({ imagePath, name, description }) => {
   return (
-    <View style={styles.itemContainer}>
+    <TouchableOpacity
+      style={[
+        styles.topCircularBorder,
+        styles.bottomCircularBorder,
+        styles.container,
+      ]}
+    >
       <View style={[styles.topCircularBorder, styles.imageContainer]}>
         <ImageBackground
-          style={[styles.topCircularBorder, styles.beerImage]}
+          style={[styles.topCircularBorder, styles.image]}
           source={require("../../assets/pngs/beerSample1.png")}
         />
       </View>
       <View style={[styles.bottomCircularBorder, styles.descriptionContainer]}>
-        <Text style={styles.nameFont}>{beerName}</Text>
-        <Text style={styles.descriptionFont}>{beerDescription}</Text>
+        <Text style={styles.name}>{name}</Text>
+        <Text style={styles.description}>{description}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
