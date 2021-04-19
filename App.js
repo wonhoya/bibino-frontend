@@ -9,7 +9,7 @@ import {
 
 import SplashAnimation from "./screens/SplashAnimation/SplashAnimation";
 import Intro from "./screens/Intro/Intro";
-// import Photo from "./screens/Photo/Photo";
+import Photo from "./screens/Photo/Photo";
 import AppNavigation from "./navigations/AppNavigation";
 
 export default function App() {
@@ -34,7 +34,7 @@ export default function App() {
         <SplashAnimation handleAnimationFinish={handleAnimationFinish} />
       ) : (
         // <Intro />
-        <AppNavigation />
+        <Photo />
       )}
     </>
   );

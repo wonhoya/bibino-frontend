@@ -12,41 +12,41 @@ import {
 } from "../../constants/colors";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
-const ITEM_WIDTH = Math.round(windowWidth * 0.8);
-const ITEM_HEIGHT = Math.round(windowHeight * 0.46);
+const itemWidth = Math.round(windowWidth * 0.8);
+const itemHeight = Math.round(windowHeight * 0.46);
 
 const styles = StyleSheet.create({
-  itemContainer: {
-    width: ITEM_WIDTH,
-    height: ITEM_HEIGHT,
+  container: {
+    width: itemWidth,
+    height: itemHeight,
     borderRadius: 30,
   },
   imageContainer: {
-    width: "100%",
     flex: 2,
+    width: "100%",
   },
   descriptionContainer: {
-    width: "100%",
-    backgroundColor: PRIMARY_BLACK,
     flex: 1,
     justifyContent: "center",
+    width: "100%",
+    backgroundColor: PRIMARY_BLACK,
   },
-  beerImage: {
+  image: {
     width: "100%",
     height: "100%",
   },
-  nameFont: {
+  name: {
+    marginHorizontal: 20,
+    color: PRIMARY_ORAGNE,
     fontFamily: RUBIK_BOLD,
     fontSize: BEER_NAME_FONT_SIZE,
-    color: PRIMARY_ORAGNE,
-    marginHorizontal: 20,
   },
-  descriptionFont: {
-    fontFamily: RUBIK_REGULAR,
-    fontSize: BEER_DESCRIPTION_FONT_SIZE,
-    color: CARD_FONT_GREY,
+  description: {
     marginVertical: 10,
     marginHorizontal: 20,
+    color: CARD_FONT_GREY,
+    fontFamily: RUBIK_REGULAR,
+    fontSize: BEER_DESCRIPTION_FONT_SIZE,
   },
   topCircularBorder: {
     borderTopStartRadius: 20,
