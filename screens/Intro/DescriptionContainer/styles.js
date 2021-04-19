@@ -8,7 +8,7 @@ import {
 } from "../../../constants/size";
 
 const styles = StyleSheet.create({
-  descriptionContainer: {
+  container: {
     flex: 5,
   },
   title: {

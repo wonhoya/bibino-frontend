@@ -1,12 +1,5 @@
 import { StyleSheet, Dimensions } from "react-native";
 
-import { PRIMARY_BLACK } from "../../constants/colors";
-import { RUBIK_REGULAR, RUBIK_BOLD } from "../../constants/font";
-import {
-  INTRO_TITLE_FONT_SIZE,
-  INTRO_PARAGRAPH_FONT_SIZE,
-} from "../../constants/size";
-
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
