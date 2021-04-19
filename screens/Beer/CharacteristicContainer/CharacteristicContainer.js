@@ -1,15 +1,13 @@
 import React from "react";
 import { View, Dimensions } from "react-native";
 
+import styles from "./styles";
 import {
   PRIMARY_ORANGE,
   PRIMARY_BLACK,
   PRIMARY_YELLOW,
 } from "../../../constants/colors";
 import CHRACTERISTIC_TITLES from "../../../constants/chracteristicTitles";
-
-import styles from "./styles";
-
 import CharacteristicBoard from "../../../components/shared/ChracteristicBoard/ChracteristicBoard";
 
 const { width: windowWidth } = Dimensions.get("window");
