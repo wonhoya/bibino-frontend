@@ -12,42 +12,9 @@ const windowHeight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
   windowContainer: { width: windowWidth, height: windowHeight },
-  container: {
-    flex: 1,
-  },
-  imageContainer: {
-    flex: 4,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  descriptionContainer: {
-    flex: 5,
-  },
-  image: {
-    height: "100%",
-    width: "100%",
-  },
-  buttonConatainer: {
-    marginTop: 20,
-    alignItems: "center",
-  },
-  title: {
-    color: PRIMARY_BLACK,
-    fontSize: INTRO_TITLE_FONT_SIZE,
-    fontFamily: RUBIK_BOLD,
-    margin: 25,
-    textAlign: "center",
-  },
-  descripton: {
-    color: PRIMARY_BLACK,
-    fontSize: INTRO_PARAGRAPH_FONT_SIZE,
-    fontFamily: RUBIK_REGULAR,
-    margin: 20,
-    textAlign: "center",
-  },
   paginationWrapper: {
     position: "absolute",
-    bottom: 50,
+    bottom: 90,
     left: 0,
     right: 0,
     justifyContent: "center",

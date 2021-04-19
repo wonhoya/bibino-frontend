@@ -1,17 +1,22 @@
 import React, { useState } from "react";
-import {
-  SafeAreaView,
-  Text,
-  View,
-  Dimensions,
-  ImageBackground,
-} from "react-native";
+import { SafeAreaView, View, Dimensions } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
 import styles from "./styles";
+import ImageContainer from "./ImageContainer/ImageContainer";
+import DescriptionContainer from "./DescriptionContainer/DescriptionContainer";
 import Button from "../../components/shared/Button/Button";
+import {
+  INTRO_FIRST_TITLE_TEXT,
+  INTRO_FIRST_TITLE_DESCRIPTION,
+  INTRO_SECOND_TITLE_TEXT,
+  INTRO_SECOND_TITLE_DESCRIPTION,
+  INTRO_THIRD_TITLE_TEXT,
+  INTRO_THIRD_TITLE_DESCRIPTION,
+  INTRO_START_BUTTON_TEXT,
+} from "../../constants/text";
 
-const windowWidth = Dimensions.get("window").width;
+const { width: windowWidth } = Dimensions.get("window");
 
 const Intro = () => {
   const [sliderState, setSliderState] = useState({ currentPage: 0 });
@@ -47,58 +52,26 @@ const Intro = () => {
           }}
         >
           <View style={styles.windowContainer}>
-            <View style={styles.container}>
-              <View style={styles.imageContainer}>
-                <ImageBackground
-                  style={styles.image}
-                  source={require("../../assets/pngs/introImage1.png")}
-                />
-              </View>
-              <View style={styles.descriptionContainer}>
-                <Text style={styles.title}>Just scan BEER And That’s All!</Text>
-                <Text style={styles.descripton}>
-                  Quarantine is the perfect time to spend your day learning
-                  something new, from anywhere!
-                </Text>
-              </View>
-            </View>
+            <ImageContainer />
+            <DescriptionContainer
+              title={INTRO_FIRST_TITLE_TEXT}
+              description={INTRO_FIRST_TITLE_DESCRIPTION}
+            />
           </View>
           <View style={styles.windowContainer}>
-            <View style={styles.container}>
-              <View style={styles.imageContainer}>
-                <ImageBackground
-                  style={styles.image}
-                  source={require("../../assets/pngs/introImage2.png")}
-                />
-              </View>
-              <View style={styles.descriptionContainer}>
-                <Text style={styles.title}>Just scan BEER And That’s All!</Text>
-                <Text style={styles.descripton}>
-                  Quarantine is the perfect time to spend your day learning
-                  something new, from anywhere!
-                </Text>
-              </View>
-            </View>
+            <ImageContainer />
+            <DescriptionContainer
+              title={INTRO_SECOND_TITLE_TEXT}
+              description={INTRO_SECOND_TITLE_DESCRIPTION}
+            />
           </View>
           <View style={styles.windowContainer}>
-            <View style={styles.container}>
-              <View style={styles.imageContainer}>
-                <ImageBackground
-                  style={styles.image}
-                  source={require("../../assets/pngs/introImage1.png")}
-                />
-              </View>
-              <View style={styles.descriptionContainer}>
-                <Text style={styles.title}>Just scan BEER And That’s All!</Text>
-                <Text style={styles.descripton}>
-                  Quarantine is the perfect time to spend your day learning
-                  something new, from anywhere!
-                </Text>
-                <View style={styles.buttonConatainer}>
-                  <Button text={"Get started"} />
-                </View>
-              </View>
-            </View>
+            <ImageContainer />
+            <DescriptionContainer
+              title={INTRO_THIRD_TITLE_TEXT}
+              description={INTRO_THIRD_TITLE_DESCRIPTION}
+              button={<Button text={INTRO_START_BUTTON_TEXT} />}
+            />
           </View>
         </ScrollView>
         <View style={styles.paginationWrapper}>
