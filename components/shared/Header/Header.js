@@ -1,11 +1,11 @@
 import React from "react";
 import { View, TouchableOpacity } from "react-native";
 
+import styles from "./styles";
 import { BackIcon, ConfigurationIcon } from "../../../assets/svgs/icon";
 import { HeaderLogoSvg } from "../../../assets/svgs/ilusts";
-import styles from "./styles";
 
-const Header = ({ navigation }) => {
+const Header = ({ navigation: { navigation } }) => {
   return (
     <View style={styles.header}>
       <TouchableOpacity
@@ -17,7 +17,7 @@ const Header = ({ navigation }) => {
       <HeaderLogoSvg />
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("config")}
+        onPress={() => navigation.navigate("Configuration")}
       >
         <ConfigurationIcon />
       </TouchableOpacity>

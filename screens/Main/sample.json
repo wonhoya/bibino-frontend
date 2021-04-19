@@ -1,50 +1,32 @@
 [
   {
-    "username": "이상엽",
-    "userImagePath": null,
-    "userPreferences": {},
-    "beerImagePath": "../../assets/pngs/beerSample1.png",
-    "beerName": "Stout Beer",
-    "beerDescription": "Not that great I think"
+    "imagePath": "../../assets/pngs/beerSample1.png",
+    "name": "Stout Beer",
+    "description": "Not that great I think"
   },
   {
-    "username": "정주형",
-    "userImagePath": null,
-    "userPreferences": {},
-    "beerImagePath": "../../assets/pngs/beerSample2.png",
-    "beerName": "beerSample2",
-    "beerDescription": "BBBB@@@@"
+    "imagePath": "../../assets/pngs/beerSample2.png",
+    "name": "beerSample2",
+    "description": "BBBB@@@@"
   },
   {
-    "username": "이원호",
-    "userImagePath": null,
-    "userPreferences": {},
-    "beerImagePath": "../../assets/pngs/beerSample3.png",
-    "beerName": "beerSample3",
-    "beerDescription": "CCCCC33333"
+    "imagePath": "../../assets/pngs/beerSample3.png",
+    "name": "beerSample3",
+    "description": "CCCCC33333"
   },
   {
-    "username": "박정빈",
-    "userImagePath": null,
-    "userPreferences": {},
-    "beerImagePath": "../../assets/pngs/beerSample4.png",
-    "beerName": "beerSample4",
-    "beerDescription": "DDDDD444444"
+    "imagePath": "../../assets/pngs/beerSample4.png",
+    "name": "beerSample4",
+    "description": "DDDDD444444"
   },
   {
-    "username": "전유림",
-    "userImagePath": null,
-    "userPreferences": {},
-    "beerImagePath": "../../assets/pngs/beerSample5.png",
-    "beerName": "beerSample5",
-    "beerDescription": "EEEEEEE5555"
+    "imagePath": "../../assets/pngs/beerSample5.png",
+    "name": "beerSample5",
+    "description": "EEEEEEE5555"
   },
   {
-    "username": "김탁현",
-    "userImagePath": null,
-    "userPreferences": {},
-    "beerImagePath": "../../assets/pngs/beerSample6.png",
-    "beerName": "beerSample6",
-    "beerDescription": "F666666666"
+    "imagePath": "../../assets/pngs/beerSample6.png",
+    "name": "beerSample6",
+    "description": "F666666666"
   }
 ]

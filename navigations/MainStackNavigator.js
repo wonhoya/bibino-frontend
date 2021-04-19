@@ -2,11 +2,11 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import Header from "../components/shared/Header/Header";
-import Main from "../screens/Main/Main";
 import Search from "../screens/Search/Search";
-//import Profile from "../screens/Profile/Profile";
+import Profile from "../screens/Profile/Profile";
 //import Beer from "../screens/Beer/Beer";
-//import Config from "../screens/Config/Config";
+import Configuration from "../screens/Configuration/Configuration";
+import MainTabNavigator from "./MainTabNavigator";
 
 const MainStack = createStackNavigator();
 
@@ -15,7 +15,7 @@ const MainStackNavigator = () => {
     <MainStack.Navigator>
       <MainStack.Screen
         name="Main"
-        component={Main}
+        component={MainTabNavigator}
         options={{
           header: (navigation) => <Header navigation={navigation} />,
         }}
@@ -27,13 +27,13 @@ const MainStackNavigator = () => {
           header: (navigation) => <Header navigation={navigation} />,
         }}
       />
-      {/* <MainStack.Screen
+      <MainStack.Screen
         name="Profile"
         component={Profile}
         options={{
           header: (navigation) => <Header navigation={navigation} />,
         }}
-      /> */}
+      />
       {/* <MainStack.Screen
         name="Beer"
         component={Beer}
@@ -41,13 +41,13 @@ const MainStackNavigator = () => {
           header: (navigation) => <Header navigation={navigation} />,
         }}
       /> */}
-      {/* <MainStack.Screen
-        name="Config"
-        component={Config}
+      <MainStack.Screen
+        name="Configuration"
+        component={Configuration}
         options={{
           header: (navigation) => <Header navigation={navigation} />,
         }}
-      /> */}
+      />
     </MainStack.Navigator>
   );
 };
