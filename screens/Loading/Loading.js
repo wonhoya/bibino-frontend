@@ -8,18 +8,16 @@ const Loading = () => {
     console.log("finished");
   };
   return (
-    <>
-      <View style={styles.container}>
-        <LottieView
-          source={require("../../assets/animations/loadingAnimation.json")}
-          style={styles.animation}
-          autoPlay
-          loop={true}
-          speed={0.6}
-          onAnimationFinish={handleAnimationFinish}
-        />
-      </View>
-    </>
+    <View style={styles.container}>
+      <LottieView
+        source={require("../../assets/animations/loadingAnimation.json")}
+        style={styles.animation}
+        autoPlay
+        loop={true}
+        speed={0.6}
+        onAnimationFinish={handleAnimationFinish}
+      />
+    </View>
   );
 };
 
