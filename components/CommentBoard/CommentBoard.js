@@ -25,6 +25,7 @@ const CommentBoard = () => {
           data={users}
           renderItem={({ item }) => <CommentCard user={item} />}
           keyExtractor={({ id }) => "" + id}
+          showsVerticalScrollIndicator={false}
         />
       ) : null}
       {!isLoading && !users.length ? (
