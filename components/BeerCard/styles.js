@@ -8,7 +8,7 @@ import {
 import {
   PRIMARY_BLACK,
   CARD_FONT_GREY,
-  PRIMARY_ORAGNE,
+  PRIMARY_ORANGE,
 } from "../../constants/colors";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   },
   name: {
     marginHorizontal: 20,
-    color: PRIMARY_ORAGNE,
+    color: PRIMARY_ORANGE,
     fontFamily: RUBIK_BOLD,
     fontSize: BEER_NAME_FONT_SIZE,
   },

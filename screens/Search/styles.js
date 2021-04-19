@@ -7,7 +7,7 @@ import {
   SEARCH_INPUT_FONT_SIZE,
 } from "../../constants/size";
 import {
-  PRIMARY_ORAGNE,
+  PRIMARY_ORANGE,
   SEARCH_GREY,
   SERACH_LIGHT_GREY,
   SERACH_BLACK,
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     fontSize: SEARCH_INDICATOR_FONT_SIZE,
   },
   dropdownText: {
-    color: PRIMARY_ORAGNE,
+    color: PRIMARY_ORANGE,
     fontFamily: RUBIK_REGULAR,
     fontSize: SEARCH_INDICATOR_FONT_SIZE,
   },
