@@ -5,7 +5,7 @@ import Header from "../components/shared/Header/Header";
 import Search from "../screens/Search/Search";
 import Profile from "../screens/Profile/Profile";
 //import Beer from "../screens/Beer/Beer";
-//import Config from "../screens/Config/Config";
+import Configuration from "../screens/Configuration/Configuration";
 import MainTabNavigator from "./MainTabNavigator";
 
 const MainStack = createStackNavigator();
@@ -41,13 +41,13 @@ const MainStackNavigator = () => {
           header: (navigation) => <Header navigation={navigation} />,
         }}
       /> */}
-      {/* <MainStack.Screen
+      <MainStack.Screen
         name="Config"
-        component={Config}
+        component={Configuration}
         options={{
           header: (navigation) => <Header navigation={navigation} />,
         }}
-      /> */}
+      />
     </MainStack.Navigator>
   );
 };

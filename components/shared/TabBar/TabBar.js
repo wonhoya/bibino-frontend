@@ -2,7 +2,7 @@ import React from "react";
 import { View, TouchableOpacity, Text } from "react-native";
 
 import styles from "./styles";
-import { ProfileIcon, SearchIcon, CameraIcon } from "../../assets/svgs/icon";
+import { ProfileIcon, SearchIcon, CameraIcon } from "../../../assets/svgs/icon";
 
 const TabBar = ({ navigation: { navigation } }) => {
   return (

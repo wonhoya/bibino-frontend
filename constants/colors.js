@@ -11,9 +11,6 @@ const TAG_RED = "#EF4949";
 const TAG_LIGHT_BLUE = "#65AAEA";
 const TAG_BLACK = "#3C3A36";
 
-const PURE_WHITE = "#FFFFFF";
-const PURE_BLACK = "#000000";
-
 const CARD_FONT_GREY = "#E1D6CE";
 
 const TAB_GREY = "#CAC1C1";
@@ -38,7 +35,6 @@ export {
   TAG_LIGHT_BLUE,
   TAG_BLACK,
   CARD_FONT_GREY,
-  PURE_WHITE,
   TAB_GREY,
   TAB_ORANGE,
   PRIMARY_GREY,
@@ -48,5 +44,4 @@ export {
   SEARCH_YELLOW,
   SERACH_BLACK,
   SEARCH_DARK_GREEN,
-  PURE_BLACK,
 };

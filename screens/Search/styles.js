@@ -4,8 +4,6 @@ import { RUBIK_REGULAR, RUBIK_BOLD } from "../../constants/font";
 import {
   SEARCH_TITLE_FONT_SIZE,
   SEARCH_INDICATOR_FONT_SIZE,
-  SEARCH_CARD_TITLE_FONT_SIZE,
-  SEARCH_CARD_PARAGRAPH_FONT_SIZE,
   SEARCH_INPUT_FONT_SIZE,
 } from "../../constants/size";
 import {
@@ -13,8 +11,6 @@ import {
   SEARCH_GREY,
   SERACH_LIGHT_GREY,
   SERACH_BLACK,
-  SEARCH_DARK_GREEN,
-  PURE_BLACK,
   PRIMARY_WHITE,
 } from "../../constants/colors";
 
@@ -22,24 +18,28 @@ const { width: windowWidth } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
-    width: windowWidth * 0.89,
+    flex: 1,
     alignSelf: "center",
+    width: windowWidth * 0.89,
   },
   titleContainer: {
+    flex: 0.7,
     marginVertical: 18,
   },
   indicatorContainer: {
-    marginHorizontal: 10,
+    flex: 0.5,
     flexDirection: "row",
+    marginHorizontal: 16,
   },
   inputContainer: {
-    marginTop: 20,
+    flex: 1.5,
     flexDirection: "row",
     alignItems: "center",
+    marginTop: 20,
   },
   iconContainer: {
-    position: "absolute",
     zIndex: 1,
+    position: "absolute",
     left: 20,
   },
   paragraph: {
@@ -50,46 +50,31 @@ const styles = StyleSheet.create({
     height: 108,
   },
   input: {
+    width: "100%",
+    height: 76,
     paddingLeft: 60,
     paddingRight: 20,
     paddingVertical: 14,
-    backgroundColor: SERACH_LIGHT_GREY,
     borderRadius: 10,
-    width: "100%",
-    height: 76,
+    backgroundColor: SERACH_LIGHT_GREY,
+    color: PRIMARY_WHITE,
     fontFamily: RUBIK_REGULAR,
     fontSize: SEARCH_INPUT_FONT_SIZE,
-    color: PRIMARY_WHITE,
   },
   title: {
+    color: SERACH_BLACK,
     fontFamily: RUBIK_BOLD,
     fontSize: SEARCH_TITLE_FONT_SIZE,
-    color: SERACH_BLACK,
   },
   indicator: {
+    color: SEARCH_GREY,
     fontFamily: RUBIK_REGULAR,
     fontSize: SEARCH_INDICATOR_FONT_SIZE,
-    color: SEARCH_GREY,
   },
   dropdownText: {
+    color: PRIMARY_ORAGNE,
     fontFamily: RUBIK_REGULAR,
     fontSize: SEARCH_INDICATOR_FONT_SIZE,
-    color: PRIMARY_ORAGNE,
-  },
-  cardTitle: {
-    fontFamily: RUBIK_BOLD,
-    fontSize: SEARCH_CARD_TITLE_FONT_SIZE,
-    color: PURE_BLACK,
-  },
-  cardDate: {
-    fontFamily: RUBIK_REGULAR,
-    fontSize: SEARCH_CARD_PARAGRAPH_FONT_SIZE,
-    color: SEARCH_DARK_GREEN,
-  },
-  cardDescription: {
-    fontFamily: RUBIK_REGULAR,
-    fontSize: SEARCH_CARD_PARAGRAPH_FONT_SIZE,
-    color: PURE_BLACK,
   },
 });
 

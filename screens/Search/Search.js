@@ -33,7 +33,11 @@ const Search = () => {
           <View style={styles.iconContainer}>
             <SearchIcon size={30} />
           </View>
-          <TextInput style={styles.input} />
+          <TextInput
+            autoCapitalize="none"
+            autoCorrect={false}
+            style={styles.input}
+          />
         </View>
         <SearchCardBoard />
       </View>

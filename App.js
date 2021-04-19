@@ -9,6 +9,7 @@ import {
 
 import SplashAnimation from "./screens/SplashAnimation/SplashAnimation";
 import Intro from "./screens/Intro/Intro";
+import AppNavigation from "./navigations/AppNavigation";
 
 export default function App() {
   const [isAnimationFinished, setIsAnimationFinished] = useState(false);
@@ -31,7 +32,7 @@ export default function App() {
       {!isAnimationFinished ? (
         <SplashAnimation handleAnimationFinish={handleAnimationFinish} />
       ) : (
-        <Intro />
+        <AppNavigation />
       )}
     </>
   );

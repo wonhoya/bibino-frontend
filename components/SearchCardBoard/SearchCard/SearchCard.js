@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Image, Text } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 import styles from "./styles";
 
@@ -8,7 +9,7 @@ const SearchCard = ({
   backgroundColor,
 }) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container}>
       <View style={styles.imageContainer}>
         <Image source={imageSource} style={styles.image} resizeMode="cover" />
       </View>
@@ -17,7 +18,7 @@ const SearchCard = ({
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.description}>{description}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

@@ -55,6 +55,7 @@ const SearchCardBoard = () => {
           data={beers}
           renderItem={renderItem}
           keyExtractor={({ id }) => "" + id}
+          showsVerticalScrollIndicator={false}
         />
       ) : null}
     </View>
