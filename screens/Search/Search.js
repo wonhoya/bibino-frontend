@@ -5,7 +5,7 @@ import ModalDropdown from "react-native-modal-dropdown";
 import styles from "./styles";
 import { SearchIcon } from "../../assets/svgs/icon";
 import SearchCardBoard from "../../components/SearchCardBoard/SearchCardBoard";
-import { SEARCH_TITLE_TEXT } from "../../constants/texts";
+import { SEARCH_TITLE_TEXT } from "../../constants/text";
 
 //mockup
 //https://github.com/RazaShehryar/react-native-modal-dropdown#api
