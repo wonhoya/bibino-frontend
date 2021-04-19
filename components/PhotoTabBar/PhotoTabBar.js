@@ -1,6 +1,8 @@
 import React from "react";
 import { View, TouchableOpacity, Text } from "react-native";
 import * as Animatable from "react-native-animatable";
+import { AntDesign } from "@expo/vector-icons";
+import { PRIMARY_ORANGE, PRIMARY_WHITE } from "../../constants/colors";
 
 import {
   ProfileIcon,
@@ -10,6 +12,7 @@ import {
   RetakeIcon,
 } from "../../assets/svgs/icon";
 import styles from "./styles";
+import ButtonContainer from "./ButtonContainer/ButtonContainer";
 
 Animatable.initializeRegistryWithDefinitions({
   changeHeight: {
@@ -36,50 +39,77 @@ Animatable.initializeRegistryWithDefinitions({
       marginTop: 5,
     },
   },
+  changeBoderRaidus: {
+    from: {
+      borderTopStartRadius: 20,
+    },
+    to: {
+      borderTopStartRadius: 0,
+    },
+  },
 });
 
-const PhotoTabBar = ({ handleTakePicture, isPreview }) => {
+const PhotoTabBar = ({
+  handleTakePicture,
+  handleRetake,
+  isPreview,
+  handleUse,
+}) => {
   console.log("isPreview?", isPreview);
   return (
     <Animatable.View animation="changeHeight" style={styles.tabsContainer}>
       <Animatable.View
         animation="changeButtonsHeight"
-        style={[styles.columnCenter, styles.tab]}
+        style={styles.columnCenter}
       >
-        <TouchableOpacity onPress={() => console.log("Camera Pressed")}>
-          <SearchIcon size={21} />
-        </TouchableOpacity>
-        <Text style={styles.tabFont}>Search</Text>
+        <ButtonContainer
+          handleOnPress={() => console.log("Camera Pressed")}
+          icon={<AntDesign name="search1" size={35} color={PRIMARY_WHITE} />}
+        />
       </Animatable.View>
 
       <Animatable.View
         animation="changeCameraButtonHeight"
-        style={styles.button}
+        style={styles.mainButton}
       >
         {isPreview ? (
-          <View style={[styles.columnCenter, styles.cameraContainer]}>
-            <TouchableOpacity onPress={handleTakePicture}>
-              <RetakeIcon />
-            </TouchableOpacity>
+          <View style={styles.cameraContainer}>
+            <ButtonContainer
+              handleOnPress={handleRetake}
+              icon={
+                <AntDesign name="reload1" size={50} color={PRIMARY_ORANGE} />
+              }
+            />
           </View>
         ) : (
-          <View style={[styles.columnCenter, styles.cameraContainer]}>
-            <TouchableOpacity onPress={handleTakePicture}>
-              <CameraIcon />
-            </TouchableOpacity>
-            <Text style={styles.cameraFont}>Camera</Text>
+          <View style={styles.cameraContainer}>
+            <ButtonContainer
+              handleOnPress={handleTakePicture}
+              icon={
+                <AntDesign name="camera" size={60} color={PRIMARY_ORANGE} />
+              }
+            />
           </View>
         )}
       </Animatable.View>
 
       <Animatable.View
         animation="changeButtonsHeight"
-        style={[styles.columnCenter, styles.tab]}
+        style={styles.columnCenter}
       >
-        <TouchableOpacity onPress={() => console.log("Camera Pressed")}>
-          <ProfileIcon />
-        </TouchableOpacity>
-        <Text style={styles.tabFont}>Profile</Text>
+        {isPreview ? (
+          <ButtonContainer
+            handleOnPress={handleUse}
+            icon={
+              <AntDesign name="checkcircleo" size={40} color={PRIMARY_WHITE} />
+            }
+          />
+        ) : (
+          <ButtonContainer
+            handleOnPress={() => console.log("Profile Pressed")}
+            icon={<AntDesign name="user" size={40} color={PRIMARY_WHITE} />}
+          />
+        )}
       </Animatable.View>
     </Animatable.View>
   );

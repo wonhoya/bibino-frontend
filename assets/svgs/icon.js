@@ -143,13 +143,13 @@ const SuccessIcon = () => {
   return <SvgXml xml={svgPath} />;
 };
 
-const UseIcon = () => {
+const UseIcon = ({ size }) => {
   const svgPath = `<svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path fill-rule="evenodd" clip-rule="evenodd" d="M15.4375 30.875C6.9116 30.875 0 23.9634 0 15.4375C0 6.9116 6.9116 0 15.4375 0C23.9634 0 30.875 6.9116 30.875 15.4375C30.875 23.9634 23.9634 30.875 15.4375 30.875ZM15.4375 28.0682C22.4133 28.0682 28.0682 22.4133 28.0682 15.4375C28.0682 8.4618 22.4133 2.80685 15.4375 2.80685C8.4618 2.80685 2.80685 8.4618 2.80685 15.4375C2.80685 22.4133 8.4618 28.0682 15.4375 28.0682ZM20.0588 10.2348L12.6307 17.6629L9.41287 14.445L7.42815 16.4298L12.6307 21.6323L22.0435 12.2195L20.0588 10.2348Z" fill="#5F8851"/>
   </svg>
   `;
 
-  return <SvgXml xml={svgPath} />;
+  return <SvgXml xml={svgPath} width={size} height={size} />;
 };
 
 const ContactIcon = () => {

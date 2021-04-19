@@ -1,7 +1,7 @@
 import { StyleSheet, Dimensions } from "react-native";
 
 import {
-  PRIMARY_ORAGNE,
+  PRIMARY_ORANGE,
   TAB_GREY,
   TAB_ORANGE,
   PRIMARY_WHITE,
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 60,
     borderTopStartRadius: 20,
     borderTopEndRadius: 20,
-    backgroundColor: PRIMARY_ORAGNE,
+    backgroundColor: PRIMARY_ORANGE,
   },
   tab: {
     flexDirection: "column",

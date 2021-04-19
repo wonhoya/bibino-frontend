@@ -13,30 +13,24 @@ const styles = StyleSheet.create({
   tabsContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: PRIMARY_ORANGE,
     width: "100%",
-    bottom: 0,
-    borderTopStartRadius: 20,
-    borderTopEndRadius: 20,
+
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     padding: 28,
     paddingHorizontal: 60,
+    backgroundColor: PRIMARY_ORANGE,
   },
-  tab: {},
-  tabFont: {
-    fontFamily: RUBIK_REGULAR,
-    color: PRIMARY_WHITE,
-  },
-  cameraFont: {
-    bottom: 10,
-    fontFamily: RUBIK_REGULAR,
-    color: TAB_ORANGE,
-  },
-  button: {
+  mainButton: {
     position: "absolute",
-    top: -40,
-    left: windowWidth / 2 - 45,
+
+    left: windowWidth / 2 - 44,
   },
   cameraContainer: {
+    minWidth: 70,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
     width: 90,
     height: 90,
     backgroundColor: PRIMARY_WHITE,
@@ -45,6 +39,7 @@ const styles = StyleSheet.create({
     borderRadius: 38,
   },
   columnCenter: {
+    minWidth: 70,
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
