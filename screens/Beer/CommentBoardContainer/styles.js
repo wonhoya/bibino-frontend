@@ -1,16 +1,16 @@
 import { StyleSheet, Dimensions } from "react-native";
-import { PRIMARY_ORAGNE } from "../../constants/colors";
+
+import { PRIMARY_ORANGE } from "../../../constants/colors";
 
 const { width: windowWidth } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
-    width: windowWidth / 1.1,
-    height: windowWidth / 1.09,
-    paddingTop: 5,
-    paddingBottom: 10,
+    width: "90%",
+    paddingTop: windowWidth / 50,
+    paddingBottom: windowWidth / 110,
     borderRadius: 10,
-    justifyContent: "center",
+    backgroundColor: PRIMARY_ORANGE,
     alignItems: "center",
   },
 });
