@@ -1,27 +1,48 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  SafeAreaView,
-  View,
-  Image,
-  Dimensions,
-  Text,
-  Alert,
-  TouchableOpacity,
-} from "react-native";
+import { View, Image } from "react-native";
 import { Camera } from "expo-camera";
-import * as Animatable from "react-native-animatable";
 
 import styles from "./styles";
 import Configuration from "../Configuration/Configuration";
 import PhotoTabBar from "../../components/PhotoTabBar/PhotoTabBar";
 import * as FileSystem from "expo-file-system";
-import Loading from "../Loading/Loading";
+import { API_URL } from "@env";
 
-const mockUserId = 123;
+async function callGoogleVisionAsync(image) {
+  const body = {
+    requests: [
+      {
+        image: {
+          content: image,
+        },
+        features: [
+          { type: "LABEL_DETECTION", maxResults: 10 },
+          { type: "TEXT_DETECTION", maxResults: 5 },
+          { type: "DOCUMENT_TEXT_DETECTION", maxResults: 5 },
+          { type: "WEB_DETECTION", maxResults: 5 },
+        ],
+      },
+    ],
+  };
+
+  const response = await fetch(API_URL, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+  const parsed = await response.json();
+
+  console.log("Result:", parsed);
+
+  return parsed.responses[0].labelAnnotations[0].description;
+}
 
 const Photo = () => {
   const cameraRef = useRef(null);
-  //카메라 허가는 앱 자체에 기억되는듯
+  //카메라 허가
   const [hasPermission, setHasPermission] = useState(null);
   //카메라 타입체크 후면 카메라가 기본으로 사용
   const [type, setType] = useState(Camera.Constants.Type.back);
@@ -31,6 +52,8 @@ const Photo = () => {
   const [isPreview, setIsPreview] = useState(false);
 
   const [photoUri, setPhotoUri] = useState(null);
+
+  const [photobase64, setPhotobase64] = useState(null);
 
   const [test, setTest] = useState(null);
 
@@ -54,12 +77,13 @@ const Photo = () => {
   useEffect(() => {
     const readPhotos = async () => {
       //폴더가 없으면 폴더를 만들고, 있으면 거기 있는 사진을 불러옴.
+      // await FileSystem.deleteAsync(FileSystem.documentDirectory + "photos/");
+
       const dirInfo = await FileSystem.getInfoAsync(
         FileSystem.documentDirectory + "photos/"
       );
 
       if (!dirInfo.exists) {
-        console.log("in");
         await FileSystem.makeDirectoryAsync(
           FileSystem.documentDirectory + "photos/",
           { intermediates: true }
@@ -69,13 +93,10 @@ const Photo = () => {
           FileSystem.documentDirectory + "photos/"
         );
 
+        //uri에 주소 붙이기
         const uris = photos.map((photo) => {
           return `${FileSystem.documentDirectory}photos/${photo}`;
         });
-
-        console.log("uris", uris);
-
-        // setTest(`${FileSystem.documentDirectory}photos/${photos[0]}`);
 
         setTest(uris);
       }
@@ -90,11 +111,12 @@ const Photo = () => {
     }
 
     if (cameraRef.current) {
-      const option = { quality: 1 };
+      const option = { quality: 1, base64: true };
       const photoData = await cameraRef.current.takePictureAsync(option);
-      // console.log("photoData is", photoData);
+      console.log("photoData is", photoData);
+      console.log(photoData.base64);
+      setPhotobase64(photoData.base64);
       setPhotoUri(photoData.uri);
-      // console.log("photoUri in state is", photoUri);
       await cameraRef.current.pausePreview();
       setIsPreview(true);
     }
@@ -106,39 +128,20 @@ const Photo = () => {
   };
 
   const handleUse = async () => {
-    // uri를 카피해서 저장함
-    // 구글 비전 api로 보냄
     try {
       //디렉토리 삭제
       // await FileSystem.deleteAsync(FileSystem.documentDirectory + "photos/");
-
-      //디렉토리 확인.
-      // const dirInfo = await FileSystem.getInfoAsync(
-      //   FileSystem.documentDirectory + "photos/"
-      // );
-
-      // if (!dirInfo.exists) {
-      //   console.log("in");
-      //   await FileSystem.makeDirectoryAsync(
-      //     FileSystem.documentDirectory + "photos/",
-      //     { intermediates: true }
-      //   );
-      // }
 
       await FileSystem.copyAsync({
         from: photoUri,
         to: `${FileSystem.documentDirectory}photos/${Date.now()}.jpg`,
       });
 
-      const dirInfo = await FileSystem.getInfoAsync(
-        FileSystem.documentDirectory + "photos/"
-      );
-      console.log("2", dirInfo);
+      console.log("photobase64:", photobase64);
 
-      const readAsync3 = await FileSystem.readDirectoryAsync(
-        FileSystem.documentDirectory + "photos/"
-      );
-      console.log("READ ASYNC", readAsync3);
+      callGoogleVisionAsync(photobase64);
+
+      // 구글 비전으로 보내기
     } catch (error) {
       console.log(error);
     }
