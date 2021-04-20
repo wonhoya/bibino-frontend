@@ -16,19 +16,35 @@ const PhotoTabBar = ({
   isPreview,
   handleUse,
   isCameraReady,
+  setIsAnimationFinished,
 }) => {
   const animationValue = useRef(new Animated.Value(100)).current;
+  const positionValue = useRef(new Animated.Value(0)).current;
 
-  console.log("camerrrrrrrrrrrr", isCameraReady);
   useEffect(() => {
-    if (isCameraReady) {
+    const startAnimation = () => {
       Animated.timing(animationValue, {
         toValue: 170,
         duration: 500,
         useNativeDriver: false,
       }).start();
-    }
-  }, [animationValue, isCameraReady]);
+
+      Animated.timing(positionValue, {
+        toValue: 40,
+        duration: 500,
+        useNativeDriver: true,
+      }).start();
+    };
+
+    startAnimation();
+    const id = setTimeout(() => {
+      setIsAnimationFinished(true);
+    }, 500);
+
+    return () => {
+      clearTimeout(id);
+    };
+  }, []);
 
   console.log("isPreview?", isPreview);
   return (
@@ -42,13 +58,25 @@ const PhotoTabBar = ({
       </TouchableOpacity>
 
       {isPreview ? (
-        <TouchableOpacity style={styles.button} onPress={handleRetake}>
+        <TouchableOpacity
+          style={[
+            styles.button,
+            { transform: [{ translateY: positionValue }] },
+          ]}
+          onPress={handleRetake}
+        >
           <View style={[styles.tab, styles.cameraContainer]}>
             <AntDesign name="reload1" size={50} color={PRIMARY_ORANGE} />
           </View>
         </TouchableOpacity>
       ) : (
-        <TouchableOpacity style={styles.button} onPress={handleTakePicture}>
+        <TouchableOpacity
+          style={[
+            styles.button,
+            { transform: [{ translateY: positionValue }] },
+          ]}
+          onPress={handleTakePicture}
+        >
           <View style={[styles.tab, styles.cameraContainer]}>
             <AntDesign name="camera" size={60} color={POINT_DARK_ORANGE} />
           </View>

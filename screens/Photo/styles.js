@@ -9,8 +9,7 @@ const styles = StyleSheet.create({
   },
   camera: {
     flex: 7,
-    marginHorizontal: 20,
-    marginVertical: 20,
+    backgroundColor: "black",
   },
   buttonContainer: {
     flex: 3,
@@ -25,10 +24,6 @@ const styles = StyleSheet.create({
     width: windowWidth,
     height: windowHeight,
     backgroundColor: PRIMARY_WHITE,
-  },
-  test: {
-    backgroundColor: "green",
-    flex: 9,
   },
   image: {
     width: "30%",

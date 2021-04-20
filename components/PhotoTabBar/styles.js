@@ -12,12 +12,11 @@ const { width: windowWidth } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   tabsContainer: {
-    position: "absolute",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
-    // height: "12%",
+    height: "12%",
     bottom: 0,
     padding: 18,
     paddingHorizontal: 60,

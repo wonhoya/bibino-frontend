@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { View, Text, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Camera } from "expo-camera";
+import LottieView from "lottie-react-native";
 
 import styles from "./styles";
 import Configuration from "../Configuration/Configuration";
@@ -21,9 +22,11 @@ const Photo = () => {
   const [isCameraReady, setisCameraReady] = useState(false);
   const [isPreview, setIsPreview] = useState(false);
   const [isParseStarted, setIsParseStarted] = useState(false);
+  const [isAnimationFinished, setIsAnimationFinished] = useState(false);
   const [photoUri, setPhotoUri] = useState(null);
   const [photobase64, setPhotobase64] = useState(null);
 
+  console.log("isAnimationFinished", isAnimationFinished);
   console.log("Permission check", hasPermission);
   console.log("Camera Ready check", isCameraReady);
 
@@ -127,26 +130,42 @@ const Photo = () => {
     return <Configuration />;
   }
 
+  if (isParseStarted) {
+    return (
+      <View>
+        <LottieView
+          source={require("../../assets/animations/resultScreenLoadingAnimation.json")}
+          style={styles.animation}
+          autoPlay
+          loop={true}
+          speed={0.6}
+        />
+      </View>
+    );
+  }
+
   return (
     <>
-      {isParseStarted ? (
-        <Text>Parse Started</Text>
-      ) : (
-        <View style={styles.container}>
+      <View style={styles.container}>
+        {isAnimationFinished ? (
           <Camera
             ref={cameraRef}
             style={styles.camera}
             type={Camera.Constants.Type.back}
             onCameraReady={() => setisCameraReady(true)}
           />
-          <PhotoTabBar
-            handleTakePicture={handleTakePicture}
-            handleRetake={handleRetake}
-            handleUse={handleUse}
-            isPreview={isPreview}
-          />
-        </View>
-      )}
+        ) : (
+          <View style={styles.camera} />
+        )}
+        <PhotoTabBar
+          handleTakePicture={handleTakePicture}
+          handleRetake={handleRetake}
+          handleUse={handleUse}
+          isPreview={isPreview}
+          isCameraReady={isCameraReady}
+          setIsAnimationFinished={setIsAnimationFinished}
+        />
+      </View>
     </>
   );
 };
