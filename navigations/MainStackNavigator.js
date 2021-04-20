@@ -1,62 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
+import Intro from "../screens/Intro/Intro";
+import SignIn from "../screens/SignIn/SignIn";
 import Header from "../components/shared/Header/Header";
-import Search from "../screens/Search/Search";
-import Profile from "../screens/Profile/Profile";
-//import Beer from "../screens/Beer/Beer";
-import Photo from "../screens/Photo/Photo";
-import Configuration from "../screens/Configuration/Configuration";
 import MainTabNavigator from "./MainTabNavigator";
+import Beer from "../screens/Beer/Beer";
+import Configuration from "../screens/Configuration/Configuration";
 
-const MainStack = createStackNavigator();
+const Stack = createStackNavigator();
 
 const MainStackNavigator = () => {
+  //auth flow
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const authScreens = {
+    Intro,
+    SignIn,
+  };
+  const userScreens = {
+    Main: MainTabNavigator,
+    Beer,
+    Configuration,
+  };
+
   return (
-    <MainStack.Navigator>
-      <MainStack.Screen
-        name="Photo"
-        component={Photo}
-        options={{
-          header: (navigation) => <Header navigation={navigation} />,
-        }}
-      />
-      <MainStack.Screen
-        name="Main"
-        component={MainTabNavigator}
-        options={{
-          header: (navigation) => <Header navigation={navigation} />,
-        }}
-      />
-      <MainStack.Screen
-        name="Search"
-        component={Search}
-        options={{
-          header: (navigation) => <Header navigation={navigation} />,
-        }}
-      />
-      <MainStack.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          header: (navigation) => <Header navigation={navigation} />,
-        }}
-      />
-      {/* <MainStack.Screen
-        name="Beer"
-        component={Beer}
-        options={{
-          header: (navigation) => <Header navigation={navigation} />,
-        }}
-      /> */}
-      <MainStack.Screen
-        name="Configuration"
-        component={Configuration}
-        options={{
-          header: (navigation) => <Header navigation={navigation} />,
-        }}
-      />
-    </MainStack.Navigator>
+    <Stack.Navigator headerMode={isLoggedIn ? "screen" : "none"}>
+      {Object.entries({
+        ...(isLoggedIn ? userScreens : authScreens),
+      }).map(([name, component], i) => (
+        <Stack.Screen
+          key={i}
+          name={name}
+          component={component}
+          options={
+            isLoggedIn
+              ? {
+                  header: (navigation) => <Header navigation={navigation} />,
+                }
+              : {}
+          }
+        />
+      ))}
+    </Stack.Navigator>
   );
 };
 

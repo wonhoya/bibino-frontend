@@ -8,7 +8,7 @@ import {
   scrollInterpolator,
   animatedStyles,
 } from "../../../utils/carouselAnimations";
-import { MAIN_RECOMMENDATION_TEXT } from "../../../constants/texts";
+import { MAIN_RECOMMENDATION_TEXT } from "../../../constants/text";
 import BeerCard from "../../../components/BeerCard/BeerCard";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");

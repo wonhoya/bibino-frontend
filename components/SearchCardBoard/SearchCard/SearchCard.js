@@ -1,6 +1,6 @@
 import React from "react";
-import { View, Image, Text } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { View, Image, Text, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import styles from "./styles";
 
@@ -8,8 +8,19 @@ const SearchCard = ({
   beer: { name, manufacturingDate, imageSource, description },
   backgroundColor,
 }) => {
+  const { navigate } = useNavigation();
+
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() =>
+        navigate("Beer", {
+          params: {
+            /*나중에 파라미터 삽입 */
+          },
+        })
+      }
+    >
       <View style={styles.imageContainer}>
         <Image source={imageSource} style={styles.image} resizeMode="cover" />
       </View>

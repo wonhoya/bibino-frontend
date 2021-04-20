@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Text, ImageBackground } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { View, Text, ImageBackground, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
 import styles from "./styles";
 
 /**
@@ -9,6 +10,8 @@ import styles from "./styles";
  */
 
 const BeerCard = ({ imagePath, name, description }) => {
+  const { navigate } = useNavigation();
+
   return (
     <TouchableOpacity
       style={[
@@ -16,6 +19,13 @@ const BeerCard = ({ imagePath, name, description }) => {
         styles.bottomCircularBorder,
         styles.container,
       ]}
+      onPress={() =>
+        navigate("Beer", {
+          params: {
+            /*나중에 파라미터 삽입 */
+          },
+        })
+      }
     >
       <View style={[styles.topCircularBorder, styles.imageContainer]}>
         <ImageBackground

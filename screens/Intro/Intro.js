@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { SafeAreaView, View, Dimensions } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
 
 import styles from "./styles";
 import ImageContainer from "./ImageContainer/ImageContainer";
@@ -20,6 +21,7 @@ const { width: windowWidth } = Dimensions.get("window");
 
 const Intro = () => {
   const [sliderState, setSliderState] = useState({ currentPage: 0 });
+  const { navigate } = useNavigation();
   const pagination = [1, 2, 3];
 
   const setSliderPage = (event) => {
@@ -70,7 +72,18 @@ const Intro = () => {
             <DescriptionContainer
               title={INTRO_THIRD_TITLE_TEXT}
               description={INTRO_THIRD_TITLE_DESCRIPTION}
-              button={<Button text={INTRO_START_BUTTON_TEXT} />}
+              button={
+                <Button
+                  text={INTRO_START_BUTTON_TEXT}
+                  onPress={() =>
+                    navigate("SignIn", {
+                      params: {
+                        /*나중에 파라미터 삽입 */
+                      },
+                    })
+                  }
+                />
+              }
             />
           </View>
         </ScrollView>
