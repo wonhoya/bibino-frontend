@@ -1,48 +1,58 @@
 import { StyleSheet, Dimensions } from "react-native";
+
 import {
   PRIMARY_ORANGE,
   TAB_GREY,
   TAB_ORANGE,
   PRIMARY_WHITE,
 } from "../../constants/colors";
-import { RUBIK_REGULAR } from "../../constants/font";
+import { RUBIK_REGULAR, RUBIK_BOLD } from "../../constants/font";
 
 const { width: windowWidth } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   tabsContainer: {
+    position: "absolute",
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
     width: "100%",
-
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    padding: 28,
+    // height: "12%",
+    bottom: 0,
+    padding: 18,
     paddingHorizontal: 60,
+    borderTopStartRadius: 5,
+    borderTopEndRadius: 5,
     backgroundColor: PRIMARY_ORANGE,
   },
-  mainButton: {
+  tab: {
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  tabName: {
+    color: PRIMARY_WHITE,
+    fontFamily: RUBIK_REGULAR,
+  },
+  cameraName: {
     position: "absolute",
-
-    left: windowWidth / 2 - 44,
+    bottom: 10,
+    color: TAB_ORANGE,
+    fontFamily: RUBIK_REGULAR,
+  },
+  button: {
+    position: "absolute",
+    top: -25,
+    left: windowWidth / 2 - 56,
   },
   cameraContainer: {
-    minWidth: 70,
-    flexDirection: "column",
-    alignItems: "center",
+    width: 110,
+    height: 110,
     justifyContent: "center",
-    width: 90,
-    height: 90,
+    alignItems: "center",
+    borderWidth: 13,
+    borderColor: PRIMARY_ORANGE,
+    borderRadius: 50,
     backgroundColor: PRIMARY_WHITE,
-    borderWidth: 1,
-    borderColor: TAB_GREY,
-    borderRadius: 38,
-  },
-  columnCenter: {
-    minWidth: 70,
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
   },
 });
 

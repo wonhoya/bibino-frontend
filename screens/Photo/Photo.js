@@ -13,7 +13,7 @@ import Failure from "../Failure/Failure";
 
 const Photo = () => {
   const cameraRef = useRef(null);
-  const { navigate } = useNavigation();
+  const { navigate, setOptions } = useNavigation();
 
   const [hasPermission, setHasPermission] = useState(null);
 
@@ -26,6 +26,12 @@ const Photo = () => {
 
   console.log("Permission check", hasPermission);
   console.log("Camera Ready check", isCameraReady);
+
+  useEffect(() => {
+    setOptions({
+      animationEnabled: false,
+    });
+  }, [setOptions]);
 
   useEffect(() => {
     const requestPermission = async () => {
