@@ -16,9 +16,12 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.wonhoya.bibino",
+      "buildNumber": "1.0.0"
     },
     "android": {
+      "package": "com.wonhoya.bibino",
       "adaptiveIcon": {
         "foregroundImage": "./assets/appIcon.png"
       }

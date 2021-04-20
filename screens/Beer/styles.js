@@ -11,8 +11,8 @@ const styles = StyleSheet.create({
   description: {
     width: "100%",
     padding: windowWidth / 10,
-    fontFamily: RUBIK_REGULAR,
     fontSize: windowWidth / 25,
+    fontFamily: RUBIK_REGULAR,
     textAlign: "justify",
     lineHeight: windowWidth / 20,
   },
