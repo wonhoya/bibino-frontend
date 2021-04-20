@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, FlatList } from "react-native";
+import { View, FlatList } from "react-native";
 
 import styles from "./styles";
 import SearchCard from "./SearchCard/SearchCard";
 import Loading from "../../screens/Loading/Loading";
 import {
   PRIMARY_DARK_GREY,
-  PRIMARY_ORAGNE,
+  PRIMARY_ORANGE,
   SEARCH_YELLOW,
   SERACH_RED,
 } from "../../constants/colors";
@@ -25,7 +25,7 @@ const SearchCardBoard = () => {
         backgroundColor = SERACH_RED;
         break;
       case 1:
-        backgroundColor = PRIMARY_ORAGNE;
+        backgroundColor = PRIMARY_ORANGE;
         break;
       case 2:
         backgroundColor = SEARCH_YELLOW;

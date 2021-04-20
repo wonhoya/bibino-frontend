@@ -1,13 +1,13 @@
 import React from "react";
 import { SvgXml } from "react-native-svg";
 
-const BackIcon = () => {
+const BackIcon = ({ style }) => {
   const svgPath = `<svg width="28" height="30" viewBox="0 0 28 30" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path fill-rule="evenodd" clip-rule="evenodd" d="M13.75 29.242C6.15608 29.242 0 22.696 0 14.621C0 6.54605 6.15608 0 13.75 0C21.3439 0 27.5 6.54605 27.5 14.621C27.5 22.696 21.3439 29.242 13.75 29.242ZM13.7501 26.5834C19.9633 26.5834 25.0001 21.2275 25.0001 14.6208C25.0001 8.01397 19.9633 2.65811 13.7501 2.65811C7.53692 2.65811 2.50012 8.01397 2.50012 14.6208C2.50012 21.2275 7.53692 26.5834 13.7501 26.5834ZM14.1163 20.8777L15.8841 18.9979L11.768 14.6211L15.8841 10.2442L14.1163 8.36447L8.23244 14.6211L14.1163 20.8777Z" fill="#BEBAB3"/>
   </svg>
   `;
 
-  return <SvgXml xml={svgPath} />;
+  return <SvgXml xml={svgPath} style={style} />;
 };
 
 const ConfigurationIcon = () => {
