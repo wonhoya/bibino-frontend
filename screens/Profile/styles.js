@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
   },
   tagBoardContainer: {
-    height: 50,
+    height: 30,
     alignItems: "center",
   },
   galleryContainer: {

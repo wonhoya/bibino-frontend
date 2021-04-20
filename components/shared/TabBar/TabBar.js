@@ -1,7 +1,13 @@
 import React from "react";
 import { View, TouchableOpacity, Text } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 
 import styles from "./styles";
+import {
+  PRIMARY_ORANGE,
+  PRIMARY_WHITE,
+  POINT_DARK_ORANGE,
+} from "../../../constants/colors";
 import { ProfileIcon, SearchIcon, CameraIcon } from "../../../assets/svgs/icon";
 
 const TabBar = ({ navigation: { navigation } }) => {
@@ -11,17 +17,16 @@ const TabBar = ({ navigation: { navigation } }) => {
         style={styles.tab}
         onPress={() => navigation.navigate("Search")}
       >
-        <SearchIcon size={21} />
+        <AntDesign name="search1" size={30} color={PRIMARY_WHITE} />
         <Text style={styles.tabName}>Search</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.goBack()}
+        onPress={() => navigation.navigate("Photo")}
       >
         <View style={[styles.tab, styles.cameraContainer]}>
-          <CameraIcon />
-          <Text style={styles.cameraName}>Camera</Text>
+          <AntDesign name="camera" size={60} color={POINT_DARK_ORANGE} />
         </View>
       </TouchableOpacity>
 
@@ -29,7 +34,7 @@ const TabBar = ({ navigation: { navigation } }) => {
         style={styles.tab}
         onPress={() => navigation.navigate("Profile")}
       >
-        <ProfileIcon />
+        <AntDesign name="user" size={32} color={PRIMARY_WHITE} />
         <Text style={styles.tabName}>Profile</Text>
       </TouchableOpacity>
     </View>

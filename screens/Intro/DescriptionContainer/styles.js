@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-import { PRIMARY_BLACK } from "../../../constants/colors";
+import { PRIMARY_BLACK, PRIMARY_ORANGE } from "../../../constants/colors";
 import { RUBIK_REGULAR, RUBIK_BOLD } from "../../../constants/font";
 import {
   INTRO_TITLE_FONT_SIZE,
@@ -10,6 +10,7 @@ import {
 const styles = StyleSheet.create({
   container: {
     flex: 5,
+    alignItems: "center",
   },
   title: {
     color: PRIMARY_BLACK,
@@ -27,7 +28,6 @@ const styles = StyleSheet.create({
   },
   buttonConatainer: {
     marginTop: 20,
-    alignItems: "center",
   },
 });
 

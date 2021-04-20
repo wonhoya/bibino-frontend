@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from "react-native";
-import { PRIMARY_ORAGNE, PRIMARY_BLACK } from "../../../constants/colors";
+import { PRIMARY_ORANGE, PRIMARY_BLACK } from "../../../constants/colors";
 import { PRIMARY_BUTTON_FONT_SIZE } from "../../../constants/size";
 import { RUBIK_BOLD } from "../../../constants/font";
 
@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   primaryContainer: {
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: PRIMARY_ORAGNE,
+    backgroundColor: PRIMARY_ORANGE,
     paddingVertical: 8,
     width: windowWidth / 1.3,
     height: 60,
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   secondaryTextStyle: {
-    color: PRIMARY_ORAGNE,
+    color: PRIMARY_ORANGE,
     fontSize: PRIMARY_BUTTON_FONT_SIZE,
     fontFamily: RUBIK_BOLD,
   },

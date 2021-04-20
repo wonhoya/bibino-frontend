@@ -1,14 +1,7 @@
 import React from "react";
-import {
-  View,
-  SafeAreaView,
-  Text,
-  Image,
-  FlatList,
-  TouchableOpacity,
-} from "react-native";
-
+import { View, SafeAreaView, Text, Image, FlatList } from "react-native";
 import styles from "./styles";
+
 import avatarSample from "../../assets/pngs/avatarSample.png";
 import TagBoard from "../../components/shared/TagBoard/TagBoard";
 import formatItems from "../../utils/formatItems";
@@ -59,29 +52,20 @@ const data = [
 
 const numColumns = 3;
 
-const Profile = ({ navigation: navigation }) => {
+const Profile = () => {
   const renderItem = ({ item }) => {
     if (item.empty) {
       return <View style={[styles.photo, styles.invisiblePhoto]} />;
     }
 
     return (
-      <TouchableOpacity
-        style={styles.photo}
-        onPress={() =>
-          navigation.navigate("Beer", {
-            params: {
-              /*나중에 파라미터 삽입 */
-            },
-          })
-        }
-      >
+      <View style={styles.photo}>
         <Image
           source={item.imagePath}
           style={styles.image}
           resizeMode="cover"
         />
-      </TouchableOpacity>
+      </View>
     );
   };
 
@@ -104,6 +88,7 @@ const Profile = ({ navigation: navigation }) => {
               renderItem={renderItem}
               keyExtractor={(item) => item.id}
               numColumns={numColumns}
+              showsVerticalScrollIndicator={false}
             />
           </View>
         </View>

@@ -3,13 +3,10 @@ import { View, ImageBackground } from "react-native";
 
 import styles from "./styles";
 
-const ImageContainer = () => {
+const ImageContainer = ({ source }) => {
   return (
     <View style={styles.container}>
-      <ImageBackground
-        style={styles.image}
-        source={require("../../../assets/pngs/introImage1.png")}
-      />
+      <ImageBackground style={styles.image} source={source} />
     </View>
   );
 };

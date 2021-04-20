@@ -1,5 +1,5 @@
 import {
-  PRIMARY_ORAGNE,
+  PRIMARY_ORANGE,
   PRIMARY_GREY,
   PRIMARY_BLACK,
 } from "../../constants/colors";
@@ -14,7 +14,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: PRIMARY_ORAGNE,
+    backgroundColor: PRIMARY_ORANGE,
     justifyContent: "center",
     alignItems: "center",
   },

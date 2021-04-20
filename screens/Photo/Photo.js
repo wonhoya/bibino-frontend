@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { View, Text, Image } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { Camera } from "expo-camera";
 
 import styles from "./styles";
@@ -7,12 +8,12 @@ import Configuration from "../Configuration/Configuration";
 import PhotoTabBar from "../../components/PhotoTabBar/PhotoTabBar";
 import * as FileSystem from "expo-file-system";
 import callGoogleVisionAsync from "../../utils/callGoogleVisionAsync";
-
-import { useNavigation } from "@react-navigation/native";
+import Success from "../Success/Success";
+import Failure from "../Failure/Failure";
 
 const Photo = () => {
   const cameraRef = useRef(null);
-  const navigation = useNavigation();
+  const { navigate } = useNavigation();
 
   const [hasPermission, setHasPermission] = useState(null);
 
@@ -108,10 +109,10 @@ const Photo = () => {
       setIsParseStarted(false);
 
       // 여기서 navigate
-      navigation.navigate();
+      navigate("Success");
     } catch (error) {
-      navigation.navigate();
       console.log(error);
+      navigate("Failure");
     }
   };
 

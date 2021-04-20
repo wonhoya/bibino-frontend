@@ -8,6 +8,11 @@ import MainTabNavigator from "./MainTabNavigator";
 import Beer from "../screens/Beer/Beer";
 import Configuration from "../screens/Configuration/Configuration";
 
+//photo test용
+import Photo from "../screens/Photo/Photo";
+import Success from "../screens/Success/Success";
+import Failure from "../screens/Failure/Failure";
+
 const Stack = createStackNavigator();
 
 const MainStackNavigator = () => {
@@ -19,6 +24,9 @@ const MainStackNavigator = () => {
   };
   const userScreens = {
     Main: MainTabNavigator,
+    Photo,
+    Success,
+    Failure,
     Beer,
     Configuration,
   };
