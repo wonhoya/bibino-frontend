@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import {
   SafeAreaView,
   View,
+  Image,
   Dimensions,
   Text,
   Alert,
@@ -31,8 +32,11 @@ const Photo = () => {
 
   const [photoUri, setPhotoUri] = useState(null);
 
+  const [test, setTest] = useState(null);
+
   console.log("Permission check", hasPermission);
   console.log("Camera Ready check", isCameraReady);
+  console.log("testing is", test);
 
   useEffect(() => {
     const requestPermission = async () => {
@@ -46,6 +50,19 @@ const Photo = () => {
     };
     requestPermission();
   }, [hasPermission]);
+
+  useEffect(() => {
+    const readPhotos = async () => {
+      const photos = await FileSystem.readDirectoryAsync(
+        FileSystem.documentDirectory + "photos/"
+      );
+
+      console.log(photos);
+      setTest(`${FileSystem.documentDirectory}photos/${photos[0]}`);
+    };
+
+    readPhotos();
+  }, []);
 
   const handleTakePicture = async () => {
     if (!isCameraReady) {
@@ -71,29 +88,58 @@ const Photo = () => {
   const handleUse = async () => {
     // uri를 카피해서 저장함
     // 구글 비전 api로 보냄
-    const image = photoUri;
-    console.log("image is", image);
     const path = FileSystem.documentDirectory;
     try {
-      const dirInfo = await FileSystem.getInfoAsync(`${path}bibino`);
+      //디렉토리인지 항상 확인.
+      // await FileSystem.deleteAsync(FileSystem.documentDirectory + "photos/");
+      const readAsync = await FileSystem.readDirectoryAsync(
+        FileSystem.documentDirectory + "photos/"
+      );
+      console.log("READ ASYNC", readAsync);
+
+      const dirInfo = await FileSystem.getInfoAsync(
+        FileSystem.documentDirectory + "photos/"
+      );
 
       console.log("dirInfo", dirInfo);
       console.log(dirInfo.exists);
 
       if (!dirInfo.exists) {
-        await FileSystem.makeDirectoryAsync(`${path}bibino`, {
-          intermediates: true,
-        });
+        console.log("in");
+        await FileSystem.makeDirectoryAsync(
+          FileSystem.documentDirectory + "photos/",
+          {
+            intermediates: true,
+          }
+        );
       }
+      const dirInfo1 = await FileSystem.getInfoAsync(
+        FileSystem.documentDirectory + "photos/"
+      );
+      console.log("1", dirInfo1);
+
+      const readAsync2 = await FileSystem.readDirectoryAsync(
+        FileSystem.documentDirectory + "photos/"
+      );
+      console.log("READ ASYNC", readAsync2);
+
+      await FileSystem.copyAsync({
+        from: photoUri,
+        to: `${FileSystem.documentDirectory}photos/2.jpg`,
+      });
+
+      const dirInfo2 = await FileSystem.getInfoAsync(
+        FileSystem.documentDirectory + "photos/"
+      );
+      console.log("2", dirInfo2);
+
+      const readAsync3 = await FileSystem.readDirectoryAsync(
+        FileSystem.documentDirectory + "photos/"
+      );
+      console.log("READ ASYNC", readAsync3);
     } catch (error) {
       console.log(error);
     }
-
-    // const copy = await FileSystem.copyAsync({
-    //   from: image,
-    //   to: `${FileSystem.documentDirectory}`,
-    // });
-    // console.log("copy async is", copy);
   };
 
   if (hasPermission === false) {
@@ -103,6 +149,9 @@ const Photo = () => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.test}>
+        {test && <Image style={styles.image} source={{ uri: test }} />}
+      </View>
       <Camera
         ref={cameraRef}
         style={styles.camera}

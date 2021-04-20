@@ -26,6 +26,14 @@ const styles = StyleSheet.create({
     height: windowHeight,
     backgroundColor: PRIMARY_WHITE,
   },
+  test: {
+    backgroundColor: "green",
+    flex: 9,
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+  },
 });
 
 export default styles;
