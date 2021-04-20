@@ -36,7 +36,7 @@ const Photo = () => {
 
   console.log("Permission check", hasPermission);
   console.log("Camera Ready check", isCameraReady);
-  console.log("testing is", test);
+  console.log("test is", test);
 
   useEffect(() => {
     const requestPermission = async () => {
@@ -53,12 +53,32 @@ const Photo = () => {
 
   useEffect(() => {
     const readPhotos = async () => {
-      const photos = await FileSystem.readDirectoryAsync(
+      //폴더가 없으면 폴더를 만들고, 있으면 거기 있는 사진을 불러옴.
+      const dirInfo = await FileSystem.getInfoAsync(
         FileSystem.documentDirectory + "photos/"
       );
 
-      console.log(photos);
-      setTest(`${FileSystem.documentDirectory}photos/${photos[0]}`);
+      if (!dirInfo.exists) {
+        console.log("in");
+        await FileSystem.makeDirectoryAsync(
+          FileSystem.documentDirectory + "photos/",
+          { intermediates: true }
+        );
+      } else {
+        const photos = await FileSystem.readDirectoryAsync(
+          FileSystem.documentDirectory + "photos/"
+        );
+
+        const uris = photos.map((photo) => {
+          return `${FileSystem.documentDirectory}photos/${photo}`;
+        });
+
+        console.log("uris", uris);
+
+        // setTest(`${FileSystem.documentDirectory}photos/${photos[0]}`);
+
+        setTest(uris);
+      }
     };
 
     readPhotos();
@@ -72,9 +92,9 @@ const Photo = () => {
     if (cameraRef.current) {
       const option = { quality: 1 };
       const photoData = await cameraRef.current.takePictureAsync(option);
-      console.log("photoData is", photoData);
+      // console.log("photoData is", photoData);
       setPhotoUri(photoData.uri);
-      console.log("photoUri in state is", photoUri);
+      // console.log("photoUri in state is", photoUri);
       await cameraRef.current.pausePreview();
       setIsPreview(true);
     }
@@ -88,50 +108,32 @@ const Photo = () => {
   const handleUse = async () => {
     // uri를 카피해서 저장함
     // 구글 비전 api로 보냄
-    const path = FileSystem.documentDirectory;
     try {
-      //디렉토리인지 항상 확인.
+      //디렉토리 삭제
       // await FileSystem.deleteAsync(FileSystem.documentDirectory + "photos/");
-      const readAsync = await FileSystem.readDirectoryAsync(
-        FileSystem.documentDirectory + "photos/"
-      );
-      console.log("READ ASYNC", readAsync);
+
+      //디렉토리 확인.
+      // const dirInfo = await FileSystem.getInfoAsync(
+      //   FileSystem.documentDirectory + "photos/"
+      // );
+
+      // if (!dirInfo.exists) {
+      //   console.log("in");
+      //   await FileSystem.makeDirectoryAsync(
+      //     FileSystem.documentDirectory + "photos/",
+      //     { intermediates: true }
+      //   );
+      // }
+
+      await FileSystem.copyAsync({
+        from: photoUri,
+        to: `${FileSystem.documentDirectory}photos/${Date.now()}.jpg`,
+      });
 
       const dirInfo = await FileSystem.getInfoAsync(
         FileSystem.documentDirectory + "photos/"
       );
-
-      console.log("dirInfo", dirInfo);
-      console.log(dirInfo.exists);
-
-      if (!dirInfo.exists) {
-        console.log("in");
-        await FileSystem.makeDirectoryAsync(
-          FileSystem.documentDirectory + "photos/",
-          {
-            intermediates: true,
-          }
-        );
-      }
-      const dirInfo1 = await FileSystem.getInfoAsync(
-        FileSystem.documentDirectory + "photos/"
-      );
-      console.log("1", dirInfo1);
-
-      const readAsync2 = await FileSystem.readDirectoryAsync(
-        FileSystem.documentDirectory + "photos/"
-      );
-      console.log("READ ASYNC", readAsync2);
-
-      await FileSystem.copyAsync({
-        from: photoUri,
-        to: `${FileSystem.documentDirectory}photos/2.jpg`,
-      });
-
-      const dirInfo2 = await FileSystem.getInfoAsync(
-        FileSystem.documentDirectory + "photos/"
-      );
-      console.log("2", dirInfo2);
+      console.log("2", dirInfo);
 
       const readAsync3 = await FileSystem.readDirectoryAsync(
         FileSystem.documentDirectory + "photos/"
@@ -150,7 +152,12 @@ const Photo = () => {
   return (
     <View style={styles.container}>
       <View style={styles.test}>
-        {test && <Image style={styles.image} source={{ uri: test }} />}
+        {test &&
+          test.map((photo, index) => {
+            return (
+              <Image style={styles.image} key={index} source={{ uri: photo }} />
+            );
+          })}
       </View>
       <Camera
         ref={cameraRef}
