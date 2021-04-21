@@ -9,10 +9,8 @@ async function callGoogleVisionAsync(image) {
           content: image,
         },
         features: [
-          { type: "LABEL_DETECTION", maxResults: 10 },
           { type: "TEXT_DETECTION", maxResults: 5 },
           { type: "DOCUMENT_TEXT_DETECTION", maxResults: 5 },
-          { type: "WEB_DETECTION", maxResults: 5 },
         ],
       },
     ],

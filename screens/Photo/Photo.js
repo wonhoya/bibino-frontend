@@ -21,13 +21,14 @@ const Photo = ({ navigation }) => {
   const [isPreview, setIsPreview] = useState(false);
   const [isParseStarted, setIsParseStarted] = useState(false);
   const [isAnimationFinished, setIsAnimationFinished] = useState(false);
-  const [photoUri, setPhotoUri] = useState(null);
+  // const [photoUri, setPhotoUri] = useState(null);
   const [photobase64, setPhotobase64] = useState(null);
 
   console.log("isAnimationFinished", isAnimationFinished);
   console.log("Permission check", hasPermission);
   console.log("Camera Ready check", isCameraReady);
-  console.log("photobase64", photobase64);
+  //이거 하면 위험할 수 있음. request too large
+  // console.log("photobase64", photobase64);
 
   useEffect(() => {
     navigation.setOptions({
@@ -92,7 +93,7 @@ const Photo = ({ navigation }) => {
       await cameraRef.current.pausePreview();
       setIsPreview(true);
       setPhotobase64(photoData.base64);
-      setPhotoUri(photoData.uri);
+      // setPhotoUri(photoData.uri);
     }
   };
 
@@ -103,17 +104,35 @@ const Photo = ({ navigation }) => {
 
   const handleUse = async () => {
     try {
+      setIsParseStarted(true);
+
       //디렉토리 삭제
       // await FileSystem.deleteAsync(FileSystem.documentDirectory + "photos/");
 
-      setIsParseStarted(true);
-      await FileSystem.copyAsync({
-        from: photoUri,
-        to: `${FileSystem.documentDirectory}photos/${Date.now()}.jpg`,
+      // 카피 이미지
+      // await FileSystem.copyAsync({
+      //   from: photoUri,
+      //   to: `${FileSystem.documentDirectory}photos/${Date.now()}.jpg`,
+      // });
+
+      //서버에 이미지 보내고 구글 비전 결과 받기
+      const response = await fetch("http://192.168.0.54:3000/api/beers/scan", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: "hi are you connected?",
+          base64: photobase64,
+        }), //photobase64
       });
+
+      const parsed = await response.json();
+
       // 구글 비전으로 보내기
-      const parsedText = await callGoogleVisionAsync(photobase64);
-      console.log("parsedText:", parsedText);
+      // const parsedText = await callGoogleVisionAsync(photobase64);
+      // console.log("parsedText:", parsedText);
       setIsParseStarted(false);
 
       // 여기서 navigate

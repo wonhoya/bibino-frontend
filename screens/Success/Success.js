@@ -7,10 +7,10 @@ import { BeercanSvg } from "../../assets/svgs/ilusts";
 
 const Success = ({ navigation }) => {
   useEffect(() => {
-    navigation.reset({
-      index: 0,
-      routes: [{ name: "Success" }],
-    });
+    // navigation.reset({
+    //   index: 0,
+    //   routes: [{ name: "Success" }],
+    // });
 
     const id = setTimeout(() => {
       navigation.navigate("Beer");
