@@ -12,7 +12,7 @@ const Stack = createStackNavigator();
 
 const MainStackNavigator = () => {
   //auth flow
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const authScreens = {
     Intro,
     SignIn,

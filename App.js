@@ -7,6 +7,8 @@ import {
   Rubik_700Bold,
 } from "@expo-google-fonts/rubik";
 
+import "./config/auth";
+
 import SplashAnimation from "./screens/SplashAnimation/SplashAnimation";
 import Intro from "./screens/Intro/Intro";
 import AppNavigation from "./navigations/AppNavigation";
