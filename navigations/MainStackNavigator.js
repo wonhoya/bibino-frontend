@@ -6,14 +6,16 @@ import SignIn from "../screens/SignIn/SignIn";
 import Header from "../components/shared/Header/Header";
 import MainTabNavigator from "./MainTabNavigator";
 import Beer from "../screens/Beer/Beer";
+import Profile from "../screens/Profile/Profile";
 import Configuration from "../screens/Configuration/Configuration";
+import { createSharedElementStackNavigator } from "react-navigation-shared-element";
 
 //photo test용
 import Photo from "../screens/Photo/Photo";
 import Success from "../screens/Success/Success";
 import Failure from "../screens/Failure/Failure";
 
-const Stack = createStackNavigator();
+const Stack = createSharedElementStackNavigator();
 
 const MainStackNavigator = () => {
   const verticalAnimation = {
@@ -51,7 +53,7 @@ const MainStackNavigator = () => {
 
   return (
     <Stack.Navigator headerMode={isLoggedIn ? "screen" : "none"}>
-      {Object.entries({
+      {/* {Object.entries({
         ...(isLoggedIn ? userScreens : authScreens),
       }).map(([name, component], i) => (
         <Stack.Screen
@@ -66,7 +68,39 @@ const MainStackNavigator = () => {
               : {}
           }
         />
-      ))}
+      ))} */}
+      <Stack.Screen
+        key={1}
+        name="Main"
+        component={MainTabNavigator}
+        options={{
+          header: (navigation) => <Header navigation={navigation} />,
+        }}
+      />
+      <Stack.Screen key={2} name="Photo" component={Photo} />
+      <Stack.Screen key={3} name="Success" component={Success} />
+      <Stack.Screen key={4} name="Failure" component={Failure} />
+      <Stack.Screen
+        key={5}
+        name="Beer"
+        component={Beer}
+        options={{
+          header: (navigation) => <Header navigation={navigation} />,
+        }}
+        sharedElementsConfig={(route, otherRoute, showing) => {
+          const { item } = route.params;
+          return [`item.${item.id}.photo`];
+        }}
+      />
+      <Stack.Screen
+        key={6}
+        name="Profile"
+        component={Profile}
+        options={{
+          header: (navigation) => <Header navigation={navigation} />,
+        }}
+      />
+      <Stack.Screen key={7} name="Configuration" component={Configuration} />
     </Stack.Navigator>
   );
 };

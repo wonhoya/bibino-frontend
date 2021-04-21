@@ -32,7 +32,7 @@ const TabBar = ({ navigation: { navigation } }) => {
 
       <TouchableOpacity
         style={styles.tab}
-        onPress={() => navigation.navigate("Profile")}
+        onPress={() => navigation.push("Profile")}
       >
         <AntDesign name="user" size={32} color={PRIMARY_WHITE} />
         <Text style={styles.tabName}>Profile</Text>

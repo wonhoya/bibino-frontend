@@ -1,5 +1,6 @@
 import React from "react";
 import { View, ScrollView, Image, Text } from "react-native";
+import { SharedElement } from "react-navigation-shared-element";
 
 import styles from "./styles";
 import TitleContainer from "./TitleContainer/TitleContainer";
@@ -8,19 +9,28 @@ import TagBoardContainer from "./TagBoardContainer/TagBoardContainer";
 import CharacteristicContainer from "./CharacteristicContainer/CharacteristicContainer";
 import CommentBoardContainer from "./CommentBoardContainer/CommentBoardContainer";
 import RecommendationBoardContainer from "./RecommendationBoardContainer/RecommendationBoardContainer";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-const Beer = ({ navigation }) => {
+const Beer = ({ route, navigation }) => {
+  const { item } = route.params;
+  console.log("item", item);
+
   return (
     <ScrollView
       style={styles.scrollContainer}
       showsVerticalScrollIndicator={false}
     >
       <View style={styles.container}>
-        <Image
-          style={styles.image}
-          source={require("../../assets/pngs/beerSample8.png")}
-        />
-        <TitleContainer title="RAEA BEER" />
+        <SharedElement id={`item.${item.id}.photo`}>
+          <Image
+            style={styles.image}
+            source={require("../../assets/pngs/beerSample8.png")}
+          />
+        </SharedElement>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <TitleContainer title="RAEA BEER" />
+        </TouchableOpacity>
+
         <RatingBoardContainer rating={4} />
         <TagBoardContainer />
         <CharacteristicContainer />

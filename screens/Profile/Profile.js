@@ -1,6 +1,14 @@
 import React from "react";
-import { View, SafeAreaView, Text, Image, FlatList } from "react-native";
+import {
+  View,
+  SafeAreaView,
+  Text,
+  Image,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import styles from "./styles";
+import { SharedElement } from "react-navigation-shared-element";
 
 import avatarSample from "../../assets/pngs/avatarSample.png";
 import TagBoard from "../../components/shared/TagBoard/TagBoard";
@@ -52,20 +60,25 @@ const data = [
 
 const numColumns = 3;
 
-const Profile = () => {
+const Profile = ({ navigation }) => {
   const renderItem = ({ item }) => {
     if (item.empty) {
       return <View style={[styles.photo, styles.invisiblePhoto]} />;
     }
 
     return (
-      <View style={styles.photo}>
-        <Image
-          source={item.imagePath}
-          style={styles.image}
-          resizeMode="cover"
-        />
-      </View>
+      <TouchableOpacity
+        style={styles.photo}
+        onPress={() => navigation.navigate("Beer", { item })}
+      >
+        <SharedElement id={`item.${item.id}.photo`}>
+          <Image
+            source={item.imagePath}
+            style={styles.image}
+            resizeMode="cover"
+          />
+        </SharedElement>
+      </TouchableOpacity>
     );
   };
 
