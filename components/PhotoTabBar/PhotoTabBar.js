@@ -75,6 +75,7 @@ const PhotoTabBar = ({
             styles.button,
             { transform: [{ translateY: positionValue }] },
           ]}
+          activeOpacity={1}
           onPress={handleTakePicture}
         >
           <View style={[styles.tab, styles.cameraContainer]}>

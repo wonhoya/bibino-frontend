@@ -1,6 +1,7 @@
 import { API_URL } from "@env";
 
 async function callGoogleVisionAsync(image) {
+  console.log(API_URL);
   const body = {
     requests: [
       {

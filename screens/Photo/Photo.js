@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { View, Text, Image } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { Camera } from "expo-camera";
 import LottieView from "lottie-react-native";
 
@@ -12,9 +11,8 @@ import callGoogleVisionAsync from "../../utils/callGoogleVisionAsync";
 import Success from "../Success/Success";
 import Failure from "../Failure/Failure";
 
-const Photo = () => {
+const Photo = ({ navigation }) => {
   const cameraRef = useRef(null);
-  const { navigate, setOptions } = useNavigation();
 
   const [hasPermission, setHasPermission] = useState(null);
 
@@ -29,12 +27,13 @@ const Photo = () => {
   console.log("isAnimationFinished", isAnimationFinished);
   console.log("Permission check", hasPermission);
   console.log("Camera Ready check", isCameraReady);
+  console.log("photobase64", photobase64);
 
   useEffect(() => {
-    setOptions({
+    navigation.setOptions({
       animationEnabled: false,
     });
-  }, [setOptions]);
+  }, []);
 
   useEffect(() => {
     const requestPermission = async () => {
@@ -86,7 +85,7 @@ const Photo = () => {
     }
 
     if (cameraRef.current) {
-      const option = { quality: 1, base64: true };
+      const option = { quality: 0.3, base64: true };
       const photoData = await cameraRef.current.takePictureAsync(option);
       // console.log("photoData is", photoData);
       // console.log(photoData.base64);
@@ -118,10 +117,10 @@ const Photo = () => {
       setIsParseStarted(false);
 
       // 여기서 navigate
-      navigate("Success");
+      navigation.navigate("Success");
     } catch (error) {
       console.log(error);
-      navigate("Failure");
+      navigation.navigate("Failure");
     }
   };
 
@@ -132,14 +131,19 @@ const Photo = () => {
 
   if (isParseStarted) {
     return (
-      <View>
-        <LottieView
-          source={require("../../assets/animations/resultScreenLoadingAnimation.json")}
-          style={styles.animation}
-          autoPlay
-          loop={true}
-          speed={0.6}
-        />
+      <View style={styles.resultLoadingContainer}>
+        <View style={styles.animationContainer}>
+          <LottieView
+            source={require("../../assets/animations/resultScreenLoadingAnimation.json")}
+            style={styles.animation}
+            autoPlay
+            loop={true}
+            speed={0.6}
+          />
+        </View>
+        <View style={styles.descriptionContainer}>
+          <Text style={styles.description}>Analzing...</Text>
+        </View>
       </View>
     );
   }
