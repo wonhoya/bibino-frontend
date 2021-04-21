@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import * as SecureStore from "expo-secure-store";
+import { saveToken } from "./tokenSlice";
 
 import getServerUrl from "../utils/getServerUrl";
 
@@ -14,8 +14,8 @@ const initialState = {
 };
 
 const signInUser = createAsyncThunk(
-  "user/signInUser",
-  async ({ accessToken }) => {
+  "user/SIGN_IN_USER",
+  async ({ accessToken }, { dispatch }) => {
     const response = await fetch(`${serverUrl}/api/signin`, {
       method: "POST",
       headers: {
@@ -24,16 +24,12 @@ const signInUser = createAsyncThunk(
     });
 
     const userWithToken = await response.json();
-
-    await SecureStore.setItemAsync(
-      "accessToken",
-      "real accessToken value from userWithToken"
-    );
+    dispatch(saveToken(/* accessToken */));
     /*
       return 하는 객체는 다음과 같은 형태로 가공해야 한다.
       {
         user: { id: "id", name: "name" avatar: "base64 avatar image"},
-        token: "accessToken",
+
       }
     */
     return userWithToken;
@@ -46,18 +42,17 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: {
     [signInUser.pending]: (state) => {
-      state.user.status = "loading";
+      state.status = "loading";
     },
     [signInUser.rejected]: (state, action) => {
-      state.user.status = "failed";
+      state.status = "failed";
       state.error = action.payload;
     },
     [signInUser.fulfilled]: (state, action) => {
-      const { token, user } = action.payload;
+      const { user } = action.payload;
 
-      state.user.status = "suceeded";
+      state.status = "suceeded";
       Object.assign(state.user, user);
-      state.token = token;
     },
   },
 });

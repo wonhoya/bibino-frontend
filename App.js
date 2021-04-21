@@ -14,7 +14,7 @@ import { store, persistedStore } from "./features/store";
 import SplashAnimation from "./screens/SplashAnimation/SplashAnimation";
 import Intro from "./screens/Intro/Intro";
 import AppNavigation from "./navigations/AppNavigation";
-console.log(store.getState());
+
 export default function App() {
   const [isAnimationFinished, setIsAnimationFinished] = useState(false);
   let [fontsLoaded] = useFonts({
@@ -22,7 +22,6 @@ export default function App() {
     Rubik_500Medium,
     Rubik_700Bold,
   });
-
   if (!fontsLoaded) {
     return <AppLoading />;
   }
