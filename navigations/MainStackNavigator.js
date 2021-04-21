@@ -16,6 +16,24 @@ import Failure from "../screens/Failure/Failure";
 const Stack = createStackNavigator();
 
 const MainStackNavigator = () => {
+  const verticalAnimation = {
+    gestureDirection: "vertical",
+    cardStyleInterpolator: ({ current, layouts }) => {
+      return {
+        cardStyle: {
+          transform: [
+            {
+              translateY: current.progress.interpolate({
+                inputRange: [0, 1],
+                outputRange: [layouts.screen.height, 0],
+              }),
+            },
+          ],
+        },
+      };
+    },
+  };
+
   //auth flow
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const authScreens = {
