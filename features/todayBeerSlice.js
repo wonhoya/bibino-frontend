@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-import getServerUrl from "../utils/getServerUrl";
+import { SERVER_URL } from "../config";
 
-const serverUrl = getServerUrl();
+const serverUrl = SERVER_URL[process.env.NODE_ENV];
 
 const initialState = {
   beers: [],

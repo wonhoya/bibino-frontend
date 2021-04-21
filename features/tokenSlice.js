@@ -12,7 +12,6 @@ const saveToken = createAsyncThunk("token/tokenSaved", async (accessToken) => {
 
 const getToken = createAsyncThunk("token/tokenGotten", async () => {
   const accessToken = await SecureStore.getItemAsync("accessToken");
-
   return accessToken;
 });
 

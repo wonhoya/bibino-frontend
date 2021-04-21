@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+
 import { saveToken } from "./tokenSlice";
+import { SERVER_URL } from "../config";
 
-import getServerUrl from "../utils/getServerUrl";
-
-const serverUrl = getServerUrl();
+const serverUrl = SERVER_URL[process.env.NODE_ENV];
 
 const initialState = {
   id: null,
