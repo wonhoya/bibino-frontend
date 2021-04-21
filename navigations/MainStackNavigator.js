@@ -86,6 +86,9 @@ const MainStackNavigator = () => {
         component={Beer}
         options={{
           header: (navigation) => <Header navigation={navigation} />,
+          cardStyleInterpolator: ({ current: { progress } }) => {
+            return { cardStyle: { opacity: progress } };
+          },
         }}
         sharedElementsConfig={(route, otherRoute, showing) => {
           const { item } = route.params;
@@ -98,6 +101,9 @@ const MainStackNavigator = () => {
         component={Profile}
         options={{
           header: (navigation) => <Header navigation={navigation} />,
+          cardStyleInterpolator: ({ current: { progress } }) => {
+            return { cardStyle: { opacity: progress } };
+          },
         }}
       />
       <Stack.Screen key={7} name="Configuration" component={Configuration} />
