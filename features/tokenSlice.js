@@ -5,18 +5,18 @@ const initialState = {
   token: null,
 };
 
-const saveToken = createAsyncThunk("token/SAVE_TOKEN", async (accessToken) => {
+const saveToken = createAsyncThunk("token/tokenSaved", async (accessToken) => {
   await SecureStore.setItemAsync(accessToken);
   return accessToken;
 });
 
-const getToken = createAsyncThunk("token/GET_TOKEN", async () => {
+const getToken = createAsyncThunk("token/tokenGotten", async () => {
   const accessToken = await SecureStore.getItemAsync("accessToken");
 
   return accessToken;
 });
 
-const removeToken = createAsyncThunk("token/REMOVE_TOKEN", async () => {
+const removeToken = createAsyncThunk("token/tokenRemoved", async () => {
   await SecureStore.deleteItemAsync("accessToken");
   return;
 });

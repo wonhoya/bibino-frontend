@@ -14,7 +14,7 @@ const initialState = {
 };
 
 const signInUser = createAsyncThunk(
-  "user/SIGN_IN_USER",
+  "user/userSignedIn",
   async ({ accessToken }, { dispatch }) => {
     const response = await fetch(`${serverUrl}/api/signin`, {
       method: "POST",

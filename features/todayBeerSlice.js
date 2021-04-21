@@ -12,7 +12,7 @@ const initialState = {
 };
 
 const fetchTodayBeers = createAsyncThunk(
-  "todayBeer/FETCH_TODAY_BEERS",
+  "todayBeers/todayBeersFetched",
   async () => {
     const response = await fetch(`${serverUrl}/api/main`);
     const beers = await response.json();
@@ -22,11 +22,11 @@ const fetchTodayBeers = createAsyncThunk(
 );
 
 const todayBeerSlice = createSlice({
-  name: "todayBeer",
+  name: "todayBeers",
   initialState,
   reducers: {},
   extraReducers: {
-    [fetchTodayBeers.pending]: ({ state }) => {
+    [fetchTodayBeers.pending]: (state) => {
       state.status = "loading";
     },
     [fetchTodayBeers.rejected]: (state, action) => {
