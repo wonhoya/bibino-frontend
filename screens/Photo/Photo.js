@@ -8,8 +8,6 @@ import Configuration from "../Configuration/Configuration";
 import PhotoTabBar from "../../components/PhotoTabBar/PhotoTabBar";
 import * as FileSystem from "expo-file-system";
 import callGoogleVisionAsync from "../../utils/callGoogleVisionAsync";
-import Success from "../Success/Success";
-import Failure from "../Failure/Failure";
 
 const Photo = ({ navigation }) => {
   const cameraRef = useRef(null);
@@ -49,6 +47,7 @@ const Photo = ({ navigation }) => {
     requestPermission();
   }, []);
 
+  //로컬 디렉토리 저장 함수
   useEffect(() => {
     const makeDirectory = async () => {
       //폴더가 없으면 폴더를 만들고, 있으면 거기 있는 사진을 불러옴.
@@ -86,14 +85,13 @@ const Photo = ({ navigation }) => {
     }
 
     if (cameraRef.current) {
-      const option = { quality: 0.3, base64: true };
-      const photoData = await cameraRef.current.takePictureAsync(option);
-      // console.log("photoData is", photoData);
-      // console.log(photoData.base64);
+      const photoData = await cameraRef.current.takePictureAsync({
+        quality: 0.3,
+        base64: true,
+      });
       await cameraRef.current.pausePreview();
       setIsPreview(true);
       setPhotobase64(photoData.base64);
-      // setPhotoUri(photoData.uri);
     }
   };
 
