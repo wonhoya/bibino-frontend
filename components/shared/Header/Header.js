@@ -4,11 +4,7 @@ import { useRoute } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 
 import styles from "./styles";
-import {
-  BackIcon,
-  ConfigurationIcon,
-  ShareIcon,
-} from "../../../assets/svgs/icon";
+import { ShareIcon } from "../../../assets/svgs/icon";
 import { PRIMARY_GREY } from "../../../constants/colors";
 import { HeaderLogoSvg } from "../../../assets/svgs/ilusts";
 
@@ -28,18 +24,6 @@ const Header = ({ navigation, route }) => {
     }
 
     navigation.navigation.navigate("Configuration");
-  };
-
-  const handleLeftHeaderButtonClick = () => {
-    if (!navigation) {
-      return;
-    }
-
-    if (isConfigurationScreen) {
-      //Do something about share
-    }
-
-    navigation.navigation.jumpTo("Main");
   };
 
   useEffect(() => {

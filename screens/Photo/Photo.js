@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text } from "react-native";
 import { Camera } from "expo-camera";
 import LottieView from "lottie-react-native";
 
@@ -192,16 +192,3 @@ const Photo = ({ navigation }) => {
 };
 
 export default Photo;
-
-{
-  /* <View style={styles.test}>
-{test &&
-  test.map((photo, index) => {
-    return (
-      <Image style={styles.image} key={index} source={{ uri: photo }} />
-    );
-  })}
-</View> */
-}
-
-// const [test, setTest] = useState(null);

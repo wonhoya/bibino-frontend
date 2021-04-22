@@ -2,7 +2,6 @@ import { StyleSheet, Dimensions } from "react-native";
 
 import {
   PRIMARY_ORANGE,
-  TAB_GREY,
   TAB_ORANGE,
   PRIMARY_WHITE,
 } from "../../../constants/colors";

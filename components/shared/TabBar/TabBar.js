@@ -1,23 +1,17 @@
 import React from "react";
 import { View, TouchableOpacity, Text } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import { useRoute } from "@react-navigation/native";
 import styles from "./styles";
 import {
-  PRIMARY_ORANGE,
   PRIMARY_LIGHT_ORANGE,
   PRIMARY_WHITE,
-  PRIMARY_GREY,
-  PRIMARY_LIGHT_GREY,
   POINT_DARK_ORANGE,
 } from "../../../constants/colors";
-import { ProfileIcon, SearchIcon, CameraIcon } from "../../../assets/svgs/icon";
 
 const TabBar = ({ navigation }) => {
   const nav = navigation.navigation;
   const navState = navigation.state;
   const currentRouteName = navState.routeNames[navState.index];
-  console.log("currentRouteName", currentRouteName);
 
   return (
     <View style={styles.tabsContainer}>

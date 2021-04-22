@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions, Platform, StatusBar } from "react-native";
 
-import { PRIMARY_WHITE, PRIMARY_ORANGE } from "../../../constants/colors";
+import { PRIMARY_WHITE } from "../../../constants/colors";
 
 const { width: windowWidth, height: windowHiehgt } = Dimensions.get("window");
 
