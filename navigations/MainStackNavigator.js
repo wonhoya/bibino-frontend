@@ -7,12 +7,12 @@ import Header from "../components/shared/Header/Header";
 import MainTabNavigator from "./MainTabNavigator";
 import Beer from "../screens/Beer/Beer";
 import Configuration from "../screens/Configuration/Configuration";
-
+import useUserIsLogIn from "../hooks/useUserIsLogIn";
 const Stack = createStackNavigator();
 
 const MainStackNavigator = () => {
-  //auth flow
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { accessToken } = useUserIsLogIn();
+
   const authScreens = {
     Intro,
     SignIn,
@@ -24,16 +24,16 @@ const MainStackNavigator = () => {
   };
 
   return (
-    <Stack.Navigator headerMode={isLoggedIn ? "screen" : "none"}>
+    <Stack.Navigator headerMode={accessToken ? "screen" : "none"}>
       {Object.entries({
-        ...(isLoggedIn ? userScreens : authScreens),
+        ...(accessToken ? userScreens : authScreens),
       }).map(([name, component], i) => (
         <Stack.Screen
           key={i}
           name={name}
           component={component}
           options={
-            isLoggedIn
+            accessToken
               ? {
                   header: (navigation) => <Header navigation={navigation} />,
                 }

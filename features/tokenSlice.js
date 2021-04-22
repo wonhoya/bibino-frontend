@@ -1,8 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as SecureStore from "expo-secure-store";
 
+import ASYNC_STATE from "../constants/asyncState";
+
 const initialState = {
-  token: null,
+  accessToken: null,
+  status: "idle",
+  error: null,
 };
 
 const saveToken = createAsyncThunk("token/tokenSaved", async (accessToken) => {
@@ -23,18 +27,27 @@ const removeToken = createAsyncThunk("token/tokenRemoved", async () => {
 const tokenSlice = createSlice({
   name: "token",
   initialState,
-  reducers: {},
+  reducers: {
+    tokenStateSet: (state, action) => {
+      state.status = action.payload;
+    },
+  },
   extraReducers: {
     [saveToken.fulfilled]: (state, action) => {
-      state.token = action.payload;
+      state.accessToken = action.payload;
+    },
+    [getToken.pending]: (state) => {
+      state.status = ASYNC_STATE.LOADING;
     },
     [getToken.fulfilled]: (state, action) => {
-      state.token = action.payload;
+      state.status = ASYNC_STATE.SUCCEED;
+      state.accessToken = action.payload;
     },
     [removeToken.fulfilled]: (state) => {
-      state.token = null;
+      state.accessToken = null;
     },
   },
 });
 
-export { tokenSlice, saveToken, getToken, removeToken };
+const { tokenStateSet } = tokenSlice.actions;
+export { tokenSlice, saveToken, getToken, removeToken, tokenStateSet };
