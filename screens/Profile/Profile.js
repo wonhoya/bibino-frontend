@@ -1,5 +1,12 @@
 import React from "react";
-import { View, SafeAreaView, Text, Image, FlatList } from "react-native";
+import {
+  View,
+  SafeAreaView,
+  Text,
+  Image,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import styles from "./styles";
 
 import avatarSample from "../../assets/pngs/avatarSample.png";
@@ -52,20 +59,25 @@ const data = [
 
 const numColumns = 3;
 
-const Profile = () => {
+const Profile = ({ navigation }) => {
   const renderItem = ({ item }) => {
     if (item.empty) {
       return <View style={[styles.photo, styles.invisiblePhoto]} />;
     }
 
     return (
-      <View style={styles.photo}>
+      <TouchableOpacity
+        style={styles.photo}
+        onPress={() => {
+          navigation.navigate("Beer");
+        }}
+      >
         <Image
           source={item.imagePath}
           style={styles.image}
           resizeMode="cover"
         />
-      </View>
+      </TouchableOpacity>
     );
   };
 
