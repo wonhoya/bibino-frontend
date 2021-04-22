@@ -6,7 +6,7 @@ const initialState = {
 };
 
 const saveToken = createAsyncThunk("token/tokenSaved", async (accessToken) => {
-  await SecureStore.setItemAsync(accessToken);
+  await SecureStore.setItemAsync("accessToken", accessToken);
   return accessToken;
 });
 
