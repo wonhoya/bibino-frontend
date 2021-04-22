@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, TouchableOpacity, SafeAreaView } from "react-native";
 import { useRoute } from "@react-navigation/native";
+import { AntDesign } from "@expo/vector-icons";
 
 import styles from "./styles";
 import {
@@ -8,11 +9,13 @@ import {
   ConfigurationIcon,
   ShareIcon,
 } from "../../../assets/svgs/icon";
+import { PRIMARY_GREY } from "../../../constants/colors";
 import { HeaderLogoSvg } from "../../../assets/svgs/ilusts";
 
-const Header = ({ navigation }) => {
+const Header = ({ navigation, route }) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const { name } = useRoute();
+
   const isConfigurationScreen = name === "Configuration";
 
   const handleRightHeaderButtonClick = () => {
@@ -25,6 +28,18 @@ const Header = ({ navigation }) => {
     }
 
     navigation.navigation.navigate("Configuration");
+  };
+
+  const handleLeftHeaderButtonClick = () => {
+    if (!navigation) {
+      return;
+    }
+
+    if (isConfigurationScreen) {
+      //Do something about share
+    }
+
+    navigation.navigation.jumpTo("Main");
   };
 
   useEffect(() => {
@@ -43,8 +58,14 @@ const Header = ({ navigation }) => {
             onPress={() => navigation.navigation.goBack()}
             disabled={isDisabled}
           >
-            <BackIcon style={isDisabled ? styles.hidden : {}} />
+            <AntDesign
+              name="leftcircleo"
+              size={24}
+              color={PRIMARY_GREY}
+              style={isDisabled ? styles.hidden : {}}
+            />
           </TouchableOpacity>
+
           <HeaderLogoSvg />
           <TouchableOpacity
             style={styles.button}
@@ -53,7 +74,7 @@ const Header = ({ navigation }) => {
             {isConfigurationScreen ? (
               <ShareIcon size={22} />
             ) : (
-              <ConfigurationIcon />
+              <AntDesign name="setting" size={24} color={PRIMARY_GREY} />
             )}
           </TouchableOpacity>
         </View>

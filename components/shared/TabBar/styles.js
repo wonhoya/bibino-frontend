@@ -7,29 +7,29 @@ import {
   PRIMARY_WHITE,
 } from "../../../constants/colors";
 import { RUBIK_REGULAR, RUBIK_BOLD } from "../../../constants/font";
+import { TABBAR_FONT_SIZE } from "../../../constants/size";
 
 const { width: windowWidth } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   tabsContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    justifyContent: "center",
     width: "100%",
-    height: "12%",
+    height: "13%",
     padding: 18,
-    paddingHorizontal: 60,
     borderTopStartRadius: 5,
     borderTopEndRadius: 5,
     backgroundColor: PRIMARY_ORANGE,
   },
   tab: {
+    marginHorizontal: 10,
     flexDirection: "column",
     alignItems: "center",
   },
   tabName: {
-    color: PRIMARY_WHITE,
-    fontFamily: RUBIK_REGULAR,
+    fontFamily: RUBIK_BOLD,
+    fontSize: TABBAR_FONT_SIZE,
   },
   cameraName: {
     position: "absolute",
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   button: {
     position: "absolute",
     top: -25,
-    left: windowWidth / 2 - 56,
+    left: windowWidth / 2 - 58,
   },
   cameraContainer: {
     width: 110,
@@ -51,6 +51,11 @@ const styles = StyleSheet.create({
     borderColor: PRIMARY_ORANGE,
     borderRadius: 50,
     backgroundColor: PRIMARY_WHITE,
+  },
+  invisibleButton: {
+    width: 120,
+    height: 120,
+    zIndex: -1,
   },
 });
 

@@ -1,41 +1,115 @@
 import React from "react";
 import { View, TouchableOpacity, Text } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-
+import { useRoute } from "@react-navigation/native";
 import styles from "./styles";
 import {
   PRIMARY_ORANGE,
+  PRIMARY_LIGHT_ORANGE,
   PRIMARY_WHITE,
+  PRIMARY_GREY,
+  PRIMARY_LIGHT_GREY,
   POINT_DARK_ORANGE,
 } from "../../../constants/colors";
 import { ProfileIcon, SearchIcon, CameraIcon } from "../../../assets/svgs/icon";
 
-const TabBar = ({ navigation: { navigation } }) => {
+const TabBar = ({ navigation }) => {
+  const nav = navigation.navigation;
+  const navState = navigation.state;
+  const currentRouteName = navState.routeNames[navState.index];
+  console.log("currentRouteName", currentRouteName);
+
   return (
     <View style={styles.tabsContainer}>
       <TouchableOpacity
         style={styles.tab}
-        onPress={() => navigation.navigate("Search")}
+        onPress={(e) => {
+          nav.navigate("Main");
+        }}
       >
-        <AntDesign name="search1" size={30} color={PRIMARY_WHITE} />
-        <Text style={styles.tabName}>Search</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate("Photo")}
-      >
-        <View style={[styles.tab, styles.cameraContainer]}>
-          <AntDesign name="camera" size={60} color={POINT_DARK_ORANGE} />
-        </View>
+        <AntDesign
+          name="home"
+          size={25}
+          color={
+            currentRouteName === "Main" ? PRIMARY_WHITE : PRIMARY_LIGHT_ORANGE
+          }
+        />
+        <Text
+          style={
+            currentRouteName === "Main"
+              ? { ...styles.tabName, color: PRIMARY_WHITE }
+              : { ...styles.tabName, color: PRIMARY_LIGHT_ORANGE }
+          }
+        >
+          Home
+        </Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.tab}
-        onPress={() => navigation.navigate("Profile")}
+        onPress={() => nav.navigate("Search")}
       >
-        <AntDesign name="user" size={32} color={PRIMARY_WHITE} />
-        <Text style={styles.tabName}>Profile</Text>
+        <AntDesign
+          name="search1"
+          size={24}
+          color={
+            currentRouteName === "Search" ? PRIMARY_WHITE : PRIMARY_LIGHT_ORANGE
+          }
+        />
+        <Text
+          style={
+            currentRouteName === "Search"
+              ? { ...styles.tabName, color: PRIMARY_WHITE }
+              : { ...styles.tabName, color: PRIMARY_LIGHT_ORANGE }
+          }
+        >
+          Search
+        </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => nav.navigate("Photo")}
+      >
+        <View style={[styles.cameraContainer]}>
+          <AntDesign name="camera" size={60} color={POINT_DARK_ORANGE} />
+        </View>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.invisibleButton} />
+
+      <TouchableOpacity
+        style={styles.tab}
+        onPress={() => nav.navigate("Profile")}
+      >
+        <AntDesign
+          name="user"
+          size={25}
+          color={
+            currentRouteName === "Profile"
+              ? PRIMARY_WHITE
+              : PRIMARY_LIGHT_ORANGE
+          }
+        />
+        <Text
+          style={
+            currentRouteName === "Profile"
+              ? { ...styles.tabName, color: PRIMARY_WHITE }
+              : { ...styles.tabName, color: PRIMARY_LIGHT_ORANGE }
+          }
+        >
+          Profile
+        </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.tab}
+        onPress={() => console.log("Ranking Presssed")}
+      >
+        <AntDesign name="Trophy" size={25} color={PRIMARY_LIGHT_ORANGE} />
+        <Text style={{ ...styles.tabName, color: PRIMARY_LIGHT_ORANGE }}>
+          Ranking
+        </Text>
       </TouchableOpacity>
     </View>
   );
