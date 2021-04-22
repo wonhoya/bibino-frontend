@@ -44,13 +44,13 @@ const styles = StyleSheet.create({
     left: windowWidth / 2 - 56,
   },
   cameraContainer: {
-    width: 110,
-    height: 110,
     justifyContent: "center",
     alignItems: "center",
+    width: 110,
+    height: 110,
     borderWidth: 13,
-    borderColor: PRIMARY_ORANGE,
     borderRadius: 50,
+    borderColor: PRIMARY_ORANGE,
     backgroundColor: PRIMARY_WHITE,
   },
 });

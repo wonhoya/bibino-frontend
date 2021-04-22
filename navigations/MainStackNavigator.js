@@ -7,8 +7,6 @@ import Header from "../components/shared/Header/Header";
 import MainTabNavigator from "./MainTabNavigator";
 import Beer from "../screens/Beer/Beer";
 import Configuration from "../screens/Configuration/Configuration";
-
-//photo test용
 import Photo from "../screens/Photo/Photo";
 import Success from "../screens/Success/Success";
 import Failure from "../screens/Failure/Failure";

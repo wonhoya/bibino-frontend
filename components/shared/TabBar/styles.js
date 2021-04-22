@@ -22,9 +22,9 @@ const styles = StyleSheet.create({
     backgroundColor: PRIMARY_ORANGE,
   },
   tab: {
-    marginHorizontal: 10,
     flexDirection: "column",
     alignItems: "center",
+    marginHorizontal: 10,
   },
   tabName: {
     fontFamily: RUBIK_BOLD,
@@ -42,13 +42,13 @@ const styles = StyleSheet.create({
     left: windowWidth / 2 - 58,
   },
   cameraContainer: {
-    width: 110,
-    height: 110,
     justifyContent: "center",
     alignItems: "center",
+    width: 110,
+    height: 110,
     borderWidth: 13,
-    borderColor: PRIMARY_ORANGE,
     borderRadius: 50,
+    borderColor: PRIMARY_ORANGE,
     backgroundColor: PRIMARY_WHITE,
   },
   invisibleButton: {

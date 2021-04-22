@@ -2,6 +2,7 @@ import { StyleSheet, Dimensions } from "react-native";
 
 import { PRIMARY_WHITE, PRIMARY_ORANGE } from "../../constants/colors";
 import { RUBIK_REGULAR } from "../../constants/font";
+
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
@@ -14,10 +15,10 @@ const styles = StyleSheet.create({
   },
   resultLoadingContainer: {
     flex: 1,
-    backgroundColor: PRIMARY_ORANGE,
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: PRIMARY_ORANGE,
   },
   animationContainer: {
     width: 400,
@@ -25,8 +26,8 @@ const styles = StyleSheet.create({
     marginTop: "50%",
   },
   descriptionContainer: {
-    marginTop: 10,
     flex: 2,
+    marginTop: 10,
   },
   description: {
     fontFamily: RUBIK_REGULAR,

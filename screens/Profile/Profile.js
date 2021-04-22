@@ -7,8 +7,8 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import styles from "./styles";
 
+import styles from "./styles";
 import avatarSample from "../../assets/pngs/avatarSample.png";
 import TagBoard from "../../components/shared/TagBoard/TagBoard";
 import formatItems from "../../utils/formatItems";

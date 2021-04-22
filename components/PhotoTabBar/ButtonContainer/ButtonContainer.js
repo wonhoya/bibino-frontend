@@ -3,12 +3,12 @@ import { TouchableOpacity, Text, View } from "react-native";
 
 import styles from "./styles";
 
-const ButtonContainer = ({ handleOnPress, text, icon }) => {
+const ButtonContainer = ({ style, handlePressButton, text, icon }) => {
   return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={handleOnPress}>{icon}</TouchableOpacity>
-      <Text style={styles.tabFont}>{text}</Text>
-    </View>
+    <TouchableOpacity style={styles.tab} onPress={handlePressButton}>
+      {icon}
+      <Text style={styles.tabName}>{text}</Text>
+    </TouchableOpacity>
   );
 };
 

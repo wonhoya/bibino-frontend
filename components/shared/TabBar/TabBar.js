@@ -1,6 +1,7 @@
 import React from "react";
 import { View, TouchableOpacity, Text } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+
 import styles from "./styles";
 import {
   PRIMARY_LIGHT_ORANGE,
@@ -17,7 +18,7 @@ const TabBar = ({ navigation }) => {
     <View style={styles.tabsContainer}>
       <TouchableOpacity
         style={styles.tab}
-        onPress={(e) => {
+        onPress={() => {
           nav.navigate("Main");
         }}
       >
@@ -38,7 +39,6 @@ const TabBar = ({ navigation }) => {
           Home
         </Text>
       </TouchableOpacity>
-
       <TouchableOpacity
         style={styles.tab}
         onPress={() => nav.navigate("Search")}
@@ -60,7 +60,6 @@ const TabBar = ({ navigation }) => {
           Search
         </Text>
       </TouchableOpacity>
-
       <TouchableOpacity
         style={styles.button}
         onPress={() => nav.navigate("Photo")}
@@ -69,9 +68,7 @@ const TabBar = ({ navigation }) => {
           <AntDesign name="camera" size={60} color={POINT_DARK_ORANGE} />
         </View>
       </TouchableOpacity>
-
       <TouchableOpacity style={styles.invisibleButton} />
-
       <TouchableOpacity
         style={styles.tab}
         onPress={() => nav.navigate("Profile")}
@@ -95,7 +92,6 @@ const TabBar = ({ navigation }) => {
           Profile
         </Text>
       </TouchableOpacity>
-
       <TouchableOpacity
         style={styles.tab}
         onPress={() => console.log("Ranking Presssed")}

@@ -1,14 +1,15 @@
 import React, { useRef, useEffect } from "react";
-import { View, TouchableOpacity, Text, Animated } from "react-native";
-import * as Animatable from "react-native-animatable";
+import { Animated } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+
+import styles from "./styles";
+import MainButtonContainer from "./MainButtonContainer/MainButtonContainer";
+import ButtonContainer from "./ButtonContainer/ButtonContainer";
 import {
   PRIMARY_ORANGE,
   PRIMARY_WHITE,
   POINT_DARK_ORANGE,
 } from "../../constants/colors";
-
-import styles from "./styles";
 
 const PhotoTabBar = ({
   handleTakePicture,
@@ -37,6 +38,7 @@ const PhotoTabBar = ({
     };
 
     startAnimation();
+
     const id = setTimeout(() => {
       setIsAnimationFinished(true);
     }, 500);
@@ -46,57 +48,48 @@ const PhotoTabBar = ({
     };
   }, []);
 
-  console.log("isPreview?", isPreview);
   return (
     <Animated.View style={{ ...styles.tabsContainer, height: animationValue }}>
-      <TouchableOpacity
-        style={styles.tab}
-        onPress={() => console.log("Search Pressed")}
-      >
-        <AntDesign name="search1" size={30} color={PRIMARY_WHITE} />
-        <Text style={styles.tabName}>Search</Text>
-      </TouchableOpacity>
-
+      <ButtonContainer
+        handlePressButton={() => console.log("Search Pressed")}
+        icon={<AntDesign name="search1" size={30} color={PRIMARY_WHITE} />}
+        text="Search"
+      />
       {isPreview ? (
-        <TouchableOpacity
-          style={[
+        <MainButtonContainer
+          animation={[
             styles.button,
             { transform: [{ translateY: positionValue }] },
           ]}
-          onPress={handleRetake}
-        >
-          <View style={[styles.tab, styles.cameraContainer]}>
-            <AntDesign name="reload1" size={50} color={PRIMARY_ORANGE} />
-          </View>
-        </TouchableOpacity>
+          handlePressButton={handleRetake}
+          style={[styles.tab, styles.cameraContainer]}
+          icon={<AntDesign name="reload1" size={50} color={PRIMARY_ORANGE} />}
+        />
       ) : (
-        <TouchableOpacity
-          style={[
+        <MainButtonContainer
+          animation={[
             styles.button,
             { transform: [{ translateY: positionValue }] },
           ]}
-          activeOpacity={1}
-          onPress={handleTakePicture}
-        >
-          <View style={[styles.tab, styles.cameraContainer]}>
-            <AntDesign name="camera" size={60} color={POINT_DARK_ORANGE} />
-          </View>
-        </TouchableOpacity>
+          handlePressButton={handleTakePicture}
+          style={[styles.tab, styles.cameraContainer]}
+          icon={<AntDesign name="camera" size={60} color={POINT_DARK_ORANGE} />}
+        />
       )}
-
       {isPreview ? (
-        <TouchableOpacity style={styles.tab} onPress={handleUse}>
-          <AntDesign name="checkcircleo" size={32} color={PRIMARY_WHITE} />
-          <Text style={styles.tabName}>Use</Text>
-        </TouchableOpacity>
+        <ButtonContainer
+          handlePressButton={handleUse}
+          icon={
+            <AntDesign name="checkcircleo" size={32} color={PRIMARY_WHITE} />
+          }
+          text="Use"
+        />
       ) : (
-        <TouchableOpacity
-          style={styles.tab}
-          onPress={() => console.log("Profile Pressed")}
-        >
-          <AntDesign name="user" size={32} color={PRIMARY_WHITE} />
-          <Text style={styles.tabName}>Profile</Text>
-        </TouchableOpacity>
+        <ButtonContainer
+          handlePressButton={() => console.log("Profile Pressed")}
+          icon={<AntDesign name="user" size={32} color={PRIMARY_WHITE} />}
+          text="Profile"
+        />
       )}
     </Animated.View>
   );

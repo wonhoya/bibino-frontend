@@ -23,17 +23,17 @@ const styles = StyleSheet.create({
     fontSize: PROFILE_TITLE_FONT_SIZE,
   },
   sortDescription: {
+    marginHorizontal: 30,
     fontSize: PROFILE_SORT_FONT_SIZE,
     fontFamily: RUBIK_REGULAR,
-    marginHorizontal: 30,
   },
   tagBoardContainer: {
-    height: 30,
     alignItems: "center",
+    height: 30,
   },
   galleryContainer: {
-    paddingTop: 20,
     flex: 7,
+    paddingTop: 20,
   },
   gallery: {
     flex: 1,
