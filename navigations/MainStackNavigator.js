@@ -7,10 +7,32 @@ import Header from "../components/shared/Header/Header";
 import MainTabNavigator from "./MainTabNavigator";
 import Beer from "../screens/Beer/Beer";
 import Configuration from "../screens/Configuration/Configuration";
+import Photo from "../screens/Photo/Photo";
+import Success from "../screens/Success/Success";
+import Failure from "../screens/Failure/Failure";
+import AnalyzeFailure from "../screens/Failure/AnalyzeFailure";
 
 const Stack = createStackNavigator();
 
 const MainStackNavigator = () => {
+  const verticalAnimation = {
+    gestureDirection: "vertical",
+    cardStyleInterpolator: ({ current, layouts }) => {
+      return {
+        cardStyle: {
+          transform: [
+            {
+              translateY: current.progress.interpolate({
+                inputRange: [0, 1],
+                outputRange: [layouts.screen.height, 0],
+              }),
+            },
+          ],
+        },
+      };
+    },
+  };
+
   //auth flow
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const authScreens = {
@@ -18,7 +40,11 @@ const MainStackNavigator = () => {
     SignIn,
   };
   const userScreens = {
-    Main: MainTabNavigator,
+    MainTab: MainTabNavigator,
+    Photo,
+    Success,
+    Failure,
+    AnalyzeFailure,
     Beer,
     Configuration,
   };

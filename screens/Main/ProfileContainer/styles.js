@@ -11,7 +11,8 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 0.75,
+    justifyContent: "flex-start",
     alignSelf: "center",
     width: windowWidth * 0.87,
     height: windowHeight * 0.17,
@@ -21,7 +22,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "baseline",
-    paddingTop: Platform.OS === "android" ? 0 : 20,
+    paddingTop: Platform.OS === "android" ? 0 : 10,
   },
   paragraphContainer: {
     marginVertical: 4,
@@ -33,6 +34,7 @@ const styles = StyleSheet.create({
   },
   tagContainer: {
     flex: 1,
+    marginRight: windowWidth * 0.09,
   },
   username: {
     color: PRIMARY_DARK_GREY,

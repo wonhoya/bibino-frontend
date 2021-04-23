@@ -2,26 +2,35 @@ import { StyleSheet, Dimensions } from "react-native";
 
 import {
   PRIMARY_ORANGE,
-  TAB_ORANGE,
   PRIMARY_WHITE,
-} from "../../../constants/colors";
-import { RUBIK_REGULAR, RUBIK_BOLD } from "../../../constants/font";
-import { TABBAR_FONT_SIZE } from "../../../constants/size";
+  TAB_ORANGE,
+} from "../../constants/colors";
+import { RUBIK_REGULAR } from "../../constants/font";
 
 const { width: windowWidth } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   tabsContainer: {
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-between",
+    alignItems: "center",
+    bottom: 0,
     width: "100%",
-    height: "13%",
+    height: "12%",
     padding: 18,
+    paddingHorizontal: 60,
     borderTopStartRadius: 5,
     borderTopEndRadius: 5,
     backgroundColor: PRIMARY_ORANGE,
   },
-
+  tab: {
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  tabName: {
+    color: PRIMARY_WHITE,
+    fontFamily: RUBIK_REGULAR,
+  },
   cameraName: {
     position: "absolute",
     bottom: 10,
@@ -31,7 +40,7 @@ const styles = StyleSheet.create({
   button: {
     position: "absolute",
     top: -25,
-    left: windowWidth / 2 - 58,
+    left: windowWidth / 2 - 56,
   },
   cameraContainer: {
     justifyContent: "center",
@@ -42,11 +51,6 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     borderColor: PRIMARY_ORANGE,
     backgroundColor: PRIMARY_WHITE,
-  },
-  invisibleButton: {
-    width: 120,
-    height: 120,
-    zIndex: -1,
   },
 });
 

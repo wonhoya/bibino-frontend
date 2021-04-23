@@ -13,7 +13,7 @@ import {
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 const itemWidth = Math.round(windowWidth * 0.8);
-const itemHeight = Math.round(windowHeight * 0.46);
+const itemHeight = Math.round(windowHeight * 0.49);
 
 const styles = StyleSheet.create({
   container: {
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
   },
   imageContainer: {
-    flex: 2,
+    flex: 2.3,
     width: "100%",
   },
   descriptionContainer: {
