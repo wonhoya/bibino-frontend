@@ -10,6 +10,7 @@ import Configuration from "../screens/Configuration/Configuration";
 import Photo from "../screens/Photo/Photo";
 import Success from "../screens/Success/Success";
 import Failure from "../screens/Failure/Failure";
+import AnalyzeFailure from "../screens/Failure/AnalyzeFailure";
 
 const Stack = createStackNavigator();
 
@@ -43,6 +44,7 @@ const MainStackNavigator = () => {
     Photo,
     Success,
     Failure,
+    AnalyzeFailure,
     Beer,
     Configuration,
   };

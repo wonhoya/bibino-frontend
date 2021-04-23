@@ -3,11 +3,9 @@ import { View, TouchableOpacity, Text } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 import styles from "./styles";
-import {
-  PRIMARY_LIGHT_ORANGE,
-  PRIMARY_WHITE,
-  POINT_DARK_ORANGE,
-} from "../../../constants/colors";
+import { POINT_DARK_ORANGE } from "../../../constants/colors";
+import TabContainer from "./TabContainer/TabContainer";
+import ButtonContainer from "./ButtonContainer/ButtonContainer";
 
 const TabBar = ({ navigation }) => {
   const nav = navigation.navigation;
@@ -16,91 +14,40 @@ const TabBar = ({ navigation }) => {
 
   return (
     <View style={styles.tabsContainer}>
-      <TouchableOpacity
-        style={styles.tab}
-        onPress={() => {
+      <TabContainer
+        handleButtonPress={() => {
           nav.navigate("Main");
         }}
-      >
-        <AntDesign
-          name="home"
-          size={25}
-          color={
-            currentRouteName === "Main" ? PRIMARY_WHITE : PRIMARY_LIGHT_ORANGE
-          }
-        />
-        <Text
-          style={
-            currentRouteName === "Main"
-              ? { ...styles.tabName, color: PRIMARY_WHITE }
-              : { ...styles.tabName, color: PRIMARY_LIGHT_ORANGE }
-          }
-        >
-          Home
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.tab}
-        onPress={() => nav.navigate("Search")}
-      >
-        <AntDesign
-          name="search1"
-          size={24}
-          color={
-            currentRouteName === "Search" ? PRIMARY_WHITE : PRIMARY_LIGHT_ORANGE
-          }
-        />
-        <Text
-          style={
-            currentRouteName === "Search"
-              ? { ...styles.tabName, color: PRIMARY_WHITE }
-              : { ...styles.tabName, color: PRIMARY_LIGHT_ORANGE }
-          }
-        >
-          Search
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => nav.navigate("Photo")}
-      >
-        <View style={[styles.cameraContainer]}>
-          <AntDesign name="camera" size={60} color={POINT_DARK_ORANGE} />
-        </View>
-      </TouchableOpacity>
+        iconName="home"
+        text="Home"
+        isActive={currentRouteName === "Main" ? true : false}
+      />
+      <TabContainer
+        handleButtonPress={() => {
+          nav.navigate("Search");
+        }}
+        iconName="search1"
+        text="Search"
+        isActive={currentRouteName === "Search" ? true : false}
+      />
+      <ButtonContainer handleButtonPress={() => nav.navigate("Photo")} />
       <TouchableOpacity style={styles.invisibleButton} />
-      <TouchableOpacity
-        style={styles.tab}
-        onPress={() => nav.navigate("Profile")}
-      >
-        <AntDesign
-          name="user"
-          size={25}
-          color={
-            currentRouteName === "Profile"
-              ? PRIMARY_WHITE
-              : PRIMARY_LIGHT_ORANGE
-          }
-        />
-        <Text
-          style={
-            currentRouteName === "Profile"
-              ? { ...styles.tabName, color: PRIMARY_WHITE }
-              : { ...styles.tabName, color: PRIMARY_LIGHT_ORANGE }
-          }
-        >
-          Profile
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.tab}
-        onPress={() => console.log("Ranking Presssed")}
-      >
-        <AntDesign name="Trophy" size={25} color={PRIMARY_LIGHT_ORANGE} />
-        <Text style={{ ...styles.tabName, color: PRIMARY_LIGHT_ORANGE }}>
-          Ranking
-        </Text>
-      </TouchableOpacity>
+      <TabContainer
+        handleButtonPress={() => {
+          nav.navigate("Profile");
+        }}
+        iconName="user"
+        text="Profile"
+        isActive={currentRouteName === "Profile" ? true : false}
+      />
+      <TabContainer
+        handleButtonPress={() => {
+          console.log("Ranking Presssed");
+        }}
+        iconName="Trophy"
+        text="Ranking"
+        isActive={currentRouteName === "Ranking" ? true : false}
+      />
     </View>
   );
 };

@@ -21,15 +21,7 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 5,
     backgroundColor: PRIMARY_ORANGE,
   },
-  tab: {
-    flexDirection: "column",
-    alignItems: "center",
-    marginHorizontal: 10,
-  },
-  tabName: {
-    fontFamily: RUBIK_BOLD,
-    fontSize: TABBAR_FONT_SIZE,
-  },
+
   cameraName: {
     position: "absolute",
     bottom: 10,

@@ -20,9 +20,9 @@ const Failure = ({ navigation }) => {
     <>
       <View style={styles.container}>
         <FailureIcon />
-        <Text style={styles.title}>Oops! Something happend..</Text>
+        <Text style={styles.title}>Analyze Failed..</Text>
         <Text style={styles.description}>
-          This is Probably Server Error, Could you try again?
+          Could you please take picture again?
         </Text>
       </View>
       <View style={styles.svgContainer}>

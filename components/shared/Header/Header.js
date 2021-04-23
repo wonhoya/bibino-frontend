@@ -27,7 +27,12 @@ const Header = ({ navigation, route }) => {
   };
 
   useEffect(() => {
-    if (name === "Main" || name === "Search" || name === "Profile") {
+    if (
+      name === "Main" ||
+      name === "Search" ||
+      name === "Profile" ||
+      name === "Success"
+    ) {
       setIsDisabled(true);
     }
   }, [name]);

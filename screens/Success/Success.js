@@ -13,7 +13,12 @@ const Success = ({ navigation }) => {
     // });
 
     const id = setTimeout(() => {
-      navigation.navigate("Beer");
+      // navigation.navigate("Beer");
+
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Beer" }],
+      });
     }, 1500);
 
     return () => {
