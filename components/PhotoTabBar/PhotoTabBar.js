@@ -51,7 +51,7 @@ const PhotoTabBar = ({
   return (
     <Animated.View style={{ ...styles.tabsContainer, height: animationValue }}>
       <ButtonContainer
-        handlePressButton={() => console.log("Search Pressed")}
+        handleButtonPress={() => console.log("Search Pressed")}
         icon={<AntDesign name="search1" size={30} color={PRIMARY_WHITE} />}
         text="Search"
       />
@@ -61,7 +61,7 @@ const PhotoTabBar = ({
             styles.button,
             { transform: [{ translateY: positionValue }] },
           ]}
-          handlePressButton={handleRetake}
+          handleButtonPress={handleRetake}
           style={[styles.tab, styles.cameraContainer]}
           icon={<AntDesign name="reload1" size={50} color={PRIMARY_ORANGE} />}
         />
@@ -71,14 +71,14 @@ const PhotoTabBar = ({
             styles.button,
             { transform: [{ translateY: positionValue }] },
           ]}
-          handlePressButton={handleTakePicture}
+          handleButtonPress={handleTakePicture}
           style={[styles.tab, styles.cameraContainer]}
           icon={<AntDesign name="camera" size={60} color={POINT_DARK_ORANGE} />}
         />
       )}
       {isPreview ? (
         <ButtonContainer
-          handlePressButton={handleUse}
+          handleButtonPress={handleUse}
           icon={
             <AntDesign name="checkcircleo" size={32} color={PRIMARY_WHITE} />
           }
@@ -86,7 +86,7 @@ const PhotoTabBar = ({
         />
       ) : (
         <ButtonContainer
-          handlePressButton={() => console.log("Profile Pressed")}
+          handleButtonPress={() => console.log("Profile Pressed")}
           icon={<AntDesign name="user" size={32} color={PRIMARY_WHITE} />}
           text="Profile"
         />
