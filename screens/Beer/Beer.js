@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, ScrollView, Image, Text } from "react-native";
+import { FloatingAction } from "react-native-floating-action";
+import { AntDesign } from "@expo/vector-icons";
 
 import styles from "./styles";
 import TitleContainer from "./TitleContainer/TitleContainer";
@@ -9,11 +11,48 @@ import CharacteristicContainer from "./CharacteristicContainer/CharacteristicCon
 import CommentBoardContainer from "./CommentBoardContainer/CommentBoardContainer";
 import RecommendationBoardContainer from "./RecommendationBoardContainer/RecommendationBoardContainer";
 
+const actions = [
+  {
+    text: "Accessibility",
+    icon: <AntDesign name="rightcircle" size={24} color="black" />,
+    name: "bt_accessibility",
+    position: 2,
+  },
+  {
+    text: "Language",
+    icon: <AntDesign name="rightcircle" size={24} color="black" />,
+    name: "bt_language",
+    position: 1,
+  },
+  {
+    text: "Location",
+    icon: <AntDesign name="rightcircle" size={24} color="black" />,
+    name: "bt_room",
+    position: 3,
+  },
+  {
+    text: "Video",
+    icon: <AntDesign name="rightcircle" size={24} color="black" />,
+    name: "bt_videocam",
+    position: 4,
+  },
+];
+
 const Beer = ({ navigation }) => {
+  const [offsetY, setOffsetY] = useState(0);
+
+  const handleOnScroll = (event) => {
+    console.log(event.nativeEvent.contentOffset);
+    const { y } = event.nativeEvent.contentOffset;
+    setOffsetY(y);
+  };
+
   return (
     <ScrollView
       style={styles.scrollContainer}
       showsVerticalScrollIndicator={false}
+      onScroll={handleOnScroll}
+      scrollEventThrottle={16}
     >
       <View style={styles.container}>
         <Image
@@ -36,6 +75,14 @@ const Beer = ({ navigation }) => {
         <CommentBoardContainer />
       </View>
       <RecommendationBoardContainer />
+      <View style={[styles.buttonContainer, styles.handleButtonY(offsetY)]}>
+        <FloatingAction
+          actions={actions}
+          onPressItem={(name) => {
+            console.log(`selected button: ${name}`);
+          }}
+        />
+      </View>
     </ScrollView>
   );
 };
