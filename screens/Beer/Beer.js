@@ -73,9 +73,6 @@ const Beer = ({ navigation }) => {
         <RecommendationBoardContainer />
         <SectionDivider direction="left" text="Comments" />
         <CommentBoardContainer />
-        <TouchableOpacity style={styles.commentContainer}>
-          <Text>Show All comments</Text>
-        </TouchableOpacity>
       </View>
 
       <View style={[styles.buttonContainer, styles.handleButtonY(offsetY)]}>

@@ -18,24 +18,6 @@ const styles = StyleSheet.create({
     lineHeight: windowWidth / 16,
     color: PRIMARY_BLACK,
   },
-  sectionContainer: {
-    flex: 1,
-    flexDirection: "row",
-    width: windowWidth,
-  },
-  sectionTitle: {
-    fontFamily: RUBIK_REGULAR,
-    fontSize: 20,
-    color: PRIMARY_ORANGE,
-    marginHorizontal: 10,
-  },
-  line: {
-    flex: 7,
-    backgroundColor: PRIMARY_ORANGE,
-    borderRadius: 15,
-    marginTop: 20,
-    height: 1,
-  },
   buttonContainer: {
     position: "absolute",
     width: 200,
@@ -43,11 +25,6 @@ const styles = StyleSheet.create({
     left: windowWidth / 2.2,
     zIndex: 1,
     backgroundColor: "transparent",
-  },
-  commentContainer: {
-    width: windowWidth * 0.8,
-    marginBottom: 10,
-    alignItems: "flex-end",
   },
 });
 
