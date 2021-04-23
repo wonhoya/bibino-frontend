@@ -6,7 +6,6 @@ import styles from "./styles";
 import Configuration from "../Configuration/Configuration";
 import PhotoTabBar from "../../components/PhotoTabBar/PhotoTabBar";
 import CameraLoading from "../Loading/CameraLoading";
-import handleFetch from "../../utils/fetch";
 
 const Photo = ({ navigation }) => {
   const cameraRef = useRef(null);
