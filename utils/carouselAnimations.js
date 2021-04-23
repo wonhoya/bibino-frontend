@@ -4,14 +4,15 @@ import { getInputRangeFromIndexes } from "react-native-snap-carousel"; // 3.7.2
 const windowWidth = Dimensions.get("window").width;
 const TRANSLATE_VALUE = Math.round((windowWidth * 0.3) / 4);
 
-export function scrollInterpolator(index, carouselProps) {
+const scrollInterpolator = (index, carouselProps) => {
   const range = [1, 0, -1];
   const inputRange = getInputRangeFromIndexes(range, index, carouselProps);
   const outputRange = range;
 
   return { inputRange, outputRange };
-}
-export function animatedStyles(index, animatedValue, carouselProps) {
+};
+
+const animatedStyles = (index, animatedValue, carouselProps) => {
   const translateProp = carouselProps.vertical ? "translateY" : "translateX";
   let animatedOpacity = {};
   let animatedTransform = {};
@@ -58,4 +59,6 @@ export function animatedStyles(index, animatedValue, carouselProps) {
     ...animatedOpacity,
     ...animatedTransform,
   };
-}
+};
+
+export { scrollInterpolator, animatedStyles };
