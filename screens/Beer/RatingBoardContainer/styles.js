@@ -4,7 +4,7 @@ const { width: windowWidth } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
-    width: "85%",
+    width: "90%",
     marginTop: windowWidth / 50,
   },
 });

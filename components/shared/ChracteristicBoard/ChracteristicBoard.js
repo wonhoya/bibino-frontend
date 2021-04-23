@@ -35,6 +35,7 @@ const CharacteristicBoard = ({
           onValueChange={(value) => setRate(value)}
           maximumTrackTintColor="transparent"
           minimumTrackTintColor="transparent"
+          thumbTintColor="transparent"
           disabled={isDisabled ? true : false}
         />
       </View>

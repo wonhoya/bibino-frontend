@@ -88,9 +88,6 @@ const Profile = ({ navigation }) => {
         <View style={styles.infoContainer}>
           <Image source={avatarSample} />
           <Text style={styles.title}>Alisa Chimy</Text>
-          <View style={styles.tagBoardContainer}>
-            <TagBoard />
-          </View>
         </View>
         <View style={styles.galleryContainer}>
           <Text style={styles.sortDescription}>Sorted by: Date</Text>

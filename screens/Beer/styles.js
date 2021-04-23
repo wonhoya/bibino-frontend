@@ -1,4 +1,10 @@
 import { StyleSheet, Dimensions } from "react-native";
+import {
+  PRIMARY_ORANGE,
+  PRIMARY_GREY,
+  PRIMARY_BLACK,
+  PRIMARY_YELLOW,
+} from "../../constants/colors";
 
 import { RUBIK_REGULAR } from "../../constants/font";
 
@@ -14,7 +20,15 @@ const styles = StyleSheet.create({
     fontSize: windowWidth / 25,
     fontFamily: RUBIK_REGULAR,
     textAlign: "justify",
-    lineHeight: windowWidth / 20,
+    lineHeight: windowWidth / 16,
+    color: PRIMARY_BLACK,
+  },
+  line: {
+    width: windowWidth * 0.9,
+    backgroundColor: PRIMARY_ORANGE,
+    borderRadius: 15,
+    marginTop: 20,
+    height: 1,
   },
 });
 
