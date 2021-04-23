@@ -7,21 +7,19 @@ import { unwrapResult } from "@reduxjs/toolkit";
 
 import { signInUser, userStateSet } from "../features/userSlice";
 import ASYNC_STATE from "../constants/asyncState";
+let isSigningIn = false;
 
 const useGoogleSignIn = () => {
   const dispatch = useDispatch();
-  const fetchStatus = useSelector((state) => state.user.status);
+  const userFetchStatus = useSelector((state) => state.user.status);
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
     clientId: EXPO_CLIENT_ID,
     clientSecret: EXPO_CLIENT_PASSWORD,
   });
 
   useEffect(() => {
-    if (fetchStatus === ASYNC_STATE.LOADING) {
-      return;
-    }
-
-    if (response?.type === "success") {
+    if (response?.type === "success" && !isSigningIn) {
+      isSigningIn = true;
       dispatch(userStateSet(ASYNC_STATE.LOADING));
 
       const getUserData = async () => {
@@ -33,21 +31,22 @@ const useGoogleSignIn = () => {
           const auth = await firebase.auth().signInWithCredential(credential);
 
           const idToken = await auth.user.getIdToken();
-          // const [resultActionOfUser, resultActionOfTodayBeers] = await Promise.all([dispatch(signInUser(idToken)), dispatch(fetchTodayBeers())]);
+
           const resultAction = await dispatch(signInUser(idToken));
           unwrapResult(resultAction);
         } catch (err) {
+          // 에러 페이지로 navigate 할 수 있게나, 에러 페이지 모달로 뜰 수 있게.
           console.log(err);
         } finally {
-          dispatch(userStateSet(ASYNC_STATE.IDLE));
+          isSigningIn = false;
         }
       };
 
       getUserData();
     }
-  }, [response, fetchStatus, dispatch]);
+  }, [response, dispatch]);
 
-  return { fetchStatus, promptAsync };
+  return { userFetchStatus, promptAsync };
 };
 
 export default useGoogleSignIn;

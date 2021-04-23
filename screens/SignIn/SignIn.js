@@ -14,11 +14,11 @@ import useGoogleSignIn from "../../hooks/useGoogleSignIn";
 import Loading from "../Loading/Loading";
 
 const SignIn = () => {
-  const { fetchStatus, promptAsync } = useGoogleSignIn();
+  const { userFetchStatus, promptAsync } = useGoogleSignIn();
 
-  const isLoading = fetchStatus === ASYNC_STATE.LOADING;
+  const isLoading = userFetchStatus === ASYNC_STATE.LOADING;
 
-  const onSignInWithGoogle = () => {
+  const handleSignInWithGoogle = () => {
     promptAsync();
   };
 
@@ -39,7 +39,10 @@ const SignIn = () => {
           <Text style={styles.description}>Sign in with social networks</Text>
         </View>
         <View style={styles.iconContainer}>
-          <TouchableOpacity onPress={onSignInWithGoogle} disabled={isLoading}>
+          <TouchableOpacity
+            onPress={handleSignInWithGoogle}
+            disabled={isLoading}
+          >
             <GoogleIcon size={50} />
           </TouchableOpacity>
           <TouchableOpacity onPress={handleOnpress}>

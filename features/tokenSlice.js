@@ -9,8 +9,6 @@ const initialState = {
   error: null,
 };
 
-// SecureStore.deleteItemAsync("idToken");
-
 const saveIdToken = createAsyncThunk("token/tokenSaved", async (idToken) => {
   await SecureStore.setItemAsync("idToken", idToken);
   return idToken;

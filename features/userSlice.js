@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, unwrapResult } from "@reduxjs/toolkit";
 
+import { todayBeersAdded } from "./todayBeersSlice";
 import { saveIdToken } from "./tokenSlice";
 import { SERVER_URL } from "../config";
 import ASYNC_STATE from "../constants/asyncState";
@@ -18,15 +19,17 @@ const signInUser = createAsyncThunk(
   "user/userSignedIn",
   async (idTokenByGoogle, { dispatch }) => {
     try {
-      const response = await fetch(`${serverUrl}/signIn`, {
+      const response = await fetch(`${serverUrl}/users/sign-in`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${idTokenByGoogle}`,
         },
       });
 
-      const { user, idTokenByBibino } = await response.json();
-      dispatch(saveIdToken(idTokenByBibino));
+      const { user, idTokenByBibino, beers } = await response.json();
+      const resultAction = await dispatch(saveIdToken(idTokenByBibino));
+      unwrapResult(resultAction);
+      dispatch(todayBeersAdded({ beers, timestamp: Date.now() }));
 
       return {
         user: { id: user._id, avatar: user.imagePath, name: user.name },

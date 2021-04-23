@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import { SERVER_URL } from "../config";
+import ASYNC_STATE from "../constants/asyncState";
 
 const serverUrl = SERVER_URL[process.env.NODE_ENV];
 
@@ -14,30 +15,42 @@ const initialState = {
 const fetchTodayBeers = createAsyncThunk(
   "todayBeers/todayBeersFetched",
   async () => {
-    const response = await fetch(`${serverUrl}/api/main`);
+    const response = await fetch(`${serverUrl}/api/beers`);
     const beers = await response.json();
+    const timestamp = Date.now();
+
     // 정제된 today's beers 배열을 반환해야 한다
-    return beers;
+    return { beers, timestamp };
   }
 );
 
 const todayBeersSlice = createSlice({
   name: "todayBeers",
   initialState,
-  reducers: {},
+  reducers: {
+    todayBeersAdded: (state, action) => {
+      const { beers, timestamp } = action.payload;
+
+      state.beers = beers;
+      state.timestamp = timestamp;
+    },
+  },
   extraReducers: {
     [fetchTodayBeers.pending]: (state) => {
-      state.status = "loading";
+      state.status = ASYNC_STATE.LOADING;
     },
     [fetchTodayBeers.rejected]: (state, action) => {
-      state.status = "failed";
+      state.status = ASYNC_STATE.FAILED;
       state.error = action.payload;
     },
     [fetchTodayBeers.fulfilled]: (state, action) => {
-      state.status = "suceeded";
-      state.beers = action.payload;
+      const { beers, timestamp } = action.payload;
+      state.status = ASYNC_STATE.SUCCEED;
+      state.beers = beers;
+      state.timestamp = timestamp;
     },
   },
 });
 
-export { todayBeersSlice, fetchTodayBeers };
+const { todayBeersAdded } = todayBeersSlice.actions;
+export { todayBeersSlice, fetchTodayBeers, todayBeersAdded };
