@@ -4,47 +4,44 @@ import { FloatingAction } from "react-native-floating-action";
 import { AntDesign } from "@expo/vector-icons";
 
 import styles from "./styles";
+import { PRIMARY_ORANGE, PRIMARY_BLACK } from "../../constants/colors";
+
 import TitleContainer from "./TitleContainer/TitleContainer";
 import RatingBoardContainer from "./RatingBoardContainer/RatingBoardContainer";
 import TagBoardContainer from "./TagBoardContainer/TagBoardContainer";
 import CharacteristicContainer from "./CharacteristicContainer/CharacteristicContainer";
 import CommentBoardContainer from "./CommentBoardContainer/CommentBoardContainer";
 import RecommendationBoardContainer from "./RecommendationBoardContainer/RecommendationBoardContainer";
+import ModalContainer from "../../components/ModalContainer/ModalContainer";
 
 const actions = [
   {
-    text: "Accessibility",
-    icon: <AntDesign name="rightcircle" size={24} color="black" />,
-    name: "bt_accessibility",
+    icon: <AntDesign name="form" size={19} color={PRIMARY_BLACK} />,
+    name: "reviewButton",
     position: 2,
+    color: PRIMARY_ORANGE,
   },
   {
-    text: "Language",
-    icon: <AntDesign name="rightcircle" size={24} color="black" />,
-    name: "bt_language",
+    icon: <AntDesign name="sharealt" size={20} color={PRIMARY_BLACK} />,
+    name: "shareButton",
     position: 1,
-  },
-  {
-    text: "Location",
-    icon: <AntDesign name="rightcircle" size={24} color="black" />,
-    name: "bt_room",
-    position: 3,
-  },
-  {
-    text: "Video",
-    icon: <AntDesign name="rightcircle" size={24} color="black" />,
-    name: "bt_videocam",
-    position: 4,
+    color: PRIMARY_ORANGE,
   },
 ];
 
 const Beer = ({ navigation }) => {
   const [offsetY, setOffsetY] = useState(0);
+  const [isModalVisible, setModalVisible] = useState(false);
 
   const handleOnScroll = (event) => {
     console.log(event.nativeEvent.contentOffset);
     const { y } = event.nativeEvent.contentOffset;
     setOffsetY(y);
+  };
+
+  const closeModal = () => {
+    console.log("in");
+    setModalVisible(false);
   };
 
   return (
@@ -78,11 +75,20 @@ const Beer = ({ navigation }) => {
       <View style={[styles.buttonContainer, styles.handleButtonY(offsetY)]}>
         <FloatingAction
           actions={actions}
+          color={PRIMARY_ORANGE}
+          showBackground={false}
           onPressItem={(name) => {
             console.log(`selected button: ${name}`);
+            if (name === "reviewButton") {
+              setModalVisible(true);
+            }
           }}
         />
       </View>
+      <ModalContainer
+        isModalVisible={isModalVisible}
+        handleOnReact={closeModal}
+      />
     </ScrollView>
   );
 };

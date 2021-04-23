@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     height: 200,
     left: windowWidth / 2.2,
     zIndex: 1,
+    backgroundColor: "transparent",
   },
 });
 
