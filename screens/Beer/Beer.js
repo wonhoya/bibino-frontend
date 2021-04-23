@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, ScrollView, Image, Text } from "react-native";
+import { View, ScrollView, Image, Text, TouchableOpacity } from "react-native";
 import { FloatingAction } from "react-native-floating-action";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -13,6 +13,7 @@ import CharacteristicContainer from "./CharacteristicContainer/CharacteristicCon
 import CommentBoardContainer from "./CommentBoardContainer/CommentBoardContainer";
 import RecommendationBoardContainer from "./RecommendationBoardContainer/RecommendationBoardContainer";
 import ModalContainer from "../../components/ModalContainer/ModalContainer";
+import SectionDivider from "./SectionDivider/SectionDivider";
 
 const actions = [
   {
@@ -34,13 +35,11 @@ const Beer = ({ navigation }) => {
   const [isModalVisible, setModalVisible] = useState(false);
 
   const handleOnScroll = (event) => {
-    console.log(event.nativeEvent.contentOffset);
     const { y } = event.nativeEvent.contentOffset;
     setOffsetY(y);
   };
 
   const closeModal = () => {
-    console.log("in");
     setModalVisible(false);
   };
 
@@ -59,7 +58,7 @@ const Beer = ({ navigation }) => {
         <TitleContainer title="RAEA BEER" />
         <RatingBoardContainer rating={4} />
         <TagBoardContainer />
-        <View style={styles.line} />
+        <SectionDivider direction="right" text="Description" />
         <Text style={styles.description}>
           2020 bottle shared by a friend. Darkest brown pour with a medium light
           brown head. Aroma of malt, maple, chocolate, bourbon, vanilla and some
@@ -68,10 +67,17 @@ const Beer = ({ navigation }) => {
           sweetness and it would have been perfect, but definitely deserving of
           the hype.
         </Text>
+        <SectionDivider direction="left" text="Characteristic" />
         <CharacteristicContainer />
+        <SectionDivider direction="right" text="Recommendation" />
+        <RecommendationBoardContainer />
+        <SectionDivider direction="left" text="Comments" />
         <CommentBoardContainer />
+        <TouchableOpacity style={styles.commentContainer}>
+          <Text>Show All comments</Text>
+        </TouchableOpacity>
       </View>
-      <RecommendationBoardContainer />
+
       <View style={[styles.buttonContainer, styles.handleButtonY(offsetY)]}>
         <FloatingAction
           actions={actions}

@@ -1,11 +1,11 @@
+import { StyleSheet } from "react-native";
+
 import { PRIMARY_GREY, PRIMARY_BLACK } from "../../constants/colors";
 import { RUBIK_REGULAR, RUBIK_BOLD } from "../../constants/font";
 import {
   FAILURE_TITLE_FONT_SIZE,
   FAILURE_DESCRIPTION_FONT_SIZE,
 } from "../../constants/size";
-
-import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {

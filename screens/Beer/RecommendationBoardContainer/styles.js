@@ -2,11 +2,13 @@ import { StyleSheet, Dimensions } from "react-native";
 
 import { RUBIK_BOLD } from "../../../constants/font";
 
-const { width: windowWidth } = Dimensions.get("window");
+const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: windowWidth / 10,
+    width: windowWidth,
+    height: windowHeight / 3,
+    marginVertical: windowWidth / 10,
     alignItems: "center",
   },
   text: {
