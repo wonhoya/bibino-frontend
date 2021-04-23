@@ -21,7 +21,7 @@ const fetchTodayBeers = createAsyncThunk(
   }
 );
 
-const todayBeerSlice = createSlice({
+const todayBeersSlice = createSlice({
   name: "todayBeers",
   initialState,
   reducers: {},
@@ -40,4 +40,4 @@ const todayBeerSlice = createSlice({
   },
 });
 
-export { todayBeerSlice, fetchTodayBeers };
+export { todayBeersSlice, fetchTodayBeers };

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, unwrapResult } from "@reduxjs/toolkit";
 
-import { saveToken } from "./tokenSlice";
+import { saveIdToken } from "./tokenSlice";
 import { SERVER_URL } from "../config";
 import ASYNC_STATE from "../constants/asyncState";
 
@@ -16,23 +16,25 @@ const initialState = {
 
 const signInUser = createAsyncThunk(
   "user/userSignedIn",
-  async (idToken, { dispatch }) => {
+  async (idTokenByGoogle, { dispatch }) => {
     try {
-      const response = await fetch(`${serverUrl}/signin`, {
+      const response = await fetch(`${serverUrl}/signIn`, {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${idToken}`,
+          Authorization: `Bearer ${idTokenByGoogle}`,
         },
       });
 
-      const { user, accessToken } = await response.json();
-      dispatch(saveToken(accessToken));
+      const { user, idTokenByBibino } = await response.json();
+      dispatch(saveIdToken(idTokenByBibino));
 
       return {
         user: { id: user._id, avatar: user.imagePath, name: user.name },
       };
     } catch (err) {
       console.error("Faild get user data: ", err);
+    } finally {
+      dispatch(userStateSet(ASYNC_STATE.IDLE));
     }
   }
 );

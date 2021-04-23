@@ -4,7 +4,7 @@ import { unwrapResult } from "@reduxjs/toolkit";
 import { NavigationContainer } from "@react-navigation/native";
 import Loading from "../screens/Loading/Loading";
 
-import { getToken, tokenStateSet } from "../features/tokenSlice";
+import { getIdToken, tokenStateSet } from "../features/tokenSlice";
 import ASYNC_STATE from "../constants/asyncState";
 import MainStackNavigator from "./MainStackNavigator";
 
@@ -15,7 +15,7 @@ const AppNavigation = () => {
   useEffect(() => {
     const loadToken = async () => {
       try {
-        const resultAction = await dispatch(getToken());
+        const resultAction = await dispatch(getIdToken());
         unwrapResult(resultAction);
       } catch (err) {
       } finally {

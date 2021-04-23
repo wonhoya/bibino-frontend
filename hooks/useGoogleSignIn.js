@@ -5,24 +5,25 @@ import { EXPO_CLIENT_ID, EXPO_CLIENT_PASSWORD } from "@env";
 import { useSelector, useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 
-import { signInUser } from "../features/userSlice";
-import { userStateSet } from "../features/userSlice";
+import { signInUser, userStateSet } from "../features/userSlice";
 import ASYNC_STATE from "../constants/asyncState";
 
 const useGoogleSignIn = () => {
   const dispatch = useDispatch();
-  const fetchState = useSelector((state) => state.user.state);
+  const fetchStatus = useSelector((state) => state.user.status);
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
     clientId: EXPO_CLIENT_ID,
     clientSecret: EXPO_CLIENT_PASSWORD,
   });
 
   useEffect(() => {
-    if (fetchState === ASYNC_STATE.LOADING) {
+    if (fetchStatus === ASYNC_STATE.LOADING) {
       return;
     }
 
     if (response?.type === "success") {
+      dispatch(userStateSet(ASYNC_STATE.LOADING));
+
       const getUserData = async () => {
         try {
           const { id_token } = response.params;
@@ -32,6 +33,7 @@ const useGoogleSignIn = () => {
           const auth = await firebase.auth().signInWithCredential(credential);
 
           const idToken = await auth.user.getIdToken();
+          // const [resultActionOfUser, resultActionOfTodayBeers] = await Promise.all([dispatch(signInUser(idToken)), dispatch(fetchTodayBeers())]);
           const resultAction = await dispatch(signInUser(idToken));
           unwrapResult(resultAction);
         } catch (err) {
@@ -43,9 +45,9 @@ const useGoogleSignIn = () => {
 
       getUserData();
     }
-  }, [response, fetchState, dispatch]);
+  }, [response, fetchStatus, dispatch]);
 
-  return { fetchState, promptAsync };
+  return { fetchStatus, promptAsync };
 };
 
 export default useGoogleSignIn;

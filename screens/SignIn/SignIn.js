@@ -8,11 +8,15 @@ import {
   FacebookIcon,
   InstagramIcon,
 } from "../../assets/svgs/icon";
+import ASYNC_STATE from "../../constants/asyncState";
 import useGoogleSignIn from "../../hooks/useGoogleSignIn";
 
+import Loading from "../Loading/Loading";
+
 const SignIn = () => {
-  const { fetchState, promptAsync } = useGoogleSignIn();
-  const isLoading = fetchState === "loading";
+  const { fetchStatus, promptAsync } = useGoogleSignIn();
+
+  const isLoading = fetchStatus === ASYNC_STATE.LOADING;
 
   const onSignInWithGoogle = () => {
     promptAsync();
@@ -21,6 +25,10 @@ const SignIn = () => {
   const handleOnpress = () => {
     console.log("clicked");
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <View style={styles.container}>

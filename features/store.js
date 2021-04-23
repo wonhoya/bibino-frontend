@@ -13,12 +13,14 @@ import {
   REGISTER,
 } from "redux-persist";
 
-import { todayBeerSlice } from "./todayBeerSlice";
+import { todayBeersSlice } from "./todayBeersSlice";
 import { tokenSlice } from "./tokenSlice";
 import { userSlice } from "./userSlice";
 
+// AsyncStorage.clear();
+
 const rootReducer = combineReducers({
-  todayBeer: todayBeerSlice.reducer,
+  todayBeers: todayBeersSlice.reducer,
   token: tokenSlice.reducer,
   user: userSlice.reducer,
 });
@@ -26,7 +28,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: "root",
   storage: AsyncStorage,
-  whitelist: ["user", "todayBeer"],
+  whitelist: ["user", "todayBeers"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

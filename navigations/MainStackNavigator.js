@@ -11,7 +11,7 @@ import useUserIsLogIn from "../hooks/useUserIsLogIn";
 const Stack = createStackNavigator();
 
 const MainStackNavigator = () => {
-  const { accessToken } = useUserIsLogIn();
+  const { idToken } = useUserIsLogIn();
 
   const authScreens = {
     Intro,
@@ -24,16 +24,16 @@ const MainStackNavigator = () => {
   };
 
   return (
-    <Stack.Navigator headerMode={accessToken ? "screen" : "none"}>
+    <Stack.Navigator headerMode={idToken ? "screen" : "none"}>
       {Object.entries({
-        ...(accessToken ? userScreens : authScreens),
+        ...(idToken ? userScreens : authScreens),
       }).map(([name, component], i) => (
         <Stack.Screen
           key={i}
           name={name}
           component={component}
           options={
-            accessToken
+            idToken
               ? {
                   header: (navigation) => <Header navigation={navigation} />,
                 }

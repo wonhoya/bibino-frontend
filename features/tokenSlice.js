@@ -4,23 +4,25 @@ import * as SecureStore from "expo-secure-store";
 import ASYNC_STATE from "../constants/asyncState";
 
 const initialState = {
-  accessToken: null,
+  idToken: null,
   status: "idle",
   error: null,
 };
 
-const saveToken = createAsyncThunk("token/tokenSaved", async (accessToken) => {
-  await SecureStore.setItemAsync("accessToken", accessToken);
-  return accessToken;
+// SecureStore.deleteItemAsync("idToken");
+
+const saveIdToken = createAsyncThunk("token/tokenSaved", async (idToken) => {
+  await SecureStore.setItemAsync("idToken", idToken);
+  return idToken;
 });
 
-const getToken = createAsyncThunk("token/tokenGotten", async () => {
-  const accessToken = await SecureStore.getItemAsync("accessToken");
-  return accessToken;
+const getIdToken = createAsyncThunk("token/tokenGotten", async () => {
+  const idToken = await SecureStore.getItemAsync("idToken");
+  return idToken;
 });
 
-const removeToken = createAsyncThunk("token/tokenRemoved", async () => {
-  await SecureStore.deleteItemAsync("accessToken");
+const removeIdToken = createAsyncThunk("token/tokenRemoved", async () => {
+  await SecureStore.deleteItemAsync("idToken");
   return;
 });
 
@@ -33,21 +35,21 @@ const tokenSlice = createSlice({
     },
   },
   extraReducers: {
-    [saveToken.fulfilled]: (state, action) => {
-      state.accessToken = action.payload;
+    [saveIdToken.fulfilled]: (state, action) => {
+      state.idToken = action.payload;
     },
-    [getToken.pending]: (state) => {
+    [getIdToken.pending]: (state) => {
       state.status = ASYNC_STATE.LOADING;
     },
-    [getToken.fulfilled]: (state, action) => {
+    [getIdToken.fulfilled]: (state, action) => {
       state.status = ASYNC_STATE.SUCCEED;
-      state.accessToken = action.payload;
+      state.idToken = action.payload;
     },
-    [removeToken.fulfilled]: (state) => {
-      state.accessToken = null;
+    [removeIdToken.fulfilled]: (state) => {
+      state.idToken = null;
     },
   },
 });
 
 const { tokenStateSet } = tokenSlice.actions;
-export { tokenSlice, saveToken, getToken, removeToken, tokenStateSet };
+export { tokenSlice, saveIdToken, getIdToken, removeIdToken, tokenStateSet };
