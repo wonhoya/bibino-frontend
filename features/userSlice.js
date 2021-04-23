@@ -4,6 +4,7 @@ import { todayBeersAdded } from "./todayBeersSlice";
 import { saveIdToken } from "./tokenSlice";
 import { SERVER_URL } from "../config";
 import ASYNC_STATE from "../constants/asyncState";
+import getHeadersIncludedIdToken from "../utils/getHeadersIncludedIdToken";
 
 const serverUrl = SERVER_URL[process.env.NODE_ENV];
 
@@ -19,11 +20,10 @@ const signInUser = createAsyncThunk(
   "user/userSignedIn",
   async (idTokenByGoogle, { dispatch }) => {
     try {
+      const headers = getHeadersIncludedIdToken(idTokenByGoogle);
       const response = await fetch(`${serverUrl}/users/sign-in`, {
         method: "POST",
-        headers: {
-          Authorization: `Bearer ${idTokenByGoogle}`,
-        },
+        headers,
       });
 
       const { user, idTokenByBibino, beers } = await response.json();
