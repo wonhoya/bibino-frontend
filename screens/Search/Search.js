@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import styles from "./styles";
 import { SearchIcon } from "../../assets/svgs/icon";
 import { SEARCH_TITLE_TEXT } from "../../constants/text";
-import debouncedFetchBeerSearched from "../../utils/debouncedFetchBeerSearched";
+import debouncedFetchSearchedBeers from "../../utils/debouncedFetchSearchedBeers";
 import SearchCardBoard from "../../components/SearchCardBoard/SearchCardBoard";
 
 //mockup
@@ -18,7 +18,7 @@ const Search = () => {
   const [searchedBeers, setSearchedBeers] = useState([]);
 
   useEffect(() => {
-    debouncedFetchBeerSearched(searchText, idToken, setSearchedBeers);
+    debouncedFetchSearchedBeers(searchText, idToken, setSearchedBeers);
   }, [searchText, idToken, setSearchedBeers]);
 
   const handleSearchInput = (text) => {

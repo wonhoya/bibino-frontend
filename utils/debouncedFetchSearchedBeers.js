@@ -22,6 +22,6 @@ const fetchBeerSearched = async (searchText, idToken, setSearchedBeers) => {
   setSearchedBeers(processedSearchedBeers);
 };
 
-const debouncedFetchBeerSearched = debounce(fetchBeerSearched, 300);
+const debouncedFetchSearchedBeers = debounce(fetchBeerSearched, 300);
 
-export default debouncedFetchBeerSearched;
+export default debouncedFetchSearchedBeers;
