@@ -16,7 +16,6 @@ const PhotoTabBar = ({
   handleRetake,
   isPreview,
   handleUse,
-  isCameraReady,
   setIsAnimationFinished,
 }) => {
   const animationValue = useRef(new Animated.Value(100)).current;

@@ -34,6 +34,7 @@ const Photo = ({ navigation }) => {
         return setHasPermission(false);
       }
     };
+
     requestPermission();
   }, []);
 
@@ -61,21 +62,24 @@ const Photo = ({ navigation }) => {
   const handleUse = async () => {
     try {
       setIsParseStarted(true);
-      const response = await handleFetch(
-        "http://192.168.0.54:3000/api/beers/scan",
-        "POST",
-        {
+
+      const response = await fetch("http://192.168.0.54:3000/api/beers/scan", {
+        method: "POST",
+        headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        { base64: photobase64 }
-      );
+        body: JSON.stringify({
+          base64: photobase64,
+        }),
+      });
 
       if (!response.ok) {
         return navigation.navigate("Failure");
       }
 
       const result = await response.json();
+
       setIsParseStarted(false);
 
       if (result.status === "Analyze Success") {
@@ -88,7 +92,7 @@ const Photo = ({ navigation }) => {
     }
   };
 
-  if (hasPermission === false || hasPermission === null) {
+  if (hasPermission === false) {
     //일단 Configuration 으로 보냄.
     return <Configuration />;
   }

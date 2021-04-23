@@ -2,11 +2,10 @@ import { StyleSheet, Dimensions } from "react-native";
 
 import {
   PRIMARY_ORANGE,
-  TAB_GREY,
-  TAB_ORANGE,
   PRIMARY_WHITE,
+  TAB_ORANGE,
 } from "../../constants/colors";
-import { RUBIK_REGULAR, RUBIK_BOLD } from "../../constants/font";
+import { RUBIK_REGULAR } from "../../constants/font";
 
 const { width: windowWidth } = Dimensions.get("window");
 
@@ -15,9 +14,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    bottom: 0,
     width: "100%",
     height: "12%",
-    bottom: 0,
     padding: 18,
     paddingHorizontal: 60,
     borderTopStartRadius: 5,

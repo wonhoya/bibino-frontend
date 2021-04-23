@@ -1,9 +1,7 @@
 import React from "react";
-import { View, TouchableOpacity, Text } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { View, TouchableOpacity } from "react-native";
 
 import styles from "./styles";
-import { POINT_DARK_ORANGE } from "../../../constants/colors";
 import TabContainer from "./TabContainer/TabContainer";
 import ButtonContainer from "./ButtonContainer/ButtonContainer";
 
@@ -15,38 +13,38 @@ const TabBar = ({ navigation }) => {
   return (
     <View style={styles.tabsContainer}>
       <TabContainer
-        handleButtonPress={() => {
+        handleTabPress={() => {
           nav.navigate("Main");
         }}
         iconName="home"
         text="Home"
-        isActive={currentRouteName === "Main" ? true : false}
+        isActive={currentRouteName === "Main"}
       />
       <TabContainer
-        handleButtonPress={() => {
+        handleTabPress={() => {
           nav.navigate("Search");
         }}
         iconName="search1"
         text="Search"
-        isActive={currentRouteName === "Search" ? true : false}
+        isActive={currentRouteName === "Search"}
       />
       <ButtonContainer handleButtonPress={() => nav.navigate("Photo")} />
       <TouchableOpacity style={styles.invisibleButton} />
       <TabContainer
-        handleButtonPress={() => {
+        handleTabPress={() => {
           nav.navigate("Profile");
         }}
         iconName="user"
         text="Profile"
-        isActive={currentRouteName === "Profile" ? true : false}
+        isActive={currentRouteName === "Profile"}
       />
       <TabContainer
-        handleButtonPress={() => {
+        handleTabPress={() => {
           console.log("Ranking Presssed");
         }}
         iconName="Trophy"
         text="Ranking"
-        isActive={currentRouteName === "Ranking" ? true : false}
+        isActive={currentRouteName === "Ranking"}
       />
     </View>
   );

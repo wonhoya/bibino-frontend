@@ -40,7 +40,7 @@ const MainStackNavigator = () => {
     SignIn,
   };
   const userScreens = {
-    Main: MainTabNavigator,
+    MainTab: MainTabNavigator,
     Photo,
     Success,
     Failure,

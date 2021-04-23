@@ -22,7 +22,7 @@ const Failure = ({ navigation }) => {
         <FailureIcon />
         <Text style={styles.title}>Oops! Something happend..</Text>
         <Text style={styles.description}>
-          This is Probably Server Error, Could you try again?
+          Sorry for Error, Could you try again?
         </Text>
       </View>
       <View style={styles.svgContainer}>

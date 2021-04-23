@@ -8,7 +8,7 @@ import { ShareIcon } from "../../../assets/svgs/icon";
 import { PRIMARY_GREY } from "../../../constants/colors";
 import { HeaderLogoSvg } from "../../../assets/svgs/ilusts";
 
-const Header = ({ navigation, route }) => {
+const Header = ({ navigation }) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const { name } = useRoute();
 
@@ -27,12 +27,9 @@ const Header = ({ navigation, route }) => {
   };
 
   useEffect(() => {
-    if (
-      name === "Main" ||
-      name === "Search" ||
-      name === "Profile" ||
-      name === "Success"
-    ) {
+    const shouldHideBackButton = name === "MainTab" || name === "Success";
+
+    if (shouldHideBackButton) {
       setIsDisabled(true);
     }
   }, [name]);
