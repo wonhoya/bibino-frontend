@@ -7,6 +7,7 @@ import Header from "../components/shared/Header/Header";
 import MainTabNavigator from "./MainTabNavigator";
 import Beer from "../screens/Beer/Beer";
 import Configuration from "../screens/Configuration/Configuration";
+import useUserIsLogIn from "../hooks/useUserIsLogIn";
 import Photo from "../screens/Photo/Photo";
 import Success from "../screens/Success/Success";
 import Failure from "../screens/Failure/Failure";
@@ -15,6 +16,7 @@ import AnalyzeFailure from "../screens/Failure/AnalyzeFailure";
 const Stack = createStackNavigator();
 
 const MainStackNavigator = () => {
+  const { idToken } = useUserIsLogIn();
   const verticalAnimation = {
     gestureDirection: "vertical",
     cardStyleInterpolator: ({ current, layouts }) => {
@@ -33,8 +35,6 @@ const MainStackNavigator = () => {
     },
   };
 
-  //auth flow
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const authScreens = {
     Intro,
     SignIn,
@@ -50,16 +50,16 @@ const MainStackNavigator = () => {
   };
 
   return (
-    <Stack.Navigator headerMode={isLoggedIn ? "screen" : "none"}>
+    <Stack.Navigator headerMode={idToken ? "screen" : "none"}>
       {Object.entries({
-        ...(isLoggedIn ? userScreens : authScreens),
+        ...(idToken ? userScreens : authScreens),
       }).map(([name, component], i) => (
         <Stack.Screen
           key={i}
           name={name}
           component={component}
           options={
-            isLoggedIn
+            idToken
               ? {
                   header: (navigation) => <Header navigation={navigation} />,
                 }

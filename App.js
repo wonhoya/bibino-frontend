@@ -9,6 +9,7 @@ import {
   Rubik_700Bold,
 } from "@expo-google-fonts/rubik";
 
+import "./config/auth";
 import { store, persistedStore } from "./features/store";
 
 import SplashAnimation from "./screens/SplashAnimation/SplashAnimation";
@@ -23,6 +24,7 @@ export default function App() {
     Rubik_500Medium,
     Rubik_700Bold,
   });
+
   if (!fontsLoaded) {
     return <AppLoading />;
   }

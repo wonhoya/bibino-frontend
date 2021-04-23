@@ -28,6 +28,7 @@
     },
     "web": {
       "favicon": "./assets/appIcon.png"
-    }
+    },
+    "scheme": "bibino"
   }
 }
