@@ -71,23 +71,11 @@ const Photo = ({ navigation }) => {
         { base64: photobase64 }
       );
 
-      // const response = await fetch("http://192.168.0.54:3000/api/beers/scan", {
-      //   method: "POST",
-      //   headers: {
-      //     Accept: "application/json",
-      //     "Content-Type": "application/json",
-      //   },
-      // body: JSON.stringify({
-      //   base64: photobase64
-      // }),
-      // });
-
       if (!response.ok) {
         return navigation.navigate("Failure");
       }
 
       const result = await response.json();
-      console.log("result", result);
       setIsParseStarted(false);
 
       if (result.status === "Analyze Success") {
@@ -100,7 +88,7 @@ const Photo = ({ navigation }) => {
     }
   };
 
-  if (hasPermission === false) {
+  if (hasPermission === false || hasPermission === null) {
     //일단 Configuration 으로 보냄.
     return <Configuration />;
   }
