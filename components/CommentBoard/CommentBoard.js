@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, FlatList } from "react-native";
+import { View, Text } from "react-native";
 
 import styles from "./styles";
 
-import CommentCard from "./CommentCard/CommentCard";
+import CommentCard from "../shared/CommentCard/CommentCard";
 
 const CommentBoard = () => {
   const [users, setUsers] = useState([]);
@@ -21,8 +21,10 @@ const CommentBoard = () => {
     <View style={styles.container}>
       {isLoading ? <Text>Loading...</Text> : null}
       {!isLoading && users.length
-        ? users.map((user) => {
-            return <CommentCard user={user} key={user.id} />;
+        ? users.map((user, index) => {
+            if (index < 5) {
+              return <CommentCard user={user} key={user.id} />;
+            }
           })
         : null}
       {!isLoading && !users.length ? <Text>Leave first comment!</Text> : null}

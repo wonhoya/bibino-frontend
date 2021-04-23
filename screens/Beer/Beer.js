@@ -72,7 +72,7 @@ const Beer = ({ navigation }) => {
         <SectionDivider direction="right" text="Recommendation" />
         <RecommendationBoardContainer />
         <SectionDivider direction="left" text="Comments" />
-        <CommentBoardContainer />
+        <CommentBoardContainer navigation={navigation} />
       </View>
 
       <View style={[styles.buttonContainer, styles.handleButtonY(offsetY)]}>
@@ -81,7 +81,6 @@ const Beer = ({ navigation }) => {
           color={PRIMARY_ORANGE}
           showBackground={false}
           onPressItem={(name) => {
-            console.log(`selected button: ${name}`);
             if (name === "reviewButton") {
               setModalVisible(true);
             }

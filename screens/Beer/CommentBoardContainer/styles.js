@@ -21,9 +21,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   commentContainer: {
+    alignItems: "center",
     width: windowWidth * 0.8,
     marginBottom: 10,
-    alignItems: "flex-end",
   },
   description: {
     fontFamily: RUBIK_BOLD,

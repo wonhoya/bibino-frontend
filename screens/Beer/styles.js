@@ -20,16 +20,14 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     position: "absolute",
-    width: 200,
-    height: 200,
-    left: windowWidth / 2.2,
+    left: windowWidth / 1.02,
     zIndex: 1,
     backgroundColor: "transparent",
   },
 });
 
 styles.handleButtonY = (y) => {
-  return { top: windowHeight / 1.7 + y };
+  return { top: windowHeight / 1.2 + y };
 };
 
 export default styles;
