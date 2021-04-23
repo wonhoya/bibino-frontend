@@ -13,7 +13,7 @@ const initialState = {
 };
 
 const fetchTodayBeers = createAsyncThunk(
-  "todayBeers/todayBeersFetched",
+  "todayBeers/fetchTodayBeers",
   async () => {
     const response = await fetch(`${serverUrl}/api/beers`);
     const beers = await response.json();

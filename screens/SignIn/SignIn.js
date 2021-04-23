@@ -10,12 +10,10 @@ import {
 } from "../../assets/svgs/icon";
 import ASYNC_STATE from "../../constants/asyncState";
 import useGoogleSignIn from "../../hooks/useGoogleSignIn";
-
 import Loading from "../Loading/Loading";
 
 const SignIn = () => {
   const { userFetchStatus, promptAsync } = useGoogleSignIn();
-
   const isLoading = userFetchStatus === ASYNC_STATE.LOADING;
 
   const handleSignInWithGoogle = () => {

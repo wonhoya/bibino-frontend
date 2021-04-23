@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { View } from "react-native";
 import { Camera } from "expo-camera";
-
 import { BACKEND_URL_FOR_DEV } from "@env";
+
 import styles from "./styles";
 import Configuration from "../Configuration/Configuration";
 import PhotoTabBar from "../../components/PhotoTabBar/PhotoTabBar";

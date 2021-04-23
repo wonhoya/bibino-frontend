@@ -29,9 +29,7 @@ const useGoogleSignIn = () => {
             id_token
           );
           const auth = await firebase.auth().signInWithCredential(credential);
-
           const idToken = await auth.user.getIdToken();
-
           const resultAction = await dispatch(signInUser(idToken));
           unwrapResult(resultAction);
         } catch (err) {

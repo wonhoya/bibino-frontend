@@ -18,6 +18,7 @@ const AppNavigation = () => {
         const resultAction = await dispatch(getIdToken());
         unwrapResult(resultAction);
       } catch (err) {
+        // 에러 핸들링 추가해야함.
       } finally {
         setIsLoading(false);
         dispatch(tokenStateSet(ASYNC_STATE.IDLE));
