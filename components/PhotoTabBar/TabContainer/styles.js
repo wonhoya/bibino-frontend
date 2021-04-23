@@ -1,12 +1,7 @@
 import { StyleSheet } from "react-native";
 
-import {
-  PRIMARY_WHITE,
-  PRIMARY_DARK_GREY,
-  PRIMARY_LIGHT_GREY,
-  PRIMARY_BLACK,
-} from "../../../constants/colors";
-import { RUBIK_REGULAR, RUBIK_BOLD } from "../../../constants/font";
+import { PRIMARY_WHITE } from "../../../constants/colors";
+import { RUBIK_REGULAR } from "../../../constants/font";
 
 const styles = StyleSheet.create({
   tabName: {

@@ -1,10 +1,19 @@
 import React from "react";
-import { TouchableOpacity, Text, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 
-const MainButtonContainer = ({ animation, style, handleButtonPress, icon }) => {
+const MainButtonContainer = ({
+  animationStyle,
+  iconStyle,
+  handleButtonPress,
+  icon,
+}) => {
   return (
-    <TouchableOpacity style={animation} onPress={handleButtonPress}>
-      <View style={style}>{icon}</View>
+    <TouchableOpacity
+      style={animationStyle}
+      onPress={handleButtonPress}
+      activeOpacity={1}
+    >
+      <View style={iconStyle}>{icon}</View>
     </TouchableOpacity>
   );
 };

@@ -14,7 +14,7 @@ const Failure = ({ navigation }) => {
     return () => {
       clearTimeout(id);
     };
-  }, []);
+  }, [navigation]);
 
   return (
     <>

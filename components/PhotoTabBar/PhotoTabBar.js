@@ -4,7 +4,7 @@ import { AntDesign } from "@expo/vector-icons";
 
 import styles from "./styles";
 import MainButtonContainer from "./MainButtonContainer/MainButtonContainer";
-import ButtonContainer from "./ButtonContainer/ButtonContainer";
+import TabContainer from "./TabContainer/TabContainer";
 import {
   PRIMARY_ORANGE,
   PRIMARY_WHITE,
@@ -45,38 +45,38 @@ const PhotoTabBar = ({
     return () => {
       clearTimeout(id);
     };
-  }, []);
+  }, [animationValue, positionValue, setIsAnimationFinished]);
 
   return (
     <Animated.View style={{ ...styles.tabsContainer, height: animationValue }}>
-      <ButtonContainer
+      <TabContainer
         handleButtonPress={() => console.log("Search Pressed")}
         icon={<AntDesign name="search1" size={30} color={PRIMARY_WHITE} />}
         text="Search"
       />
       {isPreview ? (
         <MainButtonContainer
-          animation={[
+          animationStyle={[
             styles.button,
             { transform: [{ translateY: positionValue }] },
           ]}
           handleButtonPress={handleRetake}
-          style={[styles.tab, styles.cameraContainer]}
+          iconStyle={[styles.tab, styles.cameraContainer]}
           icon={<AntDesign name="reload1" size={50} color={PRIMARY_ORANGE} />}
         />
       ) : (
         <MainButtonContainer
-          animation={[
+          animationStyle={[
             styles.button,
             { transform: [{ translateY: positionValue }] },
           ]}
           handleButtonPress={handleTakePicture}
-          style={[styles.tab, styles.cameraContainer]}
+          iconStyle={[styles.tab, styles.cameraContainer]}
           icon={<AntDesign name="camera" size={60} color={POINT_DARK_ORANGE} />}
         />
       )}
       {isPreview ? (
-        <ButtonContainer
+        <TabContainer
           handleButtonPress={handleUse}
           icon={
             <AntDesign name="checkcircleo" size={32} color={PRIMARY_WHITE} />
@@ -84,7 +84,7 @@ const PhotoTabBar = ({
           text="Use"
         />
       ) : (
-        <ButtonContainer
+        <TabContainer
           handleButtonPress={() => console.log("Profile Pressed")}
           icon={<AntDesign name="user" size={32} color={PRIMARY_WHITE} />}
           text="Profile"

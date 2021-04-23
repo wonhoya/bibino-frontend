@@ -3,7 +3,7 @@ import { TouchableOpacity, Text, View } from "react-native";
 
 import styles from "./styles";
 
-const ButtonContainer = ({ style, handleButtonPress, text, icon }) => {
+const TabContainer = ({ handleButtonPress, text, icon }) => {
   return (
     <TouchableOpacity style={styles.tab} onPress={handleButtonPress}>
       {icon}
@@ -12,4 +12,4 @@ const ButtonContainer = ({ style, handleButtonPress, text, icon }) => {
   );
 };
 
-export default ButtonContainer;
+export default TabContainer;
