@@ -54,21 +54,27 @@ const Intro = () => {
           }}
         >
           <View style={styles.windowContainer}>
-            <ImageContainer />
+            <ImageContainer
+              source={require("../../assets/pngs/introImage1.png")}
+            />
             <DescriptionContainer
               title={INTRO_FIRST_TITLE_TEXT}
               description={INTRO_FIRST_TITLE_DESCRIPTION}
             />
           </View>
           <View style={styles.windowContainer}>
-            <ImageContainer />
+            <ImageContainer
+              source={require("../../assets/pngs/introImage2.png")}
+            />
             <DescriptionContainer
               title={INTRO_SECOND_TITLE_TEXT}
               description={INTRO_SECOND_TITLE_DESCRIPTION}
             />
           </View>
           <View style={styles.windowContainer}>
-            <ImageContainer />
+            <ImageContainer
+              source={require("../../assets/pngs/introImage1.png")}
+            />
             <DescriptionContainer
               title={INTRO_THIRD_TITLE_TEXT}
               description={INTRO_THIRD_TITLE_DESCRIPTION}

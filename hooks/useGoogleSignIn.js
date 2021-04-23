@@ -36,9 +36,9 @@ const useGoogleSignIn = () => {
           unwrapResult(resultAction);
         } catch (err) {
           // 에러 페이지로 navigate 할 수 있게나, 에러 페이지 모달로 뜰 수 있게.
-          console.log(err);
         } finally {
           isSigningIn = false;
+          dispatch(userStateSet(ASYNC_STATE.IDLE));
         }
       };
 

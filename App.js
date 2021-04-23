@@ -13,6 +13,8 @@ import "./config/auth";
 import { store, persistedStore } from "./features/store";
 
 import SplashAnimation from "./screens/SplashAnimation/SplashAnimation";
+import Intro from "./screens/Intro/Intro";
+import Photo from "./screens/Photo/Photo";
 import AppNavigation from "./navigations/AppNavigation";
 
 export default function App() {

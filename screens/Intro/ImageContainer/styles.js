@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  imageContainer: {
+  container: {
     flex: 4,
     justifyContent: "center",
     alignItems: "center",

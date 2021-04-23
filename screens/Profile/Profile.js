@@ -59,7 +59,7 @@ const data = [
 
 const numColumns = 3;
 
-const Profile = ({ navigation: navigation }) => {
+const Profile = ({ navigation }) => {
   const renderItem = ({ item }) => {
     if (item.empty) {
       return <View style={[styles.photo, styles.invisiblePhoto]} />;
@@ -68,13 +68,9 @@ const Profile = ({ navigation: navigation }) => {
     return (
       <TouchableOpacity
         style={styles.photo}
-        onPress={() =>
-          navigation.navigate("Beer", {
-            params: {
-              /*나중에 파라미터 삽입 */
-            },
-          })
-        }
+        onPress={() => {
+          navigation.navigate("Beer");
+        }}
       >
         <Image
           source={item.imagePath}
@@ -104,6 +100,7 @@ const Profile = ({ navigation: navigation }) => {
               renderItem={renderItem}
               keyExtractor={(item) => item.id}
               numColumns={numColumns}
+              showsVerticalScrollIndicator={false}
             />
           </View>
         </View>

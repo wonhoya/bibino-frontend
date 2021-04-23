@@ -36,8 +36,6 @@ const signInUser = createAsyncThunk(
       };
     } catch (err) {
       console.error("Faild get user data: ", err);
-    } finally {
-      dispatch(userStateSet(ASYNC_STATE.IDLE));
     }
   }
 );
