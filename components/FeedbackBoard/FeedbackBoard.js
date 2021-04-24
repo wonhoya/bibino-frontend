@@ -10,7 +10,7 @@ const FeedbackBoard = ({ setShouldShowFeedBack }) => {
     }, 1500);
 
     return () => clearTimeout(id);
-  }, []);
+  }, [setShouldShowFeedBack]);
 
   return <Text style={styles.description}>Thank you for review!</Text>;
 };

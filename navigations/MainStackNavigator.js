@@ -52,18 +52,16 @@ const MainStackNavigator = () => {
   };
 
   return (
-    // <Stack.Navigator headerMode={idToken ? "screen" : "none"}>
-    <Stack.Navigator headerMode={!idToken ? "screen" : "none"}>
+    <Stack.Navigator headerMode={idToken ? "screen" : "none"}>
       {Object.entries({
-        ...(!idToken ? userScreens : authScreens),
-        // ...(idToken ? authScreens : userScreens),
+        ...(idToken ? userScreens : authScreens),
       }).map(([name, component], i) => (
         <Stack.Screen
           key={i}
           name={name}
           component={component}
           options={
-            !idToken
+            idToken
               ? {
                   header: (navigation) => <Header navigation={navigation} />,
                 }
