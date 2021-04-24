@@ -1,17 +1,9 @@
-import React, { useRef, useState } from "react";
-import {
-  View,
-  ScrollView,
-  Image,
-  Text,
-  TouchableOpacity,
-  Animated,
-} from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { View, Animated, Easing } from "react-native";
 import { FloatingAction } from "react-native-floating-action";
-import { AntDesign } from "@expo/vector-icons";
 
 import styles from "./styles";
-import { PRIMARY_ORANGE, PRIMARY_BLACK } from "../../constants/colors";
+import { PRIMARY_ORANGE } from "../../constants/colors";
 
 import TitleContainer from "./TitleContainer/TitleContainer";
 import RatingBoardContainer from "./RatingBoardContainer/RatingBoardContainer";
@@ -21,25 +13,22 @@ import CommentBoardContainer from "./CommentBoardContainer/CommentBoardContainer
 import RecommendationBoardContainer from "./RecommendationBoardContainer/RecommendationBoardContainer";
 import ModalContainer from "../../components/ModalContainer/ModalContainer";
 import SectionDivider from "./SectionDivider/SectionDivider";
-
-const actions = [
-  {
-    icon: <AntDesign name="form" size={19} color={PRIMARY_BLACK} />,
-    name: "reviewButton",
-    position: 2,
-    color: PRIMARY_ORANGE,
-  },
-  {
-    icon: <AntDesign name="sharealt" size={20} color={PRIMARY_BLACK} />,
-    name: "shareButton",
-    position: 1,
-    color: PRIMARY_ORANGE,
-  },
-];
+import floatingButtons from "../../constants/floatingButtons";
 
 const Beer = ({ navigation }) => {
+  const moveY = useRef(new Animated.Value(100)).current;
   const scrollY = useRef(new Animated.Value(0)).current;
   const [isModalVisible, setModalVisible] = useState(false);
+
+  useEffect(() => {
+    Animated.timing(moveY, {
+      toValue: 0,
+      duration: 500,
+      easing: Easing.inOut(Easing.quad),
+      delay: 100,
+      useNativeDriver: false,
+    }).start();
+  }, [moveY]);
 
   const handleOnScroll = (event) => {
     console.log(event.nativeEvent.contentOffset.y);
@@ -70,20 +59,22 @@ const Beer = ({ navigation }) => {
         <RatingBoardContainer rating={4} />
         <TagBoardContainer />
         <SectionDivider direction="right" text="Description" />
-        <Text style={styles.description}>
+        <Animated.Text style={{ ...styles.description, top: moveY }}>
           2020 bottle shared by a friend. Darkest brown pour with a medium light
           brown head. Aroma of malt, maple, chocolate, bourbon, vanilla and some
           coffee. Malt and vanilla flavor giving way to coconut(!), maple and
           chocolate before a sweet bourbon and maple finish. Just a tad less
           sweetness and it would have been perfect, but definitely deserving of
           the hype.
-        </Text>
+        </Animated.Text>
         <SectionDivider direction="left" text="Characteristic" />
         <Animated.View style={styles.handlePositionX(scrollY)}>
           <CharacteristicContainer />
         </Animated.View>
         <SectionDivider direction="right" text="Recommendation" />
-        <RecommendationBoardContainer />
+        <Animated.View style={styles.handleOpacity(scrollY)}>
+          <RecommendationBoardContainer />
+        </Animated.View>
         <SectionDivider direction="left" text="Comments" />
         <CommentBoardContainer navigation={navigation} />
       </View>
@@ -92,7 +83,7 @@ const Beer = ({ navigation }) => {
         style={[styles.buttonContainer, styles.handleButtonY(scrollY)]}
       >
         <FloatingAction
-          actions={actions}
+          actions={floatingButtons}
           color={PRIMARY_ORANGE}
           showBackground={false}
           onPressItem={(name) => {

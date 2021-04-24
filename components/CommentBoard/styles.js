@@ -1,5 +1,4 @@
 import { StyleSheet, Dimensions } from "react-native";
-import { PRIMARY_ORAGNE } from "../../constants/colors";
 
 const { width: windowWidth } = Dimensions.get("window");
 

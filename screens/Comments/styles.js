@@ -1,20 +1,16 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet } from "react-native";
 
 import { PRIMARY_ORANGE } from "../../constants/colors";
-import { RUBIK_BOLD, RUBIK_MEDIUM } from "../../constants/font";
+import { RUBIK_BOLD } from "../../constants/font";
 import { COMMENTS_RATING_FONT_SIZE } from "../../constants/size";
-
-const { width: windowWidth } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 20,
     borderRadius: 10,
-    // alignItems: "center",
     backgroundColor: PRIMARY_ORANGE,
   },
-
   descriptionContainer: {
     flex: 1,
     flexDirection: "row",
@@ -22,7 +18,6 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     marginBottom: 10,
   },
-
   commentsContainer: {
     flex: 9,
     alignItems: "center",

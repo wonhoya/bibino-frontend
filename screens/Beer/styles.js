@@ -1,7 +1,6 @@
 import { StyleSheet, Dimensions } from "react-native";
-import { interpolate } from "react-native-reanimated";
 
-import { PRIMARY_ORANGE, PRIMARY_BLACK } from "../../constants/colors";
+import { PRIMARY_BLACK } from "../../constants/colors";
 import { RUBIK_REGULAR } from "../../constants/font";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
@@ -44,15 +43,27 @@ styles.handleButtonY = (scrollY) => {
   return { transform: [{ translateY: scrollY }] };
 };
 
+styles.handleOpacity = (scrollY) => {
+  return {
+    opacity: scrollY.interpolate({
+      inputRange: [
+        windowHeight * 0.9,
+        windowHeight,
+        windowHeight * 1.1,
+        windowHeight * 1.2,
+        windowHeight * 1.3,
+      ],
+      outputRange: [0, 0.1, 0.3, 0.5, 1],
+    }),
+  };
+};
+
 styles.handlePositionX = (scrollY) => {
-  console.log(scrollY);
-  console.log("windowHeight", windowHeight);
-  console.log("windowWidth", windowWidth);
   return {
     transform: [
       {
         translateX: scrollY.interpolate({
-          inputRange: [0, windowHeight * 0.8, windowHeight * 0.9],
+          inputRange: [0, windowHeight * 0.8, windowHeight],
           outputRange: [
             windowWidth,
             -windowWidth * 0.245,
