@@ -97,6 +97,7 @@ const Beer = ({ navigation }) => {
       <ModalContainer
         isModalVisible={isModalVisible}
         handleOnReact={closeModal}
+        navigation={navigation}
       />
     </Animated.ScrollView>
   );

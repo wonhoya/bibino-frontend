@@ -5,11 +5,7 @@ import Slider from "@react-native-community/slider";
 import getStyles from "./styles";
 import { PRIMARY_ORAGNE } from "../../../constants/colors";
 
-const CharacteristicBoard = ({
-  titles = { title: "Hello", leftSubTitle: "Left", rightSubTitle: "right" },
-  rating = 3,
-  options = { size: 500, color: PRIMARY_ORAGNE, isDisabled: true },
-}) => {
+const CharacteristicBoard = ({ rating, titles, options, setReview }) => {
   const [rate, setRate] = useState(rating);
 
   const { title, leftSubTitle, rightSubTitle } = titles;
