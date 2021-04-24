@@ -19,11 +19,16 @@ const Main = () => {
   });
   const user = useSelector((state) => state.user);
 
-  const isTodayBeerDataOutdated =
-    new Date().toDateString() !==
-    new Date(todayBeersData.timestamp).toDateString();
+  const nowDate = new Date().toDateString();
+  const beerUpdateDate = new Date(todayBeersData.timestamp).toDateString();
+
+  const isTodayBeerDataOutdated = (today, compareDate) => {
+    return today !== compareDate;
+  };
+
   const hasTodayBeersData = !!todayBeersData.beers.length;
-  const shouldUpdateTodayBeers = isTodayBeerDataOutdated || !hasTodayBeersData;
+  const shouldUpdateTodayBeers =
+    isTodayBeerDataOutdated(nowDate, beerUpdateDate) || !hasTodayBeersData;
 
   useEffect(() => {
     if (!shouldUpdateTodayBeers) {
