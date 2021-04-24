@@ -1,9 +1,8 @@
 import React from "react";
-import { View, FlatList, Text } from "react-native";
+import { View, FlatList } from "react-native";
 
 import styles from "./styles";
 import SearchCard from "./SearchCard/SearchCard";
-import Loading from "../../screens/Loading/Loading";
 import {
   PRIMARY_DARK_GREY,
   PRIMARY_ORANGE,
@@ -16,7 +15,7 @@ const SearchCardBoard = ({ beers }) => {
   //로직 조금 수정해줘야함
   const renderItem = ({ item, index }) => {
     let backgroundColor;
-    const colorCase = index % 3;
+    const colorCase = index % 4;
 
     switch (colorCase) {
       case 0:

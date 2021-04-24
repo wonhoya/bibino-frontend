@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
 
 const SearchCard = ({
-  beer: { name, imagePath, description },
+  beer: { id, name, imagePath, description },
   backgroundColor,
 }) => {
   const { navigate } = useNavigation();
@@ -16,7 +16,7 @@ const SearchCard = ({
       onPress={() =>
         navigate("Beer", {
           params: {
-            /*나중에 파라미터 삽입 */
+            id,
           },
         })
       }

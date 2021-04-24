@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { SafeAreaView, View, Text, TextInput } from "react-native";
 import { useSelector } from "react-redux";
 
-import styles from "./styles";
 import { SearchIcon } from "../../assets/svgs/icon";
 import { SEARCH_TITLE_TEXT } from "../../constants/text";
 import debouncedFetchSearchedBeers from "../../utils/debouncedFetchSearchedBeers";
+import { selectIdToken } from "../../features/tokenSlice";
+import styles from "./styles";
 import SearchCardBoard from "../../components/SearchCardBoard/SearchCardBoard";
 
 //mockup
@@ -13,7 +14,7 @@ import SearchCardBoard from "../../components/SearchCardBoard/SearchCardBoard";
 //onSelect <= interaction func
 
 const Search = () => {
-  const idToken = useSelector((state) => state.token.idToken);
+  const idToken = useSelector(selectIdToken);
   const [searchText, setSearchText] = useState("");
   const [searchedBeers, setSearchedBeers] = useState([]);
 
