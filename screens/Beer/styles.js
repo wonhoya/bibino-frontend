@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from "react-native";
+import { interpolate } from "react-native-reanimated";
 
 import { PRIMARY_ORANGE, PRIMARY_BLACK } from "../../constants/colors";
 import { RUBIK_REGULAR } from "../../constants/font";
@@ -23,27 +24,57 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     position: "absolute",
-    left: windowWidth / 1.02,
+    left: windowWidth / 1,
+    top: windowHeight / 1.2,
     zIndex: 1,
-    backgroundColor: "transparent",
+    backgroundColor: "green",
   },
   bannerContainer: {
     marginTop: -1000,
     paddingTop: 1000,
     overflow: "hidden",
   },
+  opacity: {
+    width: "50%",
+    opacity: 0.5,
+  },
 });
 
-styles.handleButtonY = (y) => {
-  return { top: windowHeight / 1.2 + y };
+styles.handleButtonY = (scrollY) => {
+  return { transform: [{ translateY: scrollY }] };
 };
 
-styles.handleImageY = (scrollA) => {
-  console.log(scrollA);
+styles.handlePositionX = (scrollY) => {
+  console.log(scrollY);
+  console.log("windowHeight", windowHeight);
+  console.log("windowWidth", windowWidth);
   return {
     transform: [
       {
-        translateY: scrollA,
+        translateX: scrollY.interpolate({
+          inputRange: [0, windowHeight * 0.8, windowHeight * 0.9],
+          outputRange: [
+            windowWidth,
+            -windowWidth * 0.245,
+            -windowWidth * 0.245,
+          ],
+        }),
+      },
+    ],
+  };
+};
+
+styles.handleImageY = (scrollY) => {
+  return {
+    transform: [
+      {
+        translateY: scrollY,
+      },
+      {
+        scale: scrollY.interpolate({
+          inputRange: [0, windowWidth],
+          outputRange: [1.2, 1],
+        }),
       },
     ],
   };

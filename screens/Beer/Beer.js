@@ -38,22 +38,14 @@ const actions = [
 ];
 
 const Beer = ({ navigation }) => {
-  const scrollA = useRef(new Animated.Value(0)).current;
-
-  // const [offsetY, setOffsetY] = useState(0);
+  const scrollY = useRef(new Animated.Value(0)).current;
   const [isModalVisible, setModalVisible] = useState(false);
 
   const handleOnScroll = (event) => {
-    // const { y } = event.nativeEvent.contentOffset;
-    // setOffsetY(y);
-
-    Animated.event(
-      [{ nativeEvent: { contentOffset: { y: scrollA } } }],
-      {
-        useNativeDriver: false,
-      },
-      { listener: (event) => console.log(event) }
-    )(event);
+    console.log(event.nativeEvent.contentOffset.y);
+    Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], {
+      useNativeDriver: false,
+    })(event);
   };
 
   const closeModal = () => {
@@ -70,8 +62,8 @@ const Beer = ({ navigation }) => {
       <View style={styles.container}>
         <View style={styles.bannerContainer}>
           <Animated.Image
-            style={[styles.image, styles.handleImageY(scrollA)]}
-            source={require("../../assets/pngs/beerSample8.png")}
+            style={[styles.image, styles.handleImageY(scrollY)]}
+            source={require("../../assets/pngs/beerSample1.png")}
           />
         </View>
         <TitleContainer title="RAEA BEER" />
@@ -87,14 +79,18 @@ const Beer = ({ navigation }) => {
           the hype.
         </Text>
         <SectionDivider direction="left" text="Characteristic" />
-        <CharacteristicContainer />
+        <Animated.View style={styles.handlePositionX(scrollY)}>
+          <CharacteristicContainer />
+        </Animated.View>
         <SectionDivider direction="right" text="Recommendation" />
         <RecommendationBoardContainer />
         <SectionDivider direction="left" text="Comments" />
         <CommentBoardContainer navigation={navigation} />
       </View>
 
-      {/* <View style={[styles.buttonContainer, styles.handleButtonY(offsetY)]}>
+      <Animated.View
+        style={[styles.buttonContainer, styles.handleButtonY(scrollY)]}
+      >
         <FloatingAction
           actions={actions}
           color={PRIMARY_ORANGE}
@@ -105,7 +101,8 @@ const Beer = ({ navigation }) => {
             }
           }}
         />
-      </View> */}
+      </Animated.View>
+
       <ModalContainer
         isModalVisible={isModalVisible}
         handleOnReact={closeModal}
