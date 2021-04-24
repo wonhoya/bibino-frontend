@@ -8,30 +8,29 @@ import RatingBoard from "../shared/RatingBoard/RatingBoard";
 import CharacteristicContainer from "./CharacteristicContainer/CharacteristicContainer";
 import Button from "../shared/Button/Button";
 
-const ModalContainer = ({ navigation, isModalVisible, handleOnReact }) => {
-  const [isFetching, setIsFetching] = useState("Submit");
-
-  //리덕스에서 비어 평가한 값을 가져와야함
+const ModalContainer = ({
+  navigation,
+  isModalVisible,
+  closeModal,
+  setShouldShowFeedBack,
+}) => {
+  const [comment, setComment] = useState("");
   const [review, setReview] = useState({
-    rating: 2,
-    aroma: 3,
-    body: 3,
-    flavor: 3,
+    rating: 0,
+    aroma: 5,
+    body: 5,
+    flavor: 5,
   });
 
   const handleSubmit = async () => {
     try {
-      setIsFetching("Loading...");
-
-      const response = await fetch(`${BACKEND_URL_FOR_DEV}/beers/scan`, {
+      const response = await fetch(`${BACKEND_URL_FOR_DEV}/users/123/review`, {
         method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          review,
-        }),
+        body: JSON.stringify({ review, comment }),
       });
 
       if (!response.ok) {
@@ -40,8 +39,8 @@ const ModalContainer = ({ navigation, isModalVisible, handleOnReact }) => {
 
       const result = await response.json();
 
-      //모달창 끄기. 이름 바꿔야될듯.
-      handleOnReact();
+      closeModal();
+      setShouldShowFeedBack(true);
     } catch (error) {
       navigation.navigate("Failure");
     }
@@ -53,22 +52,23 @@ const ModalContainer = ({ navigation, isModalVisible, handleOnReact }) => {
         style={styles.container}
         isVisible={isModalVisible}
         avoidKeyboard={true}
-        onBackdropPress={handleOnReact}
-        onSwipeComplete={handleOnReact}
+        onBackdropPress={closeModal}
+        onSwipeComplete={closeModal}
         swipeDirection="down"
       >
         <View style={styles.modalContainer}>
           <View style={styles.line} />
           <Text style={styles.title}>Leave your review!</Text>
-          <RatingBoard mode="dynamic" review={review} />
+          <RatingBoard mode="dynamic" review={review} setReview={setReview} />
           <CharacteristicContainer review={review} setReview={setReview} />
           <TextInput
             autoCapitalize="none"
             autoCorrect={false}
             style={styles.input}
             placeholder="How was it? Feel free to leave your thought!"
+            onChangeText={(value) => setComment(value)}
           />
-          <Button mode="primary" text={isFetching} onPress={handleSubmit} />
+          <Button mode="primary" text="Submit" onPress={handleSubmit} />
         </View>
       </Modal>
     </View>

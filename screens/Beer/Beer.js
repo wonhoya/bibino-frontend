@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { View, Animated, Easing } from "react-native";
+import { View, Animated, Easing, Text } from "react-native";
 import { FloatingAction } from "react-native-floating-action";
 
 import styles from "./styles";
@@ -14,11 +14,13 @@ import RecommendationBoardContainer from "./RecommendationBoardContainer/Recomme
 import ModalContainer from "../../components/ModalContainer/ModalContainer";
 import SectionDivider from "./SectionDivider/SectionDivider";
 import floatingButtons from "../../constants/floatingButtons";
+import FeedbackBoard from "../../components/FeedbackBoard/FeedbackBoard";
 
 const Beer = ({ navigation }) => {
   const moveY = useRef(new Animated.Value(100)).current;
   const scrollY = useRef(new Animated.Value(0)).current;
   const [isModalVisible, setModalVisible] = useState(false);
+  const [shouldShowFeedBack, setShouldShowFeedBack] = useState(false);
 
   useEffect(() => {
     Animated.timing(moveY, {
@@ -96,9 +98,15 @@ const Beer = ({ navigation }) => {
 
       <ModalContainer
         isModalVisible={isModalVisible}
-        handleOnReact={closeModal}
+        closeModal={closeModal}
         navigation={navigation}
+        setShouldShowFeedBack={setShouldShowFeedBack}
       />
+      {shouldShowFeedBack && (
+        <Animated.View style={{ ...styles.feedbackContainer, top: scrollY }}>
+          <FeedbackBoard setShouldShowFeedBack={setShouldShowFeedBack} />
+        </Animated.View>
+      )}
     </Animated.ScrollView>
   );
 };

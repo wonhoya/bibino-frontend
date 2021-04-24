@@ -3,15 +3,19 @@ import { View, Text } from "react-native";
 import Slider from "@react-native-community/slider";
 
 import getStyles from "./styles";
-import { PRIMARY_ORAGNE } from "../../../constants/colors";
+import { PRIMARY_LIGHT_GREY } from "../../../constants/colors";
 
-const CharacteristicBoard = ({ rating, titles, options, setReview }) => {
-  const [rate, setRate] = useState(rating);
-
+const CharacteristicBoard = ({
+  rating,
+  titles,
+  options,
+  setReview,
+  review,
+}) => {
   const { title, leftSubTitle, rightSubTitle } = titles;
-  const { size, color, isDisabled } = options;
+  const { size, color, isDisabled, isButtonActive } = options;
 
-  const styles = getStyles(size, color, rate);
+  const styles = getStyles(size, color, rating);
 
   return (
     <View style={styles.container}>
@@ -27,11 +31,14 @@ const CharacteristicBoard = ({ rating, titles, options, setReview }) => {
           style={styles.sliderCore}
           minimumValue={0}
           maximumValue={10}
-          value={rate}
-          onValueChange={(value) => setRate(value)}
+          value={rating}
+          onValueChange={(value) => {
+            //어떻게 처리해야할지.. trade off 고려, useState를 4개 만들것이냐 말것이냐
+            setReview({ ...review, [title.toLowerCase()]: value });
+          }}
           maximumTrackTintColor="transparent"
           minimumTrackTintColor="transparent"
-          thumbTintColor="transparent"
+          thumbTintColor={isButtonActive ? PRIMARY_LIGHT_GREY : "transparent"}
           disabled={isDisabled ? true : false}
         />
       </View>

@@ -22,11 +22,13 @@ const CharacteristicContainer = ({ review, setReview }) => {
         <CharacteristicBoard
           titles={CHRACTERISTIC_TITLES.aroma}
           rating={aroma}
+          review={review}
           setReview={setReview}
           options={{
             size: chracterSize,
             color: PRIMARY_ORANGE,
             isDisabled: false,
+            isButtonActive: true,
           }}
         />
       </View>
@@ -34,11 +36,13 @@ const CharacteristicContainer = ({ review, setReview }) => {
         <CharacteristicBoard
           titles={CHRACTERISTIC_TITLES.body}
           rating={body}
+          review={review}
           setReview={setReview}
           options={{
             size: chracterSize,
             color: PRIMARY_BLACK,
             isDisabled: false,
+            isButtonActive: true,
           }}
         />
       </View>
@@ -46,11 +50,13 @@ const CharacteristicContainer = ({ review, setReview }) => {
         <CharacteristicBoard
           titles={CHRACTERISTIC_TITLES.flavor}
           rating={flavor}
+          review={review}
           setReview={setReview}
           options={{
             size: chracterSize,
             color: PRIMARY_YELLOW,
             isDisabled: false,
+            isButtonActive: true,
           }}
         />
       </View>

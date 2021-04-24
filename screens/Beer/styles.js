@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions } from "react-native";
 
-import { PRIMARY_BLACK } from "../../constants/colors";
+import { PRIMARY_BLACK, PRIMARY_ORANGE } from "../../constants/colors";
 import { RUBIK_REGULAR } from "../../constants/font";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
@@ -8,6 +8,23 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 const styles = StyleSheet.create({
   scrollContainer: { flex: 1 },
   container: { alignItems: "center" },
+  buttonContainer: {
+    position: "absolute",
+    left: windowWidth / 1,
+    top: windowHeight / 1.2,
+    zIndex: 1,
+    backgroundColor: "green",
+  },
+  feedbackContainer: {
+    position: "absolute",
+    width: windowWidth * 0.6,
+    height: windowHeight / 15,
+    marginTop: 20,
+    backgroundColor: PRIMARY_ORANGE,
+    alignSelf: "center",
+    justifyContent: "center",
+    borderRadius: 10,
+  },
   image: {
     width: windowWidth,
     height: windowWidth / 1.1,
@@ -20,13 +37,6 @@ const styles = StyleSheet.create({
     textAlign: "justify",
     lineHeight: windowWidth / 16,
     color: PRIMARY_BLACK,
-  },
-  buttonContainer: {
-    position: "absolute",
-    left: windowWidth / 1,
-    top: windowHeight / 1.2,
-    zIndex: 1,
-    backgroundColor: "green",
   },
   bannerContainer: {
     marginTop: -1000,
