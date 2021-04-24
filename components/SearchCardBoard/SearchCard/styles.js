@@ -16,12 +16,14 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     flex: 1,
-    borderRadius: 8,
+    borderTopLeftRadius: 8,
+    borderBottomLeftRadius: 8,
   },
   image: {
     width: "100%",
     height: "100%",
-    borderRadius: 8,
+    borderTopLeftRadius: 8,
+    borderBottomLeftRadius: 8,
   },
   name: {
     color: PRIMARY_BLACK,
@@ -47,7 +49,8 @@ styles.textContainer = (backgroundColor) => {
     justifyContent: "space-around",
     paddingHorizontal: 17,
     paddingVertical: 10,
-    borderRadius: 8,
+    borderTopRightRadius: 8,
+    borderBottomRightRadius: 8,
     backgroundColor,
   };
 };

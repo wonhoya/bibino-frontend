@@ -50,4 +50,14 @@ const tokenSlice = createSlice({
 });
 
 const { tokenStateSet } = tokenSlice.actions;
-export { tokenSlice, saveIdToken, getIdToken, removeIdToken, tokenStateSet };
+
+const selectIdToken = (state) => state.token.idToken;
+
+export {
+  tokenSlice,
+  saveIdToken,
+  getIdToken,
+  removeIdToken,
+  tokenStateSet,
+  selectIdToken,
+};

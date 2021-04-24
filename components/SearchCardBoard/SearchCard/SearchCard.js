@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
 
 const SearchCard = ({
-  beer: { name, manufacturingDate, imageSource, description },
+  beer: { id, name, imagePath, description },
   backgroundColor,
 }) => {
   const { navigate } = useNavigation();
@@ -16,16 +16,19 @@ const SearchCard = ({
       onPress={() =>
         navigate("Beer", {
           params: {
-            /*나중에 파라미터 삽입 */
+            id,
           },
         })
       }
     >
       <View style={styles.imageContainer}>
-        <Image source={imageSource} style={styles.image} resizeMode="cover" />
+        <Image
+          source={{ uri: imagePath }}
+          style={styles.image}
+          resizeMode="cover"
+        />
       </View>
       <View style={styles.textContainer(backgroundColor)}>
-        <Text style={styles.date}>{manufacturingDate}</Text>
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.description}>{description}</Text>
       </View>
