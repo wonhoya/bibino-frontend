@@ -33,7 +33,6 @@ const Beer = ({ navigation }) => {
   }, [moveY]);
 
   const handleOnScroll = (event) => {
-    console.log(event.nativeEvent.contentOffset.y);
     Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], {
       useNativeDriver: false,
     })(event);
