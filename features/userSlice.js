@@ -47,6 +47,10 @@ const userSlice = createSlice({
     userStateSet: (state, action) => {
       state.status = action.payload;
     },
+    userDeleted: (state) => {
+      state = initialState;
+      return state;
+    },
   },
   extraReducers: {
     [signInUser.pending]: (state) => {
@@ -65,5 +69,5 @@ const userSlice = createSlice({
   },
 });
 
-const { userStateSet } = userSlice.actions;
-export { userSlice, signInUser, userStateSet };
+const { userStateSet, userDeleted } = userSlice.actions;
+export { userSlice, signInUser, userStateSet, userDeleted };

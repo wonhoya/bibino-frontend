@@ -34,6 +34,10 @@ const todayBeersSlice = createSlice({
       state.beers = beers;
       state.timestamp = timestamp;
     },
+    todayBeersDeleted: (state) => {
+      state = initialState;
+      return state;
+    },
   },
   extraReducers: {
     [fetchTodayBeers.pending]: (state) => {
@@ -52,5 +56,5 @@ const todayBeersSlice = createSlice({
   },
 });
 
-const { todayBeersAdded } = todayBeersSlice.actions;
-export { todayBeersSlice, fetchTodayBeers, todayBeersAdded };
+const { todayBeersAdded, todayBeersDeleted } = todayBeersSlice.actions;
+export { todayBeersSlice, fetchTodayBeers, todayBeersAdded, todayBeersDeleted };

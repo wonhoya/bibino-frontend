@@ -44,7 +44,8 @@ const tokenSlice = createSlice({
       state.idToken = action.payload;
     },
     [removeIdToken.fulfilled]: (state) => {
-      state.idToken = null;
+      state = initialState;
+      return state;
     },
   },
 });

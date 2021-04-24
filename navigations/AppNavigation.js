@@ -28,9 +28,9 @@ const AppNavigation = () => {
     loadToken();
   }, [dispatch]);
 
-  if (isLoading) {
-    return <Loading />;
-  }
+  // if (isLoading) {
+  //   return <Loading />;
+  // }
 
   return (
     <NavigationContainer>
