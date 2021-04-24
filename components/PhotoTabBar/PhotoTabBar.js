@@ -21,6 +21,8 @@ const PhotoTabBar = ({
   const animationValue = useRef(new Animated.Value(100)).current;
   const positionValue = useRef(new Animated.Value(0)).current;
 
+  console.log(animationValue);
+
   useEffect(() => {
     const startAnimation = () => {
       Animated.timing(animationValue, {

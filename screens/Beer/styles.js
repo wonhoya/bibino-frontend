@@ -8,7 +8,10 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 const styles = StyleSheet.create({
   scrollContainer: { flex: 1 },
   container: { alignItems: "center" },
-  image: { width: windowWidth, height: windowWidth / 1.1 },
+  image: {
+    width: windowWidth,
+    height: windowWidth / 1.1,
+  },
   description: {
     width: "100%",
     padding: windowWidth / 7,
@@ -24,10 +27,26 @@ const styles = StyleSheet.create({
     zIndex: 1,
     backgroundColor: "transparent",
   },
+  bannerContainer: {
+    marginTop: -1000,
+    paddingTop: 1000,
+    overflow: "hidden",
+  },
 });
 
 styles.handleButtonY = (y) => {
   return { top: windowHeight / 1.2 + y };
+};
+
+styles.handleImageY = (scrollA) => {
+  console.log(scrollA);
+  return {
+    transform: [
+      {
+        translateY: scrollA,
+      },
+    ],
+  };
 };
 
 export default styles;
