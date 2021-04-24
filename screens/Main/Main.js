@@ -19,21 +19,21 @@ const Main = () => {
   });
   const user = useSelector((state) => state.user);
 
-  const isStaleTodayBeersData =
+  const isTodayBeerDataOutdated =
     new Date().toDateString() !==
     new Date(todayBeersData.timestamp).toDateString();
   const hasTodayBeersData = !!todayBeersData.beers.length;
-  const hasFetchTodayBeers = isStaleTodayBeersData || !hasTodayBeersData;
+  const shouldUpdateTodayBeers = isTodayBeerDataOutdated || !hasTodayBeersData;
 
   useEffect(() => {
-    if (!hasFetchTodayBeers) {
+    if (!shouldUpdateTodayBeers) {
       return;
     }
 
     dispatch(fetchTodayBeers());
-  }, [hasFetchTodayBeers, dispatch]);
+  }, [shouldUpdateTodayBeers, dispatch]);
 
-  if (hasFetchTodayBeers) {
+  if (shouldUpdateTodayBeers) {
     return <Loading />;
   }
 
