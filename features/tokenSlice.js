@@ -2,6 +2,13 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as SecureStore from "expo-secure-store";
 
 import ASYNC_STATE from "../constants/asyncState";
+import showErrorInDevelopment from "../utils/showErrorInDevelopment";
+
+// userSlice와 todayBeersSlice의 액션 크리에이터를 임폴트 하면 module 간의 cycle이 생겨서 경고창이 뜹니다. 그래서 임의로 액션 크리에이터를 만들었습니다.
+const actionUserDeleted = () => ({
+  type: "user/userDeleted",
+});
+const actionTodayBeerDeleted = () => ({ type: "todayBeers/todayBeersDeleted" });
 
 const initialState = {
   idToken: null,
@@ -9,20 +16,50 @@ const initialState = {
   error: null,
 };
 
-const saveIdToken = createAsyncThunk("token/tokenSaved", async (idToken) => {
-  await SecureStore.setItemAsync("idToken", idToken);
-  return idToken;
-});
-
-const getIdToken = createAsyncThunk("token/tokenGotten", async () => {
-  const idToken = await SecureStore.getItemAsync("idToken");
-  return idToken;
-});
-
-const removeIdToken = createAsyncThunk("token/tokenRemoved", async () => {
-  await SecureStore.deleteItemAsync("idToken");
-  return;
-});
+const saveIdToken = createAsyncThunk(
+  "token/tokenSaved",
+  async (idToken, { dispatch }) => {
+    try {
+      await SecureStore.setItemAsync("idToken", idToken);
+      return idToken;
+    } catch (err) {
+      showErrorInDevelopment("failed id token save in the secure store ", err);
+      dispatch(actionUserDeleted());
+      dispatch(actionTodayBeerDeleted());
+      dispatch(removeIdToken());
+    }
+  }
+);
+const getIdToken = createAsyncThunk(
+  "token/tokenGotten",
+  async (_, { dispatch }) => {
+    try {
+      const idToken = await SecureStore.getItemAsync("idToken");
+      return idToken;
+    } catch (err) {
+      showErrorInDevelopment("failed id token load in the secure store ", err);
+      dispatch(actionUserDeleted());
+      dispatch(actionTodayBeerDeleted());
+      dispatch(removeIdToken());
+    }
+  }
+);
+const removeIdToken = createAsyncThunk(
+  "token/tokenRemoved",
+  async (_, { dispatch }) => {
+    try {
+      await SecureStore.deleteItemAsync("idToken");
+    } catch (err) {
+      showErrorInDevelopment(
+        "failed id token deletion in the secure store ",
+        err
+      );
+      dispatch(actionUserDeleted());
+      dispatch(actionTodayBeerDeleted());
+      await SecureStore.setItemAsync("idToken", "");
+    }
+  }
+);
 
 const tokenSlice = createSlice({
   name: "token",
@@ -44,7 +81,8 @@ const tokenSlice = createSlice({
       state.idToken = action.payload;
     },
     [removeIdToken.fulfilled]: (state) => {
-      state.idToken = null;
+      state = initialState;
+      return state;
     },
   },
 });
