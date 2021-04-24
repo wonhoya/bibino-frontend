@@ -23,7 +23,6 @@ const Comments = () => {
         <Text style={styles.rating}>
           <AntDesign name="star" size={30} color="black" /> 4.5
         </Text>
-
         <Text>Sorted By : Ratings</Text>
       </View>
       <View style={styles.commentsContainer}>

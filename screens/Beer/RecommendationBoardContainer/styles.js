@@ -6,10 +6,10 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
+    alignItems: "center",
     width: windowWidth,
     height: windowHeight / 3,
     marginVertical: windowWidth / 10,
-    alignItems: "center",
   },
   text: {
     marginVertical: windowWidth / 15,

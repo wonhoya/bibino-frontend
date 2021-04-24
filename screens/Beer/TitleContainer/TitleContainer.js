@@ -12,7 +12,6 @@ const TitleContainer = ({ title }) => {
       <Text style={{ fontFamily: RUBIK_MEDIUM, fontSize: windowWidth / 12 }}>
         {title}
       </Text>
-      {/* <ShareIcon size={windowWidth / 15} /> */}
       <View style={styles.descriptionContainer}>
         <Text style={styles.ratingFont}>4.2</Text>
         <Text style={styles.descriptionFont}>124 reviews</Text>

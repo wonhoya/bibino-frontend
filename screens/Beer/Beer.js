@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { View, Animated, Easing, Text } from "react-native";
+import { View, Animated, Easing } from "react-native";
 import { FloatingAction } from "react-native-floating-action";
 
 import styles from "./styles";
@@ -80,7 +80,6 @@ const Beer = ({ navigation }) => {
         <SectionDivider direction="left" text="Comments" />
         <CommentBoardContainer navigation={navigation} />
       </View>
-
       <Animated.View
         style={[styles.buttonContainer, styles.handleButtonY(scrollY)]}
       >
@@ -95,7 +94,6 @@ const Beer = ({ navigation }) => {
           }}
         />
       </Animated.View>
-
       <ModalContainer
         isModalVisible={isModalVisible}
         closeModal={closeModal}

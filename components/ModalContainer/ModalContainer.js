@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { View, Text, TextInput } from "react-native";
 import Modal from "react-native-modal";
+import { BACKEND_URL_FOR_DEV } from "@env";
 
 import styles from "./styles";
-import { BACKEND_URL_FOR_DEV } from "@env";
 import RatingBoard from "../shared/RatingBoard/RatingBoard";
-import CharacteristicContainer from "./CharacteristicContainer/CharacteristicContainer";
 import Button from "../shared/Button/Button";
+import CharacteristicContainer from "./CharacteristicContainer/CharacteristicContainer";
 
 const ModalContainer = ({
   navigation,

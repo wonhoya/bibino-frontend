@@ -14,16 +14,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
+    marginTop: 40,
     color: PRIMARY_BLACK,
     fontFamily: RUBIK_BOLD,
     fontSize: FAILURE_TITLE_FONT_SIZE,
-    marginTop: 40,
   },
   description: {
-    fontSize: FAILURE_DESCRIPTION_FONT_SIZE,
-    color: PRIMARY_GREY,
-    fontFamily: RUBIK_REGULAR,
     marginTop: 10,
+    fontSize: FAILURE_DESCRIPTION_FONT_SIZE,
+    fontFamily: RUBIK_REGULAR,
+    color: PRIMARY_GREY,
   },
   svgContainer: {
     position: "absolute",

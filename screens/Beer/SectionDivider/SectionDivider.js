@@ -14,7 +14,6 @@ const SectionDivider = ({ direction, text }) => {
       </View>
     );
   }
-
   if (direction === "left") {
     return (
       <View style={styles.sectionContainer}>

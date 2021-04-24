@@ -1,11 +1,10 @@
 import { StyleSheet, Dimensions } from "react-native";
+
 import {
   PRIMARY_GREY,
   PRIMARY_BLACK,
   PRIMARY_WHITE,
-  PRIMARY_ORANGE,
   PRIMARY_LIGHT_GREY,
-  SERACH_LIGHT_GREY,
 } from "../../constants/colors";
 import { RUBIK_BOLD, RUBIK_REGULAR } from "../../constants/font";
 
@@ -17,15 +16,12 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     margin: 0,
   },
-
   modalContainer: {
+    alignItems: "center",
     width: windowWidth,
     height: windowHeight / 1.5,
     backgroundColor: PRIMARY_LIGHT_GREY,
-
-    alignItems: "center",
   },
-
   line: {
     width: 100,
     height: 7,
@@ -33,21 +29,17 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: PRIMARY_GREY,
   },
-
   title: {
     marginVertical: 10,
     fontSize: 30,
     fontFamily: RUBIK_BOLD,
     color: PRIMARY_BLACK,
   },
-
   input: {
     width: "90%",
     height: 60,
     marginBottom: 30,
-
     paddingLeft: 30,
-
     borderRadius: 10,
     backgroundColor: PRIMARY_WHITE,
     color: PRIMARY_BLACK,
