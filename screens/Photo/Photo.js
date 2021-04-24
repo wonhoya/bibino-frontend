@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { View } from "react-native";
 import { Camera } from "expo-camera";
+import { BACKEND_URL_FOR_DEV } from "@env";
 
 import styles from "./styles";
 import Configuration from "../Configuration/Configuration";
@@ -62,7 +63,7 @@ const Photo = ({ navigation }) => {
     try {
       setIsParseStarted(true);
 
-      const response = await fetch("http://192.168.0.54:3000/api/beers/scan", {
+      const response = await fetch(`${BACKEND_URL_FOR_DEV}/beers/scan`, {
         method: "POST",
         headers: {
           Accept: "application/json",

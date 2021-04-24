@@ -1,40 +1,63 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as SecureStore from "expo-secure-store";
 
+import ASYNC_STATE from "../constants/asyncState";
+
 const initialState = {
-  token: null,
+  idToken: null,
+  status: "idle",
+  error: null,
 };
 
-const saveToken = createAsyncThunk("token/tokenSaved", async (accessToken) => {
-  await SecureStore.setItemAsync(accessToken);
-  return accessToken;
+const saveIdToken = createAsyncThunk("token/tokenSaved", async (idToken) => {
+  await SecureStore.setItemAsync("idToken", idToken);
+  return idToken;
 });
 
-const getToken = createAsyncThunk("token/tokenGotten", async () => {
-  const accessToken = await SecureStore.getItemAsync("accessToken");
-  return accessToken;
+const getIdToken = createAsyncThunk("token/tokenGotten", async () => {
+  const idToken = await SecureStore.getItemAsync("idToken");
+  return idToken;
 });
 
-const removeToken = createAsyncThunk("token/tokenRemoved", async () => {
-  await SecureStore.deleteItemAsync("accessToken");
+const removeIdToken = createAsyncThunk("token/tokenRemoved", async () => {
+  await SecureStore.deleteItemAsync("idToken");
   return;
 });
 
 const tokenSlice = createSlice({
   name: "token",
   initialState,
-  reducers: {},
+  reducers: {
+    tokenStateSet: (state, action) => {
+      state.status = action.payload;
+    },
+  },
   extraReducers: {
-    [saveToken.fulfilled]: (state, action) => {
-      state.token = action.payload;
+    [saveIdToken.fulfilled]: (state, action) => {
+      state.idToken = action.payload;
     },
-    [getToken.fulfilled]: (state, action) => {
-      state.token = action.payload;
+    [getIdToken.pending]: (state) => {
+      state.status = ASYNC_STATE.LOADING;
     },
-    [removeToken.fulfilled]: (state) => {
-      state.token = null;
+    [getIdToken.fulfilled]: (state, action) => {
+      state.status = ASYNC_STATE.SUCCEED;
+      state.idToken = action.payload;
+    },
+    [removeIdToken.fulfilled]: (state) => {
+      state.idToken = null;
     },
   },
 });
 
-export { tokenSlice, saveToken, getToken, removeToken };
+const { tokenStateSet } = tokenSlice.actions;
+
+const selectIdToken = (state) => state.token.idToken;
+
+export {
+  tokenSlice,
+  saveIdToken,
+  getIdToken,
+  removeIdToken,
+  tokenStateSet,
+  selectIdToken,
+};
