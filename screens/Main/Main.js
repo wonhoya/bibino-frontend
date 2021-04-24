@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { SafeAreaView, View } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
-import { fetchTodayBeers } from "../../features/todayBeersSlice";
 import styles from "./styles";
+import { fetchTodayBeers } from "../../features/todayBeersSlice";
 import ProfileContainer from "./ProfileContainer/ProfileContainer";
 import ContentsContainer from "./ContentsContainer/ContentsContainer";
 import Loading from "../Loading/Loading";
