@@ -1,17 +1,17 @@
 import debounce from "lodash.debounce";
 import { BACKEND_URL_FOR_DEV } from "@env";
 
-import getHeadersIncludedIdToken from "./getHeadersIncludedIdToken";
+import generateHeaderOption from "./generateHeaderOption";
 
-const fetchSearchedBeers = debounce(
+const fetchBeersByKeywords = debounce(
   async (searchText, idToken, setSearchedBeers) => {
-    const headers = getHeadersIncludedIdToken(idToken);
+    const headers = generateHeaderOption(idToken);
     const response = await fetch(`${BACKEND_URL_FOR_DEV}/beers/search`, {
       headers: { ...headers, "search-text": searchText },
     });
 
     const searchedBeers = await response.json();
-    const processedSearchedBeers = searchedBeers.map((beer) => {
+    const managedSearchedBeers = searchedBeers.map((beer) => {
       return {
         id: beer._id,
         name: beer.name,
@@ -19,9 +19,9 @@ const fetchSearchedBeers = debounce(
         imagePath: beer.imagePath,
       };
     });
-    setSearchedBeers(processedSearchedBeers);
+    setSearchedBeers(managedSearchedBeers);
   },
   300
 );
 
-export default fetchSearchedBeers;
+export default fetchBeersByKeywords;
