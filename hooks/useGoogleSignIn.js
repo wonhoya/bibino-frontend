@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import * as Google from "expo-auth-session/providers/google";
-import firebase from "firebase";
 import { EXPO_CLIENT_ID, EXPO_CLIENT_PASSWORD } from "@env";
 import { useSelector, useDispatch } from "react-redux";
-import { unwrapResult } from "@reduxjs/toolkit";
 
-import { signInUser, userStatusSet } from "../features/userSlice";
-import ASYNC_STATE from "../constants/asyncState";
+import { signInUser, userDeleted, userStatusSet } from "../features/userSlice";
+import { removeIdToken, tokenStatusSet } from "../features/tokenSlice";
+import ASYNC_STATUS from "../constants/asyncStatus";
+import showErrorInDevelopment from "../utils/showErrorInDevelopment";
 
-let isSigningIn = false;
+let isLoading = false;
 
 const useGoogleSignIn = () => {
   const dispatch = useDispatch();
@@ -19,31 +19,27 @@ const useGoogleSignIn = () => {
   });
 
   useEffect(() => {
-    if (response?.type === "success" && !isSigningIn) {
-      isSigningIn = true;
-      dispatch(userStatusSet(ASYNC_STATE.LOADING));
+    if (response?.type === "success" && !isLoading) {
+      isLoading = true;
+      const { id_token: idToken } = response.params;
 
-      const getUserData = async () => {
+      const processUserSignIn = async () => {
         try {
-          const { id_token } = response.params;
-          const credential = await firebase.auth.GoogleAuthProvider.credential(
-            id_token
-          );
-          const auth = await firebase.auth().signInWithCredential(credential);
-          const idToken = await auth.user.getIdToken();
-          const resultAction = await dispatch(signInUser(idToken));
-          unwrapResult(resultAction);
+          await dispatch(signInUser(idToken));
         } catch (err) {
-          // 에러 페이지로 navigate 할 수 있게나, 에러 페이지 모달로 뜰 수 있게.
+          showErrorInDevelopment(err);
+          dispatch(userDeleted());
+          await dispatch(removeIdToken());
         } finally {
-          isSigningIn = false;
-          dispatch(userStatusSet(ASYNC_STATE.IDLE));
+          dispatch(userStatusSet(ASYNC_STATUS.IDLE));
+          dispatch(tokenStatusSet(ASYNC_STATUS.IDLE));
+          isLoading = false;
         }
       };
 
-      getUserData();
+      processUserSignIn();
     }
-  }, [response, dispatch]);
+  }, [response, userFetchStatus, dispatch]);
 
   return { userFetchStatus, promptAsync };
 };

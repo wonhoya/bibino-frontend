@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import Intro from "../screens/Intro/Intro";
@@ -7,7 +8,6 @@ import Header from "../components/shared/Header/Header";
 import MainTabNavigator from "./MainTabNavigator";
 import Beer from "../screens/Beer/Beer";
 import Configuration from "../screens/Configuration/Configuration";
-import useUserIsLogIn from "../hooks/useUserIsLogIn";
 import Photo from "../screens/Photo/Photo";
 import Success from "../screens/Success/Success";
 import Failure from "../screens/Failure/Failure";
@@ -16,7 +16,8 @@ import AnalyzeFailure from "../screens/Failure/AnalyzeFailure";
 const Stack = createStackNavigator();
 
 const MainStackNavigator = () => {
-  const { idToken } = useUserIsLogIn();
+  const isLogedIn = useSelector((state) => !!state.user.id);
+
   const verticalAnimation = {
     gestureDirection: "vertical",
     cardStyleInterpolator: ({ current, layouts }) => {
@@ -50,16 +51,16 @@ const MainStackNavigator = () => {
   };
 
   return (
-    <Stack.Navigator headerMode={idToken ? "screen" : "none"}>
+    <Stack.Navigator headerMode={isLogedIn ? "screen" : "none"}>
       {Object.entries({
-        ...(idToken ? userScreens : authScreens),
+        ...(isLogedIn ? userScreens : authScreens),
       }).map(([name, component], i) => (
         <Stack.Screen
           key={i}
           name={name}
           component={component}
           options={
-            idToken
+            isLogedIn
               ? {
                   header: (navigation) => <Header navigation={navigation} />,
                 }
