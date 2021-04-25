@@ -16,13 +16,13 @@ const styles = StyleSheet.create({
     backgroundColor: "green",
   },
   feedbackContainer: {
+    alignSelf: "center",
+    justifyContent: "center",
     position: "absolute",
     width: windowWidth * 0.6,
     height: windowHeight / 15,
     marginTop: 20,
     backgroundColor: PRIMARY_ORANGE,
-    alignSelf: "center",
-    justifyContent: "center",
     borderRadius: 10,
   },
   image: {
@@ -30,12 +30,12 @@ const styles = StyleSheet.create({
     height: windowWidth / 1.1,
   },
   description: {
+    textAlign: "justify",
     width: "100%",
+    lineHeight: windowWidth / 16,
     padding: windowWidth / 7,
     fontSize: windowWidth / 25,
     fontFamily: RUBIK_REGULAR,
-    textAlign: "justify",
-    lineHeight: windowWidth / 16,
     color: PRIMARY_BLACK,
   },
   bannerContainer: {
