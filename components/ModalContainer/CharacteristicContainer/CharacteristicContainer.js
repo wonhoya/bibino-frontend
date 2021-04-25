@@ -21,7 +21,7 @@ const CharacteristicContainer = ({ review, setReview }) => {
       <View>
         <CharacteristicBoard
           titles={CHRACTERISTIC_TITLES.aroma}
-          rating={aroma}
+          intensity={aroma}
           review={review}
           setReview={setReview}
           options={{
@@ -35,7 +35,7 @@ const CharacteristicContainer = ({ review, setReview }) => {
       <View style={{ marginTop: windowWidth / 6 }}>
         <CharacteristicBoard
           titles={CHRACTERISTIC_TITLES.body}
-          rating={body}
+          intensity={body}
           review={review}
           setReview={setReview}
           options={{
@@ -49,7 +49,7 @@ const CharacteristicContainer = ({ review, setReview }) => {
       <View style={{ marginTop: windowWidth / 6 }}>
         <CharacteristicBoard
           titles={CHRACTERISTIC_TITLES.sparkling}
-          rating={sparkling}
+          intensity={sparkling}
           review={review}
           setReview={setReview}
           options={{

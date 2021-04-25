@@ -19,7 +19,7 @@ const CharacteristicContainer = () => {
       <View>
         <CharacteristicBoard
           titles={CHRACTERISTIC_TITLES.aroma}
-          rating={4}
+          intensity={4}
           options={{
             size: chracterSize,
             color: PRIMARY_ORANGE,
@@ -30,7 +30,7 @@ const CharacteristicContainer = () => {
       <View style={{ marginTop: windowWidth / 6 }}>
         <CharacteristicBoard
           titles={CHRACTERISTIC_TITLES.body}
-          rating={3}
+          intensity={3}
           options={{
             size: chracterSize,
             color: PRIMARY_BLACK,
@@ -41,7 +41,7 @@ const CharacteristicContainer = () => {
       <View style={{ marginTop: windowWidth / 6 }}>
         <CharacteristicBoard
           titles={CHRACTERISTIC_TITLES.sparkling}
-          rating={5}
+          intensity={5}
           options={{
             size: chracterSize,
             color: PRIMARY_YELLOW,

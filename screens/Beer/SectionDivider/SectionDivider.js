@@ -4,26 +4,22 @@ import { Text, View } from "react-native";
 import styles from "./styles";
 
 const SectionDivider = ({ direction, text }) => {
-  if (direction === "right") {
-    return (
-      <View style={styles.sectionContainer}>
+  return (
+    <View style={styles.sectionContainer}>
+      {direction === "right" ? (
         <View style={styles.line} />
-        <View>
+      ) : (
+        <Text style={styles.sectionTitle}>{text}</Text>
+      )}
+      <View>
+        {direction === "right" ? (
           <Text style={styles.sectionTitle}>{text}</Text>
-        </View>
+        ) : (
+          <View style={styles.line} />
+        )}
       </View>
-    );
-  }
-  if (direction === "left") {
-    return (
-      <View style={styles.sectionContainer}>
-        <View>
-          <Text style={styles.sectionTitle}>{text}</Text>
-        </View>
-        <View style={styles.line} />
-      </View>
-    );
-  }
+    </View>
+  );
 };
 
 export default SectionDivider;

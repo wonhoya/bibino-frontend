@@ -4,6 +4,7 @@ import { FloatingAction } from "react-native-floating-action";
 
 import styles from "./styles";
 import { PRIMARY_ORANGE } from "../../constants/colors";
+import floatingButtons from "../../constants/floatingButtons";
 
 import TitleContainer from "./TitleContainer/TitleContainer";
 import RatingBoardContainer from "./RatingBoardContainer/RatingBoardContainer";
@@ -13,7 +14,6 @@ import CommentBoardContainer from "./CommentBoardContainer/CommentBoardContainer
 import RecommendationBoardContainer from "./RecommendationBoardContainer/RecommendationBoardContainer";
 import ModalContainer from "../../components/ModalContainer/ModalContainer";
 import SectionDivider from "./SectionDivider/SectionDivider";
-import floatingButtons from "../../constants/floatingButtons";
 import FeedbackBoard from "../../components/FeedbackBoard/FeedbackBoard";
 
 const Beer = ({ navigation }) => {

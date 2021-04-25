@@ -6,7 +6,7 @@ import getStyles from "./styles";
 import { PRIMARY_LIGHT_GREY } from "../../../constants/colors";
 
 const CharacteristicBoard = ({
-  rating,
+  intensity,
   titles,
   options,
   setReview,
@@ -15,7 +15,7 @@ const CharacteristicBoard = ({
   const { title, leftSubTitle, rightSubTitle } = titles;
   const { size, color, isDisabled, isButtonActive } = options;
 
-  const styles = getStyles(size, color, rating);
+  const styles = getStyles(size, color, intensity);
 
   return (
     <View style={styles.container}>
@@ -31,9 +31,8 @@ const CharacteristicBoard = ({
           style={styles.sliderCore}
           minimumValue={0}
           maximumValue={10}
-          value={rating}
+          value={intensity}
           onValueChange={(value) => {
-            //어떻게 처리해야할지.. trade off 고려, useState를 4개 만들것이냐 말것이냐
             setReview({ ...review, [title.toLowerCase()]: value });
           }}
           maximumTrackTintColor="transparent"
