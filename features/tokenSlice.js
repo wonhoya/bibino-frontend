@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as SecureStore from "expo-secure-store";
 
-import ASYNC_STATE from "../constants/asyncState";
+import ASYNC_STATUS from "../constants/asyncStatus";
 import showErrorInDevelopment from "../utils/showErrorInDevelopment";
 
 // userSlice와 todayBeersSlice의 액션 크리에이터를 임폴트 하면 module 간의 cycle이 생겨서 경고창이 뜹니다. 그래서 임의로 액션 크리에이터를 만들었습니다.
@@ -65,7 +65,7 @@ const tokenSlice = createSlice({
   name: "token",
   initialState,
   reducers: {
-    tokenStateSet: (state, action) => {
+    tokenStatusSet: (state, action) => {
       state.status = action.payload;
     },
   },
@@ -74,10 +74,10 @@ const tokenSlice = createSlice({
       state.idToken = action.payload;
     },
     [getIdToken.pending]: (state) => {
-      state.status = ASYNC_STATE.LOADING;
+      state.status = ASYNC_STATUS.LOADING;
     },
     [getIdToken.fulfilled]: (state, action) => {
-      state.status = ASYNC_STATE.SUCCEED;
+      state.status = ASYNC_STATUS.SUCCEED;
       state.idToken = action.payload;
     },
     [removeIdToken.fulfilled]: (state) => {
@@ -87,7 +87,7 @@ const tokenSlice = createSlice({
   },
 });
 
-const { tokenStateSet } = tokenSlice.actions;
+const { tokenStatusSet } = tokenSlice.actions;
 
 const selectIdToken = (state) => state.token.idToken;
 
@@ -96,6 +96,6 @@ export {
   saveIdToken,
   getIdToken,
   removeIdToken,
-  tokenStateSet,
+  tokenStatusSet,
   selectIdToken,
 };
