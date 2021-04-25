@@ -3,7 +3,6 @@ import { View, Text, Dimensions } from "react-native";
 
 import styles from "./styles";
 import { RUBIK_MEDIUM } from "../../../constants/font";
-import { ShareIcon } from "../../../assets/svgs/icon";
 
 const { width: windowWidth } = Dimensions.get("window");
 
@@ -13,7 +12,10 @@ const TitleContainer = ({ title }) => {
       <Text style={{ fontFamily: RUBIK_MEDIUM, fontSize: windowWidth / 12 }}>
         {title}
       </Text>
-      <ShareIcon size={windowWidth / 15} />
+      <View style={styles.descriptionContainer}>
+        <Text style={styles.ratingFont}>4.2</Text>
+        <Text style={styles.descriptionFont}>124 reviews</Text>
+      </View>
     </View>
   );
 };

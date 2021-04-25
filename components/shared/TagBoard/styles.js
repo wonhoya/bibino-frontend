@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   scrollViewContainer: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
   },
   tag: {

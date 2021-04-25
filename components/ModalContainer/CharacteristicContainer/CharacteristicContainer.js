@@ -13,39 +13,50 @@ import CharacteristicBoard from "../../../components/shared/ChracteristicBoard/C
 const { width: windowWidth } = Dimensions.get("window");
 const chracterSize = windowWidth * 1.2;
 
-const CharacteristicContainer = () => {
+const CharacteristicContainer = ({ review, setReview }) => {
+  const { aroma, body, sparkling } = review;
+
   return (
     <View style={styles.container}>
       <View>
         <CharacteristicBoard
           titles={CHRACTERISTIC_TITLES.aroma}
-          intensity={4}
+          intensity={aroma}
+          review={review}
+          setReview={setReview}
           options={{
             size: chracterSize,
             color: PRIMARY_ORANGE,
-            isDisabled: true,
+            isDisabled: false,
+            isButtonActive: true,
           }}
         />
       </View>
       <View style={{ marginTop: windowWidth / 6 }}>
         <CharacteristicBoard
           titles={CHRACTERISTIC_TITLES.body}
-          intensity={3}
+          intensity={body}
+          review={review}
+          setReview={setReview}
           options={{
             size: chracterSize,
             color: PRIMARY_BLACK,
-            isDisabled: true,
+            isDisabled: false,
+            isButtonActive: true,
           }}
         />
       </View>
       <View style={{ marginTop: windowWidth / 6 }}>
         <CharacteristicBoard
           titles={CHRACTERISTIC_TITLES.sparkling}
-          intensity={5}
+          intensity={sparkling}
+          review={review}
+          setReview={setReview}
           options={{
             size: chracterSize,
             color: PRIMARY_YELLOW,
-            isDisabled: true,
+            isDisabled: false,
+            isButtonActive: true,
           }}
         />
       </View>

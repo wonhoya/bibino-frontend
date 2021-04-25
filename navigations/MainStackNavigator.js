@@ -12,6 +12,7 @@ import Photo from "../screens/Photo/Photo";
 import Success from "../screens/Success/Success";
 import Failure from "../screens/Failure/Failure";
 import AnalyzeFailure from "../screens/Failure/AnalyzeFailure";
+import Comments from "../screens/Comments/Comments";
 
 const Stack = createStackNavigator();
 
@@ -48,19 +49,30 @@ const MainStackNavigator = () => {
     AnalyzeFailure,
     Beer,
     Configuration,
+    Comments,
   };
 
   return (
+<<<<<<< HEAD
     <Stack.Navigator headerMode={isLogIn ? "screen" : "none"}>
       {Object.entries({
         ...(isLogIn ? userScreens : authScreens),
+=======
+    <Stack.Navigator headerMode={!idToken ? "screen" : "none"}>
+      {Object.entries({
+        ...(!idToken ? userScreens : authScreens),
+>>>>>>> develop
       }).map(([name, component], i) => (
         <Stack.Screen
           key={i}
           name={name}
           component={component}
           options={
+<<<<<<< HEAD
             isLogIn
+=======
+            !idToken
+>>>>>>> develop
               ? {
                   header: (navigation) => <Header navigation={navigation} />,
                 }
