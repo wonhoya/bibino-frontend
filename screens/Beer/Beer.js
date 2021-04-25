@@ -22,6 +22,8 @@ const Beer = ({ navigation }) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [shouldShowFeedBack, setShouldShowFeedBack] = useState(false);
 
+  useEffect(() => {});
+
   useEffect(() => {
     Animated.timing(moveY, {
       toValue: 0,

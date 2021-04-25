@@ -60,35 +60,35 @@ const Photo = ({ navigation }) => {
   };
 
   const handleUse = async () => {
-    try {
-      setIsParseStarted(true);
-      const response = await fetch(`${BACKEND_URL_FOR_DEV}/beers/scan`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          base64: photobase64,
-        }),
-      });
+    // try {
+    //   setIsParseStarted(true);
+    //   const response = await fetch(`${BACKEND_URL_FOR_DEV}/beers/scan`, {
+    //     method: "POST",
+    //     headers: {
+    //       Accept: "application/json",
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //       base64: photobase64,
+    //     }),
+    //   });
+    //   if (!response.ok) {
+    //     return navigation.navigate("Failure");
+    //   }
+    //   const result = await response.json();
+    //   setIsParseStarted(false);
+    //   if (result.status === "Analyze Success") {
+    //     navigation.navigate("Success");
+    //   } else {
+    //     navigation.navigate("AnalyzeFailure");
+    //   }
+    // } catch (error) {
+    //   navigation.navigate("Failure");
+    // }
 
-      if (!response.ok) {
-        return navigation.navigate("Failure");
-      }
-
-      const result = await response.json();
-
-      setIsParseStarted(false);
-
-      if (result.status === "Analyze Success") {
-        navigation.navigate("Success");
-      } else {
-        navigation.navigate("AnalyzeFailure");
-      }
-    } catch (error) {
-      navigation.navigate("Failure");
-    }
+    navigation.navigate("Success", {
+      beerId: 123,
+    });
   };
 
   if (hasPermission === false) {

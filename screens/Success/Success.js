@@ -5,7 +5,9 @@ import styles from "./styles";
 import { SuccessIcon } from "../../assets/svgs/icon";
 import { BeercanSvg } from "../../assets/svgs/ilusts";
 
-const Success = ({ navigation }) => {
+const Success = ({ navigation, route }) => {
+  console.log("route.params", route.params);
+
   useEffect(() => {
     const id = setTimeout(() => {
       navigation.reset({
