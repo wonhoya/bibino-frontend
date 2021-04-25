@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import { SERVER_URL } from "../config";
 import ASYNC_STATUS from "../constants/asyncStatus";
-import getIdTokenByGoogle from "../utils/getIdTokenByGoogle";
+import getGoogleIdToken from "../utils/getGoogleIdToken";
 import generateHeaderOption from "../utils/generateHeaderOption";
 import showErrorInDevelopment from "../utils/showErrorInDevelopment";
 import { saveIdToken } from "./tokenSlice";
@@ -21,9 +21,9 @@ const signInUser = createAsyncThunk(
   "user/userSignedIn",
   async (idToken, { dispatch }) => {
     try {
-      const idTokenByGoogle = await getIdTokenByGoogle(idToken);
+      const googleIdToken = await getGoogleIdToken(idToken);
 
-      const headers = generateHeaderOption(idTokenByGoogle);
+      const headers = generateHeaderOption(googleIdToken);
       const response = await fetch(`${serverUrl}/users/sign-in`, {
         method: "POST",
         headers,
