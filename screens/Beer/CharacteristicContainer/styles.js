@@ -7,10 +7,10 @@ const styles = StyleSheet.create({
   container: {
     width: "50%",
     height: windowWidth / 2,
-    marginTop: windowWidth / 10,
+    marginVertical: windowWidth / 10,
   },
   body: { marginTop: chracterMarginTop },
-  flavor: { marginTop: chracterMarginTop },
+  sparkling: { marginTop: chracterMarginTop },
 });
 
 export default styles;

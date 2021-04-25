@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 import { RUBIK_REGULAR } from "../../../constants/font";
 
-const getStyles = (size, color, rate) => {
+const getStyles = (size, color, intensity) => {
   const WIDTH = size / 2.5;
   const HEIGHT = WIDTH / 15;
 
@@ -40,7 +40,7 @@ const getStyles = (size, color, rate) => {
     },
     sliderReal: {
       backgroundColor: color,
-      width: (rate * WIDTH) / 10,
+      width: (intensity * WIDTH) / 10,
       height: HEIGHT,
       borderRadius: 50,
     },

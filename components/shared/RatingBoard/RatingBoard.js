@@ -4,12 +4,16 @@ import { View, Dimensions } from "react-native";
 import getStarRatings from "../../../utils/getStarRatings";
 import styles from "./styles";
 
-const RatingBoard = ({ mode = "static", rating = 3, total = 5, size = 50 }) => {
-  const [rate, setRate] = useState(rating);
-
+const RatingBoard = ({
+  mode = "static",
+  review,
+  setReview = { setReview },
+  rating = 3,
+  total = 5,
+  size = 50,
+}) => {
   if (mode === "static") {
     const stars = getStarRatings(rating, total, size);
-
     return <View style={styles.container}>{stars}</View>;
   }
 
@@ -25,14 +29,15 @@ const RatingBoard = ({ mode = "static", rating = 3, total = 5, size = 50 }) => {
         };
       });
 
-    const stars = getStarRatings(rate, total, size);
+    const stars = getStarRatings(review.rating, total, size);
 
     const handleTouchStart = (event) => {
       const pageX = Math.floor(event.nativeEvent.pageX);
 
       for (const { starOffsetX, calculatedRating } of starsForCalculate) {
         if (starOffsetX <= pageX && pageX < starOffsetX + size) {
-          setRate(calculatedRating);
+          setReview({ ...review, rating: calculatedRating });
+          // setRate(calculatedRating);
         }
       }
     };
@@ -41,7 +46,8 @@ const RatingBoard = ({ mode = "static", rating = 3, total = 5, size = 50 }) => {
 
       for (const { starOffsetX, calculatedRating } of starsForCalculate) {
         if (starOffsetX <= pageX && pageX < starOffsetX + size) {
-          setRate(calculatedRating);
+          setReview({ ...review, rating: calculatedRating });
+          // setRate(calculatedRating);
         }
       }
     };

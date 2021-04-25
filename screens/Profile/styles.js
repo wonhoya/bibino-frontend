@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     backgroundColor: PRIMARY_WHITE,
   },
   infoContainer: {
-    flex: 2,
+    flex: 1.5,
     justifyContent: "flex-end",
     alignItems: "center",
   },

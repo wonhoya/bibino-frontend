@@ -3,19 +3,19 @@ import { View, Text } from "react-native";
 import Slider from "@react-native-community/slider";
 
 import getStyles from "./styles";
-import { PRIMARY_ORAGNE } from "../../../constants/colors";
+import { PRIMARY_LIGHT_GREY } from "../../../constants/colors";
 
 const CharacteristicBoard = ({
-  titles = { title: "Hello", leftSubTitle: "Left", rightSubTitle: "right" },
-  rating = 3,
-  options = { size: 500, color: PRIMARY_ORAGNE, isDisabled: true },
+  intensity,
+  titles,
+  options,
+  setReview,
+  review,
 }) => {
-  const [rate, setRate] = useState(rating);
-
   const { title, leftSubTitle, rightSubTitle } = titles;
-  const { size, color, isDisabled } = options;
+  const { size, color, isDisabled, isButtonActive } = options;
 
-  const styles = getStyles(size, color, rate);
+  const styles = getStyles(size, color, intensity);
 
   return (
     <View style={styles.container}>
@@ -31,10 +31,13 @@ const CharacteristicBoard = ({
           style={styles.sliderCore}
           minimumValue={0}
           maximumValue={10}
-          value={rate}
-          onValueChange={(value) => setRate(value)}
+          value={intensity}
+          onValueChange={(value) => {
+            setReview({ ...review, [title.toLowerCase()]: value });
+          }}
           maximumTrackTintColor="transparent"
           minimumTrackTintColor="transparent"
+          thumbTintColor={isButtonActive ? PRIMARY_LIGHT_GREY : "transparent"}
           disabled={isDisabled ? true : false}
         />
       </View>
