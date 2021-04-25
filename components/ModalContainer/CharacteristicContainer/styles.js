@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     marginVertical: windowWidth / 20,
   },
   body: { marginTop: chracterMarginTop },
-  flavor: { marginTop: chracterMarginTop },
+  sparkling: { marginTop: chracterMarginTop },
 });
 
 export default styles;

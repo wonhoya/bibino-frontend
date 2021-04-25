@@ -40,7 +40,7 @@ const CharacteristicContainer = () => {
       </View>
       <View style={{ marginTop: windowWidth / 6 }}>
         <CharacteristicBoard
-          titles={CHRACTERISTIC_TITLES.flavor}
+          titles={CHRACTERISTIC_TITLES.sparkling}
           rating={5}
           options={{
             size: chracterSize,

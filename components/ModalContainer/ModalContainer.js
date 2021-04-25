@@ -19,7 +19,7 @@ const ModalContainer = ({
     rating: 0,
     aroma: 5,
     body: 5,
-    flavor: 5,
+    sparkling: 5,
   });
 
   const handleSubmit = async () => {

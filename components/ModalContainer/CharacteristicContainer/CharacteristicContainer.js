@@ -14,7 +14,7 @@ const { width: windowWidth } = Dimensions.get("window");
 const chracterSize = windowWidth * 1.2;
 
 const CharacteristicContainer = ({ review, setReview }) => {
-  const { aroma, body, flavor } = review;
+  const { aroma, body, sparkling } = review;
 
   return (
     <View style={styles.container}>
@@ -48,8 +48,8 @@ const CharacteristicContainer = ({ review, setReview }) => {
       </View>
       <View style={{ marginTop: windowWidth / 6 }}>
         <CharacteristicBoard
-          titles={CHRACTERISTIC_TITLES.flavor}
-          rating={flavor}
+          titles={CHRACTERISTIC_TITLES.sparkling}
+          rating={sparkling}
           review={review}
           setReview={setReview}
           options={{
