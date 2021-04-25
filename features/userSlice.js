@@ -27,11 +27,11 @@ const signInUser = createAsyncThunk(
         headers,
       });
       const { user, idTokenByBibino } = await response.json();
-      const fetchTodayBeersMaterials = {
+      const userInfo = {
         userId: user._id,
         idToken: idTokenByBibino,
       };
-      await dispatch(fetchTodayBeers(fetchTodayBeersMaterials));
+      await dispatch(fetchTodayBeers(userInfo));
       const resultAction = await dispatch(saveIdToken(idTokenByBibino));
       unwrapResult(resultAction);
 
