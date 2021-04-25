@@ -16,7 +16,7 @@ import AnalyzeFailure from "../screens/Failure/AnalyzeFailure";
 const Stack = createStackNavigator();
 
 const MainStackNavigator = () => {
-  const isLogedIn = useSelector((state) => !!state.user.id);
+  const isLogIn = useSelector((state) => !!state.user.id);
 
   const verticalAnimation = {
     gestureDirection: "vertical",
@@ -51,16 +51,16 @@ const MainStackNavigator = () => {
   };
 
   return (
-    <Stack.Navigator headerMode={isLogedIn ? "screen" : "none"}>
+    <Stack.Navigator headerMode={isLogIn ? "screen" : "none"}>
       {Object.entries({
-        ...(isLogedIn ? userScreens : authScreens),
+        ...(isLogIn ? userScreens : authScreens),
       }).map(([name, component], i) => (
         <Stack.Screen
           key={i}
           name={name}
           component={component}
           options={
-            isLogedIn
+            isLogIn
               ? {
                   header: (navigation) => <Header navigation={navigation} />,
                 }

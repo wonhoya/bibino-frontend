@@ -9,7 +9,7 @@ import ContentsContainer from "./ContentsContainer/ContentsContainer";
 import Loading from "../Loading/Loading";
 
 const Main = () => {
-  const [isLoading, setisLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const todayBeersData = useSelector((state) => {
     const { todayBeers } = state;
@@ -31,7 +31,7 @@ const Main = () => {
       } catch (err) {
         // 투데이 맥주 fetch 실패에 대한 에러 핸들링
       } finally {
-        setisLoading(false);
+        setIsLoading(false);
       }
     };
 
@@ -50,7 +50,7 @@ const Main = () => {
   );
 
   if (shouldUpdateTodayBeers && !isLoading) {
-    setisLoading(true);
+    setIsLoading(true);
   }
 
   if (shouldUpdateTodayBeers || isLoading) {
