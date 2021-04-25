@@ -5,8 +5,9 @@ import { EXPO_CLIENT_ID, EXPO_CLIENT_PASSWORD } from "@env";
 import { useSelector, useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 
-import { signInUser, userStateSet } from "../features/userSlice";
+import { signInUser, userStatusSet } from "../features/userSlice";
 import ASYNC_STATE from "../constants/asyncState";
+
 let isSigningIn = false;
 
 const useGoogleSignIn = () => {
@@ -20,7 +21,7 @@ const useGoogleSignIn = () => {
   useEffect(() => {
     if (response?.type === "success" && !isSigningIn) {
       isSigningIn = true;
-      dispatch(userStateSet(ASYNC_STATE.LOADING));
+      dispatch(userStatusSet(ASYNC_STATE.LOADING));
 
       const getUserData = async () => {
         try {
@@ -36,7 +37,7 @@ const useGoogleSignIn = () => {
           // 에러 페이지로 navigate 할 수 있게나, 에러 페이지 모달로 뜰 수 있게.
         } finally {
           isSigningIn = false;
-          dispatch(userStateSet(ASYNC_STATE.IDLE));
+          dispatch(userStatusSet(ASYNC_STATE.IDLE));
         }
       };
 
