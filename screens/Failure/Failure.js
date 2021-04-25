@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { SafeAreaView, Text, View } from "react-native";
+import { Text, View } from "react-native";
 
 import styles from "./styles";
 import { FailureIcon } from "../../assets/svgs/icon";

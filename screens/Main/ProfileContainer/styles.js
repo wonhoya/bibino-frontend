@@ -33,8 +33,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   tagContainer: {
-    flex: 1,
-    marginRight: windowWidth * 0.09,
+    marginTop: 40,
   },
   username: {
     color: PRIMARY_DARK_GREY,

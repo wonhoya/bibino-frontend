@@ -1,11 +1,11 @@
+import { StyleSheet } from "react-native";
+
 import { PRIMARY_GREY, PRIMARY_BLACK } from "../../constants/colors";
 import { RUBIK_REGULAR, RUBIK_BOLD } from "../../constants/font";
 import {
   FAILURE_TITLE_FONT_SIZE,
   FAILURE_DESCRIPTION_FONT_SIZE,
 } from "../../constants/size";
-
-import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -14,16 +14,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
+    marginTop: 40,
     color: PRIMARY_BLACK,
     fontFamily: RUBIK_BOLD,
     fontSize: FAILURE_TITLE_FONT_SIZE,
-    marginTop: 40,
   },
   description: {
-    fontSize: FAILURE_DESCRIPTION_FONT_SIZE,
-    color: PRIMARY_GREY,
-    fontFamily: RUBIK_REGULAR,
     marginTop: 10,
+    fontSize: FAILURE_DESCRIPTION_FONT_SIZE,
+    fontFamily: RUBIK_REGULAR,
+    color: PRIMARY_GREY,
   },
   svgContainer: {
     position: "absolute",

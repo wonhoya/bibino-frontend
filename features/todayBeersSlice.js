@@ -1,7 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import { SERVER_URL } from "../config";
-import ASYNC_STATE from "../constants/asyncState";
+import ASYNC_STATUS from "../constants/asyncStatus";
+import generateHeaderOption from "../utils/generateHeaderOption";
+import showErrorInDevelopment from "../utils/showErrorInDevelopment";
 
 const serverUrl = SERVER_URL[process.env.NODE_ENV];
 
@@ -14,13 +16,22 @@ const initialState = {
 
 const fetchTodayBeers = createAsyncThunk(
   "todayBeers/fetchTodayBeers",
-  async () => {
-    const response = await fetch(`${serverUrl}/api/beers`);
-    const beers = await response.json();
-    const timestamp = Date.now();
+  async (_, { getState }) => {
+    const { user, token } = getState();
+    try {
+      const headers = generateHeaderOption(token.idToken);
+      const response = await fetch(
+        `${serverUrl}/users/${user.id}/recommendations`,
+        { headers }
+      );
+      const beers = await response.json();
+      const timestamp = Date.now();
 
-    // 정제된 today's beers 배열을 반환해야 한다
-    return { beers, timestamp };
+      return { beers, timestamp };
+    } catch (err) {
+      showErrorInDevelopment("Failed today beers fetch ", err);
+      throw err;
+    }
   }
 );
 
@@ -28,9 +39,11 @@ const todayBeersSlice = createSlice({
   name: "todayBeers",
   initialState,
   reducers: {
+    todayBeersStatusSet: (state, action) => {
+      state.status = action.payload;
+    },
     todayBeersAdded: (state, action) => {
       const { beers, timestamp } = action.payload;
-
       state.beers = beers;
       state.timestamp = timestamp;
     },
@@ -41,20 +54,31 @@ const todayBeersSlice = createSlice({
   },
   extraReducers: {
     [fetchTodayBeers.pending]: (state) => {
-      state.status = ASYNC_STATE.LOADING;
+      state.status = ASYNC_STATUS.LOADING;
     },
     [fetchTodayBeers.rejected]: (state, action) => {
-      state.status = ASYNC_STATE.FAILED;
+      state.status = ASYNC_STATUS.FAILED;
       state.error = action.payload;
     },
     [fetchTodayBeers.fulfilled]: (state, action) => {
       const { beers, timestamp } = action.payload;
-      state.status = ASYNC_STATE.SUCCEED;
+      state.status = ASYNC_STATUS.SUCCEED;
       state.beers = beers;
       state.timestamp = timestamp;
     },
   },
 });
 
-const { todayBeersAdded, todayBeersDeleted } = todayBeersSlice.actions;
-export { todayBeersSlice, fetchTodayBeers, todayBeersAdded, todayBeersDeleted };
+const {
+  todayBeersAdded,
+  todayBeersDeleted,
+  todayBeersStatusSet,
+} = todayBeersSlice.actions;
+
+export {
+  todayBeersSlice,
+  fetchTodayBeers,
+  todayBeersAdded,
+  todayBeersDeleted,
+  todayBeersStatusSet,
+};

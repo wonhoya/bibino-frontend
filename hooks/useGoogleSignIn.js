@@ -1,48 +1,54 @@
 import { useEffect } from "react";
 import * as Google from "expo-auth-session/providers/google";
-import firebase from "firebase";
-import { EXPO_CLIENT_ID, EXPO_CLIENT_PASSWORD } from "@env";
+import { EXPO_CLIENT_ID } from "@env";
 import { useSelector, useDispatch } from "react-redux";
-import { unwrapResult } from "@reduxjs/toolkit";
+import { Platform } from "react-native";
 
-import { signInUser, userStateSet } from "../features/userSlice";
-import ASYNC_STATE from "../constants/asyncState";
-let isSigningIn = false;
+import { signInUser, userDeleted, userStatusSet } from "../features/userSlice";
+import { removeIdToken, tokenStatusSet } from "../features/tokenSlice";
+import ASYNC_STATUS from "../constants/asyncStatus";
+import { CLIENT_ID } from "../config/";
+import showErrorInDevelopment from "../utils/showErrorInDevelopment";
+
+let clientId;
+
+if (process.env.NODE_ENV === "development") {
+  clientId = CLIENT_ID.web;
+} else {
+  clientId = CLIENT_ID[Platform.OS];
+}
+
+let isLoading = false;
 
 const useGoogleSignIn = () => {
   const dispatch = useDispatch();
   const userFetchStatus = useSelector((state) => state.user.status);
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-    clientId: EXPO_CLIENT_ID,
-    clientSecret: EXPO_CLIENT_PASSWORD,
+    clientId,
   });
 
   useEffect(() => {
-    if (response?.type === "success" && !isSigningIn) {
-      isSigningIn = true;
-      dispatch(userStateSet(ASYNC_STATE.LOADING));
+    if (response?.type === "success" && !isLoading) {
+      isLoading = true;
+      const { id_token: idToken } = response.params;
 
-      const getUserData = async () => {
+      const processUserSignIn = async () => {
         try {
-          const { id_token } = response.params;
-          const credential = await firebase.auth.GoogleAuthProvider.credential(
-            id_token
-          );
-          const auth = await firebase.auth().signInWithCredential(credential);
-          const idToken = await auth.user.getIdToken();
-          const resultAction = await dispatch(signInUser(idToken));
-          unwrapResult(resultAction);
+          await dispatch(signInUser(idToken));
         } catch (err) {
-          // 에러 페이지로 navigate 할 수 있게나, 에러 페이지 모달로 뜰 수 있게.
+          showErrorInDevelopment(err);
+          dispatch(userDeleted());
+          await dispatch(removeIdToken());
         } finally {
-          isSigningIn = false;
-          dispatch(userStateSet(ASYNC_STATE.IDLE));
+          dispatch(userStatusSet(ASYNC_STATUS.IDLE));
+          dispatch(tokenStatusSet(ASYNC_STATUS.IDLE));
+          isLoading = false;
         }
       };
 
-      getUserData();
+      processUserSignIn();
     }
-  }, [response, dispatch]);
+  }, [response, userFetchStatus, dispatch]);
 
   return { userFetchStatus, promptAsync };
 };

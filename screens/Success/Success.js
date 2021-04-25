@@ -17,7 +17,7 @@ const Success = ({ navigation }) => {
     return () => {
       clearTimeout(id);
     };
-  }, []);
+  }, [navigation]);
 
   return (
     <>

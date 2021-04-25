@@ -11,7 +11,6 @@ import {
 
 import "./config/auth";
 import { store, persistedStore } from "./features/store";
-
 import SplashAnimation from "./screens/SplashAnimation/SplashAnimation";
 import AppNavigation from "./navigations/AppNavigation";
 

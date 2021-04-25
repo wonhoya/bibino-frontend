@@ -62,7 +62,6 @@ const Photo = ({ navigation }) => {
   const handleUse = async () => {
     try {
       setIsParseStarted(true);
-
       const response = await fetch(`${BACKEND_URL_FOR_DEV}/beers/scan`, {
         method: "POST",
         headers: {

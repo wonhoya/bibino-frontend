@@ -7,7 +7,7 @@ import RecommendationBoard from "../../../components/RecommendationBoard/Recomme
 const RecommendationBoardContainer = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>비슷한 맥주</Text>
+      <Text style={styles.text}>Similar Beers</Text>
       <RecommendationBoard />
     </View>
   );

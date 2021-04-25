@@ -1,13 +1,16 @@
 import { StyleSheet, Dimensions } from "react-native";
 
 const { width: windowWidth } = Dimensions.get("window");
+const chracterMarginTop = windowWidth / 6;
 
 const styles = StyleSheet.create({
-  image: {
-    width: windowWidth / 3,
+  container: {
+    width: "50%",
     height: windowWidth / 2,
-    marginHorizontal: windowWidth / 40,
+    marginVertical: windowWidth / 20,
   },
+  body: { marginTop: chracterMarginTop },
+  sparkling: { marginTop: chracterMarginTop },
 });
 
 export default styles;

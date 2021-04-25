@@ -1,18 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { SafeAreaView, View, Text, TextInput } from "react-native";
-import ModalDropdown from "react-native-modal-dropdown";
+import { useSelector } from "react-redux";
 
 import styles from "./styles";
 import { SearchIcon } from "../../assets/svgs/icon";
-import SearchCardBoard from "../../components/SearchCardBoard/SearchCardBoard";
 import { SEARCH_TITLE_TEXT } from "../../constants/text";
+import fetchBeersByKeywords from "../../utils/fetchBeersByKeywords";
+import { selectIdToken } from "../../features/tokenSlice";
+import SearchCardBoard from "../../components/SearchCardBoard/SearchCardBoard";
 
 //mockup
 //https://github.com/RazaShehryar/react-native-modal-dropdown#api
 //onSelect <= interaction func
-const data = ["Name", "Date", "Ratings"];
 
 const Search = () => {
+  const idToken = useSelector(selectIdToken);
+  const [searchInput, setSearchInput] = useState("");
+  const [searchedBeers, setSearchedBeers] = useState([]);
+
+  useEffect(() => {
+    fetchBeersByKeywords(searchInput, idToken, setSearchedBeers);
+  }, [searchInput, idToken, setSearchedBeers]);
+
+  const handleSearchInput = (text) => {
+    setSearchInput(text);
+  };
+
   return (
     <>
       <SafeAreaView />
@@ -20,16 +33,6 @@ const Search = () => {
         <View style={styles.innerContainer}>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{SEARCH_TITLE_TEXT}</Text>
-          </View>
-          <View style={styles.indicatorContainer}>
-            <Text style={[styles.paragraph, styles.indicator]}>sorted by:</Text>
-            <ModalDropdown
-              options={data}
-              defaultValue={data[0]}
-              dropdownStyle={styles.dropdown}
-              textStyle={styles.dropdownText}
-              onSelect={() => console.log("selected")}
-            />
           </View>
           <View style={styles.inputContainer}>
             <View style={styles.iconContainer}>
@@ -39,9 +42,12 @@ const Search = () => {
               autoCapitalize="none"
               autoCorrect={false}
               style={styles.input}
+              placeholder="Search beers"
+              onChangeText={handleSearchInput}
+              value={searchInput}
             />
           </View>
-          <SearchCardBoard />
+          <SearchCardBoard beers={searchedBeers} />
         </View>
       </View>
     </>
