@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
-import { unwrapResult } from "@reduxjs/toolkit";
 
 import { userDeleted } from "../../features/userSlice";
 import { removeIdToken } from "../../features/tokenSlice";
@@ -19,8 +18,7 @@ const Configuration = () => {
     }
     const logOutUser = async () => {
       try {
-        const resultAction = await dispatch(removeIdToken());
-        unwrapResult(resultAction);
+        await dispatch(removeIdToken());
         dispatch(userDeleted());
         dispatch(todayBeersDeleted());
       } catch (err) {
