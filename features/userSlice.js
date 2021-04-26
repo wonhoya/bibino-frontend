@@ -32,7 +32,8 @@ const signInUser = createAsyncThunk(
       });
       const { user, idTokenByBibino } = await response.json();
       await dispatch(saveIdToken(idTokenByBibino));
-      dispatch(userBeersFetched());
+      dispatch(userBeersShouldFetch(false));
+
       return {
         user: {
           id: user._id,
@@ -55,8 +56,14 @@ const fetchMyBeers = createAsyncThunk(
       const { idToken } = getState().token;
       const { id: userId } = getState().user;
       const headers = generateHeaderOption(idToken);
-      const response = await fetch(`${serverUrl}/users/${userId}/my-beers`);
-    } catch (err) {}
+      const response = await fetch(`${serverUrl}/users/${userId}`, { headers });
+
+      const { beers } = await response.json();
+
+      return beers;
+    } catch (err) {
+      showErrorInDevelopment("Failed user's beer fetch ", err);
+    }
   }
 );
 
@@ -67,8 +74,8 @@ const userSlice = createSlice({
     userStatusSet: (state, action) => {
       state.status = action.payload;
     },
-    userBeersFetched: (state) => {
-      state.shouldFetchBeers = false;
+    userBeersShouldFetch: (state, action) => {
+      state.shouldFetchBeers = action.payload;
     },
     userDeleted: (state) => {
       state = initialState;
@@ -88,9 +95,30 @@ const userSlice = createSlice({
       state.status = ASYNC_STATUS.SUCCEED;
       Object.assign(state, user);
     },
+    [fetchMyBeers.pending]: (state) => {
+      state.status = ASYNC_STATUS.LOADING;
+    },
+    [fetchMyBeers.rejected]: (state, action) => {
+      state.status = ASYNC_STATUS.FAILED;
+      state.error = action.payload;
+    },
+    [fetchMyBeers.fulfilled]: (state, action) => {
+      state.status = ASYNC_STATUS.SUCCEED;
+      state.beers = action.payload;
+    },
   },
 });
 
-const { userStatusSet, userDeleted, userBeersFetched } = userSlice.actions;
+const { userStatusSet, userDeleted, userBeersShouldFetch } = userSlice.actions;
 
-export { userSlice, signInUser, userStatusSet, userDeleted, userBeersFetched };
+const getUser = (state) => state.user;
+
+export {
+  userSlice,
+  signInUser,
+  userStatusSet,
+  userDeleted,
+  userBeersShouldFetch,
+  fetchMyBeers,
+  getUser,
+};

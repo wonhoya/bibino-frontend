@@ -1,4 +1,4 @@
-const formatItems = (items, columns) => {
+const formatItems = (items, columns, phrase) => {
   const copyItems = items.slice();
   const fullRowsNumber = Math.floor(copyItems.length / columns);
   let lastRowElementsNumber = copyItems.length - fullRowsNumber * columns;
@@ -9,6 +9,10 @@ const formatItems = (items, columns) => {
       empty: true,
     });
     lastRowElementsNumber = lastRowElementsNumber + 1;
+  }
+
+  if (!copyItems.length) {
+    return [{ id: "information-phrase", phrase }];
   }
   return copyItems;
 };
