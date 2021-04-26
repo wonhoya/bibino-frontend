@@ -71,7 +71,6 @@ const Beer = ({ navigation, route }) => {
       }
     };
     getBeer();
-    //무한 fetch 오류 발생중
   }, []);
 
   useEffect(() => {

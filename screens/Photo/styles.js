@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
     flex: 3,
     backgroundColor: "blue",
   },
-
   button: {
     flex: 1,
   },
