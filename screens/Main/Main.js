@@ -3,6 +3,7 @@ import { SafeAreaView, View } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
 import styles from "./styles";
+import { getUser } from "../../features/userSlice";
 import { fetchTodayBeers } from "../../features/todayBeersSlice";
 import ProfileContainer from "./ProfileContainer/ProfileContainer";
 import ContentsContainer from "./ContentsContainer/ContentsContainer";
@@ -18,7 +19,7 @@ const Main = () => {
       timestamp: todayBeers.timestamp,
     };
   });
-  const user = useSelector((state) => state.user);
+  const user = useSelector(getUser);
 
   useEffect(() => {
     if (!isLoading) {

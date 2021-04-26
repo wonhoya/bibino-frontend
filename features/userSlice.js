@@ -15,10 +15,11 @@ const initialState = {
   avatar: null,
   status: ASYNC_STATUS.IDLE,
   error: null,
+  beers: [],
 };
 
 const signInUser = createAsyncThunk(
-  "user/userSignedIn",
+  "user/signInUser",
   async (idToken, { dispatch }) => {
     try {
       const googleIdToken = await getGoogleIdToken(idToken);
@@ -32,11 +33,34 @@ const signInUser = createAsyncThunk(
       await dispatch(saveIdToken(idTokenByBibino));
 
       return {
-        user: { id: user._id, avatar: user.imagePath, name: user.name },
+        user: {
+          id: user._id,
+          avatar: user.imagePath,
+          name: user.name,
+          beers: user.beers || [],
+        },
       };
     } catch (err) {
       showErrorInDevelopment("Faild an user sign in ", err);
       throw err;
+    }
+  }
+);
+
+const fetchMyBeers = createAsyncThunk(
+  "user/fetchMyBeers",
+  async (_, { getState }) => {
+    try {
+      const { idToken } = getState().token;
+      const { id: userId } = getState().user;
+      const headers = generateHeaderOption(idToken);
+      const response = await fetch(`${serverUrl}/users/${userId}`, { headers });
+
+      const { beers } = await response.json();
+
+      return beers || [];
+    } catch (err) {
+      showErrorInDevelopment("Failed user's beer fetch ", err);
     }
   }
 );
@@ -66,9 +90,29 @@ const userSlice = createSlice({
       state.status = ASYNC_STATUS.SUCCEED;
       Object.assign(state, user);
     },
+    [fetchMyBeers.pending]: (state) => {
+      state.status = ASYNC_STATUS.LOADING;
+    },
+    [fetchMyBeers.rejected]: (state, action) => {
+      state.status = ASYNC_STATUS.FAILED;
+      state.error = action.payload;
+    },
+    [fetchMyBeers.fulfilled]: (state, action) => {
+      state.status = ASYNC_STATUS.SUCCEED;
+      state.beers = action.payload;
+    },
   },
 });
 
 const { userStatusSet, userDeleted } = userSlice.actions;
 
-export { userSlice, signInUser, userStatusSet, userDeleted };
+const getUser = (state) => state.user;
+
+export {
+  userSlice,
+  signInUser,
+  userStatusSet,
+  userDeleted,
+  fetchMyBeers,
+  getUser,
+};
