@@ -3,12 +3,15 @@ import { BACKEND_URL_FOR_DEV } from "@env";
 
 import generateHeaderOption from "./generateHeaderOption";
 
-const fetchBeersByKeywords = debounce(
+const fetchSearchBeers = debounce(
   async (searchText, idToken, setSearchedBeers) => {
     const headers = generateHeaderOption(idToken);
-    const response = await fetch(`${BACKEND_URL_FOR_DEV}/beers/search`, {
-      headers: { ...headers, "search-text": searchText },
-    });
+    const response = await fetch(
+      `${BACKEND_URL_FOR_DEV}/beers/search/?text=${encodeURI(searchText)}`,
+      {
+        headers,
+      }
+    );
 
     const searchedBeers = await response.json();
     const managedSearchedBeers = searchedBeers.map((beer) => {
@@ -24,4 +27,4 @@ const fetchBeersByKeywords = debounce(
   300
 );
 
-export default fetchBeersByKeywords;
+export default fetchSearchBeers;
