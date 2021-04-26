@@ -16,7 +16,6 @@ const Header = ({ navigation }) => {
 
   const handleBackButton = () => {
     if (navState.routes[navState.index - 1].name === "Success") {
-      console.log("in button", navState);
       return navigation.navigation.popToTop();
     }
 
