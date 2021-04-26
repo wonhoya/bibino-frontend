@@ -31,16 +31,15 @@ const signInUser = createAsyncThunk(
       const { user, idTokenByBibino } = await response.json();
       await dispatch(saveIdToken(idTokenByBibino));
 
-      console.log("user in redux", user);
       return {
         user: {
           id: user._id,
           avatar: user.imagePath,
           name: user.name,
           charcteristc: {
-            avgBody: user.totalBody,
-            avgAroma: user.totalAroma,
-            avgSparkling: user.totalSparkling,
+            averageBody: user.averageBody,
+            averageAroma: user.averageAroma,
+            averageSparkling: user.averageSparkling,
           },
         },
       };

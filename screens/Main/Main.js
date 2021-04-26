@@ -19,6 +19,7 @@ const Main = () => {
     };
   });
   const user = useSelector((state) => state.user);
+
   console.log("user in store", user);
   useEffect(() => {
     if (!isLoading) {
