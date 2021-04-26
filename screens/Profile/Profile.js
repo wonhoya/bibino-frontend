@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   SafeAreaView,
@@ -10,11 +10,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./styles";
-import {
-  fetchMyBeers,
-  getUser,
-  userBeersShouldFetch,
-} from "../../features/userSlice";
+import { fetchMyBeers, getUser } from "../../features/userSlice";
 import formatItems from "../../utils/formatItems";
 import ASYNC_STATUS from "../../constants/asyncStatus";
 
@@ -23,20 +19,35 @@ const numColumns = 3;
 const Profile = ({ navigation }) => {
   const dispatch = useDispatch();
   const user = useSelector(getUser);
-  const shouldFetchBeers = useSelector((state) => state.user.shouldFetchBeers);
-  const isFetchingUserBeers = useSelector((state) => state.user.status);
+  const [shouldFetch, setShouldFetch] = useState(!user.beers.length);
+  const isFetchingUserBeers = useSelector(
+    (state) => state.user.status === ASYNC_STATUS.LOADING
+  );
 
   const informationPhrase =
     isFetchingUserBeers === ASYNC_STATUS.FAILED
-      ? "사진 불러오기 실패\n화면을 아래로 당겨 새로고침 해주세요"
-      : "첫 번째 맥주 사진을 찍어보세요 🍺";
+      ? "사진 불러오기 실패.\n화면을 아래로 당겨서 새로고침 해주세요."
+      : "사진이 없습니다. 맥주를 찍어보세요.";
 
-  const handleReFetchMyBeers = () => {
-    if (isFetchingUserBeers === ASYNC_STATUS.LOADING) {
+  useEffect(() => {
+    if (!shouldFetch) {
       return;
     }
-    dispatch(userBeersShouldFetch(true));
-    dispatch(fetchMyBeers());
+
+    const getMyBeers = async () => {
+      await dispatch(fetchMyBeers());
+      setShouldFetch(false);
+    };
+
+    getMyBeers();
+  }, [shouldFetch, dispatch]);
+
+  const handleReFetchMyBeers = () => {
+    if (isFetchingUserBeers) {
+      return;
+    }
+
+    setShouldFetch(true);
   };
 
   const renderItem = ({ item }) => {
@@ -83,7 +94,7 @@ const Profile = ({ navigation }) => {
               keyExtractor={(item) => item.id}
               numColumns={numColumns}
               showsVerticalScrollIndicator={false}
-              refreshing={shouldFetchBeers}
+              refreshing={shouldFetch}
               onRefresh={handleReFetchMyBeers}
             />
           </View>

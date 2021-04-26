@@ -16,7 +16,6 @@ const initialState = {
   status: ASYNC_STATUS.IDLE,
   error: null,
   beers: [],
-  shouldFetchBeers: true,
 };
 
 const signInUser = createAsyncThunk(
@@ -32,14 +31,13 @@ const signInUser = createAsyncThunk(
       });
       const { user, idTokenByBibino } = await response.json();
       await dispatch(saveIdToken(idTokenByBibino));
-      dispatch(userBeersShouldFetch(false));
 
       return {
         user: {
           id: user._id,
           avatar: user.imagePath,
           name: user.name,
-          beers: user.beers,
+          beers: user.beers || [],
         },
       };
     } catch (err) {
@@ -60,7 +58,7 @@ const fetchMyBeers = createAsyncThunk(
 
       const { beers } = await response.json();
 
-      return beers;
+      return beers || [];
     } catch (err) {
       showErrorInDevelopment("Failed user's beer fetch ", err);
     }
@@ -73,9 +71,6 @@ const userSlice = createSlice({
   reducers: {
     userStatusSet: (state, action) => {
       state.status = action.payload;
-    },
-    userBeersShouldFetch: (state, action) => {
-      state.shouldFetchBeers = action.payload;
     },
     userDeleted: (state) => {
       state = initialState;
@@ -109,7 +104,7 @@ const userSlice = createSlice({
   },
 });
 
-const { userStatusSet, userDeleted, userBeersShouldFetch } = userSlice.actions;
+const { userStatusSet, userDeleted } = userSlice.actions;
 
 const getUser = (state) => state.user;
 
@@ -118,7 +113,6 @@ export {
   signInUser,
   userStatusSet,
   userDeleted,
-  userBeersShouldFetch,
   fetchMyBeers,
   getUser,
 };
