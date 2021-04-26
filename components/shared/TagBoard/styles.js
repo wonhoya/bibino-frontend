@@ -5,6 +5,12 @@ import {
   TAG_LIGHT_BLUE,
   TAG_BLACK,
   PRIMARY_WHITE,
+  TAG_HEAVY,
+  TAG_LIGHT,
+  TAG_AROMA,
+  TAG_PURE,
+  TAG_SPARKLE,
+  TAG_TENDER,
 } from "../../../constants/colors";
 import { TAG_FONT_SIZE } from "../../../constants/size";
 
@@ -34,17 +40,41 @@ const styles = StyleSheet.create({
 
 styles.tagBackgroundColor = (tagType) => {
   switch (tagType) {
-    case "#Aromatic":
-      return { backgroundColor: TAG_LIGHT_PURPLE };
+    case "heavyLover":
+      return { backgroundColor: TAG_HEAVY };
 
-    case "#Body":
-      return { backgroundColor: TAG_RED };
+    case "like a Feather":
+      return { backgroundColor: TAG_LIGHT };
 
-    case "#TOK":
-      return { backgroundColor: TAG_LIGHT_BLUE };
+    case "niche":
+      return { backgroundColor: TAG_AROMA };
 
-    case "#SUCK":
-      return { backgroundColor: TAG_BLACK };
+    case "refresh":
+      return { backgroundColor: TAG_PURE };
+
+    case "toks":
+      return { backgroundColor: TAG_SPARKLE };
+
+    case "tender":
+      return { backgroundColor: TAG_TENDER };
+
+    case "mellow":
+      return { backgroundColor: TAG_HEAVY };
+
+    case "light":
+      return { backgroundColor: TAG_LIGHT };
+
+    case "bittersweet":
+      return { backgroundColor: TAG_AROMA };
+
+    case "mild":
+      return { backgroundColor: TAG_PURE };
+
+    case "toks":
+      return { backgroundColor: TAG_SPARKLE };
+
+    case "bland":
+      return { backgroundColor: TAG_TENDER };
 
     default:
       return { backgroundColor: TAG_BLACK };

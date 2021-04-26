@@ -9,7 +9,7 @@ const Success = ({ navigation, route }) => {
   useEffect(() => {
     const id = setTimeout(() => {
       navigation.navigate("Beer", {
-        beerId: 123,
+        beerId: route.params.beerId,
       });
     }, 1500);
 

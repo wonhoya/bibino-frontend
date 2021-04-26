@@ -19,7 +19,7 @@ const Main = () => {
     };
   });
   const user = useSelector((state) => state.user);
-
+  console.log("user in store", user);
   useEffect(() => {
     if (!isLoading) {
       return;
@@ -61,7 +61,11 @@ const Main = () => {
     <>
       <SafeAreaView />
       <View style={styles.container}>
-        <ProfileContainer userName={user.name} userAvatar={user.avatar} />
+        <ProfileContainer
+          userName={user.name}
+          userAvatar={user.avatar}
+          // userCharacterAvg={{body: user}}
+        />
         <ContentsContainer beers={todayBeersData.beers} />
       </View>
     </>

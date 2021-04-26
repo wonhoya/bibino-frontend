@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, TouchableOpacity, SafeAreaView } from "react-native";
-import { useRoute } from "@react-navigation/native";
+import { useRoute, useNavigationState } from "@react-navigation/native";
+
 import { AntDesign } from "@expo/vector-icons";
 
 import styles from "./styles";
@@ -9,12 +10,16 @@ import { PRIMARY_GREY } from "../../../constants/colors";
 import { HeaderLogoSvg } from "../../../assets/svgs/ilusts";
 
 const Header = ({ navigation }) => {
+  const navState = useNavigationState((state) => state);
   const [isDisabled, setIsDisabled] = useState(false);
   const { name } = useRoute();
+
   const handleBackButton = () => {
-    if (navigation.previous.route.name === "Success") {
+    if (navState.routes[navState.index - 1].name === "Success") {
+      console.log("in button", navState);
       return navigation.navigation.popToTop();
     }
+
     navigation.navigation.goBack();
   };
 
