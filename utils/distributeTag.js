@@ -1,57 +1,62 @@
-const distributeUserTag = (totalBody, totalAroma, totalSparkling) => {
+const distributeUserTag = (characterAverage, reviewCount) => {
+  const { averageBody, averageAroma, averageSparkling } = characterAverage;
   const tags = [];
 
-  if (totalBody > 5) {
+  if (reviewCount === 0) {
+    return ["newbie", "beerlover", "welcome"];
+  }
+
+  if (averageBody > 5) {
     tags.push("heavyLover");
   }
 
-  if (totalBody < 5) {
+  if (averageBody < 5) {
     tags.push("like a Feather");
   }
 
-  if (totalAroma > 5) {
+  if (averageAroma > 5) {
     tags.push("niche");
   }
 
-  if (totalAroma < 5) {
+  if (averageAroma < 5) {
     tags.push("refresh");
   }
 
-  if (totalSparkling > 5) {
+  if (averageSparkling > 5) {
     tags.push("toks");
   }
 
-  if (totalSparkling < 5) {
+  if (averageSparkling < 5) {
     tags.push("tender");
   }
 
   return tags;
 };
 
-const distributeBeerTag = (totalBody, totalAroma, totalSparkling) => {
+const distributeBeerTag = (averageBody, averageAroma, averageSparkling) => {
   const tags = [];
 
-  if (totalBody > 5) {
+  if (averageBody > 5) {
     tags.push("mellow");
   }
 
-  if (totalBody < 5) {
-    tags.push("ligth");
+  if (averageBody < 5) {
+    tags.push("light");
   }
 
-  if (totalAroma > 5) {
+  if (averageAroma > 5) {
     tags.push("bittersweet");
   }
 
-  if (totalAroma < 5) {
+  if (averageAroma < 5) {
     tags.push("mild");
   }
 
-  if (totalSparkling > 5) {
+  if (averageSparkling > 5) {
     tags.push("toks");
   }
 
-  if (totalSparkling < 5) {
+  if (averageSparkling < 5) {
     tags.push("bland");
   }
 

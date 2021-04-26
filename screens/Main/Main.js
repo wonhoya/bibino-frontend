@@ -20,7 +20,9 @@ const Main = () => {
   });
   const user = useSelector((state) => state.user);
 
-  console.log("user in store", user);
+  console.log("user charcteristc", user.charcteristc);
+  console.log("user review counet", user.reviewCounts);
+
   useEffect(() => {
     if (!isLoading) {
       return;
@@ -65,7 +67,8 @@ const Main = () => {
         <ProfileContainer
           userName={user.name}
           userAvatar={user.avatar}
-          // userCharacterAvg={{body: user}}
+          userCharacterAverage={user.charcteristc}
+          userReviewCount={user.reviewCounts}
         />
         <ContentsContainer beers={todayBeersData.beers} />
       </View>

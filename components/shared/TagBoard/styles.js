@@ -1,8 +1,6 @@
 import { StyleSheet } from "react-native";
+
 import {
-  TAG_LIGHT_PURPLE,
-  TAG_RED,
-  TAG_LIGHT_BLUE,
   TAG_BLACK,
   PRIMARY_WHITE,
   TAG_HEAVY,
@@ -11,6 +9,9 @@ import {
   TAG_PURE,
   TAG_SPARKLE,
   TAG_TENDER,
+  TAG_NEWBIE,
+  TAG_BEERLOVER,
+  TAG_WELCOME,
 } from "../../../constants/colors";
 import { TAG_FONT_SIZE } from "../../../constants/size";
 
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
   },
   tag: {
     height: 24,
-    maxWidth: 90,
+    maxWidth: 120,
     minWidth: 50,
     margin: 3,
     borderRadius: 12,
@@ -75,6 +76,15 @@ styles.tagBackgroundColor = (tagType) => {
 
     case "bland":
       return { backgroundColor: TAG_TENDER };
+
+    case "newbie":
+      return { backgroundColor: TAG_NEWBIE };
+
+    case "beerlover":
+      return { backgroundColor: TAG_BEERLOVER };
+
+    case "welcome":
+      return { backgroundColor: TAG_WELCOME };
 
     default:
       return { backgroundColor: TAG_BLACK };

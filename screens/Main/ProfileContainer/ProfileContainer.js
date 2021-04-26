@@ -4,7 +4,12 @@ import { View, Text, Image } from "react-native";
 import styles from "./styles";
 import TagBoard from "../../../components/shared/TagBoard/TagBoard";
 
-const ProfileContainer = ({ userName, userAvatar, userCharacterAvg }) => {
+const ProfileContainer = ({
+  userName,
+  userAvatar,
+  userCharacterAverage,
+  userReviewCount,
+}) => {
   return (
     <View style={styles.container}>
       <View style={styles.upperContainer}>
@@ -21,7 +26,10 @@ const ProfileContainer = ({ userName, userAvatar, userCharacterAvg }) => {
         </View>
       </View>
       <View style={styles.tagContainer}>
-        <TagBoard userCharacterAvg={userCharacterAvg} />
+        <TagBoard
+          userCharacterAverage={userCharacterAverage}
+          userReviewCount={userReviewCount}
+        />
       </View>
     </View>
   );

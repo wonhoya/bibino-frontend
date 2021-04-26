@@ -19,24 +19,6 @@ const Stack = createStackNavigator();
 const MainStackNavigator = () => {
   const isLogIn = useSelector((state) => !!state.user.id);
 
-  const verticalAnimation = {
-    gestureDirection: "vertical",
-    cardStyleInterpolator: ({ current, layouts }) => {
-      return {
-        cardStyle: {
-          transform: [
-            {
-              translateY: current.progress.interpolate({
-                inputRange: [0, 1],
-                outputRange: [layouts.screen.height, 0],
-              }),
-            },
-          ],
-        },
-      };
-    },
-  };
-
   const authScreens = {
     Intro,
     SignIn,

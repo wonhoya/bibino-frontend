@@ -1,15 +1,16 @@
 import React from "react";
 import { Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+
 import {
   distributeUserTag,
   distributeBeerTag,
 } from "../../../utils/distributeTag";
-
 import styles from "./styles";
+//distributeBeerTag 비어페이지에서 사용 예정입니다.
 
-const TagBoard = ({ userCharacterAvg, beerCharacterAvg }) => {
-  const mockTagData = distributeUserTag();
+const TagBoard = ({ userCharacterAverage, userReviewCount }) => {
+  const mockTagData = distributeUserTag(userCharacterAverage, userReviewCount);
 
   return (
     <ScrollView

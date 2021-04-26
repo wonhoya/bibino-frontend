@@ -1,3 +1,0 @@
-const userTags = {
-  Smooth: "Smooth",
-};
