@@ -16,6 +16,7 @@ const ModalContainer = ({
 }) => {
   const [comment, setComment] = useState("");
   const [review, setReview] = useState({
+    beerId: null,
     rating: 0,
     aroma: 5,
     body: 5,

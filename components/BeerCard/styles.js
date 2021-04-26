@@ -27,7 +27,8 @@ const styles = StyleSheet.create({
   },
   descriptionContainer: {
     flex: 1,
-    justifyContent: "center",
+    // justifyContent: "center",
+    overflow: "hidden",
     width: "100%",
     backgroundColor: PRIMARY_BLACK,
   },
@@ -36,12 +37,14 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   name: {
+    marginTop: 5,
     marginHorizontal: 20,
     color: PRIMARY_ORANGE,
     fontFamily: RUBIK_BOLD,
     fontSize: BEER_NAME_FONT_SIZE,
   },
   description: {
+    maxHeight: itemHeight * 0.15,
     marginVertical: 10,
     marginHorizontal: 20,
     color: CARD_FONT_GREY,

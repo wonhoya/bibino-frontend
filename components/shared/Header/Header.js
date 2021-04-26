@@ -11,6 +11,12 @@ import { HeaderLogoSvg } from "../../../assets/svgs/ilusts";
 const Header = ({ navigation }) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const { name } = useRoute();
+  const handleBackButton = () => {
+    if (navigation.previous.route.name === "Success") {
+      return navigation.navigation.popToTop();
+    }
+    navigation.navigation.goBack();
+  };
 
   const isConfigurationScreen = name === "Configuration";
 
@@ -41,7 +47,7 @@ const Header = ({ navigation }) => {
         <View style={styles.header}>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigation.goBack()}
+            onPress={handleBackButton}
             disabled={isDisabled}
           >
             <AntDesign
