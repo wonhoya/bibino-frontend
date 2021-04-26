@@ -16,11 +16,13 @@ import ModalContainer from "../../components/ModalContainer/ModalContainer";
 import SectionDivider from "./SectionDivider/SectionDivider";
 import FeedbackBoard from "../../components/FeedbackBoard/FeedbackBoard";
 
-const Beer = ({ navigation }) => {
+const Beer = ({ navigation, route }) => {
   const moveY = useRef(new Animated.Value(100)).current;
   const scrollY = useRef(new Animated.Value(0)).current;
   const [isModalVisible, setModalVisible] = useState(false);
   const [shouldShowFeedBack, setShouldShowFeedBack] = useState(false);
+
+  console.log("route.params in beer", route.params);
 
   useEffect(() => {});
 

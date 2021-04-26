@@ -1,14 +1,17 @@
 import React, { useEffect } from "react";
-import { SafeAreaView, Text, View } from "react-native";
+import { Text, View } from "react-native";
 
 import styles from "./styles";
 import { FailureIcon } from "../../assets/svgs/icon";
 import { PretzelSvg } from "../../assets/svgs/ilusts";
 
-const Failure = ({ navigation }) => {
+const AnalyzeFailure = ({ navigation }) => {
   useEffect(() => {
     const id = setTimeout(() => {
-      navigation.navigate("Main");
+      const state = navigation.dangerouslyGetState();
+      console.log("state is", state);
+
+      navigation.navigate("Photo");
     }, 1500);
 
     return () => {
@@ -32,4 +35,4 @@ const Failure = ({ navigation }) => {
   );
 };
 
-export default Failure;
+export default AnalyzeFailure;

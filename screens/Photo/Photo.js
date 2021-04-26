@@ -10,7 +10,6 @@ import CameraLoading from "../Loading/CameraLoading";
 
 const Photo = ({ navigation }) => {
   const cameraRef = useRef(null);
-
   const [hasPermission, setHasPermission] = useState(null);
   const [isCameraReady, setisCameraReady] = useState(false);
   const [isPreview, setIsPreview] = useState(false);
@@ -19,6 +18,16 @@ const Photo = ({ navigation }) => {
   const [photobase64, setPhotobase64] = useState(null);
 
   useEffect(() => {
+    const unSubscribe = navigation.addListener("focus", () => {
+      setIsPreview(false);
+      setPhotobase64(null);
+    });
+
+    return unSubscribe;
+  }, [navigation]);
+
+  useEffect(() => {
+    console.log(1);
     navigation.setOptions({
       animationEnabled: false,
     });
@@ -60,35 +69,34 @@ const Photo = ({ navigation }) => {
   };
 
   const handleUse = async () => {
-    // try {
-    //   setIsParseStarted(true);
-    //   const response = await fetch(`${BACKEND_URL_FOR_DEV}/beers/scan`, {
-    //     method: "POST",
-    //     headers: {
-    //       Accept: "application/json",
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       base64: photobase64,
-    //     }),
-    //   });
-    //   if (!response.ok) {
-    //     return navigation.navigate("Failure");
-    //   }
-    //   const result = await response.json();
-    //   setIsParseStarted(false);
-    //   if (result.status === "Analyze Success") {
-    //     navigation.navigate("Success");
-    //   } else {
-    //     navigation.navigate("AnalyzeFailure");
-    //   }
-    // } catch (error) {
-    //   navigation.navigate("Failure");
-    // }
-
-    navigation.navigate("Success", {
-      beerId: 123,
-    });
+    try {
+      setIsParseStarted(true);
+      const response = await fetch(`${BACKEND_URL_FOR_DEV}/beers/scan`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          base64: photobase64,
+        }),
+      });
+      if (!response.ok) {
+        return navigation.navigate("Failure");
+      }
+      const result = await response.json();
+      setIsParseStarted(false);
+      if (result.status === "Analyze Success") {
+        navigation.navigate("Success", {
+          //result 에 포함되어 있는 beerId 반환
+          beerId: 123,
+        });
+      } else {
+        navigation.navigate("AnalyzeFailure");
+      }
+    } catch (error) {
+      navigation.navigate("Failure");
+    }
   };
 
   if (hasPermission === false) {
