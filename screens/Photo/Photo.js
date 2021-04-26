@@ -78,7 +78,6 @@ const Photo = ({ navigation }) => {
   const handleUse = async () => {
     try {
       setIsParseStarted(true);
-
       const response = await fetch(`${BACKEND_URL_FOR_DEV}/beers/scan`, {
         method: "POST",
         headers: {
@@ -90,6 +89,7 @@ const Photo = ({ navigation }) => {
           base64: photobase64,
         }),
       });
+
       if (!response.ok) {
         return navigation.navigate("Failure");
       }

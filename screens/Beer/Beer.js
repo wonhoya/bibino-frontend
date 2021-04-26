@@ -113,11 +113,11 @@ const Beer = ({ navigation, route }) => {
         <View style={styles.bannerContainer}>
           <Animated.Image
             style={[styles.image, styles.handleImageY(scrollY)]}
-            source={require("../../assets/pngs/beerSample1.png")}
+            source={{ uri: beerInfo.imagePath }}
           />
         </View>
-        <TitleContainer title="RAEA BEER" />
-        <RatingBoardContainer rating={4} />
+        <TitleContainer title={beerInfo.name} />
+        <RatingBoardContainer rating={beerInfo.averageRating} />
         <TagBoardContainer characterAverage={characterAverage} />
         <SectionDivider direction="right" text="Description" />
         <Animated.Text style={{ ...styles.description, top: moveY }}>
@@ -125,14 +125,17 @@ const Beer = ({ navigation, route }) => {
         </Animated.Text>
         <SectionDivider direction="left" text="Characteristic" />
         <Animated.View style={styles.handlePositionX(scrollY)}>
-          <CharacteristicContainer />
+          <CharacteristicContainer characterAverage={characterAverage} />
         </Animated.View>
         <SectionDivider direction="right" text="Recommendation" />
         <Animated.View style={styles.handleOpacity(scrollY)}>
-          <RecommendationBoardContainer />
+          <RecommendationBoardContainer beerInfo={beerInfo._id} />
         </Animated.View>
         <SectionDivider direction="left" text="Comments" />
-        <CommentBoardContainer navigation={navigation} />
+        <CommentBoardContainer
+          navigation={navigation}
+          beerInfo={beerInfo._id}
+        />
       </View>
       <Animated.View
         style={[styles.buttonContainer, styles.handleButtonY(scrollY)]}
