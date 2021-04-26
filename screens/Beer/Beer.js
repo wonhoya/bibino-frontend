@@ -62,9 +62,8 @@ const Beer = ({ navigation, route }) => {
         }
 
         const result = await response.json();
-        console.log("client response", result);
-        setBeerInfo(result);
 
+        setBeerInfo(result);
         setIsFetching(false);
       } catch (error) {
         navigation.navigate("Failure");

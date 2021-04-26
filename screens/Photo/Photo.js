@@ -76,37 +76,38 @@ const Photo = ({ navigation }) => {
   };
 
   const handleUse = async () => {
-    // try {
-    //   setIsParseStarted(true);
-    //   const response = await fetch(`${BACKEND_URL_FOR_DEV}/beers/scan`, {
-    //     method: "POST",
-    //     headers: {
-    //       ...headers,
-    //       Accept: "application/json",
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       base64: photobase64,
-    //     }),
-    //   });
-    //   if (!response.ok) {
-    //     return navigation.navigate("Failure");
-    //   }
-    //   const result = await response.json();
-    //   setIsParseStarted(false);
-    //   if (result.status === "Analyze Success") {
-    //     navigation.navigate("Success", {
-    //       beerId: result.payload._id,
-    //     });
-    //   } else {
-    //     navigation.navigate("AnalyzeFailure");
-    //   }
-    // } catch (error) {
-    //   navigation.navigate("Failure");
-    // }
-    navigation.navigate("Success", {
-      beerId: "60869bd7080896609959271a",
-    });
+    try {
+      setIsParseStarted(true);
+
+      const response = await fetch(`${BACKEND_URL_FOR_DEV}/beers/scan`, {
+        method: "POST",
+        headers: {
+          ...headers,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          base64: photobase64,
+        }),
+      });
+      if (!response.ok) {
+        return navigation.navigate("Failure");
+      }
+
+      const result = await response.json();
+
+      setIsParseStarted(false);
+
+      if (result.status === "Analyze Success") {
+        navigation.navigate("Success", {
+          beerId: result.payload._id,
+        });
+      } else {
+        navigation.navigate("AnalyzeFailure");
+      }
+    } catch (error) {
+      navigation.navigate("Failure");
+    }
   };
 
   if (hasPermission === false) {
