@@ -5,7 +5,7 @@ import styles from "./styles";
 
 import CommentCard from "../shared/CommentCard/CommentCard";
 
-const CommentBoard = () => {
+const CommentBoard = (beerId) => {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 

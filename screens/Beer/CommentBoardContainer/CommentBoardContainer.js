@@ -4,10 +4,10 @@ import { View, TouchableOpacity, Text } from "react-native";
 import styles from "./styles";
 import CommentBoard from "../../../components/CommentBoard/CommentBoard";
 
-const CommentBoardContainer = ({ navigation }) => {
+const CommentBoardContainer = ({ navigation, beerId }) => {
   return (
     <View style={styles.container}>
-      <CommentBoard />
+      <CommentBoard beerId={beerId} />
       <TouchableOpacity
         style={styles.commentContainer}
         onPress={() => navigation.navigate("Comments")}

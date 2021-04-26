@@ -132,10 +132,7 @@ const Beer = ({ navigation, route }) => {
           <RecommendationBoardContainer beerInfo={beerInfo._id} />
         </Animated.View>
         <SectionDivider direction="left" text="Comments" />
-        <CommentBoardContainer
-          navigation={navigation}
-          beerInfo={beerInfo._id}
-        />
+        <CommentBoardContainer navigation={navigation} beerId={beerInfo._id} />
       </View>
       <Animated.View
         style={[styles.buttonContainer, styles.handleButtonY(scrollY)]}
