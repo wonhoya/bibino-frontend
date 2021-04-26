@@ -31,10 +31,6 @@ const Configuration = () => {
     if (method === "logout") {
       logOutUser();
     }
-
-    if (method === "resign") {
-      resignUser();
-    }
   }, [method, dispatch]);
 
   const handleLogOut = () => {
