@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 
 import { PRIMARY_WHITE } from "../../constants/colors";
 import { RUBIK_REGULAR, RUBIK_BOLD } from "../../constants/font";
@@ -6,6 +6,8 @@ import {
   PROFILE_SORT_FONT_SIZE,
   PROFILE_TITLE_FONT_SIZE,
 } from "../../constants/size";
+
+const { height: windowHeight } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
@@ -16,6 +18,11 @@ const styles = StyleSheet.create({
     flex: 1.5,
     justifyContent: "flex-end",
     alignItems: "center",
+  },
+  avatar: {
+    width: windowHeight * 0.1,
+    height: windowHeight * 0.1,
+    borderRadius: 50,
   },
   title: {
     marginTop: 10,
