@@ -15,10 +15,11 @@ const initialState = {
   avatar: null,
   status: ASYNC_STATUS.IDLE,
   error: null,
+  beers: [],
 };
 
 const signInUser = createAsyncThunk(
-  "user/userSignedIn",
+  "user/signInUser",
   async (idToken, { dispatch }) => {
     try {
       const googleIdToken = await getGoogleIdToken(idToken);
@@ -41,6 +42,14 @@ const signInUser = createAsyncThunk(
   }
 );
 
+const fetchMyBeers = createAsyncThunk(
+  "user/fetchMyBeers",
+  async (_, { getState }) => {
+    try {
+      const { idToken } = getState().token;
+    } catch (err) {}
+  }
+);
 const userSlice = createSlice({
   name: "user",
   initialState,
