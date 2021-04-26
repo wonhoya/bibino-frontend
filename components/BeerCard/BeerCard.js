@@ -26,6 +26,7 @@ const BeerCard = ({ imagePath, name, description }) => {
           },
         })
       }
+      activeOpacity={1}
     >
       <View style={[styles.topCircularBorder, styles.imageContainer]}>
         <ImageBackground

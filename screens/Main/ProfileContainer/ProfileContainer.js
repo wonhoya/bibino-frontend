@@ -6,6 +6,7 @@ import TagBoard from "../../../components/shared/TagBoard/TagBoard";
 
 //mockData
 import { ProfileIcon } from "../../../assets/svgs/icon";
+import { ScrollView } from "react-native-gesture-handler";
 
 const ProfileContainer = ({ userName, userAvatar }) => {
   return (
@@ -15,7 +16,9 @@ const ProfileContainer = ({ userName, userAvatar }) => {
           <View style={styles.paragraphContainer}>
             <Text style={styles.paragraph}>Hello,</Text>
           </View>
-          <Text style={styles.username}>{userName}님</Text>
+          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.username}>
+            {userName}님
+          </Text>
         </View>
         <View style={styles.imageContainer}>
           <ProfileIcon />

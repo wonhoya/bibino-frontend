@@ -23,8 +23,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "baseline",
     paddingTop: Platform.OS === "android" ? 0 : 10,
+    maxWidth: 500,
   },
   paragraphContainer: {
+    maxWidth: 100,
     marginVertical: 4,
   },
   imageContainer: {
