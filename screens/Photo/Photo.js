@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 import { View } from "react-native";
 import { Camera } from "expo-camera";
 import { BACKEND_URL_FOR_DEV } from "@env";
@@ -7,6 +8,8 @@ import styles from "./styles";
 import Configuration from "../Configuration/Configuration";
 import PhotoTabBar from "../../components/PhotoTabBar/PhotoTabBar";
 import CameraLoading from "../Loading/CameraLoading";
+import { selectIdToken } from "../../features/tokenSlice";
+import generateHeaderOption from "../../utils/generateHeaderOption";
 
 const Photo = ({ navigation }) => {
   const cameraRef = useRef(null);
@@ -16,6 +19,9 @@ const Photo = ({ navigation }) => {
   const [isParseStarted, setIsParseStarted] = useState(false);
   const [isAnimationFinished, setIsAnimationFinished] = useState(false);
   const [photobase64, setPhotobase64] = useState(null);
+
+  const idToken = useSelector(selectIdToken);
+  const headers = generateHeaderOption(idToken);
 
   useEffect(() => {
     const unSubscribe = navigation.addListener("focus", () => {
@@ -27,7 +33,6 @@ const Photo = ({ navigation }) => {
   }, [navigation]);
 
   useEffect(() => {
-    console.log(1);
     navigation.setOptions({
       animationEnabled: false,
     });
@@ -74,6 +79,7 @@ const Photo = ({ navigation }) => {
       const response = await fetch(`${BACKEND_URL_FOR_DEV}/beers/scan`, {
         method: "POST",
         headers: {
+          ...headers,
           Accept: "application/json",
           "Content-Type": "application/json",
         },

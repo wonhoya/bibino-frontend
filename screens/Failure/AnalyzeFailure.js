@@ -8,9 +8,6 @@ import { PretzelSvg } from "../../assets/svgs/ilusts";
 const AnalyzeFailure = ({ navigation }) => {
   useEffect(() => {
     const id = setTimeout(() => {
-      const state = navigation.dangerouslyGetState();
-      console.log("state is", state);
-
       navigation.navigate("Photo");
     }, 1500);
 
