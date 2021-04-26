@@ -10,10 +10,10 @@ import { LogOutIcon, ResignIcon, ContactIcon } from "../../assets/svgs/icon";
 
 const Configuration = () => {
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(false);
+  const [method, setMethod] = useState("");
 
   useEffect(() => {
-    if (!isLoading) {
+    if (!method) {
       return;
     }
     const logOutUser = async () => {
@@ -24,15 +24,25 @@ const Configuration = () => {
       } catch (err) {
         // 에러 핸들링
       } finally {
-        setIsLoading(false);
+        setMethod("");
       }
     };
 
-    logOutUser();
-  }, [isLoading, dispatch]);
+    if (method === "logout") {
+      logOutUser();
+    }
+
+    if (method === "resign") {
+      resignUser();
+    }
+  }, [method, dispatch]);
 
   const handleLogOut = () => {
-    setIsLoading(true);
+    setMethod("logout");
+  };
+
+  const handleResign = () => {
+    setMethod("resign");
   };
 
   return (
@@ -44,7 +54,7 @@ const Configuration = () => {
         <TouchableOpacity
           style={styles.buttonBoard}
           onPress={handleLogOut}
-          disabled={isLoading}
+          disabled={!!method}
         >
           <LogOutIcon />
           <View style={styles.textBoard}>
@@ -52,14 +62,18 @@ const Configuration = () => {
             <Text style={styles.buttonDescription}>Membership logout</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonBoard} disabled={isLoading}>
+        <TouchableOpacity
+          style={styles.buttonBoard}
+          disabled={!!method}
+          onPress={handleResign}
+        >
           <ResignIcon />
           <View style={styles.textBoard}>
             <Text style={styles.buttonTitle}>Resign</Text>
             <Text style={styles.buttonDescription}>Membership resign</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonBoard} disabled={isLoading}>
+        <TouchableOpacity style={styles.buttonBoard} disabled={!!method}>
           <ContactIcon />
           <View style={styles.textBoard}>
             <Text style={styles.buttonTitle}>Contact</Text>
