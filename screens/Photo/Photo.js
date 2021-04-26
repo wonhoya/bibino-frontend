@@ -41,9 +41,11 @@ const Photo = ({ navigation }) => {
   useEffect(() => {
     const requestPermission = async () => {
       const { status } = await Camera.requestPermissionsAsync();
+
       if (status === "granted") {
         return setHasPermission(true);
       }
+
       if (status === "denied" || "undetermined") {
         return setHasPermission(false);
       }
@@ -87,15 +89,18 @@ const Photo = ({ navigation }) => {
           base64: photobase64,
         }),
       });
+
       if (!response.ok) {
         return navigation.navigate("Failure");
       }
+
       const result = await response.json();
+
       setIsParseStarted(false);
+
       if (result.status === "Analyze Success") {
         navigation.navigate("Success", {
-          //result 에 포함되어 있는 beerId 반환
-          beerId: 123,
+          beerId: result.payload._id,
         });
       } else {
         navigation.navigate("AnalyzeFailure");

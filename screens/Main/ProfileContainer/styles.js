@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   username: {
     color: PRIMARY_DARK_GREY,
     fontFamily: RUBIK_BOLD,
-    fontSize: MAIN_USERNAME_FONT_SIZE,
+    fontSize: windowHeight * 0.05,
   },
   paragraph: {
     color: PRIMARY_BLACK,

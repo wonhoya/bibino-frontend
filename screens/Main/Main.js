@@ -62,7 +62,12 @@ const Main = () => {
     <>
       <SafeAreaView />
       <View style={styles.container}>
-        <ProfileContainer userName={user.name} userAvatar={user.avatar} />
+        <ProfileContainer
+          userName={user.name}
+          userAvatar={user.avatar}
+          userCharacterAverage={user.charcteristc}
+          userReviewCount={user.reviewCounts}
+        />
         <ContentsContainer beers={todayBeersData.beers} />
       </View>
     </>

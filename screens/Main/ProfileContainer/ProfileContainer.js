@@ -4,11 +4,12 @@ import { View, Text, Image } from "react-native";
 import styles from "./styles";
 import TagBoard from "../../../components/shared/TagBoard/TagBoard";
 
-//mockData
-import { ProfileIcon } from "../../../assets/svgs/icon";
-import { ScrollView } from "react-native-gesture-handler";
-
-const ProfileContainer = ({ userName, userAvatar }) => {
+const ProfileContainer = ({
+  userName,
+  userAvatar,
+  userCharacterAverage,
+  userReviewCount,
+}) => {
   return (
     <View style={styles.container}>
       <View style={styles.upperContainer}>
@@ -21,12 +22,14 @@ const ProfileContainer = ({ userName, userAvatar }) => {
           </Text>
         </View>
         <View style={styles.imageContainer}>
-          <ProfileIcon />
           <Image source={{ uri: userAvatar }} />
         </View>
       </View>
       <View style={styles.tagContainer}>
-        <TagBoard />
+        <TagBoard
+          userCharacterAverage={userCharacterAverage}
+          userReviewCount={userReviewCount}
+        />
       </View>
     </View>
   );

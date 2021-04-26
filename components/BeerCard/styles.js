@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
   },
   descriptionContainer: {
     flex: 1,
-    // justifyContent: "center",
     overflow: "hidden",
     width: "100%",
     backgroundColor: PRIMARY_BLACK,

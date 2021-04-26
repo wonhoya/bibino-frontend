@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import { View, Animated, Easing } from "react-native";
 import { FloatingAction } from "react-native-floating-action";
+import { useNavigationState } from "@react-navigation/native";
+import { BACKEND_URL_FOR_DEV } from "@env";
 
 import styles from "./styles";
 import { PRIMARY_ORANGE } from "../../constants/colors";
@@ -15,16 +18,58 @@ import RecommendationBoardContainer from "./RecommendationBoardContainer/Recomme
 import ModalContainer from "../../components/ModalContainer/ModalContainer";
 import SectionDivider from "./SectionDivider/SectionDivider";
 import FeedbackBoard from "../../components/FeedbackBoard/FeedbackBoard";
+import { selectIdToken } from "../../features/tokenSlice";
+import generateHeaderOption from "../../utils/generateHeaderOption";
 
 const Beer = ({ navigation, route }) => {
+  const navState = useNavigationState((state) => state);
   const moveY = useRef(new Animated.Value(100)).current;
   const scrollY = useRef(new Animated.Value(0)).current;
+  const [isLoading, setIsLoading] = useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
   const [shouldShowFeedBack, setShouldShowFeedBack] = useState(false);
 
-  console.log("route.params in beer", route.params);
+  const idToken = useSelector(selectIdToken);
+  const headers = generateHeaderOption(idToken);
 
-  useEffect(() => {});
+  useEffect(() => {
+    if (navState.routes[navState.index - 1]?.name === "Success") {
+      navigation.setOptions({
+        gestureEnabled: false,
+      });
+    }
+  }, [navigation, navState.index, navState.routes]);
+
+  useEffect(() => {
+    const getBeer = async () => {
+      try {
+        setIsLoading(true);
+
+        const response = await fetch(
+          `${BACKEND_URL_FOR_DEV}/beers/${route.params.beerId}`,
+          {
+            method: "GET",
+            headers: {
+              ...headers,
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (!response.ok) {
+          return navigation.navigate("Failure");
+        }
+
+        const result = await response.json();
+
+        setIsLoading(false);
+      } catch (error) {
+        navigation.navigate("Failure");
+      }
+    };
+    getBeer();
+  }, [headers, navigation, route.params.beerId]);
 
   useEffect(() => {
     Animated.timing(moveY, {
