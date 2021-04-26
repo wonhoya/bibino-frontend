@@ -16,6 +16,7 @@ const initialState = {
   status: ASYNC_STATUS.IDLE,
   error: null,
   beers: [],
+  shouldFetchBeers: true,
 };
 
 const signInUser = createAsyncThunk(
@@ -31,9 +32,14 @@ const signInUser = createAsyncThunk(
       });
       const { user, idTokenByBibino } = await response.json();
       await dispatch(saveIdToken(idTokenByBibino));
-
+      dispatch(userBeersFetched());
       return {
-        user: { id: user._id, avatar: user.imagePath, name: user.name },
+        user: {
+          id: user._id,
+          avatar: user.imagePath,
+          name: user.name,
+          beers: user.beers,
+        },
       };
     } catch (err) {
       showErrorInDevelopment("Faild an user sign in ", err);
@@ -47,15 +53,22 @@ const fetchMyBeers = createAsyncThunk(
   async (_, { getState }) => {
     try {
       const { idToken } = getState().token;
+      const { id: userId } = getState().user;
+      const headers = generateHeaderOption(idToken);
+      const response = await fetch(`${serverUrl}/users/${userId}/my-beers`);
     } catch (err) {}
   }
 );
+
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
     userStatusSet: (state, action) => {
       state.status = action.payload;
+    },
+    userBeersFetched: (state) => {
+      state.shouldFetchBeers = false;
     },
     userDeleted: (state) => {
       state = initialState;
@@ -78,6 +91,6 @@ const userSlice = createSlice({
   },
 });
 
-const { userStatusSet, userDeleted } = userSlice.actions;
+const { userStatusSet, userDeleted, userBeersFetched } = userSlice.actions;
 
-export { userSlice, signInUser, userStatusSet, userDeleted };
+export { userSlice, signInUser, userStatusSet, userDeleted, userBeersFetched };

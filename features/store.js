@@ -22,22 +22,25 @@ import { userSlice } from "./userSlice";
 // AsyncStorage.clear();
 // SecureStore.deleteItemAsync("idToken");
 
-const rootReducer = combineReducers({
-  todayBeers: todayBeersSlice.reducer,
-  token: tokenSlice.reducer,
-  user: userSlice.reducer,
-});
-
-const persistConfig = {
-  key: "root",
+const todayBeersPersistConfig = {
+  key: "todayBeers",
   storage: AsyncStorage,
-  whitelist: ["user", "todayBeers"],
+  blacklist: ["status", "error"],
+};
+const userPersistConfig = {
+  key: "user",
+  storage: AsyncStorage,
+  blacklist: ["shouldFetchBeers", "status", "error"],
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const rootReducer = combineReducers({
+  todayBeers: persistReducer(todayBeersPersistConfig, todayBeersSlice.reducer),
+  token: tokenSlice.reducer,
+  user: persistReducer(userPersistConfig, userSlice.reducer),
+});
 
 const store = configureStore({
-  reducer: persistedReducer,
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
