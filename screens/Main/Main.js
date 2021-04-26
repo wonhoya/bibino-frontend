@@ -20,9 +20,6 @@ const Main = () => {
   });
   const user = useSelector((state) => state.user);
 
-  console.log("user charcteristc", user.charcteristc);
-  console.log("user review counet", user.reviewCounts);
-
   useEffect(() => {
     if (!isLoading) {
       return;

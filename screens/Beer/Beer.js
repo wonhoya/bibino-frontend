@@ -44,6 +44,7 @@ const Beer = ({ navigation, route }) => {
     const getBeer = async () => {
       try {
         setIsLoading(true);
+
         const response = await fetch(
           `${BACKEND_URL_FOR_DEV}/beers/${route.params.beerId}`,
           {
@@ -61,8 +62,8 @@ const Beer = ({ navigation, route }) => {
         }
 
         const result = await response.json();
+
         setIsLoading(false);
-        console.log("beer detail result is", result);
       } catch (error) {
         navigation.navigate("Failure");
       }
