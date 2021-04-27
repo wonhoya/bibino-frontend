@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { View, Text, TextInput } from "react-native";
+import { useSelector } from "react-redux";
 import Modal from "react-native-modal";
-import { BACKEND_URL_FOR_DEV } from "@env";
 
 import styles from "./styles";
+import { SERVER_URL } from "../../config";
+import generateHeaderOption from "../../utils/generateHeaderOption";
+import showErrorInDevelopment from "../../utils/showErrorInDevelopment";
+import { selectIdToken } from "../../features/userSlice";
 import RatingBoard from "../shared/RatingBoard/RatingBoard";
 import Button from "../shared/Button/Button";
 import CharacteristicContainer from "./CharacteristicContainer/CharacteristicContainer";
@@ -13,7 +17,10 @@ const ModalContainer = ({
   isModalVisible,
   closeModal,
   setShouldShowFeedBack,
+  reviewId,
+  beerId,
 }) => {
+  const idToken = useSelector(selectIdToken);
   const [comment, setComment] = useState("");
   const [review, setReview] = useState({
     beerId: null,
@@ -22,27 +29,39 @@ const ModalContainer = ({
     body: 5,
     sparkling: 5,
   });
-
+  console.log(comment);
   const handleSubmit = async () => {
+    const serverUrl = SERVER_URL[process.env.NODE_ENV];
+    const url = `${serverUrl}/reviews/${reviewId || "new"}`;
+    const method = reviewId ? "PUT" : "POST";
+    const headers = generateHeaderOption(idToken);
+    const { rating, aroma, body, sparkling } = review;
+
     try {
-      const response = await fetch(`${BACKEND_URL_FOR_DEV}/users/123/review`, {
-        method: "POST",
+      const response = await fetch(url, {
+        method,
         headers: {
+          ...headers,
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ review, comment }),
+        body: JSON.stringify({
+          beerId,
+          review: { rating, aroma, body, sparkling },
+          comment,
+        }),
       });
 
       if (!response.ok) {
         return navigation.navigate("Failure");
       }
 
-      const result = await response.json();
+      await response.json();
 
       closeModal();
       setShouldShowFeedBack(true);
-    } catch (error) {
+    } catch (err) {
+      showErrorInDevelopment("Failed Review post ", err);
       navigation.navigate("Failure");
     }
   };

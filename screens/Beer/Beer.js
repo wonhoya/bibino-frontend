@@ -48,6 +48,10 @@ const Beer = ({ navigation, route }) => {
   }, [navigation, navState.index, navState.routes]);
 
   useEffect(() => {
+    if (isModalVisible) {
+      return;
+    }
+    console.log("hello");
     const serverUrl = SERVER_URL[process.env.NODE_ENV];
     const headers = generateHeaderOption(idToken);
     const fetchUrls = [
@@ -111,7 +115,7 @@ const Beer = ({ navigation, route }) => {
     };
 
     fetchAllData();
-  }, [idToken, navigation, beerId, userId, dispatch]);
+  }, [idToken, navigation, beerId, userId, dispatch, isModalVisible]);
 
   useEffect(() => {
     Animated.timing(moveY, {
@@ -201,6 +205,8 @@ const Beer = ({ navigation, route }) => {
         closeModal={closeModal}
         navigation={navigation}
         setShouldShowFeedBack={setShouldShowFeedBack}
+        reviewId={myReview._id}
+        beerId={beerInfo._id}
       />
       {shouldShowFeedBack && (
         <Animated.View style={{ ...styles.feedbackContainer, top: scrollY }}>
