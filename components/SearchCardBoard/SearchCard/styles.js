@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 
 import { RUBIK_REGULAR, RUBIK_BOLD } from "../../../constants/font";
 import {
@@ -7,25 +7,23 @@ import {
 } from "../../../constants/size";
 import { SEARCH_DARK_GREEN, PRIMARY_BLACK } from "../../../constants/colors";
 
+const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    width: "100%",
-    height: 120,
-    marginVertical: 10,
-  },
-  imageContainer: {
     flex: 1,
-    borderTopLeftRadius: 8,
-    borderBottomLeftRadius: 8,
-  },
-  image: {
-    width: "100%",
-    height: "100%",
-    borderTopLeftRadius: 8,
-    borderBottomLeftRadius: 8,
+    flexDirection: "row",
+    minHeight: windowHeight * 0.09,
+    borderWidth: 0.5,
+    borderColor: "black",
+    borderLeftColor: "white",
+    borderRightColor: "white",
+    borderTopColor: "white",
   },
   name: {
+    minWidth: windowWidth * 4,
+    maxHeight: windowHeight * 0.05,
+    marginBottom: 9,
     color: PRIMARY_BLACK,
     fontFamily: RUBIK_BOLD,
     fontSize: SEARCH_CARD_TITLE_FONT_SIZE,
@@ -40,19 +38,9 @@ const styles = StyleSheet.create({
     fontFamily: RUBIK_REGULAR,
     fontSize: SEARCH_CARD_PARAGRAPH_FONT_SIZE,
   },
+  textContainer: {
+    marginVertical: windowHeight * 0.01,
+  },
 });
-
-styles.textContainer = (backgroundColor) => {
-  return {
-    flex: 1.9,
-    flexDirection: "column",
-    justifyContent: "space-around",
-    paddingHorizontal: 17,
-    paddingVertical: 10,
-    borderTopRightRadius: 8,
-    borderBottomRightRadius: 8,
-    backgroundColor,
-  };
-};
 
 export default styles;

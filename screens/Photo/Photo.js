@@ -95,7 +95,6 @@ const Photo = ({ navigation }) => {
       }
 
       const result = await response.json();
-
       setIsParseStarted(false);
 
       if (result.status === "Analyze Success") {
