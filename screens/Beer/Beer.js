@@ -49,83 +49,34 @@ const Beer = ({ navigation, route }) => {
   useEffect(() => {
     const serverUrl = SERVER_URL[process.env.NODE_ENV];
     const headers = generateHeaderOption(idToken);
-
-    const fetchBeer = async () => {
-      try {
-        const response = await fetch(`${serverUrl}/beers/${beerId}`, {
-          method: "GET",
-          headers: {
-            ...headers,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (!response.ok) {
-          return navigation.navigate("Failure");
-        }
-
-        return await response.json();
-      } catch (error) {
-        navigation.navigate("Failure");
-      }
-    };
-
-    const fetchMyReview = async () => {
-      const response = await fetch(
-        `${serverUrl}/beers/${beerId}/reviews/single`,
-        {
-          headers: {
-            ...headers,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      return await response.json();
-    };
-
-    const fetchComments = async () => {
-      const response = await fetch(`${serverUrl}/beers/${beerId}/comments/`, {
-        headers: {
-          ...headers,
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
-
-      return await response.json();
-    };
-
-    const fetchRecommendation = async () => {
-      const response = await fetch(
-        `${serverUrl}/beers/${beerId}/recommendations/`,
-        {
-          headers: {
-            ...headers,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      return await response.json();
-    };
+    const fetchUrls = [
+      `${serverUrl}/beers/${beerId}`,
+      `${serverUrl}/beers/${beerId}/reviews/single`,
+      `${serverUrl}/beers/${beerId}/comments/`,
+      `${serverUrl}/beers/${beerId}/recommendations/`,
+    ];
 
     const fetchAllData = async () => {
+      const fetchedDatum = fetchUrls.map((url) => {
+        return (async () => {
+          const response = await fetch(url, {
+            headers: {
+              ...headers,
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          });
+
+          return await response.json();
+        })();
+      });
       try {
         const [
           fetchedBeerData,
           fetchedMyReview,
           fetchedCommentDatum,
           fetchedRecommendation,
-        ] = await Promise.all([
-          fetchBeer(),
-          fetchMyReview(),
-          fetchComments(),
-          fetchRecommendation(),
-        ]);
+        ] = await Promise.all(fetchedDatum);
 
         setBeerInfo(fetchedBeerData);
         setMyReview(fetchedMyReview || {});
