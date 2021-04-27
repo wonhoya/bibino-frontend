@@ -19,10 +19,11 @@ const fetchSearchBeers = debounce(
         return {
           id: beer._id,
           name: beer.name,
-          description: beer.description.slice(0, 25) + "...",
+          description: beer.description,
           imagePath: beer.imagePath,
         };
       });
+
       setSearchedBeers(managedSearchedBeers);
     } catch (err) {
       showErrorInDevelopment("Faild search beer ", err);

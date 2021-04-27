@@ -4,14 +4,9 @@ import { useSelector } from "react-redux";
 
 import styles from "./styles";
 import { SearchIcon } from "../../assets/svgs/icon";
-import { SEARCH_TITLE_TEXT } from "../../constants/text";
 import fetchSearchBeers from "../../utils/fetchSearchBeers";
 import { selectIdToken } from "../../features/tokenSlice";
 import SearchCardBoard from "../../components/SearchCardBoard/SearchCardBoard";
-
-//mockup
-//https://github.com/RazaShehryar/react-native-modal-dropdown#api
-//onSelect <= interaction func
 
 const Search = () => {
   const idToken = useSelector(selectIdToken);
@@ -39,7 +34,7 @@ const Search = () => {
               autoCapitalize="none"
               autoCorrect={false}
               style={styles.input}
-              placeholder="Search b"
+              placeholder="Search beer"
               onChangeText={handleSearchInput}
               value={searchInput}
             />
