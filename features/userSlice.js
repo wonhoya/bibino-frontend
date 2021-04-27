@@ -29,13 +29,13 @@ const signInUser = createAsyncThunk("user/signInUser", async (idToken) => {
       method: "POST",
       headers,
     });
-    const { user, idTokenByBibino } = await response.json();
-    await SecureStore.setItemAsync("idToken", idTokenByBibino);
+    const { user, myAppIdToken } = await response.json();
+    await SecureStore.setItemAsync("idToken", myAppIdToken);
 
     return {
       user: {
         id: user._id,
-        idToken: idTokenByBibino,
+        idToken: myAppIdToken,
         name: user.name,
         avatar: user.imagePath,
         reviewCounts: user.reviewCounts,

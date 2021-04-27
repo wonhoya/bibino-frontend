@@ -85,7 +85,7 @@ const Main = ({ navigation }) => {
         <ProfileContainer
           userName={user.name}
           userAvatar={user.avatar}
-          characterAverage={user.charcteristic}
+          characterAverage={user.characteristic}
           reviewCount={user.reviewCounts}
         />
         <ContentsContainer beers={todayBeersData.beers} />
