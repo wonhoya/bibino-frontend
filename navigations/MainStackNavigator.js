@@ -17,7 +17,7 @@ import Comments from "../screens/Comments/Comments";
 const Stack = createStackNavigator();
 
 const MainStackNavigator = () => {
-  const isLogIn = useSelector((state) => !!state.user.id);
+  const isLogedIn = useSelector((state) => !!state.user.idToken);
 
   const authScreens = {
     Intro,
@@ -35,16 +35,16 @@ const MainStackNavigator = () => {
   };
 
   return (
-    <Stack.Navigator headerMode={isLogIn ? "screen" : "none"}>
+    <Stack.Navigator headerMode={isLogedIn ? "screen" : "none"}>
       {Object.entries({
-        ...(isLogIn ? userScreens : authScreens),
+        ...(isLogedIn ? userScreens : authScreens),
       }).map(([name, component], i) => (
         <Stack.Screen
           key={i}
           name={name}
           component={component}
           options={
-            isLogIn
+            isLogedIn
               ? {
                   header: (navigation) => <Header navigation={navigation} />,
                 }
