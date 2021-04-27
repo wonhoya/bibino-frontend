@@ -14,7 +14,7 @@ const TitleContainer = ({ title, rating, reviewCounts }) => {
       </Text>
       <View style={styles.descriptionContainer}>
         <Text style={styles.ratingFont}>
-          {rating ? `Your Rating is ${rating}` : null}
+          {rating ? `My Rating ${rating}` : null}
         </Text>
         <Text style={styles.descriptionFont}>{reviewCounts} reviews</Text>
       </View>

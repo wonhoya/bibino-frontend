@@ -16,9 +16,7 @@ const CameraLoading = ({ navigation }) => {
           speed={0.6}
         />
       </View>
-      <View style={styles.descriptionContainer}>
-        <Text style={styles.description}>Analzing...</Text>
-      </View>
+      <View style={styles.descriptionContainer} />
     </View>
   );
 };
