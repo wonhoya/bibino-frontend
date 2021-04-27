@@ -14,13 +14,7 @@ const BeerCard = ({ beerId, imagePath, name, description }) => {
         styles.bottomCircularBorder,
         styles.container,
       ]}
-      onPress={() =>
-        navigate("Beer", {
-          params: {
-            beerId,
-          },
-        })
-      }
+      onPress={() => navigate("Beer", { beerId })}
       activeOpacity={1}
     >
       <View style={[styles.topCircularBorder, styles.imageContainer]}>
