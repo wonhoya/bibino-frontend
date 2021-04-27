@@ -11,7 +11,7 @@ import { PRIMARY_ORANGE } from "../../constants/colors";
 
 import Loading from "../Loading/Loading";
 import FirstRankingContainer from "./FirstRankingContainer/FirstRankingContainer";
-
+import SecondRankingContainer from "./SecondRankingContainer/SecondRankingContainer";
 import generateHeaderOption from "../../utils/generateHeaderOption";
 import { selectIdToken } from "../../features/userSlice";
 
@@ -103,25 +103,7 @@ const Ranking = ({ navigation }) => {
       <Animated.View
         style={{ ...styles.secondContainer, opacity: secondOpacity }}
       >
-        <View style={styles.secondRankingDescriptionContainer}>
-          <Text style={styles.rating}>
-            <CountUp isCounting end={3.5} duration={3.2} /> stars
-          </Text>
-          <Text style={styles.reviewCount}>
-            based on <CountUp isCounting end={402} duration={3.2} /> review
-          </Text>
-          <Text style={styles.secondName}>Cass</Text>
-        </View>
-        <View
-          style={[
-            styles.secondRankingNumberContainer,
-            {
-              transform: [{ translateY: 50 }, { translateX: 5 }],
-            },
-          ]}
-        >
-          <Text style={styles.secondNumber}>2</Text>
-        </View>
+        <SecondRankingContainer />
       </Animated.View>
 
       <Animated.View
