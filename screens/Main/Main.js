@@ -77,7 +77,8 @@ const Main = ({ navigation }) => {
   if (shouldUpdateTodayBeers || isLoading) {
     return <Loading />;
   }
-
+  console.log("user", user);
+  console.log("characterAverage", user.characteristic);
   return (
     <>
       <SafeAreaView />

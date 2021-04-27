@@ -9,6 +9,8 @@ import {
 import styles from "./styles";
 
 const TagBoard = ({ characterAverage, reviewCount }) => {
+  console.log("characterAverage", characterAverage);
+
   let tags =
     reviewCount || reviewCount === 0
       ? distributeUserTag(characterAverage, reviewCount)
