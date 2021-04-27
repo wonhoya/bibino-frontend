@@ -1,3 +1,5 @@
+import { StyleSheet } from "react-native";
+
 import {
   PRIMARY_ORANGE,
   PRIMARY_GREY,
@@ -8,8 +10,6 @@ import {
   SIGN_IN_TITLE_FONT_SIZE,
   SIGN_IN_DESCRIPTION_FONT_SIZE,
 } from "../../constants/size";
-
-import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {

@@ -5,6 +5,7 @@ import TabBar from "../components/shared/TabBar/TabBar";
 import Main from "../screens/Main/Main";
 import Search from "../screens/Search/Search";
 import Profile from "../screens/Profile/Profile";
+import Ranking from "../screens/Ranking/Ranking";
 
 const MainTab = createBottomTabNavigator();
 
@@ -17,6 +18,7 @@ const MainTabNavigator = () => {
       <MainTab.Screen name="Main" component={Main} />
       <MainTab.Screen name="Search" component={Search} />
       <MainTab.Screen name="Profile" component={Profile} />
+      <MainTab.Screen name="Ranking" component={Ranking} />
     </MainTab.Navigator>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, View, Text, TextInput } from "react-native";
+import { SafeAreaView, View, TextInput } from "react-native";
 import { useSelector } from "react-redux";
 
 import styles from "./styles";

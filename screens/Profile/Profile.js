@@ -26,8 +26,8 @@ const Profile = ({ navigation }) => {
 
   const informationPhrase =
     isFetchingUserBeers === ASYNC_STATUS.FAILED
-      ? "사진 불러오기 실패.\n화면을 아래로 당겨서 새로고침 해주세요."
-      : "사진이 없습니다. 맥주를 찍어보세요.";
+      ? "Fail to get photos\nPlease swipe down to refresh"
+      : "No photos. Please take a picture";
 
   useEffect(() => {
     if (!shouldFetch) {
