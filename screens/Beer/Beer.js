@@ -36,7 +36,7 @@ const Beer = ({ navigation, route }) => {
   const [myReview, setMyReview] = useState(null);
   const [recommendation, setRecommendation] = useState(null);
   const idToken = useSelector(selectIdToken);
-  const commentsData = useSelector(getComments);
+  const commentDatum = useSelector(getComments);
 
   useEffect(() => {
     if (navState.routes[navState.index - 1]?.name === "Success") {
@@ -118,7 +118,7 @@ const Beer = ({ navigation, route }) => {
         const [
           fetchedBeerData,
           fetchedMyReview,
-          fetchedCommentsData,
+          fetchedCommentDatum,
           fetchedRecommendation,
         ] = await Promise.all([
           fetchBeer(),
@@ -129,7 +129,7 @@ const Beer = ({ navigation, route }) => {
 
         setBeerInfo(fetchedBeerData);
         setMyReview(fetchedMyReview || {});
-        dispatch(commentsAdded(fetchedCommentsData || []));
+        dispatch(commentsAdded(fetchedCommentDatum || []));
         setRecommendation(fetchedRecommendation);
       } catch (err) {
         setBeerInfo({});
@@ -190,8 +190,8 @@ const Beer = ({ navigation, route }) => {
         </View>
         <TitleContainer
           title={beerInfo.name}
-          myRating={myReview.rating}
-          reviewsNumber={commentsData.length}
+          rating={myReview.rating}
+          reviewCounts={commentDatum.length}
         />
         <RatingBoardContainer rating={beerInfo.averageRating} />
         <TagBoardContainer characterAverage={characterAverage} />
@@ -210,7 +210,7 @@ const Beer = ({ navigation, route }) => {
         <SectionDivider direction="left" text="Comments" />
         <CommentBoardContainer
           navigation={navigation}
-          commentsData={commentsData}
+          commentDatum={commentDatum}
         />
       </View>
       <Animated.View

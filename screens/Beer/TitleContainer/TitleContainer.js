@@ -6,7 +6,7 @@ import { RUBIK_MEDIUM } from "../../../constants/font";
 
 const { width: windowWidth } = Dimensions.get("window");
 
-const TitleContainer = ({ title, rating, reviewsNumber }) => {
+const TitleContainer = ({ title, rating, reviewCounts }) => {
   return (
     <View style={styles.container}>
       <Text style={{ fontFamily: RUBIK_MEDIUM, fontSize: windowWidth / 12 }}>
@@ -16,7 +16,7 @@ const TitleContainer = ({ title, rating, reviewsNumber }) => {
         <Text style={styles.ratingFont}>
           {rating ? `Your Rating is ${rating}` : null}
         </Text>
-        <Text style={styles.descriptionFont}>{reviewsNumber} reviews</Text>
+        <Text style={styles.descriptionFont}>{reviewCounts} reviews</Text>
       </View>
     </View>
   );

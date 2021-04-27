@@ -8,7 +8,7 @@ import { getComments } from "../../features/commentsSlice";
 import CommentCard from "../../components/shared/CommentCard/CommentCard";
 
 const Comments = () => {
-  const commentsData = useSelector(getComments);
+  const commentDatum = useSelector(getComments);
 
   return (
     <View style={styles.container}>
@@ -20,12 +20,12 @@ const Comments = () => {
       </View>
       <View style={styles.commentsContainer}>
         <FlatList
-          data={commentsData}
+          data={commentDatum}
           renderItem={({ item }) => <CommentCard commentData={item} />}
           keyExtractor={({ _id }) => "" + _id}
           showsVerticalScrollIndicator={false}
         />
-        {commentsData.length ? <Text>Leave first comment!</Text> : null}
+        {commentDatum.length ? <Text>Leave first comment!</Text> : null}
       </View>
     </View>
   );
