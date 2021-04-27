@@ -4,10 +4,10 @@ import { View } from "react-native";
 import styles from "./styles";
 import TagBoard from "../../../components/shared/TagBoard/TagBoard";
 
-const TagBoardContainer = () => {
+const TagBoardContainer = ({ characterAverage }) => {
   return (
     <View style={styles.container}>
-      <TagBoard />
+      <TagBoard characterAverage={characterAverage} />
     </View>
   );
 };

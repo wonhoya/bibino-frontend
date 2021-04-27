@@ -13,13 +13,15 @@ import CharacteristicBoard from "../../../components/shared/ChracteristicBoard/C
 const { width: windowWidth } = Dimensions.get("window");
 const chracterSize = windowWidth * 1.2;
 
-const CharacteristicContainer = () => {
+const CharacteristicContainer = ({ characterAverage }) => {
+  const { averageBody, averageAroma, averageSparkling } = characterAverage;
+
   return (
     <View style={styles.container}>
       <View>
         <CharacteristicBoard
           titles={CHRACTERISTIC_TITLES.aroma}
-          intensity={4}
+          intensity={averageAroma}
           options={{
             size: chracterSize,
             color: PRIMARY_ORANGE,
@@ -30,7 +32,7 @@ const CharacteristicContainer = () => {
       <View style={{ marginTop: windowWidth / 6 }}>
         <CharacteristicBoard
           titles={CHRACTERISTIC_TITLES.body}
-          intensity={3}
+          intensity={averageBody}
           options={{
             size: chracterSize,
             color: PRIMARY_BLACK,
@@ -41,7 +43,7 @@ const CharacteristicContainer = () => {
       <View style={{ marginTop: windowWidth / 6 }}>
         <CharacteristicBoard
           titles={CHRACTERISTIC_TITLES.sparkling}
-          intensity={5}
+          intensity={averageSparkling}
           options={{
             size: chracterSize,
             color: PRIMARY_YELLOW,
