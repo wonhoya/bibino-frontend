@@ -19,7 +19,9 @@ const CommentCard = ({ commentData }) => {
         <Image id={id} style={styles.image} source={{ uri }} />
       </View>
       <View style={styles.textContainer}>
-        <Text style={styles.userName}>{username}</Text>
+        <Text numberOfLines={1} ellipsizeMode="tail" style={styles.userName}>
+          {username}
+        </Text>
         <Text numberOfLines={1} ellipsizeMode="tail" style={styles.comment}>
           {comment}
         </Text>
