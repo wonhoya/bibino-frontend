@@ -7,8 +7,12 @@ import RatingBoard from "../../shared/RatingBoard/RatingBoard";
 
 const { width: windowWidth } = Dimensions.get("window");
 
-const CommentCard = ({ user }) => {
-  const { id, username, work, rating, comment } = user;
+const CommentCard = ({ commentData }) => {
+  const {
+    user: { _id: id, name: username },
+    comment,
+    rating,
+  } = commentData;
 
   return (
     <View style={styles.container}>
@@ -17,7 +21,6 @@ const CommentCard = ({ user }) => {
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.userName}>{username}</Text>
-        <Text style={styles.work}>{work}</Text>
         <Text style={styles.comment}>{comment}</Text>
       </View>
       <View style={styles.ratingBoardContainer}>
