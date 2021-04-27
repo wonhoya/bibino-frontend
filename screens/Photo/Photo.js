@@ -95,12 +95,12 @@ const Photo = ({ navigation }) => {
       }
 
       const result = await response.json();
-
+      console.log("result", result);
       setIsParseStarted(false);
 
       if (result.status === "Analyze Success") {
         navigation.navigate("Success", {
-          beerId: result.payload._id,
+          beerId: result.payload,
         });
       } else {
         navigation.navigate("AnalyzeFailure");

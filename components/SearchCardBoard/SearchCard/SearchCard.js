@@ -28,7 +28,7 @@ const SearchCard = ({
           resizeMode="cover"
         />
       </View>
-      <View style={styles.textContainer(backgroundColor)}>
+      <View style={styles.textContainer}>
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.description}>{description}</Text>
       </View>

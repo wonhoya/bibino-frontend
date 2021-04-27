@@ -31,9 +31,6 @@ const Search = () => {
       <SafeAreaView />
       <View style={styles.container}>
         <View style={styles.innerContainer}>
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>{SEARCH_TITLE_TEXT}</Text>
-          </View>
           <View style={styles.inputContainer}>
             <View style={styles.iconContainer}>
               <SearchIcon size={30} />
@@ -42,7 +39,7 @@ const Search = () => {
               autoCapitalize="none"
               autoCorrect={false}
               style={styles.input}
-              placeholder="Search beers"
+              placeholder="Search b"
               onChangeText={handleSearchInput}
               value={searchInput}
             />
