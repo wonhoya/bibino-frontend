@@ -42,6 +42,14 @@ const Profile = ({ navigation }) => {
     getMyBeers();
   }, [shouldFetch, dispatch]);
 
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      setShouldFetch(true);
+    });
+
+    return unsubscribe;
+  }, [navigation, shouldFetch]);
+
   const handleReFetchMyBeers = () => {
     if (isFetchingUserBeers) {
       return;
