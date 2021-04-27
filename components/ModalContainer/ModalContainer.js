@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TextInput } from "react-native";
 import { useSelector } from "react-redux";
 import Modal from "react-native-modal";
@@ -23,47 +23,73 @@ const ModalContainer = ({
   const idToken = useSelector(selectIdToken);
   const [comment, setComment] = useState("");
   const [review, setReview] = useState({
-    beerId: null,
-    rating: 0,
+    rating: 0.5,
     aroma: 5,
     body: 5,
     sparkling: 5,
   });
-  console.log(comment);
-  const handleSubmit = async () => {
-    const serverUrl = SERVER_URL[process.env.NODE_ENV];
-    const url = `${serverUrl}/reviews/${reviewId || "new"}`;
-    const method = reviewId ? "PUT" : "POST";
-    const headers = generateHeaderOption(idToken);
-    const { rating, aroma, body, sparkling } = review;
+  const [isFetching, setIsFetching] = useState(false);
 
-    try {
-      const response = await fetch(url, {
-        method,
-        headers: {
-          ...headers,
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          beerId,
-          review: { rating, aroma, body, sparkling },
-          comment,
-        }),
-      });
-
-      if (!response.ok) {
-        return navigation.navigate("Failure");
-      }
-
-      await response.json();
-
-      closeModal();
-      setShouldShowFeedBack(true);
-    } catch (err) {
-      showErrorInDevelopment("Failed Review post ", err);
-      navigation.navigate("Failure");
+  useEffect(() => {
+    if (!isFetching) {
+      return;
     }
+
+    const postReview = async () => {
+      const serverUrl = SERVER_URL[process.env.NODE_ENV];
+      const url = `${serverUrl}/reviews/${reviewId || "new"}`;
+      const method = reviewId ? "PUT" : "POST";
+      const headers = generateHeaderOption(idToken);
+
+      try {
+        const response = await fetch(url, {
+          method,
+          headers: {
+            ...headers,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            beerId,
+            review,
+            comment,
+          }),
+        });
+
+        if (!response.ok) {
+          return navigation.navigate("Failure");
+        }
+
+        await response.json();
+      } catch (err) {
+        showErrorInDevelopment("Failed Review post ", err);
+        navigation.navigate("Failure");
+      } finally {
+        setIsFetching(false);
+        closeModal();
+        setShouldShowFeedBack(true);
+      }
+    };
+
+    postReview();
+  }, [
+    closeModal,
+    beerId,
+    idToken,
+    navigation,
+    comment,
+    review,
+    reviewId,
+    setShouldShowFeedBack,
+    isFetching,
+  ]);
+
+  const handleSubmit = () => {
+    if (isFetching) {
+      return;
+    }
+
+    setIsFetching(true);
   };
 
   return (

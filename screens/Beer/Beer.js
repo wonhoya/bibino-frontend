@@ -51,7 +51,7 @@ const Beer = ({ navigation, route }) => {
     if (isModalVisible) {
       return;
     }
-    console.log("hello");
+
     const serverUrl = SERVER_URL[process.env.NODE_ENV];
     const headers = generateHeaderOption(idToken);
     const fetchUrls = [

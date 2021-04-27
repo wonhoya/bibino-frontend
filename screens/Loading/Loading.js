@@ -4,9 +4,6 @@ import { View } from "react-native";
 import styles from "./styles";
 
 const Loading = () => {
-  const handleAnimationFinish = () => {
-    console.log("finished");
-  };
   return (
     <View style={styles.container}>
       <LottieView
@@ -15,7 +12,6 @@ const Loading = () => {
         autoPlay
         loop={true}
         speed={0.6}
-        onAnimationFinish={handleAnimationFinish}
       />
     </View>
   );
