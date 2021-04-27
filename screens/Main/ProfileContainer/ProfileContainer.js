@@ -7,8 +7,8 @@ import TagBoard from "../../../components/shared/TagBoard/TagBoard";
 const ProfileContainer = ({
   userName,
   userAvatar,
-  userCharacterAverage,
-  userReviewCount,
+  characterAverage,
+  reviewCount,
 }) => {
   return (
     <View style={styles.container}>
@@ -27,8 +27,8 @@ const ProfileContainer = ({
       </View>
       <View style={styles.tagContainer}>
         <TagBoard
-          userCharacterAverage={userCharacterAverage}
-          userReviewCount={userReviewCount}
+          characterAverage={characterAverage}
+          reviewCount={reviewCount}
         />
       </View>
     </View>

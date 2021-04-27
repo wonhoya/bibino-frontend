@@ -16,21 +16,20 @@ import CharacteristicContainer from "./CharacteristicContainer/CharacteristicCon
 import CommentBoardContainer from "./CommentBoardContainer/CommentBoardContainer";
 import RecommendationBoardContainer from "./RecommendationBoardContainer/RecommendationBoardContainer";
 import ModalContainer from "../../components/ModalContainer/ModalContainer";
+import Loading from "../Loading/Loading";
 import SectionDivider from "./SectionDivider/SectionDivider";
 import FeedbackBoard from "../../components/FeedbackBoard/FeedbackBoard";
-import { selectIdToken } from "../../features/userSlice";
+import { selectIdToken } from "../../features/tokenSlice";
 import generateHeaderOption from "../../utils/generateHeaderOption";
 
 const Beer = ({ navigation, route }) => {
-  const { myBeerImageURL } = route.params;
   const navState = useNavigationState((state) => state);
   const moveY = useRef(new Animated.Value(100)).current;
   const scrollY = useRef(new Animated.Value(0)).current;
-  const [beer, setBeer] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
-  const [shouldFetch, setShouldFetch] = useState(true);
+  const [isFetching, setIsFetching] = useState(true);
   const [isModalVisible, setModalVisible] = useState(false);
   const [shouldShowFeedBack, setShouldShowFeedBack] = useState(false);
+  const [beerInfo, setBeerInfo] = useState(null);
 
   const idToken = useSelector(selectIdToken);
   const headers = generateHeaderOption(idToken);
@@ -46,10 +45,7 @@ const Beer = ({ navigation, route }) => {
   useEffect(() => {
     const getBeer = async () => {
       try {
-        setIsLoading(true);
-        setShouldFetch(false);
-
-        const beerResponse = await fetch(
+        const response = await fetch(
           `${BACKEND_URL_FOR_DEV}/beers/${route.params.beerId}`,
           {
             method: "GET",
@@ -61,24 +57,20 @@ const Beer = ({ navigation, route }) => {
           }
         );
 
-        if (!beerResponse.ok) {
+        if (!response.ok) {
           return navigation.navigate("Failure");
         }
 
-        const beerData = await beerResponse.json();
-        setBeer(beerData);
+        const result = await response.json();
+
+        setBeerInfo(result);
+        setIsFetching(false);
       } catch (error) {
-        setBeer({});
         navigation.navigate("Failure");
-      } finally {
-        setIsLoading(false);
       }
     };
-
-    if (!isLoading && shouldFetch) {
-      getBeer();
-    }
-  }, [isLoading, shouldFetch, headers, navigation, route.params.beerId]);
+    getBeer();
+  }, []);
 
   useEffect(() => {
     Animated.timing(moveY, {
@@ -88,7 +80,7 @@ const Beer = ({ navigation, route }) => {
       delay: 100,
       useNativeDriver: false,
     }).start();
-  }, [moveY]);
+  }, [moveY, isFetching]);
 
   const handleOnScroll = (event) => {
     Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], {
@@ -99,6 +91,16 @@ const Beer = ({ navigation, route }) => {
   const closeModal = () => {
     setModalVisible(false);
   };
+
+  const characterAverage = {
+    averageBody: beerInfo?.averageBody,
+    averageAroma: beerInfo?.averageAroma,
+    averageSparkling: beerInfo?.averageSparkling,
+  };
+
+  if (isFetching) {
+    return <Loading />;
+  }
 
   return (
     <Animated.ScrollView
@@ -111,31 +113,29 @@ const Beer = ({ navigation, route }) => {
         <View style={styles.bannerContainer}>
           <Animated.Image
             style={[styles.image, styles.handleImageY(scrollY)]}
-            source={require("../../assets/pngs/beerSample1.png")}
+            source={{ uri: beerInfo.imagePath }}
           />
         </View>
-        <TitleContainer title="RAEA BEER" />
-        <RatingBoardContainer rating={4} />
-        <TagBoardContainer />
+        <TitleContainer title={beerInfo.name} />
+        <RatingBoardContainer rating={beerInfo.averageRating} />
+        <TagBoardContainer characterAverage={characterAverage} />
         <SectionDivider direction="right" text="Description" />
         <Animated.Text style={{ ...styles.description, top: moveY }}>
-          2020 bottle shared by a friend. Darkest brown pour with a medium light
-          brown head. Aroma of malt, maple, chocolate, bourbon, vanilla and some
-          coffee. Malt and vanilla flavor giving way to coconut(!), maple and
-          chocolate before a sweet bourbon and maple finish. Just a tad less
-          sweetness and it would have been perfect, but definitely deserving of
-          the hype.
+          {beerInfo.description}
         </Animated.Text>
         <SectionDivider direction="left" text="Characteristic" />
         <Animated.View style={styles.handlePositionX(scrollY)}>
-          <CharacteristicContainer />
+          <CharacteristicContainer characterAverage={characterAverage} />
         </Animated.View>
         <SectionDivider direction="right" text="Recommendation" />
         <Animated.View style={styles.handleOpacity(scrollY)}>
-          <RecommendationBoardContainer />
+          <RecommendationBoardContainer beerInfo={beerInfo._id} />
         </Animated.View>
         <SectionDivider direction="left" text="Comments" />
-        <CommentBoardContainer navigation={navigation} />
+        <CommentBoardContainer
+          navigation={navigation}
+          beerInfo={beerInfo._id}
+        />
       </View>
       <Animated.View
         style={[styles.buttonContainer, styles.handleButtonY(scrollY)]}

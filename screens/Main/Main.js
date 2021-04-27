@@ -85,8 +85,8 @@ const Main = ({ navigation }) => {
         <ProfileContainer
           userName={user.name}
           userAvatar={user.avatar}
-          userCharacterAverage={user.charcteristc}
-          userReviewCount={user.reviewCounts}
+          characterAverage={user.charcteristic}
+          reviewCount={user.reviewCounts}
         />
         <ContentsContainer beers={todayBeersData.beers} />
       </View>
