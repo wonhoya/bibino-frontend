@@ -17,7 +17,7 @@ import Comments from "../screens/Comments/Comments";
 const Stack = createStackNavigator();
 
 const MainStackNavigator = () => {
-  const isLogIn = useSelector((state) => !!state.user.id);
+  const isLogIn = useSelector((state) => !!state.user.idToken);
 
   const authScreens = {
     Intro,

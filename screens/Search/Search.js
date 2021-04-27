@@ -6,7 +6,7 @@ import styles from "./styles";
 import { SearchIcon } from "../../assets/svgs/icon";
 import { SEARCH_TITLE_TEXT } from "../../constants/text";
 import fetchSearchBeers from "../../utils/fetchSearchBeers";
-import { selectIdToken } from "../../features/tokenSlice";
+import { selectIdToken } from "../../features/userSlice";
 import SearchCardBoard from "../../components/SearchCardBoard/SearchCardBoard";
 
 //mockup

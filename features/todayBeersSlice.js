@@ -39,9 +39,6 @@ const todayBeersSlice = createSlice({
   name: "todayBeers",
   initialState,
   reducers: {
-    todayBeersStatusSet: (state, action) => {
-      state.status = action.payload;
-    },
     todayBeersAdded: (state, action) => {
       const { beers, timestamp } = action.payload;
       state.beers = beers;

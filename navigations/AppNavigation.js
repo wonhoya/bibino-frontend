@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
-import Loading from "../screens/Loading/Loading";
+import { unwrapResult } from "@reduxjs/toolkit";
 
-import { getIdToken, tokenStatusSet } from "../features/tokenSlice";
-import ASYNC_STATUS from "../constants/asyncStatus";
+import Loading from "../screens/Loading/Loading";
+import { getIdToken, removeIdToken, userDeleted } from "../features/userSlice";
 import MainStackNavigator from "./MainStackNavigator";
 
 const AppNavigation = () => {
@@ -14,12 +14,16 @@ const AppNavigation = () => {
   useEffect(() => {
     const loadToken = async () => {
       try {
-        await dispatch(getIdToken());
+        const resultAction = await dispatch(getIdToken());
+        const idToken = unwrapResult(resultAction);
+        if (!idToken) {
+          throw new Error("Invaild token in the secure store");
+        }
       } catch (err) {
-        // 에러 핸들링 추가해야함.
+        dispatch(userDeleted());
+        await dispatch(removeIdToken());
       } finally {
         setIsLoading(false);
-        dispatch(tokenStatusSet(ASYNC_STATUS.IDLE));
       }
     };
 

@@ -13,9 +13,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import * as SecureStore from "expo-secure-store";
-
 import { todayBeersSlice } from "./todayBeersSlice";
-import { tokenSlice } from "./tokenSlice";
 import { userSlice } from "./userSlice";
 
 // 이 코드는 스토리지 초기화를 쉽게해서 테스트를 수월하게 하기 위한 것입니다. 추후에 삭제해야 합니다.
@@ -30,12 +28,11 @@ const todayBeersPersistConfig = {
 const userPersistConfig = {
   key: "user",
   storage: AsyncStorage,
-  blacklist: ["shouldFetchBeers", "status", "error"],
+  blacklist: ["status", "error", "idToken"],
 };
 
 const rootReducer = combineReducers({
   todayBeers: persistReducer(todayBeersPersistConfig, todayBeersSlice.reducer),
-  token: tokenSlice.reducer,
   user: persistReducer(userPersistConfig, userSlice.reducer),
 });
 

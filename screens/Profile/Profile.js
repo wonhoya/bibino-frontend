@@ -62,7 +62,10 @@ const Profile = ({ navigation }) => {
       <TouchableOpacity
         style={styles.photo}
         onPress={() => {
-          navigation.navigate("Beer", { beerId: item.beer });
+          navigation.navigate("Beer", {
+            beerId: item.beer,
+            myBeerImageURL: item.myBeerImageURL,
+          });
         }}
       >
         <Image

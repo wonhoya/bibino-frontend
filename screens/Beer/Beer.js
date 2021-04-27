@@ -18,14 +18,17 @@ import RecommendationBoardContainer from "./RecommendationBoardContainer/Recomme
 import ModalContainer from "../../components/ModalContainer/ModalContainer";
 import SectionDivider from "./SectionDivider/SectionDivider";
 import FeedbackBoard from "../../components/FeedbackBoard/FeedbackBoard";
-import { selectIdToken } from "../../features/tokenSlice";
+import { selectIdToken } from "../../features/userSlice";
 import generateHeaderOption from "../../utils/generateHeaderOption";
 
 const Beer = ({ navigation, route }) => {
+  const { myBeerImageURL } = route.params;
   const navState = useNavigationState((state) => state);
   const moveY = useRef(new Animated.Value(100)).current;
   const scrollY = useRef(new Animated.Value(0)).current;
+  const [beer, setBeer] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [shouldFetch, setShouldFetch] = useState(true);
   const [isModalVisible, setModalVisible] = useState(false);
   const [shouldShowFeedBack, setShouldShowFeedBack] = useState(false);
 
@@ -44,8 +47,9 @@ const Beer = ({ navigation, route }) => {
     const getBeer = async () => {
       try {
         setIsLoading(true);
+        setShouldFetch(false);
 
-        const response = await fetch(
+        const beerResponse = await fetch(
           `${BACKEND_URL_FOR_DEV}/beers/${route.params.beerId}`,
           {
             method: "GET",
@@ -57,19 +61,24 @@ const Beer = ({ navigation, route }) => {
           }
         );
 
-        if (!response.ok) {
+        if (!beerResponse.ok) {
           return navigation.navigate("Failure");
         }
 
-        const result = await response.json();
-
-        setIsLoading(false);
+        const beerData = await beerResponse.json();
+        setBeer(beerData);
       } catch (error) {
+        setBeer({});
         navigation.navigate("Failure");
+      } finally {
+        setIsLoading(false);
       }
     };
-    getBeer();
-  }, [headers, navigation, route.params.beerId]);
+
+    if (!isLoading && shouldFetch) {
+      getBeer();
+    }
+  }, [isLoading, shouldFetch, headers, navigation, route.params.beerId]);
 
   useEffect(() => {
     Animated.timing(moveY, {
