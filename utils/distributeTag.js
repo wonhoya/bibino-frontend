@@ -33,7 +33,8 @@ const distributeUserTag = (characterAverage, reviewCount) => {
   return tags;
 };
 
-const distributeBeerTag = (averageBody, averageAroma, averageSparkling) => {
+const distributeBeerTag = (characterAverage) => {
+  const { averageBody, averageAroma, averageSparkling } = characterAverage;
   const tags = [];
 
   if (averageBody > 5) {

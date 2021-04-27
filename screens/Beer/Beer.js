@@ -16,6 +16,7 @@ import CharacteristicContainer from "./CharacteristicContainer/CharacteristicCon
 import CommentBoardContainer from "./CommentBoardContainer/CommentBoardContainer";
 import RecommendationBoardContainer from "./RecommendationBoardContainer/RecommendationBoardContainer";
 import ModalContainer from "../../components/ModalContainer/ModalContainer";
+import Loading from "../Loading/Loading";
 import SectionDivider from "./SectionDivider/SectionDivider";
 import FeedbackBoard from "../../components/FeedbackBoard/FeedbackBoard";
 import { selectIdToken } from "../../features/tokenSlice";
@@ -25,9 +26,10 @@ const Beer = ({ navigation, route }) => {
   const navState = useNavigationState((state) => state);
   const moveY = useRef(new Animated.Value(100)).current;
   const scrollY = useRef(new Animated.Value(0)).current;
-  const [isLoading, setIsLoading] = useState(false);
+  const [isFetching, setIsFetching] = useState(true);
   const [isModalVisible, setModalVisible] = useState(false);
   const [shouldShowFeedBack, setShouldShowFeedBack] = useState(false);
+  const [beerInfo, setBeerInfo] = useState(null);
 
   const idToken = useSelector(selectIdToken);
   const headers = generateHeaderOption(idToken);
@@ -43,8 +45,6 @@ const Beer = ({ navigation, route }) => {
   useEffect(() => {
     const getBeer = async () => {
       try {
-        setIsLoading(true);
-
         const response = await fetch(
           `${BACKEND_URL_FOR_DEV}/beers/${route.params.beerId}`,
           {
@@ -63,13 +63,14 @@ const Beer = ({ navigation, route }) => {
 
         const result = await response.json();
 
-        setIsLoading(false);
+        setBeerInfo(result);
+        setIsFetching(false);
       } catch (error) {
         navigation.navigate("Failure");
       }
     };
     getBeer();
-  }, [headers, navigation, route.params.beerId]);
+  }, []);
 
   useEffect(() => {
     Animated.timing(moveY, {
@@ -79,7 +80,7 @@ const Beer = ({ navigation, route }) => {
       delay: 100,
       useNativeDriver: false,
     }).start();
-  }, [moveY]);
+  }, [moveY, isFetching]);
 
   const handleOnScroll = (event) => {
     Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], {
@@ -90,6 +91,16 @@ const Beer = ({ navigation, route }) => {
   const closeModal = () => {
     setModalVisible(false);
   };
+
+  const characterAverage = {
+    averageBody: beerInfo?.averageBody,
+    averageAroma: beerInfo?.averageAroma,
+    averageSparkling: beerInfo?.averageSparkling,
+  };
+
+  if (isFetching) {
+    return <Loading />;
+  }
 
   return (
     <Animated.ScrollView
@@ -107,15 +118,10 @@ const Beer = ({ navigation, route }) => {
         </View>
         <TitleContainer title="RAEA BEER" />
         <RatingBoardContainer rating={4} />
-        <TagBoardContainer />
+        <TagBoardContainer characterAverage={characterAverage} />
         <SectionDivider direction="right" text="Description" />
         <Animated.Text style={{ ...styles.description, top: moveY }}>
-          2020 bottle shared by a friend. Darkest brown pour with a medium light
-          brown head. Aroma of malt, maple, chocolate, bourbon, vanilla and some
-          coffee. Malt and vanilla flavor giving way to coconut(!), maple and
-          chocolate before a sweet bourbon and maple finish. Just a tad less
-          sweetness and it would have been perfect, but definitely deserving of
-          the hype.
+          {beerInfo.description}
         </Animated.Text>
         <SectionDivider direction="left" text="Characteristic" />
         <Animated.View style={styles.handlePositionX(scrollY)}>

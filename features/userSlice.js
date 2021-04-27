@@ -38,7 +38,7 @@ const signInUser = createAsyncThunk(
           avatar: user.imagePath,
           name: user.name,
           reviewCounts: user.reviewCounts,
-          charcteristc: {
+          charcteristic: {
             averageBody: user.averageBody,
             averageAroma: user.averageAroma,
             averageSparkling: user.averageSparkling,
