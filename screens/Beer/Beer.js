@@ -43,33 +43,61 @@ const Beer = ({ navigation, route }) => {
   }, [navigation, navState.index, navState.routes]);
 
   useEffect(() => {
-    const getBeer = async () => {
+    // const getBeer = async () => {
+    //   try {
+    // const getBeerInfo = await fetch(
+    //   `${BACKEND_URL_FOR_DEV}/beers/${route.params.beerId}`,
+    //   {
+    //     method: "GET",
+    //     headers: {
+    //       ...headers,
+    //       Accept: "application/json",
+    //       "Content-Type": "application/json",
+    //     },
+    //   }
+    // );
+
+    //     const getReview = await fetch ();
+
+    //     let [foo, bar] = await Promise.all([getBeerInfo(), getReview()]);
+
+    //     const result = await response.json();
+
+    //     setBeerInfo(result);
+    //     setIsFetching(false);
+    //   } catch (error) {
+    //     navigation.navigate("Failure");
+    //   }
+    // };
+    // getBeer();
+
+    const urls = [
+      `${BACKEND_URL_FOR_DEV}/beers/${route.params.beerId}`,
+      `${BACKEND_URL_FOR_DEV}/beers/${route.params.beerId}/reviews/single`,
+    ];
+
+    async function makeApiCalls(endpoints) {
       try {
-        const response = await fetch(
-          `${BACKEND_URL_FOR_DEV}/beers/${route.params.beerId}`,
-          {
-            method: "GET",
-            headers: {
-              ...headers,
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            },
-          }
+        let res = await Promise.all(
+          endpoints.map(async (endpoint) => {
+            const response = await fetch(endpoint, {
+              method: "GET",
+              headers: {
+                ...headers,
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+            });
+            return response.json();
+          })
         );
-
-        if (!response.ok) {
-          return navigation.navigate("Failure");
-        }
-
-        const result = await response.json();
-
-        setBeerInfo(result);
-        setIsFetching(false);
-      } catch (error) {
+        console.log("res is", res);
+      } catch (err) {
+        console.log(err);
         navigation.navigate("Failure");
       }
-    };
-    getBeer();
+    }
+    makeApiCalls(urls);
   }, []);
 
   useEffect(() => {
