@@ -1,7 +1,7 @@
 import React from "react";
-
-import { View, Text, Image } from "react-native";
+import { View, Text } from "react-native";
 import { CountUp } from "use-count-up";
+
 import styles from "./styles";
 
 const ThirdRankingContainer = ({ beerInfo }) => {

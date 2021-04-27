@@ -21,7 +21,6 @@ const Ranking = ({ navigation }) => {
   const restOpacity = useRef(new Animated.Value(0)).current;
 
   const idToken = useSelector(selectIdToken);
-  const headers = generateHeaderOption(idToken);
 
   const restBeers = [];
   const topThreeBeers = [];
@@ -36,6 +35,8 @@ const Ranking = ({ navigation }) => {
 
   useEffect(() => {
     const getBeerRanking = async () => {
+      const headers = generateHeaderOption(idToken);
+
       try {
         const response = await fetch(`${BACKEND_URL_FOR_DEV}/beers/rankings`, {
           method: "GET",
@@ -51,7 +52,6 @@ const Ranking = ({ navigation }) => {
         }
 
         const result = await response.json();
-        console.log("beerRankings is", beerRankings);
 
         setBeersRanking(result);
         setIsFetching(false);
@@ -60,7 +60,7 @@ const Ranking = ({ navigation }) => {
       }
     };
     getBeerRanking();
-  }, []);
+  }, [navigation, idToken]);
 
   useEffect(() => {
     Animated.sequence([
@@ -94,7 +94,6 @@ const Ranking = ({ navigation }) => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.invisible} />
-
       <Animated.View
         style={{ ...styles.firstContainer, opacity: firstOpactiy }}
       >

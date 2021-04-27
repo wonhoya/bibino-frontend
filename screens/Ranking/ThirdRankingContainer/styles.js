@@ -21,26 +21,22 @@ const styles = StyleSheet.create({
     width: windowWidth,
     height: windowHeight * 0.14,
   },
-
   thirdRankingNumberContainer: {
     flex: 2,
     justifyContent: "flex-end",
     alignItems: "flex-end",
     backgroundColor: PRIMARY_LIGHT_GREY,
   },
-
   thirdRankingDescriptionContainer: {
     flex: 5,
     justifyContent: "flex-end",
     alignItems: "flex-start",
   },
-
   thirdNumber: {
     fontFamily: RUBIK_BOLD,
     color: PRIMARY_BLACK,
     fontSize: 80,
   },
-
   thirdName: {
     fontFamily: RUBIK_BOLD,
     color: PRIMARY_BLACK,

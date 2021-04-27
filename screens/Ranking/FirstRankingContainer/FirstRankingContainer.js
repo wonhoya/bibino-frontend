@@ -1,20 +1,19 @@
 import React from "react";
 import { FontAwesome5 } from "@expo/vector-icons";
-
 import { View, Text, Image } from "react-native";
 import { CountUp } from "use-count-up";
+
 import styles from "./styles";
 import { PRIMARY_ORANGE } from "../../../constants/colors";
 
 const FirstRankingContainer = ({ beerInfo }) => {
-  console.log("beerInfo", beerInfo);
   return (
     <>
       <View
         style={[
           styles.firstRankingNumberContainer,
           {
-            transform: [{ translateY: 70 }, { translateX: 30 }],
+            transform: [{ translateY: 80 }, { translateX: 30 }],
           },
         ]}
       >
