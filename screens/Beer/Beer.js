@@ -1,14 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { View, Animated, Easing } from "react-native";
 import { FloatingAction } from "react-native-floating-action";
 import { useNavigationState } from "@react-navigation/native";
-import { BACKEND_URL_FOR_DEV } from "@env";
 
 import styles from "./styles";
+import { SERVER_URL } from "../../config";
 import { PRIMARY_ORANGE } from "../../constants/colors";
 import floatingButtons from "../../constants/floatingButtons";
-
+import { selectIdToken } from "../../features/userSlice";
+import { commentsAdded, getComments } from "../../features/commentsSlice";
+import showErrorInDevelopment from "../../utils/showErrorInDevelopment";
 import TitleContainer from "./TitleContainer/TitleContainer";
 import RatingBoardContainer from "./RatingBoardContainer/RatingBoardContainer";
 import TagBoardContainer from "./TagBoardContainer/TagBoardContainer";
@@ -19,10 +21,11 @@ import ModalContainer from "../../components/ModalContainer/ModalContainer";
 import Loading from "../Loading/Loading";
 import SectionDivider from "./SectionDivider/SectionDivider";
 import FeedbackBoard from "../../components/FeedbackBoard/FeedbackBoard";
-import { selectIdToken } from "../../features/userSlice";
 import generateHeaderOption from "../../utils/generateHeaderOption";
 
 const Beer = ({ navigation, route }) => {
+  const { myBeerImageURL, beerId } = route.params;
+  const dispatch = useDispatch();
   const navState = useNavigationState((state) => state);
   const moveY = useRef(new Animated.Value(100)).current;
   const scrollY = useRef(new Animated.Value(0)).current;
@@ -30,9 +33,11 @@ const Beer = ({ navigation, route }) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [shouldShowFeedBack, setShouldShowFeedBack] = useState(false);
   const [beerInfo, setBeerInfo] = useState(null);
-
+  const [myReview, setMyReview] = useState({});
+  const [recommendation, setRecommendation] = useState(null);
+  const userId = useSelector((state) => state.user.id);
   const idToken = useSelector(selectIdToken);
-  const headers = generateHeaderOption(idToken);
+  const commentDatum = useSelector(getComments);
 
   useEffect(() => {
     if (navState.routes[navState.index - 1]?.name === "Success") {
@@ -43,34 +48,70 @@ const Beer = ({ navigation, route }) => {
   }, [navigation, navState.index, navState.routes]);
 
   useEffect(() => {
-    const getBeer = async () => {
-      try {
-        const response = await fetch(
-          `${BACKEND_URL_FOR_DEV}/beers/${route.params.beerId}`,
-          {
-            method: "GET",
+    const serverUrl = SERVER_URL[process.env.NODE_ENV];
+    const headers = generateHeaderOption(idToken);
+    const fetchUrls = [
+      `${serverUrl}/beers/${beerId}`,
+      `${serverUrl}/beers/${beerId}/comments/`,
+      `${serverUrl}/beers/${beerId}/recommendations/`,
+    ];
+
+    const fetchAllData = async () => {
+      const fetchedDatum = fetchUrls.map((url) => {
+        return (async () => {
+          const response = await fetch(url, {
             headers: {
               ...headers,
               Accept: "application/json",
               "Content-Type": "application/json",
             },
-          }
-        );
+          });
 
-        if (!response.ok) {
-          return navigation.navigate("Failure");
+          return await response.json();
+        })();
+      });
+
+      try {
+        const [
+          fetchedBeerData,
+          fetchedCommentDatum,
+          fetchedRecommendation,
+        ] = await Promise.all(fetchedDatum);
+
+        const userReview = fetchedCommentDatum.filter(
+          ({ user: { _id } }) => _id === userId
+        );
+        const userReviewId = userReview[0]?._id;
+        let response;
+
+        if (userReviewId) {
+          response = await fetch(`${serverUrl}/reviews/${userReviewId}`, {
+            headers: {
+              ...headers,
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          });
         }
 
-        const result = await response.json();
-
-        setBeerInfo(result);
+        const fetchedMyReview = await response?.json();
+        setBeerInfo(fetchedBeerData || {});
+        setMyReview(fetchedMyReview || {});
+        dispatch(commentsAdded(fetchedCommentDatum || []));
+        setRecommendation(fetchedRecommendation || []);
+      } catch (err) {
+        showErrorInDevelopment("Failed Beer scrren fetch ", err);
+        setBeerInfo({});
+        setMyReview({});
+        dispatch(commentsAdded([]));
+        setRecommendation([]);
+      } finally {
         setIsFetching(false);
-      } catch (error) {
-        navigation.navigate("Failure");
       }
     };
-    getBeer();
-  }, []);
+
+    fetchAllData();
+  }, [idToken, navigation, beerId, userId, dispatch]);
 
   useEffect(() => {
     Animated.timing(moveY, {
@@ -113,10 +154,14 @@ const Beer = ({ navigation, route }) => {
         <View style={styles.bannerContainer}>
           <Animated.Image
             style={[styles.image, styles.handleImageY(scrollY)]}
-            source={{ uri: beerInfo.imagePath }}
+            source={{ uri: myBeerImageURL || beerInfo.imagePath }}
           />
         </View>
-        <TitleContainer title={beerInfo.name} />
+        <TitleContainer
+          title={beerInfo.name}
+          rating={myReview.rating}
+          reviewCounts={commentDatum.length}
+        />
         <RatingBoardContainer rating={beerInfo.averageRating} />
         <TagBoardContainer characterAverage={characterAverage} />
         <SectionDivider direction="right" text="Description" />
@@ -129,12 +174,12 @@ const Beer = ({ navigation, route }) => {
         </Animated.View>
         <SectionDivider direction="right" text="Recommendation" />
         <Animated.View style={styles.handleOpacity(scrollY)}>
-          <RecommendationBoardContainer beerInfo={beerInfo._id} />
+          <RecommendationBoardContainer beers={recommendation} />
         </Animated.View>
         <SectionDivider direction="left" text="Comments" />
         <CommentBoardContainer
           navigation={navigation}
-          beerInfo={beerInfo._id}
+          commentDatum={commentDatum}
         />
       </View>
       <Animated.View
