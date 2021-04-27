@@ -128,7 +128,7 @@ const Beer = ({ navigation, route }) => {
         ]);
 
         setBeerInfo(fetchedBeerData);
-        setMyReview(fetchedMyReview);
+        setMyReview(fetchedMyReview || {});
         dispatch(commentsAdded(fetchedCommentsData || []));
         setRecommendation(fetchedRecommendation);
       } catch (err) {
@@ -188,7 +188,11 @@ const Beer = ({ navigation, route }) => {
             source={{ uri: myBeerImageURL || beerInfo.imagePath }}
           />
         </View>
-        <TitleContainer title={beerInfo.name} />
+        <TitleContainer
+          title={beerInfo.name}
+          myRating={myReview.rating}
+          reviewsNumber={commentsData.length}
+        />
         <RatingBoardContainer rating={beerInfo.averageRating} />
         <TagBoardContainer characterAverage={characterAverage} />
         <SectionDivider direction="right" text="Description" />
