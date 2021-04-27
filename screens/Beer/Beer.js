@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { View, Animated, Easing } from "react-native";
 import { FloatingAction } from "react-native-floating-action";
 import { useNavigationState } from "@react-navigation/native";
@@ -8,12 +8,8 @@ import styles from "./styles";
 import { SERVER_URL } from "../../config";
 import { PRIMARY_ORANGE } from "../../constants/colors";
 import floatingButtons from "../../constants/floatingButtons";
-import {
-  selectIdToken,
-  userDeleted,
-  removeIdToken,
-} from "../../features/userSlice";
-import { todayBeersDeleted } from "../../features/todayBeersSlice";
+import { selectIdToken } from "../../features/userSlice";
+import { commentsAdded, getComments } from "../../features/commentsSlice";
 
 import TitleContainer from "./TitleContainer/TitleContainer";
 import RatingBoardContainer from "./RatingBoardContainer/RatingBoardContainer";
@@ -29,6 +25,7 @@ import generateHeaderOption from "../../utils/generateHeaderOption";
 
 const Beer = ({ navigation, route }) => {
   const { myBeerImageURL, beerId } = route.params;
+  const dispatch = useDispatch();
   const navState = useNavigationState((state) => state);
   const moveY = useRef(new Animated.Value(100)).current;
   const scrollY = useRef(new Animated.Value(0)).current;
@@ -37,8 +34,9 @@ const Beer = ({ navigation, route }) => {
   const [shouldShowFeedBack, setShouldShowFeedBack] = useState(false);
   const [beerInfo, setBeerInfo] = useState(null);
   const [myReview, setMyReview] = useState(null);
-  const [comments, setComments] = useState(null);
+  const [recommendation, setRecommendation] = useState(null);
   const idToken = useSelector(selectIdToken);
+  const commentsData = useSelector(getComments);
 
   useEffect(() => {
     if (navState.routes[navState.index - 1]?.name === "Success") {
@@ -50,10 +48,10 @@ const Beer = ({ navigation, route }) => {
 
   useEffect(() => {
     const serverUrl = SERVER_URL[process.env.NODE_ENV];
+    const headers = generateHeaderOption(idToken);
 
-    const getBeer = async () => {
+    const fetchBeer = async () => {
       try {
-        const headers = generateHeaderOption(idToken);
         const response = await fetch(`${serverUrl}/beers/${beerId}`, {
           method: "GET",
           headers: {
@@ -68,24 +66,49 @@ const Beer = ({ navigation, route }) => {
         }
 
         return await response.json();
-
-        // setBeerInfo(result);
-        // setIsFetching(false);
       } catch (error) {
         navigation.navigate("Failure");
       }
     };
 
-    const getMyReview = async () => {
+    const fetchMyReview = async () => {
       const response = await fetch(
-        `${serverUrl}/beers/${beerId}/reviews/single`
+        `${serverUrl}/beers/${beerId}/reviews/single`,
+        {
+          headers: {
+            ...headers,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
       );
 
       return await response.json();
     };
 
-    const getComments = async () => {
-      const response = await fetch(`${serverUrl}/beers/${beerId}/comments/`);
+    const fetchComments = async () => {
+      const response = await fetch(`${serverUrl}/beers/${beerId}/comments/`, {
+        headers: {
+          ...headers,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+
+      return await response.json();
+    };
+
+    const fetchRecommendation = async () => {
+      const response = await fetch(
+        `${serverUrl}/beers/${beerId}/recommendations/`,
+        {
+          headers: {
+            ...headers,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       return await response.json();
     };
@@ -95,28 +118,31 @@ const Beer = ({ navigation, route }) => {
         const [
           fetchedBeerData,
           fetchedMyReview,
-          fetchedComments,
-        ] = await Promise.all([getBeer(), getMyReview(), getComments()]);
-        console.log(
-          "hello world",
-          fetchedBeerData,
-          fetchedMyReview,
-          fetchedComments
-        );
+          fetchedCommentsData,
+          fetchedRecommendation,
+        ] = await Promise.all([
+          fetchBeer(),
+          fetchMyReview(),
+          fetchComments(),
+          fetchRecommendation(),
+        ]);
+
         setBeerInfo(fetchedBeerData);
         setMyReview(fetchedMyReview);
-        setComments(fetchedComments);
+        dispatch(commentsAdded(fetchedCommentsData || []));
+        setRecommendation(fetchedRecommendation);
       } catch (err) {
-        if (err.message === "Unauthorized ID token") {
-        }
-        console.log("여기요", err.message);
+        setBeerInfo({});
+        setMyReview({});
+        dispatch(commentsAdded([]));
+        setRecommendation([]);
       } finally {
         setIsFetching(false);
       }
     };
 
     fetchAllData();
-  }, [idToken, navigation, beerId]);
+  }, [idToken, navigation, beerId, dispatch]);
 
   useEffect(() => {
     Animated.timing(moveY, {
@@ -175,12 +201,12 @@ const Beer = ({ navigation, route }) => {
         </Animated.View>
         <SectionDivider direction="right" text="Recommendation" />
         <Animated.View style={styles.handleOpacity(scrollY)}>
-          <RecommendationBoardContainer beerInfo={beerInfo._id} />
+          <RecommendationBoardContainer beers={recommendation} />
         </Animated.View>
         <SectionDivider direction="left" text="Comments" />
         <CommentBoardContainer
           navigation={navigation}
-          beerInfo={beerInfo._id}
+          commentsData={commentsData}
         />
       </View>
       <Animated.View

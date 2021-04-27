@@ -5,29 +5,19 @@ import styles from "./styles";
 
 import CommentCard from "../shared/CommentCard/CommentCard";
 
-const CommentBoard = () => {
-  const [users, setUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      const usersData = require("./users.json");
-      setIsLoading(false);
-      setUsers(usersData);
-    }, 1000);
-  }, [setUsers, setIsLoading]);
-
+const CommentBoard = ({ commentsData }) => {
+  const commentcards =
+    commentsData?.map((commentData, index) => {
+      if (index < 5) {
+        return (
+          <CommentCard commentData={commentData} key={commentData.user._id} />
+        );
+      }
+    }) || [];
   return (
     <View style={styles.container}>
-      {isLoading ? <Text>Loading...</Text> : null}
-      {!isLoading && users.length
-        ? users.map((user, index) => {
-            if (index < 5) {
-              return <CommentCard user={user} key={user.id} />;
-            }
-          })
-        : null}
-      {!isLoading && !users.length ? <Text>Leave first comment!</Text> : null}
+      {commentcards}
+      {!commentcards.length ? <Text>Leave first comment!</Text> : null}
     </View>
   );
 };
