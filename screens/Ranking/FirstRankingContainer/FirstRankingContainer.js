@@ -32,7 +32,7 @@ const FirstRankingContainer = ({ beerInfo }) => {
       >
         <FontAwesome5 name="crown" size={30} color={PRIMARY_ORANGE} />
         <Text style={styles.rating}>
-          <CountUp isCounting end={beerInfo.totalRating} duration={4} /> stars
+          <CountUp isCounting end={beerInfo.averageRating} duration={4} /> stars
         </Text>
         <Text style={styles.reviewCount}>
           based on{" "}

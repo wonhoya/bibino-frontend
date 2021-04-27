@@ -19,7 +19,7 @@ const ThirdRankingContainer = ({ beerInfo }) => {
       </View>
       <View style={styles.thirdRankingDescriptionContainer}>
         <Text style={styles.rating}>
-          <CountUp isCounting end={beerInfo.totalRating} duration={5} /> stars
+          <CountUp isCounting end={beerInfo.averageRating} duration={5} /> stars
         </Text>
         <Text style={styles.reviewCount}>
           based on{" "}
