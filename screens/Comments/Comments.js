@@ -1,21 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { View, Text, FlatList } from "react-native";
+import { useSelector } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
 
 import styles from "./styles";
+import { getComments } from "../../features/commentsSlice";
 import CommentCard from "../../components/shared/CommentCard/CommentCard";
 
 const Comments = () => {
-  const [users, setUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      const usersData = require("../../components/CommentBoard/users.json");
-      setIsLoading(false);
-      setUsers(usersData);
-    }, 1000);
-  }, [setUsers, setIsLoading]);
+  const commentDatum = useSelector(getComments);
 
   return (
     <View style={styles.container}>
@@ -26,16 +19,13 @@ const Comments = () => {
         <Text>Sorted By : Ratings</Text>
       </View>
       <View style={styles.commentsContainer}>
-        {isLoading ? <Text>Loading...</Text> : null}
-        {!isLoading && users.length ? (
-          <FlatList
-            data={users}
-            renderItem={({ item }) => <CommentCard user={item} />}
-            keyExtractor={({ id }) => "" + id}
-            showsVerticalScrollIndicator={false}
-          />
-        ) : null}
-        {!isLoading && !users.length ? <Text>Leave first comment!</Text> : null}
+        <FlatList
+          data={commentDatum}
+          renderItem={({ item }) => <CommentCard commentData={item} />}
+          keyExtractor={({ _id }) => "" + _id}
+          showsVerticalScrollIndicator={false}
+        />
+        {commentDatum.length ? <Text>Leave first comment!</Text> : null}
       </View>
     </View>
   );

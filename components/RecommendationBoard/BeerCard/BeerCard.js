@@ -6,10 +6,7 @@ import styles from "./styles";
 const BeerCard = ({ uri }) => {
   return (
     <>
-      <Image
-        style={styles.image}
-        source={require("../../../assets/pngs/beerSample7.png")}
-      />
+      <Image style={styles.image} source={{ uri }} />
     </>
   );
 };
