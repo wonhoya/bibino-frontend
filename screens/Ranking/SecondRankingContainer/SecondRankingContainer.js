@@ -1,20 +1,24 @@
 import React from "react";
 
-import { View, Text } from "react-native";
+import { View, Text, Image } from "react-native";
 import { CountUp } from "use-count-up";
 import styles from "./styles";
 
-const SecondRankingContainer = () => {
+const SecondRankingContainer = ({ beerInfo }) => {
   return (
     <>
       <View style={styles.secondRankingDescriptionContainer}>
         <Text style={styles.rating}>
-          <CountUp isCounting end={3.5} duration={3.2} /> stars
+          <CountUp isCounting end={beerInfo.totalRating} duration={3.2} /> stars
         </Text>
         <Text style={styles.reviewCount}>
-          based on <CountUp isCounting end={402} duration={3.2} /> review
+          based on{" "}
+          <CountUp isCounting end={beerInfo.reviewCounts} duration={3.2} />{" "}
+          review
         </Text>
-        <Text style={styles.secondName}>Cass</Text>
+        <Text style={[styles.secondName, styles.resizeFont(beerInfo.name)]}>
+          {beerInfo.name}
+        </Text>
       </View>
       <View
         style={[

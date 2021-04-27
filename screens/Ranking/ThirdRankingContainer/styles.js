@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions } from "react-native";
 
-import { PRIMARY_BLACK, PRIMARY_LIGHT_ORANGE } from "../../../constants/colors";
+import { PRIMARY_BLACK, PRIMARY_LIGHT_GREY } from "../../../constants/colors";
 import { RUBIK_BOLD, RUBIK_REGULAR } from "../../../constants/font";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
@@ -16,31 +16,35 @@ const styles = StyleSheet.create({
     color: PRIMARY_BLACK,
     fontSize: 18,
   },
-  secondContainer: {
+  thirdContainer: {
     flexDirection: "row",
     width: windowWidth,
-    height: windowHeight * 0.24,
+    height: windowHeight * 0.14,
   },
-  secondRankingNumberContainer: {
+
+  thirdRankingNumberContainer: {
     flex: 2,
     justifyContent: "flex-end",
-    alignItems: "flex-start",
-    backgroundColor: PRIMARY_LIGHT_ORANGE,
+    alignItems: "flex-end",
+    backgroundColor: PRIMARY_LIGHT_GREY,
   },
-  secondRankingDescriptionContainer: {
+
+  thirdRankingDescriptionContainer: {
     flex: 5,
     justifyContent: "flex-end",
-    alignItems: "flex-end",
+    alignItems: "flex-start",
   },
-  secondNumber: {
+
+  thirdNumber: {
     fontFamily: RUBIK_BOLD,
     color: PRIMARY_BLACK,
-    fontSize: 130,
+    fontSize: 80,
   },
-  secondName: {
+
+  thirdName: {
     fontFamily: RUBIK_BOLD,
     color: PRIMARY_BLACK,
-    fontSize: 50,
+    fontSize: 40,
   },
 });
 

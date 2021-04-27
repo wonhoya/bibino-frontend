@@ -13,14 +13,8 @@ import { RUBIK_BOLD, RUBIK_REGULAR } from "../../../constants/font";
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
-  firstContainer: {
-    flexDirection: "row",
-    width: windowWidth,
-    height: windowHeight * 0.28,
-  },
-
   firstRankingNumberContainer: {
-    flex: 2,
+    flex: 2.3,
     justifyContent: "flex-end",
     alignItems: "flex-end",
     backgroundColor: POINT_DARK_ORANGE,
@@ -41,9 +35,9 @@ const styles = StyleSheet.create({
   },
 
   firstName: {
+    maxWidth: windowWidth * 0.5,
     fontFamily: RUBIK_BOLD,
     color: PRIMARY_BLACK,
-    fontSize: 70,
   },
 
   reviewCount: {
@@ -58,5 +52,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 });
+
+styles.resizeFont = (string) => {
+  if (string.length > 6) {
+    return { fontSize: windowWidth * 0.07 };
+  } else {
+    return { fontSize: 80 };
+  }
+};
 
 export default styles;
