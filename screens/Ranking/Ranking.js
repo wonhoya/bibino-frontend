@@ -10,7 +10,7 @@ import styles from "./styles";
 import { PRIMARY_ORANGE } from "../../constants/colors";
 
 import Loading from "../Loading/Loading";
-import thirdRankingContainer from "./thirdRankingContainer/thirdRankingContainer";
+import ThirdRankingContainer from "./ThirdRankingContainer/ThirdRankingContainer";
 
 import generateHeaderOption from "../../utils/generateHeaderOption";
 import { selectIdToken } from "../../features/userSlice";
@@ -153,7 +153,7 @@ const Ranking = ({ navigation }) => {
       <Animated.View
         style={{ ...styles.thirdContainer, opacity: thirdOpacity }}
       >
-        <thirdRankingContainer />
+        <ThirdRankingContainer />
       </Animated.View>
       <Animated.View style={{ ...styles.restContainer, opacity: restOpacity }}>
         {mockbeers.map((beer, index) => {

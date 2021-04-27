@@ -4,7 +4,7 @@ import { CountUp } from "use-count-up";
 import { View, Text } from "react-native";
 import styles from "./styles";
 
-const thirdRankingContainer = () => {
+const ThirdRankingContainer = () => {
   return (
     <>
       <View
@@ -28,4 +28,4 @@ const thirdRankingContainer = () => {
   );
 };
 
-export default thirdRankingContainer;
+export default ThirdRankingContainer;
