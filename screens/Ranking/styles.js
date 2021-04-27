@@ -1,19 +1,28 @@
 import { StyleSheet, Dimensions } from "react-native";
 
-import { PRIMARY_BLACK } from "../../constants/colors";
-import { RUBIK_BOLD, RUBIK_MEDIUM, RUBIK_REGULAR } from "../../constants/font";
+import {
+  PRIMARY_BLACK,
+  PRIMARY_WHITE,
+  PRIMARY_LIGHT_ORANGE,
+  PRIMARY_ORANGE,
+  POINT_DARK_ORANGE,
+  PRIMARY_LIGHT_GREY,
+} from "../../constants/colors";
+import { RUBIK_BOLD, RUBIK_REGULAR } from "../../constants/font";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
     width: windowWidth,
-    backgroundColor: "green",
+    backgroundColor: PRIMARY_WHITE,
   },
 
   title: {
     color: PRIMARY_BLACK,
+    fontFamily: RUBIK_REGULAR,
     fontSize: 30,
+    marginLeft: 20,
   },
 
   firstContainer: {
@@ -26,7 +35,8 @@ const styles = StyleSheet.create({
     flex: 2,
     justifyContent: "flex-end",
     alignItems: "flex-end",
-    backgroundColor: "yellow",
+    backgroundColor: POINT_DARK_ORANGE,
+    zIndex: 1,
   },
 
   firstRankingDescriptionContainer: {
@@ -57,28 +67,26 @@ const styles = StyleSheet.create({
   rating: {
     fontFamily: RUBIK_REGULAR,
     color: PRIMARY_BLACK,
-    fontSize: 15,
+    fontSize: 18,
   },
   //////////////////////
   secondContainer: {
     flexDirection: "row",
     width: windowWidth,
     height: windowHeight * 0.24,
-    backgroundColor: "red",
   },
 
   secondRankingNumberContainer: {
     flex: 2,
     justifyContent: "flex-end",
     alignItems: "flex-start",
-    backgroundColor: "green",
+    backgroundColor: PRIMARY_LIGHT_ORANGE,
   },
 
   secondRankingDescriptionContainer: {
     flex: 5,
     justifyContent: "flex-end",
     alignItems: "flex-end",
-    backgroundColor: "red",
   },
 
   secondNumber: {
@@ -99,21 +107,19 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: windowWidth,
     height: windowHeight * 0.14,
-    backgroundColor: "purple",
   },
 
   thirdRankingNumberContainer: {
     flex: 2,
     justifyContent: "flex-end",
     alignItems: "flex-end",
-    backgroundColor: "yellow",
+    backgroundColor: PRIMARY_LIGHT_GREY,
   },
 
   thirdRankingDescriptionContainer: {
     flex: 5,
     justifyContent: "flex-end",
     alignItems: "flex-start",
-    backgroundColor: "white",
   },
 
   thirdNumber: {
@@ -131,8 +137,28 @@ const styles = StyleSheet.create({
   /////////////////////
   restContainer: {
     width: windowWidth,
-    marginTop: 50,
-    backgroundColor: "brown",
+    marginTop: 30,
+  },
+  restDescriptionContainer: {
+    marginVertical: 10,
+    borderBottomColor: PRIMARY_ORANGE,
+    borderBottomWidth: 1,
+  },
+  restName: {
+    marginLeft: 30,
+    minWidth: windowWidth * 4,
+    maxHeight: windowHeight * 0.05,
+    marginBottom: 9,
+    color: PRIMARY_BLACK,
+    fontFamily: RUBIK_BOLD,
+    fontSize: 20,
+  },
+  restDescription: {
+    marginLeft: 30,
+    marginBottom: 10,
+    color: PRIMARY_BLACK,
+    fontFamily: RUBIK_REGULAR,
+    fontSize: 20,
   },
 });
 

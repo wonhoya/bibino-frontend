@@ -5,7 +5,11 @@ import {
   SEARCH_CARD_TITLE_FONT_SIZE,
   SEARCH_CARD_PARAGRAPH_FONT_SIZE,
 } from "../../../constants/size";
-import { SEARCH_DARK_GREEN, PRIMARY_BLACK } from "../../../constants/colors";
+import {
+  SEARCH_DARK_GREEN,
+  PRIMARY_BLACK,
+  PRIMARY_ORANGE,
+} from "../../../constants/colors";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
@@ -14,11 +18,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     minHeight: windowHeight * 0.09,
-    borderWidth: 0.5,
-    borderColor: "black",
-    borderLeftColor: "white",
-    borderRightColor: "white",
-    borderTopColor: "white",
+    borderBottomWidth: 1,
+    borderBottomColor: PRIMARY_BLACK,
   },
   name: {
     minWidth: windowWidth * 4,
