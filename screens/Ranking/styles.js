@@ -6,6 +6,10 @@ import {
   PRIMARY_ORANGE,
 } from "../../constants/colors";
 import { RUBIK_BOLD, RUBIK_REGULAR } from "../../constants/font";
+import {
+  RANKING_REST_DESCRIPTION_FONT_SIZE,
+  RANKING_REST_NAME_FONT_SIZE,
+} from "../../constants/size";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
@@ -43,19 +47,19 @@ const styles = StyleSheet.create({
   },
   restName: {
     marginLeft: 30,
+    marginBottom: 9,
     minWidth: windowWidth * 4,
     maxHeight: windowHeight * 0.05,
-    marginBottom: 9,
     color: PRIMARY_BLACK,
     fontFamily: RUBIK_BOLD,
-    fontSize: 20,
+    fontSize: RANKING_REST_NAME_FONT_SIZE,
   },
   restDescription: {
     marginLeft: 30,
     marginBottom: 10,
     color: PRIMARY_BLACK,
     fontFamily: RUBIK_REGULAR,
-    fontSize: 15,
+    fontSize: RANKING_REST_DESCRIPTION_FONT_SIZE,
   },
 });
 

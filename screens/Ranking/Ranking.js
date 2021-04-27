@@ -112,7 +112,7 @@ const Ranking = ({ navigation }) => {
       <Animated.View style={{ ...styles.restContainer, opacity: restOpacity }}>
         {restBeers?.map((beer, index) => {
           return (
-            <View style={styles.restDescriptionContainer}>
+            <View style={styles.restDescriptionContainer} key={beer._id}>
               <Text style={styles.restName}>
                 {index + 4}. {beer.name}
               </Text>

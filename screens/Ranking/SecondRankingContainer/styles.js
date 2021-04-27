@@ -2,19 +2,25 @@ import { StyleSheet, Dimensions } from "react-native";
 
 import { PRIMARY_BLACK, PRIMARY_LIGHT_ORANGE } from "../../../constants/colors";
 import { RUBIK_BOLD, RUBIK_REGULAR } from "../../../constants/font";
+import {
+  RANKING_SECOND_RATING_FONT,
+  RANKING_SECOND_NUMBER_FONT,
+  RANKING_SECOND_REVIEW_COUNT_FONT,
+  RANKING_NAME_FONT,
+} from "../../../constants/size";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   reviewCount: {
-    fontFamily: RUBIK_REGULAR,
     color: PRIMARY_BLACK,
-    fontSize: 15,
+    fontFamily: RUBIK_REGULAR,
+    fontSize: RANKING_SECOND_REVIEW_COUNT_FONT,
   },
   rating: {
-    fontFamily: RUBIK_REGULAR,
     color: PRIMARY_BLACK,
-    fontSize: 18,
+    fontFamily: RUBIK_REGULAR,
+    fontSize: RANKING_SECOND_RATING_FONT,
   },
   secondContainer: {
     flexDirection: "row",
@@ -33,14 +39,13 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
   },
   secondNumber: {
-    fontFamily: RUBIK_BOLD,
     color: PRIMARY_BLACK,
-    fontSize: 130,
+    fontFamily: RUBIK_BOLD,
+    fontSize: RANKING_SECOND_NUMBER_FONT,
   },
   secondName: {
-    fontFamily: RUBIK_BOLD,
     color: PRIMARY_BLACK,
-    fontSize: 50,
+    fontFamily: RUBIK_BOLD,
   },
 });
 
@@ -48,7 +53,7 @@ styles.resizeFont = (string) => {
   if (string.length > 6) {
     return { fontSize: windowWidth * 0.07 };
   } else {
-    return { fontSize: 80 };
+    return { fontSize: RANKING_NAME_FONT };
   }
 };
 
