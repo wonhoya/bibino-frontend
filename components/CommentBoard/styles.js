@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     paddingBottom: 10,
     borderRadius: 10,
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
   },
 });

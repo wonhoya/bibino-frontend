@@ -24,20 +24,20 @@ const styles = StyleSheet.create({
     marginLeft: "2%",
   },
   image: {
-    width: windowWidth / 6,
-    height: windowWidth / 6,
+    width: windowWidth / 6.5,
+    height: windowWidth / 6.5,
     borderRadius: 50,
-    borderWidth: 2,
   },
   textContainer: {
     flex: 1.5,
+
     marginTop: "1%",
     marginLeft: "3%",
   },
   userName: {
     fontFamily: RUBIK_BOLD,
     fontSize: 18,
-    marginBottom: "2%",
+    marginBottom: "18%",
   },
   work: {
     fontFamily: RUBIK_MEDIUM,
