@@ -1,12 +1,16 @@
 import { StyleSheet, Dimensions } from "react-native";
 
-import { PRIMARY_BLACK, PRIMARY_ORANGE } from "../../constants/colors";
+import {
+  PRIMARY_BLACK,
+  PRIMARY_ORANGE,
+  PRIMARY_WHITE,
+} from "../../constants/colors";
 import { RUBIK_REGULAR } from "../../constants/font";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
-  scrollContainer: { flex: 1 },
+  scrollContainer: { flex: 1, backgroundColor: PRIMARY_WHITE },
   container: { alignItems: "center" },
   buttonContainer: {
     position: "absolute",
@@ -57,13 +61,13 @@ styles.handleOpacity = (scrollY) => {
   return {
     opacity: scrollY.interpolate({
       inputRange: [
+        windowHeight * 0.8,
+        windowHeight * 0.85,
         windowHeight * 0.9,
+        windowHeight * 0.95,
         windowHeight,
-        windowHeight * 1.1,
-        windowHeight * 1.2,
-        windowHeight * 1.3,
       ],
-      outputRange: [0, 0.1, 0.3, 0.5, 1],
+      outputRange: [0, 0.3, 0.5, 0.7, 1],
     }),
   };
 };
@@ -73,7 +77,7 @@ styles.handlePositionX = (scrollY) => {
     transform: [
       {
         translateX: scrollY.interpolate({
-          inputRange: [0, windowHeight * 0.8, windowHeight],
+          inputRange: [0, windowHeight * 0.5, windowHeight],
           outputRange: [
             windowWidth,
             -windowWidth * 0.245,

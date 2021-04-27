@@ -11,13 +11,11 @@ const SectionDivider = ({ direction, text }) => {
       ) : (
         <Text style={styles.sectionTitle}>{text}</Text>
       )}
-      <View>
-        {direction === "right" ? (
-          <Text style={styles.sectionTitle}>{text}</Text>
-        ) : (
-          <View style={styles.line} />
-        )}
-      </View>
+      {direction === "right" ? (
+        <Text style={styles.sectionTitle}>{text}</Text>
+      ) : (
+        <View style={styles.line} />
+      )}
     </View>
   );
 };
