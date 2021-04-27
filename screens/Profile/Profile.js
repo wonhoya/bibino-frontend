@@ -42,6 +42,12 @@ const Profile = ({ navigation }) => {
     getMyBeers();
   }, [shouldFetch, dispatch]);
 
+  useEffect(() => {
+    navigation.addListener("focus", () => {
+      setShouldFetch(true);
+    });
+  }, [navigation, shouldFetch]);
+
   const handleReFetchMyBeers = () => {
     if (isFetchingUserBeers) {
       return;
