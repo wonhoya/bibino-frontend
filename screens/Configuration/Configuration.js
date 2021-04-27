@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
+import * as SecureStore from "expo-secure-store";
 
 import styles from "./styles";
 import { userDeleted } from "../../features/userSlice";
-import { removeIdToken } from "../../features/tokenSlice";
+import { removeIdToken } from "../../features/userSlice";
 import { todayBeersDeleted } from "../../features/todayBeersSlice";
 import { LogOutIcon, ResignIcon, ContactIcon } from "../../assets/svgs/icon";
 
@@ -16,13 +17,14 @@ const Configuration = () => {
     if (!method) {
       return;
     }
+
     const logOutUser = async () => {
       try {
-        await dispatch(removeIdToken());
         dispatch(userDeleted());
         dispatch(todayBeersDeleted());
+        await dispatch(removeIdToken());
       } catch (err) {
-        // 에러 핸들링
+        await SecureStore.setItemAsync("idToken", "");
       } finally {
         setMethod("");
       }

@@ -19,7 +19,7 @@ import ModalContainer from "../../components/ModalContainer/ModalContainer";
 import Loading from "../Loading/Loading";
 import SectionDivider from "./SectionDivider/SectionDivider";
 import FeedbackBoard from "../../components/FeedbackBoard/FeedbackBoard";
-import { selectIdToken } from "../../features/tokenSlice";
+import { selectIdToken } from "../../features/userSlice";
 import generateHeaderOption from "../../utils/generateHeaderOption";
 
 const Beer = ({ navigation, route }) => {

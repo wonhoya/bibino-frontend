@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import styles from "./styles";
 import { SearchIcon } from "../../assets/svgs/icon";
 import fetchSearchBeers from "../../utils/fetchSearchBeers";
-import { selectIdToken } from "../../features/tokenSlice";
+import { selectIdToken } from "../../features/userSlice";
 import SearchCardBoard from "../../components/SearchCardBoard/SearchCardBoard";
 
 const Search = () => {

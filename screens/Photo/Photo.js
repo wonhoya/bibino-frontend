@@ -8,7 +8,7 @@ import styles from "./styles";
 import Configuration from "../Configuration/Configuration";
 import PhotoTabBar from "../../components/PhotoTabBar/PhotoTabBar";
 import CameraLoading from "../Loading/CameraLoading";
-import { selectIdToken } from "../../features/tokenSlice";
+import { selectIdToken } from "../../features/userSlice";
 import generateHeaderOption from "../../utils/generateHeaderOption";
 
 const Photo = ({ navigation }) => {
