@@ -9,19 +9,19 @@ const { width: windowWidth } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: "row",
+    marginVertical: windowWidth / 50,
     width: windowWidth / 1.2,
     height: windowWidth / 4.8,
     borderRadius: 5,
     backgroundColor: "#FFFFFF",
-    flexDirection: "row",
-    marginVertical: windowWidth / 50,
   },
   imageContainer: {
     flex: 0.8,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 20,
     marginLeft: "2%",
+    borderRadius: 20,
   },
   image: {
     width: windowWidth / 6.5,
@@ -30,19 +30,18 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flex: 1.5,
-
     marginTop: "1%",
     marginLeft: "3%",
   },
   userName: {
+    marginBottom: "18%",
     fontFamily: RUBIK_BOLD,
     fontSize: 18,
-    marginBottom: "18%",
   },
   work: {
+    marginBottom: "6%",
     fontFamily: RUBIK_MEDIUM,
     fontSize: 11,
-    marginBottom: "6%",
   },
   comment: {
     fontFamily: RUBIK_REGULAR,

@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Image, Text, Dimensions } from "react-native";
-import avatarImg from "../../../assets/pngs/avatarSample.png";
 import styles from "./styles";
 
 import RatingBoard from "../../shared/RatingBoard/RatingBoard";
@@ -13,8 +12,6 @@ const CommentCard = ({ commentData }) => {
     comment,
     rating,
   } = commentData;
-
-  console.log(commentData);
 
   return (
     <View style={styles.container}>
