@@ -70,6 +70,7 @@ const Beer = ({ navigation, route }) => {
           return await response.json();
         })();
       });
+
       try {
         const [
           fetchedBeerData,
