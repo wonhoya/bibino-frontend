@@ -10,7 +10,7 @@ import { PRIMARY_ORANGE } from "../../constants/colors";
 import floatingButtons from "../../constants/floatingButtons";
 import { selectIdToken } from "../../features/userSlice";
 import { commentsAdded, getComments } from "../../features/commentsSlice";
-
+import showErrorInDevelopment from "../../utils/showErrorInDevelopment";
 import TitleContainer from "./TitleContainer/TitleContainer";
 import RatingBoardContainer from "./RatingBoardContainer/RatingBoardContainer";
 import TagBoardContainer from "./TagBoardContainer/TagBoardContainer";
@@ -33,8 +33,9 @@ const Beer = ({ navigation, route }) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [shouldShowFeedBack, setShouldShowFeedBack] = useState(false);
   const [beerInfo, setBeerInfo] = useState(null);
-  const [myReview, setMyReview] = useState(null);
+  const [myReview, setMyReview] = useState({});
   const [recommendation, setRecommendation] = useState(null);
+  const userId = useSelector((state) => state.user.id);
   const idToken = useSelector(selectIdToken);
   const commentDatum = useSelector(getComments);
 
@@ -51,7 +52,6 @@ const Beer = ({ navigation, route }) => {
     const headers = generateHeaderOption(idToken);
     const fetchUrls = [
       `${serverUrl}/beers/${beerId}`,
-      `${serverUrl}/beers/${beerId}/reviews/single`,
       `${serverUrl}/beers/${beerId}/comments/`,
       `${serverUrl}/beers/${beerId}/recommendations/`,
     ];
@@ -73,16 +73,33 @@ const Beer = ({ navigation, route }) => {
       try {
         const [
           fetchedBeerData,
-          fetchedMyReview,
           fetchedCommentDatum,
           fetchedRecommendation,
         ] = await Promise.all(fetchedDatum);
 
-        setBeerInfo(fetchedBeerData);
+        const userReview = fetchedCommentDatum.filter(
+          ({ user: { _id } }) => _id === userId
+        );
+        const userReviewId = userReview[0]?._id;
+        let response;
+
+        if (userReviewId) {
+          response = await fetch(`${serverUrl}/reviews/${userReviewId}`, {
+            headers: {
+              ...headers,
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          });
+        }
+
+        const fetchedMyReview = await response?.json();
+        setBeerInfo(fetchedBeerData || {});
         setMyReview(fetchedMyReview || {});
         dispatch(commentsAdded(fetchedCommentDatum || []));
-        setRecommendation(fetchedRecommendation);
+        setRecommendation(fetchedRecommendation || []);
       } catch (err) {
+        showErrorInDevelopment("Failed Beer scrren fetch ", err);
         setBeerInfo({});
         setMyReview({});
         dispatch(commentsAdded([]));
@@ -93,7 +110,7 @@ const Beer = ({ navigation, route }) => {
     };
 
     fetchAllData();
-  }, [idToken, navigation, beerId, dispatch]);
+  }, [idToken, navigation, beerId, userId, dispatch]);
 
   useEffect(() => {
     Animated.timing(moveY, {

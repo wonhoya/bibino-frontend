@@ -3,6 +3,7 @@ import { SafeAreaView, View } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
 import styles from "./styles";
+import isTodayBeerDataOutdated from "../../utils/isTodayBeerDataOutdated";
 import { getUser } from "../../features/userSlice";
 import {
   fetchTodayBeers,
@@ -44,7 +45,11 @@ const Main = ({ navigation }) => {
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", async () => {
-      if (!todayBeersData.beers.length) {
+      const nowDate = new Date().toDateString();
+      const beerUpdateDate = new Date(todayBeersData.timestamp).toDateString();
+      const shouldUpdate = isTodayBeerDataOutdated(nowDate, beerUpdateDate);
+
+      if (!todayBeersData.beers.length || shouldUpdate) {
         setIsLoading(true);
         try {
           await dispatch(fetchTodayBeers());
@@ -57,24 +62,9 @@ const Main = ({ navigation }) => {
     });
 
     return unsubscribe;
-  }, [navigation, todayBeersData.beers, dispatch]);
+  }, [navigation, todayBeersData.beers, todayBeersData.timestamp, dispatch]);
 
-  const nowDate = new Date().toDateString();
-  const beerUpdateDate = new Date(todayBeersData.timestamp).toDateString();
-
-  const isTodayBeerDataOutdated = (today, compareDate) => {
-    return today !== compareDate;
-  };
-  const shouldUpdateTodayBeers = isTodayBeerDataOutdated(
-    nowDate,
-    beerUpdateDate
-  );
-
-  if (shouldUpdateTodayBeers && !isLoading) {
-    setIsLoading(true);
-  }
-
-  if (shouldUpdateTodayBeers || isLoading) {
+  if (isLoading) {
     return <Loading />;
   }
 
