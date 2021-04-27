@@ -73,8 +73,7 @@ const fetchMyBeers = createAsyncThunk(
 
 const getIdToken = createAsyncThunk("user/getIdToken", async () => {
   try {
-    const idToken = await SecureStore.getItemAsync("idToken");
-    return idToken;
+    return await SecureStore.getItemAsync("idToken");
   } catch (err) {
     showErrorInDevelopment("failed id token load in the secure store ", err);
     throw err;
