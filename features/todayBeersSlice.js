@@ -17,9 +17,9 @@ const initialState = {
 const fetchTodayBeers = createAsyncThunk(
   "todayBeers/fetchTodayBeers",
   async (_, { getState }) => {
-    const { user, token } = getState();
+    const { user } = getState();
     try {
-      const headers = generateHeaderOption(token.idToken);
+      const headers = generateHeaderOption(user.idToken);
       const response = await fetch(
         `${serverUrl}/users/${user.id}/recommendations`,
         { headers }
