@@ -8,11 +8,11 @@ import { SERVER_URL } from "../../config";
 import generateHeaderOption from "../../utils/generateHeaderOption";
 import showErrorInDevelopment from "../../utils/showErrorInDevelopment";
 import { selectIdToken } from "../../features/userSlice";
-import RatingBoard from "../shared/RatingBoard/RatingBoard";
-import Button from "../shared/Button/Button";
+import RatingBoard from "../../components/shared/RatingBoard/RatingBoard";
+import Button from "../../components/shared/Button/Button";
 import CharacteristicContainer from "./CharacteristicContainer/CharacteristicContainer";
 
-const ModalContainer = ({
+const ReviewModal = ({
   navigation,
   isModalVisible,
   closeModal,
@@ -121,4 +121,4 @@ const ModalContainer = ({
   );
 };
 
-export default ModalContainer;
+export default ReviewModal;

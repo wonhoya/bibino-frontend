@@ -17,7 +17,7 @@ import TagBoardContainer from "./TagBoardContainer/TagBoardContainer";
 import CharacteristicContainer from "./CharacteristicContainer/CharacteristicContainer";
 import CommentBoardContainer from "./CommentBoardContainer/CommentBoardContainer";
 import RecommendationBoardContainer from "./RecommendationBoardContainer/RecommendationBoardContainer";
-import ModalContainer from "../../components/ModalContainer/ModalContainer";
+import ReviewModal from "../ReviewModal/ReviewModal";
 import Loading from "../Loading/Loading";
 import SectionDivider from "./SectionDivider/SectionDivider";
 import FeedbackBoard from "../../components/FeedbackBoard/FeedbackBoard";
@@ -200,7 +200,7 @@ const Beer = ({ navigation, route }) => {
           }}
         />
       </Animated.View>
-      <ModalContainer
+      <ReviewModal
         isModalVisible={isModalVisible}
         closeModal={closeModal}
         navigation={navigation}

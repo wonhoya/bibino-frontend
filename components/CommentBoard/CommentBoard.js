@@ -3,12 +3,12 @@ import { View, Text } from "react-native";
 
 import styles from "./styles";
 
-import CommentCard from "../shared/CommentCard/CommentCard";
+import CommentCard from "./CommentCard/CommentCard";
 
-const CommentBoard = ({ commentDatum }) => {
+const CommentBoard = ({ commentDatum, commentNumber }) => {
   const commentcards =
     commentDatum?.map((commentData, index) => {
-      if (index < 5) {
+      if (index < commentNumber) {
         return (
           <CommentCard commentData={commentData} key={commentData.user._id} />
         );
