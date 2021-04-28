@@ -5,7 +5,7 @@ import { AntDesign } from "@expo/vector-icons";
 
 import styles from "./styles";
 import { getComments } from "../../features/commentsSlice";
-import CommentCard from "../../components/shared/CommentCard/CommentCard";
+import CommentBoard from "../../components/CommentBoard/CommentBoard";
 
 const Comments = () => {
   const commentDatum = useSelector(getComments);
@@ -19,13 +19,10 @@ const Comments = () => {
         <Text>Sorted By : Ratings</Text>
       </View>
       <View style={styles.commentsContainer}>
-        <FlatList
-          data={commentDatum}
-          renderItem={({ item }) => <CommentCard commentData={item} />}
-          keyExtractor={({ _id }) => "" + _id}
-          showsVerticalScrollIndicator={false}
+        <CommentBoard
+          commentDatum={commentDatum}
+          commentNumber={commentDatum.length}
         />
-        {commentDatum.length ? <Text>Leave first comment!</Text> : null}
       </View>
     </View>
   );
