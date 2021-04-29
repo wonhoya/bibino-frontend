@@ -9,17 +9,6 @@ import showErrorInDevelopment from "../utils/showErrorInDevelopment";
 
 const serverUrl = SERVER_URL[process.env.NODE_ENV];
 
-const initialState = {
-  id: null,
-  idToken: null,
-  name: null,
-  avatar: null,
-  characteristic: {},
-  beers: [],
-  status: ASYNC_STATUS.IDLE,
-  error: null,
-};
-
 const signInUser = createAsyncThunk("user/signInUser", async (idToken) => {
   try {
     const googleIdToken = await getGoogleIdToken(idToken);
@@ -92,6 +81,17 @@ const removeIdToken = createAsyncThunk("user/removeIdToken", async () => {
   }
 });
 
+const initialState = {
+  id: null,
+  idToken: null,
+  name: null,
+  avatar: null,
+  characteristic: {},
+  beers: [],
+  status: ASYNC_STATUS.IDLE,
+  error: null,
+};
+
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -150,7 +150,7 @@ const userSlice = createSlice({
   },
 });
 
-const { userStatusSet, userDeleted } = userSlice.actions;
+const { userDeleted } = userSlice.actions;
 
 const getUser = (state) => state.user;
 const selectIdToken = (state) => state.user.idToken;
@@ -158,7 +158,6 @@ const selectIdToken = (state) => state.user.idToken;
 export {
   userSlice,
   signInUser,
-  userStatusSet,
   userDeleted,
   removeIdToken,
   getIdToken,

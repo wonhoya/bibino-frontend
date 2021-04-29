@@ -20,10 +20,6 @@ const SignIn = () => {
     promptAsync();
   };
 
-  const handleOnpress = () => {
-    console.log("clicked");
-  };
-
   if (isLoading) {
     return <Loading />;
   }
@@ -43,10 +39,10 @@ const SignIn = () => {
           >
             <GoogleIcon size={50} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={handleOnpress}>
+          <TouchableOpacity>
             <FacebookIcon size={50} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={handleOnpress}>
+          <TouchableOpacity>
             <InstagramIcon size={50} />
           </TouchableOpacity>
         </View>

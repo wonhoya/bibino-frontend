@@ -148,72 +148,71 @@ const Beer = ({ navigation, route }) => {
   }
 
   return (
-    <Animated.ScrollView
-      style={styles.scrollContainer}
-      showsVerticalScrollIndicator={false}
-      onScroll={handleOnScroll}
-      scrollEventThrottle={16}
-    >
-      <View style={styles.container}>
-        <View style={styles.bannerContainer}>
-          <Animated.Image
-            style={[styles.image, styles.handleImageY(scrollY)]}
-            source={{ uri: myBeerImageURL || beerInfo.imagePath }}
+    <>
+      <Animated.ScrollView
+        style={styles.scrollContainer}
+        showsVerticalScrollIndicator={false}
+        onScroll={handleOnScroll}
+        scrollEventThrottle={16}
+      >
+        <View style={styles.container}>
+          <View style={styles.bannerContainer}>
+            <Animated.Image
+              style={[styles.image, styles.handleImageY(scrollY)]}
+              source={{ uri: myBeerImageURL || beerInfo.imagePath }}
+            />
+          </View>
+          <TitleContainer
+            title={beerInfo.name}
+            rating={myReview.rating}
+            reviewCounts={commentDatum.length}
+          />
+          <RatingBoardContainer rating={beerInfo.averageRating} />
+          <TagBoardContainer characterAverage={characterAverage} />
+          <SectionDivider direction="right" text="Description" />
+          <Animated.Text style={{ ...styles.description, top: moveY }}>
+            {beerInfo.description}
+          </Animated.Text>
+          <SectionDivider direction="left" text="Characteristic" />
+          <Animated.View style={styles.handlePositionX(scrollY)}>
+            <CharacteristicContainer characterAverage={characterAverage} />
+          </Animated.View>
+          <SectionDivider direction="right" text="Recommendation" />
+          <Animated.View style={styles.handleOpacity(scrollY)}>
+            <RecommendationBoardContainer beers={recommendation} />
+          </Animated.View>
+          <SectionDivider direction="left" text="Comments" />
+          <CommentBoardContainer
+            navigation={navigation}
+            commentDatum={commentDatum}
           />
         </View>
-        <TitleContainer
-          title={beerInfo.name}
-          rating={myReview.rating}
-          reviewCounts={commentDatum.length}
-        />
-        <RatingBoardContainer rating={beerInfo.averageRating} />
-        <TagBoardContainer characterAverage={characterAverage} />
-        <SectionDivider direction="right" text="Description" />
-        <Animated.Text style={{ ...styles.description, top: moveY }}>
-          {beerInfo.description}
-        </Animated.Text>
-        <SectionDivider direction="left" text="Characteristic" />
-        <Animated.View style={styles.handlePositionX(scrollY)}>
-          <CharacteristicContainer characterAverage={characterAverage} />
-        </Animated.View>
-        <SectionDivider direction="right" text="Recommendation" />
-        <Animated.View style={styles.handleOpacity(scrollY)}>
-          <RecommendationBoardContainer beers={recommendation} />
-        </Animated.View>
-        <SectionDivider direction="left" text="Comments" />
-        <CommentBoardContainer
+        <ReviewModal
+          isModalVisible={isModalVisible}
+          closeModal={closeModal}
           navigation={navigation}
-          commentDatum={commentDatum}
+          setShouldShowFeedBack={setShouldShowFeedBack}
+          reviewId={myReview._id}
+          beerId={beerInfo._id}
         />
-      </View>
-      <Animated.View
-        style={[styles.buttonContainer, styles.handleButtonY(scrollY)]}
-      >
-        <FloatingAction
-          actions={floatingButtons}
-          color={PRIMARY_ORANGE}
-          showBackground={false}
-          onPressItem={(name) => {
-            if (name === "reviewButton") {
-              setModalVisible(true);
-            }
-          }}
-        />
-      </Animated.View>
-      <ReviewModal
-        isModalVisible={isModalVisible}
-        closeModal={closeModal}
-        navigation={navigation}
-        setShouldShowFeedBack={setShouldShowFeedBack}
-        reviewId={myReview._id}
-        beerId={beerInfo._id}
+        {shouldShowFeedBack && (
+          <Animated.View style={{ ...styles.feedbackContainer, top: scrollY }}>
+            <FeedbackBoard setShouldShowFeedBack={setShouldShowFeedBack} />
+          </Animated.View>
+        )}
+      </Animated.ScrollView>
+      <FloatingAction
+        actions={floatingButtons}
+        color={PRIMARY_ORANGE}
+        distanceToEdge={{ vertical: 100, horizontal: 30 }}
+        showBackground={false}
+        onPressItem={(name) => {
+          if (name === "reviewButton") {
+            setModalVisible(true);
+          }
+        }}
       />
-      {shouldShowFeedBack && (
-        <Animated.View style={{ ...styles.feedbackContainer, top: scrollY }}>
-          <FeedbackBoard setShouldShowFeedBack={setShouldShowFeedBack} />
-        </Animated.View>
-      )}
-    </Animated.ScrollView>
+    </>
   );
 };
 

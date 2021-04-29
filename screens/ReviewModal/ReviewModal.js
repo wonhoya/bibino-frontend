@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TextInput } from "react-native";
+import { View, Text, TextInput, Dimensions } from "react-native";
 import { useSelector } from "react-redux";
 import Modal from "react-native-modal";
 
@@ -11,6 +11,8 @@ import { selectIdToken } from "../../features/userSlice";
 import RatingBoard from "../../components/shared/RatingBoard/RatingBoard";
 import Button from "../../components/shared/Button/Button";
 import CharacteristicContainer from "./CharacteristicContainer/CharacteristicContainer";
+
+const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const ReviewModal = ({
   navigation,
@@ -105,7 +107,12 @@ const ReviewModal = ({
         <View style={styles.modalContainer}>
           <View style={styles.line} />
           <Text style={styles.title}>Leave your review!</Text>
-          <RatingBoard mode="dynamic" review={review} setReview={setReview} />
+          <RatingBoard
+            mode="dynamic"
+            review={review}
+            setReview={setReview}
+            size={windowHeight / 16}
+          />
           <CharacteristicContainer review={review} setReview={setReview} />
           <TextInput
             autoCapitalize="none"

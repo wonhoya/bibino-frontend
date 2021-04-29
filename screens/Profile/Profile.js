@@ -63,9 +63,6 @@ const Profile = ({ navigation }) => {
       return <View style={[styles.photo, styles.invisiblePhoto]} />;
     }
 
-    if (item.phrase) {
-      return <Text>{item.phrase}</Text>;
-    }
     return (
       <TouchableOpacity
         style={styles.photo}
@@ -102,7 +99,7 @@ const Profile = ({ navigation }) => {
             <FlatList
               data={formatItems(user.beers, numColumns, informationPhrase)}
               renderItem={renderItem}
-              keyExtractor={(item) => item.id}
+              keyExtractor={(item) => item._id}
               numColumns={numColumns}
               showsVerticalScrollIndicator={false}
               refreshing={shouldFetch}

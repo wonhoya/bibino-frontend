@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { SafeAreaView, View, Dimensions } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { SafeAreaView, View, Dimensions, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import styles from "./styles";
@@ -81,13 +80,7 @@ const Intro = () => {
               button={
                 <Button
                   text={INTRO_START_BUTTON_TEXT}
-                  onPress={() =>
-                    navigate("SignIn", {
-                      params: {
-                        /*나중에 파라미터 삽입 */
-                      },
-                    })
-                  }
+                  onPress={() => navigate("SignIn")}
                 />
               }
             />

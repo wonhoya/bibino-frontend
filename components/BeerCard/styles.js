@@ -22,13 +22,13 @@ const styles = StyleSheet.create({
     borderRadius: 30,
   },
   imageContainer: {
-    flex: 2.3,
-    width: "100%",
+    alignItems: "center",
+    height: itemHeight * 0.69,
+    width: itemWidth,
   },
   descriptionContainer: {
-    flex: 1,
-    overflow: "hidden",
-    width: "100%",
+    height: itemHeight * 0.34,
+    width: itemWidth,
     backgroundColor: PRIMARY_BLACK,
   },
   image: {

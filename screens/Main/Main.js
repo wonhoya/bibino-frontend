@@ -70,7 +70,7 @@ const Main = ({ navigation }) => {
 
   return (
     <>
-      <SafeAreaView />
+      <SafeAreaView style={styles.safeArewView} />
       <View style={styles.container}>
         <ProfileContainer
           userName={user.name}

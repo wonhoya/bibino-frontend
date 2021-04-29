@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   restDescriptionContainer: {
     marginVertical: 10,
     borderBottomColor: PRIMARY_ORANGE,
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.5,
   },
   restName: {
     marginLeft: 30,

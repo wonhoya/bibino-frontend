@@ -5,15 +5,12 @@ const formatItems = (items, columns, phrase) => {
 
   while (lastRowElementsNumber !== columns && lastRowElementsNumber !== 0) {
     copyItems.push({
-      id: `blank-${lastRowElementsNumber}`,
+      _id: Date.now(),
       empty: true,
     });
     lastRowElementsNumber = lastRowElementsNumber + 1;
   }
 
-  if (!copyItems.length) {
-    return [{ id: "information-phrase", phrase }];
-  }
   return copyItems;
 };
 

@@ -80,8 +80,8 @@ styles.handlePositionX = (scrollY) => {
           inputRange: [0, windowHeight * 0.5, windowHeight],
           outputRange: [
             windowWidth,
-            -windowWidth * 0.245,
-            -windowWidth * 0.245,
+            -windowWidth * 0.005,
+            -windowWidth * 0.005,
           ],
         }),
       },
