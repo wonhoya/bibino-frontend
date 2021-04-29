@@ -4,40 +4,45 @@ import { View, Animated, Easing } from "react-native";
 import { FloatingAction } from "react-native-floating-action";
 import { useNavigationState } from "@react-navigation/native";
 
-import styles from "./styles";
 import { SERVER_URL } from "../../config";
-import { PRIMARY_ORANGE } from "../../constants/colors";
-import floatingButtons from "../../constants/floatingButtons";
 import { selectIdToken } from "../../features/userSlice";
 import { commentsAdded, getComments } from "../../features/commentsSlice";
-import showErrorInDevelopment from "../../utils/showErrorInDevelopment";
-import TitleContainer from "./TitleContainer/TitleContainer";
-import RatingBoardContainer from "./RatingBoardContainer/RatingBoardContainer";
-import TagBoardContainer from "./TagBoardContainer/TagBoardContainer";
-import CharacteristicContainer from "./CharacteristicContainer/CharacteristicContainer";
-import CommentBoardContainer from "./CommentBoardContainer/CommentBoardContainer";
-import RecommendationBoardContainer from "./RecommendationBoardContainer/RecommendationBoardContainer";
-import ReviewModal from "../ReviewModal/ReviewModal";
-import Loading from "../Loading/Loading";
-import SectionDivider from "./SectionDivider/SectionDivider";
-import FeedbackBoard from "../../components/FeedbackBoard/FeedbackBoard";
 import generateHeaderOption from "../../utils/generateHeaderOption";
+import showErrorInDevelopment from "../../utils/showErrorInDevelopment";
+
+import styles from "./styles";
+import { PRIMARY_ORANGE } from "../../constants/colors";
+import floatingButtons from "../../constants/floatingButtons";
+
+import Loading from "../Loading/Loading";
+import ReviewModal from "../ReviewModal/ReviewModal";
+import FeedbackBoard from "../../components/FeedbackBoard/FeedbackBoard";
+import SectionDivider from "./SectionDivider/SectionDivider";
+import TitleContainer from "./TitleContainer/TitleContainer";
+import TagBoardContainer from "./TagBoardContainer/TagBoardContainer";
+import RatingBoardContainer from "./RatingBoardContainer/RatingBoardContainer";
+import CommentBoardContainer from "./CommentBoardContainer/CommentBoardContainer";
+import CharacteristicContainer from "./CharacteristicContainer/CharacteristicContainer";
+import RecommendationBoardContainer from "./RecommendationBoardContainer/RecommendationBoardContainer";
 
 const Beer = ({ navigation, route }) => {
   const { myBeerImageURL, beerId } = route.params;
-  const dispatch = useDispatch();
   const navState = useNavigationState((state) => state);
-  const moveY = useRef(new Animated.Value(100)).current;
-  const scrollY = useRef(new Animated.Value(0)).current;
+
+  const dispatch = useDispatch();
+  const userId = useSelector((state) => state.user.id);
+  const idToken = useSelector(selectIdToken);
+  const commentDatum = useSelector(getComments);
+
   const [isFetching, setIsFetching] = useState(true);
   const [isModalVisible, setModalVisible] = useState(false);
   const [shouldShowFeedBack, setShouldShowFeedBack] = useState(false);
   const [beerInfo, setBeerInfo] = useState(null);
   const [myReview, setMyReview] = useState({});
   const [recommendation, setRecommendation] = useState(null);
-  const userId = useSelector((state) => state.user.id);
-  const idToken = useSelector(selectIdToken);
-  const commentDatum = useSelector(getComments);
+
+  const moveY = useRef(new Animated.Value(100)).current;
+  const scrollY = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     if (navState.routes[navState.index - 1]?.name === "Success") {

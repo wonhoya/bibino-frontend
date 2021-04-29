@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { SafeAreaView, View } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
+import { Camera } from "expo-camera";
 
 import styles from "./styles";
 import isTodayBeerDataOutdated from "../../utils/isTodayBeerDataOutdated";
@@ -12,9 +13,9 @@ import {
 import ProfileContainer from "./ProfileContainer/ProfileContainer";
 import ContentsContainer from "./ContentsContainer/ContentsContainer";
 import Loading from "../Loading/Loading";
+import Configuration from "../Configuration/Configuration";
 
 const Main = ({ navigation }) => {
-  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const todayBeersData = useSelector((state) => {
     const { todayBeers } = state;
@@ -24,6 +25,9 @@ const Main = ({ navigation }) => {
     };
   });
   const user = useSelector(getUser);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasPermission, setHasPermission] = useState(null);
 
   useEffect(() => {
     if (!isLoading) {
@@ -42,6 +46,22 @@ const Main = ({ navigation }) => {
 
     getTodayBeers();
   }, [isLoading, dispatch]);
+
+  useEffect(() => {
+    const requestPermission = async () => {
+      const { status } = await Camera.requestPermissionsAsync();
+
+      if (status === "granted") {
+        return setHasPermission(true);
+      }
+
+      if (status === "denied" || "undetermined") {
+        return setHasPermission(false);
+      }
+    };
+
+    requestPermission();
+  }, []);
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", async () => {
@@ -66,6 +86,10 @@ const Main = ({ navigation }) => {
 
   if (isLoading) {
     return <Loading />;
+  }
+
+  if (hasPermission === false) {
+    return <Configuration />;
   }
 
   return (

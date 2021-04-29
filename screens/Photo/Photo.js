@@ -4,23 +4,24 @@ import { View } from "react-native";
 import { Camera } from "expo-camera";
 import { BACKEND_URL_FOR_DEV } from "@env";
 
-import styles from "./styles";
-import Configuration from "../Configuration/Configuration";
-import PhotoTabBar from "../../components/PhotoTabBar/PhotoTabBar";
-import CameraLoading from "../Loading/CameraLoading";
 import { selectIdToken } from "../../features/userSlice";
 import generateHeaderOption from "../../utils/generateHeaderOption";
 
+import PhotoTabBar from "../../components/PhotoTabBar/PhotoTabBar";
+import CameraLoading from "../Loading/CameraLoading";
+
+import styles from "./styles";
+
 const Photo = ({ navigation }) => {
   const cameraRef = useRef(null);
-  const [hasPermission, setHasPermission] = useState(null);
+  const idToken = useSelector(selectIdToken);
+
   const [isCameraReady, setisCameraReady] = useState(false);
   const [isPreview, setIsPreview] = useState(false);
   const [isParseStarted, setIsParseStarted] = useState(false);
   const [isAnimationFinished, setIsAnimationFinished] = useState(false);
   const [photobase64, setPhotobase64] = useState(null);
 
-  const idToken = useSelector(selectIdToken);
   const headers = generateHeaderOption(idToken);
 
   useEffect(() => {
@@ -37,22 +38,6 @@ const Photo = ({ navigation }) => {
       animationEnabled: false,
     });
   }, [navigation]);
-
-  useEffect(() => {
-    const requestPermission = async () => {
-      const { status } = await Camera.requestPermissionsAsync();
-
-      if (status === "granted") {
-        return setHasPermission(true);
-      }
-
-      if (status === "denied" || "undetermined") {
-        return setHasPermission(false);
-      }
-    };
-
-    requestPermission();
-  }, []);
 
   const handleTakePicture = async () => {
     if (!isCameraReady) {
@@ -108,11 +93,6 @@ const Photo = ({ navigation }) => {
       navigation.navigate("Failure");
     }
   };
-
-  if (hasPermission === false) {
-    //일단 Configuration 으로 보냄.
-    return <Configuration />;
-  }
 
   if (isParseStarted) {
     return <CameraLoading />;
