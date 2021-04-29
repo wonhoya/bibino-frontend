@@ -10,7 +10,7 @@ const CHRACTERISTIC_TITLES = {
     rightSubTitle: "Heavy",
   },
   sparkling: {
-    title: "Sparkling ",
+    title: "Sparkling",
     leftSubTitle: "Sweat",
     rightSubTitle: "Bitter",
   },

@@ -40,7 +40,7 @@ const TabBar = ({ navigation }) => {
       />
       <TabContainer
         handleTabPress={() => {
-          console.log("Ranking Presssed");
+          nav.navigate("Ranking");
         }}
         iconName="Trophy"
         text="Ranking"

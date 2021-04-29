@@ -10,7 +10,7 @@ const distributeUserTag = (characterAverage, reviewCount) => {
     tags.push("heavyLover");
   }
 
-  if (averageBody < 5) {
+  if (averageBody <= 5) {
     tags.push("like a Feather");
   }
 
@@ -18,7 +18,7 @@ const distributeUserTag = (characterAverage, reviewCount) => {
     tags.push("niche");
   }
 
-  if (averageAroma < 5) {
+  if (averageAroma <= 5) {
     tags.push("refresh");
   }
 
@@ -26,7 +26,7 @@ const distributeUserTag = (characterAverage, reviewCount) => {
     tags.push("toks");
   }
 
-  if (averageSparkling < 5) {
+  if (averageSparkling <= 5) {
     tags.push("tender");
   }
 
@@ -37,7 +37,7 @@ const distributeBeerTag = (characterAverage) => {
   const { averageBody, averageAroma, averageSparkling } = characterAverage;
   const tags = [];
 
-  if (averageBody > 5) {
+  if (averageBody >= 5) {
     tags.push("mellow");
   }
 
@@ -45,7 +45,7 @@ const distributeBeerTag = (characterAverage) => {
     tags.push("light");
   }
 
-  if (averageAroma > 5) {
+  if (averageAroma >= 5) {
     tags.push("bittersweet");
   }
 
@@ -53,7 +53,7 @@ const distributeBeerTag = (characterAverage) => {
     tags.push("mild");
   }
 
-  if (averageSparkling > 5) {
+  if (averageSparkling >= 5) {
     tags.push("toks");
   }
 

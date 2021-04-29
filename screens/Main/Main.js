@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { SafeAreaView, View } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
+import { Camera } from "expo-camera";
+import * as Linking from "expo-linking";
 
 import styles from "./styles";
+import isTodayBeerDataOutdated from "../../utils/isTodayBeerDataOutdated";
 import { getUser } from "../../features/userSlice";
-import { fetchTodayBeers } from "../../features/todayBeersSlice";
+import {
+  fetchTodayBeers,
+  todayBeersDeleted,
+} from "../../features/todayBeersSlice";
 import ProfileContainer from "./ProfileContainer/ProfileContainer";
 import ContentsContainer from "./ContentsContainer/ContentsContainer";
 import Loading from "../Loading/Loading";
 
-const Main = () => {
-  const [isLoading, setIsLoading] = useState(false);
+const Main = ({ navigation }) => {
   const dispatch = useDispatch();
   const todayBeersData = useSelector((state) => {
     const { todayBeers } = state;
@@ -21,6 +26,9 @@ const Main = () => {
   });
   const user = useSelector(getUser);
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasPermission, setHasPermission] = useState(null);
+
   useEffect(() => {
     if (!isLoading) {
       return;
@@ -30,7 +38,7 @@ const Main = () => {
       try {
         await dispatch(fetchTodayBeers());
       } catch (err) {
-        // 투데이 맥주 fetch 실패에 대한 에러 핸들링
+        dispatch(todayBeersDeleted());
       } finally {
         setIsLoading(false);
       }
@@ -39,33 +47,60 @@ const Main = () => {
     getTodayBeers();
   }, [isLoading, dispatch]);
 
-  const nowDate = new Date().toDateString();
-  const beerUpdateDate = new Date(todayBeersData.timestamp).toDateString();
+  useEffect(() => {
+    const requestPermission = async () => {
+      const { status } = await Camera.requestPermissionsAsync();
 
-  const isTodayBeerDataOutdated = (today, compareDate) => {
-    return today !== compareDate;
-  };
-  const shouldUpdateTodayBeers = isTodayBeerDataOutdated(
-    nowDate,
-    beerUpdateDate
-  );
+      if (status === "granted") {
+        return setHasPermission(true);
+      }
 
-  if (shouldUpdateTodayBeers && !isLoading) {
-    setIsLoading(true);
+      if (status === "denied" || "undetermined") {
+        return setHasPermission(false);
+      }
+    };
+
+    requestPermission();
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", async () => {
+      const nowDate = new Date().toDateString();
+      const beerUpdateDate = new Date(todayBeersData.timestamp).toDateString();
+      const shouldUpdate = isTodayBeerDataOutdated(nowDate, beerUpdateDate);
+
+      if (!todayBeersData.beers.length || shouldUpdate) {
+        setIsLoading(true);
+
+        try {
+          await dispatch(fetchTodayBeers());
+        } catch (err) {
+          dispatch(todayBeersDeleted());
+        } finally {
+          setIsLoading(false);
+        }
+      }
+    });
+
+    return unsubscribe;
+  }, [navigation, todayBeersData.beers, todayBeersData.timestamp, dispatch]);
+
+  if (isLoading) {
+    return <Loading />;
   }
 
-  if (shouldUpdateTodayBeers || isLoading) {
-    return <Loading />;
+  if (hasPermission === false) {
+    return Linking.openSettings();
   }
 
   return (
     <>
-      <SafeAreaView />
+      <SafeAreaView style={styles.safeArewView} />
       <View style={styles.container}>
         <ProfileContainer
           userName={user.name}
           userAvatar={user.avatar}
-          characterAverage={user.charcteristic}
+          characterAverage={user.characteristic}
           reviewCount={user.reviewCounts}
         />
         <ContentsContainer beers={todayBeersData.beers} />

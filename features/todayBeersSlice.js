@@ -1,11 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { API_SERVER_URL } from "@env";
 
-import { SERVER_URL } from "../config";
 import ASYNC_STATUS from "../constants/asyncStatus";
 import generateHeaderOption from "../utils/generateHeaderOption";
 import showErrorInDevelopment from "../utils/showErrorInDevelopment";
-
-const serverUrl = SERVER_URL[process.env.NODE_ENV];
 
 const initialState = {
   beers: [],
@@ -17,11 +15,11 @@ const initialState = {
 const fetchTodayBeers = createAsyncThunk(
   "todayBeers/fetchTodayBeers",
   async (_, { getState }) => {
-    const { user, token } = getState();
+    const { user } = getState();
     try {
-      const headers = generateHeaderOption(token.idToken);
+      const headers = generateHeaderOption(user.idToken);
       const response = await fetch(
-        `${serverUrl}/users/${user.id}/recommendations`,
+        `${API_SERVER_URL}/users/${user.id}/recommendations`,
         { headers }
       );
       const beers = await response.json();
@@ -39,9 +37,6 @@ const todayBeersSlice = createSlice({
   name: "todayBeers",
   initialState,
   reducers: {
-    todayBeersStatusSet: (state, action) => {
-      state.status = action.payload;
-    },
     todayBeersAdded: (state, action) => {
       const { beers, timestamp } = action.payload;
       state.beers = beers;

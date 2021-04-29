@@ -1,24 +1,20 @@
 import { StyleSheet, Dimensions, Platform } from "react-native";
 
 import { RUBIK_REGULAR, RUBIK_BOLD } from "../../../constants/font";
-import {
-  MAIN_USERNAME_FONT_SIZE,
-  MAIN_PARAGRAPH_FONT_SIZE,
-} from "../../../constants/size";
+import { MAIN_PARAGRAPH_FONT_SIZE } from "../../../constants/size";
 import { PRIMARY_BLACK, PRIMARY_DARK_GREY } from "../../../constants/colors";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.75,
     justifyContent: "flex-start",
     alignSelf: "center",
     width: windowWidth * 0.87,
     height: windowHeight * 0.17,
   },
   upperContainer: {
-    flex: 1.4,
+    height: windowHeight * 0.11,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "baseline",
@@ -35,7 +31,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   tagContainer: {
-    marginTop: 40,
+    marginTop: 10,
   },
   username: {
     color: PRIMARY_DARK_GREY,

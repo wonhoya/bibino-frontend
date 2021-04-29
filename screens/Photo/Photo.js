@@ -2,25 +2,26 @@ import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { View } from "react-native";
 import { Camera } from "expo-camera";
-import { BACKEND_URL_FOR_DEV } from "@env";
+import { API_SERVER_URL } from "@env";
 
-import styles from "./styles";
-import Configuration from "../Configuration/Configuration";
+import { selectIdToken } from "../../features/userSlice";
+import generateHeaderOption from "../../utils/generateHeaderOption";
+
 import PhotoTabBar from "../../components/PhotoTabBar/PhotoTabBar";
 import CameraLoading from "../Loading/CameraLoading";
-import { selectIdToken } from "../../features/tokenSlice";
-import generateHeaderOption from "../../utils/generateHeaderOption";
+
+import styles from "./styles";
 
 const Photo = ({ navigation }) => {
   const cameraRef = useRef(null);
-  const [hasPermission, setHasPermission] = useState(null);
+  const idToken = useSelector(selectIdToken);
+
   const [isCameraReady, setisCameraReady] = useState(false);
   const [isPreview, setIsPreview] = useState(false);
   const [isParseStarted, setIsParseStarted] = useState(false);
   const [isAnimationFinished, setIsAnimationFinished] = useState(false);
   const [photobase64, setPhotobase64] = useState(null);
 
-  const idToken = useSelector(selectIdToken);
   const headers = generateHeaderOption(idToken);
 
   useEffect(() => {
@@ -37,22 +38,6 @@ const Photo = ({ navigation }) => {
       animationEnabled: false,
     });
   }, [navigation]);
-
-  useEffect(() => {
-    const requestPermission = async () => {
-      const { status } = await Camera.requestPermissionsAsync();
-
-      if (status === "granted") {
-        return setHasPermission(true);
-      }
-
-      if (status === "denied" || "undetermined") {
-        return setHasPermission(false);
-      }
-    };
-
-    requestPermission();
-  }, []);
 
   const handleTakePicture = async () => {
     if (!isCameraReady) {
@@ -76,43 +61,38 @@ const Photo = ({ navigation }) => {
   };
 
   const handleUse = async () => {
-    // try {
-    //   setIsParseStarted(true);
-    //   const response = await fetch(`${BACKEND_URL_FOR_DEV}/beers/scan`, {
-    //     method: "POST",
-    //     headers: {
-    //       ...headers,
-    //       Accept: "application/json",
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       base64: photobase64,
-    //     }),
-    //   });
-    //   if (!response.ok) {
-    //     return navigation.navigate("Failure");
-    //   }
-    //   const result = await response.json();
-    //   setIsParseStarted(false);
-    //   if (result.status === "Analyze Success") {
-    //     navigation.navigate("Success", {
-    //       beerId: result.payload._id,
-    //     });
-    //   } else {
-    //     navigation.navigate("AnalyzeFailure");
-    //   }
-    // } catch (error) {
-    //   navigation.navigate("Failure");
-    // }
-    navigation.navigate("Success", {
-      beerId: "60869bd70808966099592719",
-    });
-  };
+    try {
+      setIsParseStarted(true);
+      const response = await fetch(`${API_SERVER_URL}/beers/scan`, {
+        method: "POST",
+        headers: {
+          ...headers,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          base64: photobase64,
+        }),
+      });
 
-  if (hasPermission === false) {
-    //일단 Configuration 으로 보냄.
-    return <Configuration />;
-  }
+      if (!response.ok) {
+        return navigation.navigate("Failure");
+      }
+
+      const result = await response.json();
+      setIsParseStarted(false);
+
+      if (result.status === "Analyze Success") {
+        navigation.navigate("Success", {
+          beerId: result.payload,
+        });
+      } else {
+        navigation.navigate("AnalyzeFailure");
+      }
+    } catch (error) {
+      navigation.navigate("Failure");
+    }
+  };
 
   if (isParseStarted) {
     return <CameraLoading />;

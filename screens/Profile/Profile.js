@@ -26,8 +26,8 @@ const Profile = ({ navigation }) => {
 
   const informationPhrase =
     isFetchingUserBeers === ASYNC_STATUS.FAILED
-      ? "사진 불러오기 실패.\n화면을 아래로 당겨서 새로고침 해주세요."
-      : "사진이 없습니다. 맥주를 찍어보세요.";
+      ? "Fail to get photos\nPlease swipe down to refresh"
+      : "No photos. Please take a picture";
 
   useEffect(() => {
     if (!shouldFetch) {
@@ -42,6 +42,14 @@ const Profile = ({ navigation }) => {
     getMyBeers();
   }, [shouldFetch, dispatch]);
 
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      setShouldFetch(true);
+    });
+
+    return unsubscribe;
+  }, [navigation, shouldFetch]);
+
   const handleReFetchMyBeers = () => {
     if (isFetchingUserBeers) {
       return;
@@ -55,14 +63,14 @@ const Profile = ({ navigation }) => {
       return <View style={[styles.photo, styles.invisiblePhoto]} />;
     }
 
-    if (item.phrase) {
-      return <Text>{item.phrase}</Text>;
-    }
     return (
       <TouchableOpacity
         style={styles.photo}
         onPress={() => {
-          navigation.navigate("Beer", { beerId: item.beer });
+          navigation.navigate("Beer", {
+            beerId: item.beer,
+            myBeerImageURL: item.myBeerImageURL,
+          });
         }}
       >
         <Image
@@ -91,7 +99,7 @@ const Profile = ({ navigation }) => {
             <FlatList
               data={formatItems(user.beers, numColumns, informationPhrase)}
               renderItem={renderItem}
-              keyExtractor={(item) => item.id}
+              keyExtractor={(item) => item._id}
               numColumns={numColumns}
               showsVerticalScrollIndicator={false}
               refreshing={shouldFetch}

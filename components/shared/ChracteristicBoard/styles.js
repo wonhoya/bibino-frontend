@@ -7,9 +7,9 @@ const getStyles = (size, color, intensity) => {
   const HEIGHT = WIDTH / 15;
 
   return StyleSheet.create({
-    container: { position: "absolute" },
+    container: { position: "absolute", alignSelf: "center" },
     title: {
-      fontSize: WIDTH / 10,
+      fontSize: WIDTH / 11,
       fontFamily: RUBIK_REGULAR,
       textAlign: "center",
       marginBottom: 10,

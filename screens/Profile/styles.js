@@ -20,8 +20,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   avatar: {
-    width: windowHeight * 0.1,
-    height: windowHeight * 0.1,
+    maxHeight: windowHeight * 0.08,
+    width: windowHeight * 0.08,
+    height: windowHeight * 0.08,
     borderRadius: 50,
   },
   title: {

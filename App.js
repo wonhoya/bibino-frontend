@@ -4,6 +4,8 @@ import { PersistGate } from "redux-persist/integration/react";
 import AppLoading from "expo-app-loading";
 import {
   useFonts,
+  Rubik_300Light,
+  Rubik_300Light_Italic,
   Rubik_400Regular,
   Rubik_500Medium,
   Rubik_700Bold,
@@ -17,6 +19,8 @@ import AppNavigation from "./navigations/AppNavigation";
 export default function App() {
   const [isAnimationFinished, setIsAnimationFinished] = useState(false);
   let [fontsLoaded] = useFonts({
+    Rubik_300Light,
+    Rubik_300Light_Italic,
     Rubik_400Regular,
     Rubik_500Medium,
     Rubik_700Bold,

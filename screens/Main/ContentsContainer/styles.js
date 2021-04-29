@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     marginTop: windowWidth * 0.02,
   },
   paragraph: {
-    marginVertical: 9,
+    marginBottom: 4,
     color: PRIMARY_BLACK,
     fontFamily: RUBIK_REGULAR,
     fontSize: MAIN_PARAGRAPH_FONT_SIZE,

@@ -1,5 +1,5 @@
 import debounce from "lodash.debounce";
-import { BACKEND_URL_FOR_DEV } from "@env";
+import { API_SERVER_URL } from "@env";
 
 import showErrorInDevelopment from "./showErrorInDevelopment";
 import generateHeaderOption from "./generateHeaderOption";
@@ -9,7 +9,7 @@ const fetchSearchBeers = debounce(
     try {
       const headers = generateHeaderOption(idToken);
       const response = await fetch(
-        `${BACKEND_URL_FOR_DEV}/beers/search/?text=${encodeURI(searchText)}`,
+        `${API_SERVER_URL}/beers/search/?text=${encodeURI(searchText)}`,
         {
           headers,
         }
@@ -19,10 +19,11 @@ const fetchSearchBeers = debounce(
         return {
           id: beer._id,
           name: beer.name,
-          description: beer.description.slice(0, 25) + "...",
+          description: beer.description,
           imagePath: beer.imagePath,
         };
       });
+
       setSearchedBeers(managedSearchedBeers);
     } catch (err) {
       showErrorInDevelopment("Faild search beer ", err);

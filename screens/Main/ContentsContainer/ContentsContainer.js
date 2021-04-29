@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import Carousel from "react-native-snap-carousel";
 import { View, Text, Dimensions } from "react-native";
 
@@ -16,16 +16,18 @@ const itemWidth = Math.round(windowWidth * 0.84);
 const carouselHeight = Math.round(windowHeight * 0.3);
 
 const ContentsContainer = ({ beers }) => {
-  const [state, setState] = useState({ index: 0 });
   const carousel = useRef(null);
 
-  const renderItem = ({ item: { imagePath, name, description } }) => {
+  const renderItem = ({ item: { _id, imagePath, name, description } }) => {
     return (
-      <BeerCard imagePath={imagePath} name={name} description={description} />
+      <BeerCard
+        beerId={_id}
+        imagePath={imagePath}
+        name={name}
+        description={description}
+      />
     );
   };
-
-  //lib rul: https://github.com/meliorence/react-native-snap-carousel/blob/master/doc/CUSTOM_INTERPOLATIONS.md
 
   return (
     <View style={styles.container}>
@@ -42,7 +44,6 @@ const ContentsContainer = ({ beers }) => {
         itemWidth={itemWidth}
         containerCustomStyle={styles.carouselContainer}
         inactiveSlideShift={0}
-        onSnapToItem={(index) => setState({ index })}
         scrollInterpolator={scrollInterpolator}
         slideInterpolatedStyle={animatedStyles}
         useScrollView={true}

@@ -1,64 +1,50 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import * as SecureStore from "expo-secure-store";
+import { API_SERVER_URL } from "@env";
 
-import { SERVER_URL } from "../config";
 import ASYNC_STATUS from "../constants/asyncStatus";
 import getGoogleIdToken from "../utils/getGoogleIdToken";
 import generateHeaderOption from "../utils/generateHeaderOption";
 import showErrorInDevelopment from "../utils/showErrorInDevelopment";
-import { saveIdToken } from "./tokenSlice";
 
-const serverUrl = SERVER_URL[process.env.NODE_ENV];
+const signInUser = createAsyncThunk("user/signInUser", async (idToken) => {
+  try {
+    const googleIdToken = await getGoogleIdToken(idToken);
 
-const initialState = {
-  id: null,
-  name: null,
-  avatar: null,
-  status: ASYNC_STATUS.IDLE,
-  error: null,
-  beers: [],
-};
+    const headers = generateHeaderOption(googleIdToken);
+    const response = await fetch(`${API_SERVER_URL}/users/sign-in`, {
+      method: "POST",
+      headers,
+    });
+    const { user, appIdToken } = await response.json();
+    await SecureStore.setItemAsync("idToken", appIdToken);
 
-const signInUser = createAsyncThunk(
-  "user/signInUser",
-  async (idToken, { dispatch }) => {
-    try {
-      const googleIdToken = await getGoogleIdToken(idToken);
-
-      const headers = generateHeaderOption(googleIdToken);
-      const response = await fetch(`${serverUrl}/users/sign-in`, {
-        method: "POST",
-        headers,
-      });
-      const { user, idTokenByBibino } = await response.json();
-      await dispatch(saveIdToken(idTokenByBibino));
-
-      return {
-        user: {
-          id: user._id,
-          avatar: user.imagePath,
-          name: user.name,
-          reviewCounts: user.reviewCounts,
-          charcteristic: {
-            averageBody: user.averageBody,
-            averageAroma: user.averageAroma,
-            averageSparkling: user.averageSparkling,
-          },
-          beers: user.beers || [],
+    return {
+      user: {
+        id: user._id,
+        idToken: appIdToken,
+        name: user.name,
+        avatar: user.imagePath,
+        reviewCounts: user.reviewCounts,
+        characteristic: {
+          averageBody: user.averageBody,
+          averageAroma: user.averageAroma,
+          averageSparkling: user.averageSparkling,
         },
-      };
-    } catch (err) {
-      showErrorInDevelopment("Faild an user sign in ", err);
-      throw err;
-    }
+        beers: user.beers || [],
+      },
+    };
+  } catch (err) {
+    showErrorInDevelopment("Faild an user sign in ", err);
+    throw err;
   }
-);
+});
 
 const fetchMyBeers = createAsyncThunk(
   "user/fetchMyBeers",
   async (_, { getState }) => {
     try {
-      const { idToken } = getState().token;
-      const { id: userId } = getState().user;
+      const { id: userId, idToken } = getState().user;
       const headers = generateHeaderOption(idToken);
       const response = await fetch(`${serverUrl}/users/${userId}`, { headers });
 
@@ -67,17 +53,47 @@ const fetchMyBeers = createAsyncThunk(
       return beers || [];
     } catch (err) {
       showErrorInDevelopment("Failed user's beer fetch ", err);
+      throw err;
     }
   }
 );
+
+const getIdToken = createAsyncThunk("user/getIdToken", async () => {
+  try {
+    return await SecureStore.getItemAsync("idToken");
+  } catch (err) {
+    showErrorInDevelopment("failed id token load in the secure store ", err);
+    throw err;
+  }
+});
+
+const removeIdToken = createAsyncThunk("user/removeIdToken", async () => {
+  try {
+    await SecureStore.deleteItemAsync("idToken");
+  } catch (err) {
+    showErrorInDevelopment(
+      "failed id token deletion in the secure store ",
+      err
+    );
+    throw err;
+  }
+});
+
+const initialState = {
+  id: null,
+  idToken: null,
+  name: null,
+  avatar: null,
+  characteristic: {},
+  beers: [],
+  status: ASYNC_STATUS.IDLE,
+  error: null,
+};
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    userStatusSet: (state, action) => {
-      state.status = action.payload;
-    },
     userDeleted: (state) => {
       state = initialState;
       return state;
@@ -107,18 +123,43 @@ const userSlice = createSlice({
       state.status = ASYNC_STATUS.SUCCEED;
       state.beers = action.payload;
     },
+    [getIdToken.pending]: (state) => {
+      state.status = ASYNC_STATUS.LOADING;
+    },
+    [getIdToken.rejected]: (state, action) => {
+      state.status = ASYNC_STATUS.FAILED;
+      state.error = action.payload;
+    },
+    [getIdToken.fulfilled]: (state, action) => {
+      state.status = ASYNC_STATUS.SUCCEED;
+      state.idToken = action.payload;
+    },
+    [removeIdToken.pending]: (state) => {
+      state.status = ASYNC_STATUS.LOADING;
+    },
+    [removeIdToken.rejected]: (state, action) => {
+      state.status = ASYNC_STATUS.FAILED;
+      state.error = action.payload;
+    },
+    [removeIdToken.fulfilled]: (state) => {
+      state = initialState;
+      return state;
+    },
   },
 });
 
-const { userStatusSet, userDeleted } = userSlice.actions;
+const { userDeleted } = userSlice.actions;
 
 const getUser = (state) => state.user;
+const selectIdToken = (state) => state.user.idToken;
 
 export {
   userSlice,
   signInUser,
-  userStatusSet,
   userDeleted,
+  removeIdToken,
+  getIdToken,
   fetchMyBeers,
   getUser,
+  selectIdToken,
 };

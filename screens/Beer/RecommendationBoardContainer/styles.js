@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     width: windowWidth,
     height: windowHeight / 3,
     marginVertical: windowWidth / 10,
+    backgroundColor: "green",
   },
   text: {
     marginVertical: windowWidth / 15,
