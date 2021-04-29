@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { SafeAreaView, View } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { Camera } from "expo-camera";
+import * as Linking from "expo-linking";
 
 import styles from "./styles";
 import isTodayBeerDataOutdated from "../../utils/isTodayBeerDataOutdated";
@@ -13,7 +14,6 @@ import {
 import ProfileContainer from "./ProfileContainer/ProfileContainer";
 import ContentsContainer from "./ContentsContainer/ContentsContainer";
 import Loading from "../Loading/Loading";
-import Configuration from "../Configuration/Configuration";
 
 const Main = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -71,6 +71,7 @@ const Main = ({ navigation }) => {
 
       if (!todayBeersData.beers.length || shouldUpdate) {
         setIsLoading(true);
+
         try {
           await dispatch(fetchTodayBeers());
         } catch (err) {
@@ -89,7 +90,7 @@ const Main = ({ navigation }) => {
   }
 
   if (hasPermission === false) {
-    return <Configuration />;
+    return Linking.openSettings();
   }
 
   return (

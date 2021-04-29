@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, Dimensions } from "react-native";
 import { useSelector } from "react-redux";
 import Modal from "react-native-modal";
+import { API_SERVER_URL } from "@env";
 
 import styles from "./styles";
-import { SERVER_URL } from "../../config";
 import generateHeaderOption from "../../utils/generateHeaderOption";
 import showErrorInDevelopment from "../../utils/showErrorInDevelopment";
 import { selectIdToken } from "../../features/userSlice";
@@ -12,7 +12,7 @@ import RatingBoard from "../../components/shared/RatingBoard/RatingBoard";
 import Button from "../../components/shared/Button/Button";
 import CharacteristicContainer from "./CharacteristicContainer/CharacteristicContainer";
 
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+const { height: windowHeight } = Dimensions.get("window");
 
 const ReviewModal = ({
   navigation,
@@ -38,8 +38,7 @@ const ReviewModal = ({
     }
 
     const postReview = async () => {
-      const serverUrl = SERVER_URL[process.env.NODE_ENV];
-      const url = `${serverUrl}/reviews/${reviewId || "new"}`;
+      const url = `${API_SERVER_URL}/reviews/${reviewId || "new"}`;
       const method = reviewId ? "PUT" : "POST";
       const headers = generateHeaderOption(idToken);
 

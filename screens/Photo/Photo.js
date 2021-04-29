@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { View } from "react-native";
 import { Camera } from "expo-camera";
-import { BACKEND_URL_FOR_DEV } from "@env";
+import { API_SERVER_URL } from "@env";
 
 import { selectIdToken } from "../../features/userSlice";
 import generateHeaderOption from "../../utils/generateHeaderOption";
@@ -63,7 +63,7 @@ const Photo = ({ navigation }) => {
   const handleUse = async () => {
     try {
       setIsParseStarted(true);
-      const response = await fetch(`${BACKEND_URL_FOR_DEV}/beers/scan`, {
+      const response = await fetch(`${API_SERVER_URL}/beers/scan`, {
         method: "POST",
         headers: {
           ...headers,

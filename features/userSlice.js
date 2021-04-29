@@ -1,20 +1,18 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as SecureStore from "expo-secure-store";
+import { API_SERVER_URL } from "@env";
 
-import { SERVER_URL } from "../config";
 import ASYNC_STATUS from "../constants/asyncStatus";
 import getGoogleIdToken from "../utils/getGoogleIdToken";
 import generateHeaderOption from "../utils/generateHeaderOption";
 import showErrorInDevelopment from "../utils/showErrorInDevelopment";
-
-const serverUrl = SERVER_URL[process.env.NODE_ENV];
 
 const signInUser = createAsyncThunk("user/signInUser", async (idToken) => {
   try {
     const googleIdToken = await getGoogleIdToken(idToken);
 
     const headers = generateHeaderOption(googleIdToken);
-    const response = await fetch(`${serverUrl}/users/sign-in`, {
+    const response = await fetch(`${API_SERVER_URL}/users/sign-in`, {
       method: "POST",
       headers,
     });

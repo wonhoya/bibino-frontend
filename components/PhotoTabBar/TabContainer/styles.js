@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-import { PRIMARY_WHITE } from "../../../constants/colors";
+import { PRIMARY_WHITE, PRIMARY_GREEN } from "../../../constants/colors";
 import { RUBIK_REGULAR } from "../../../constants/font";
 
 const styles = StyleSheet.create({
@@ -11,6 +11,11 @@ const styles = StyleSheet.create({
   tab: {
     flexDirection: "column",
     alignItems: "center",
+  },
+
+  useTabName: {
+    color: PRIMARY_GREEN,
+    fontFamily: RUBIK_REGULAR,
   },
 });
 

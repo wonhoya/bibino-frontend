@@ -18,18 +18,18 @@ const PhotoTabBar = ({
   handleUse,
   setIsAnimationFinished,
 }) => {
-  const animationValue = useRef(new Animated.Value(100)).current;
-  const positionValue = useRef(new Animated.Value(0)).current;
+  const tabBarY = useRef(new Animated.Value(100)).current;
+  const buttonY = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     const startAnimation = () => {
-      Animated.timing(animationValue, {
+      Animated.timing(tabBarY, {
         toValue: 170,
         duration: 500,
         useNativeDriver: false,
       }).start();
 
-      Animated.timing(positionValue, {
+      Animated.timing(buttonY, {
         toValue: 40,
         duration: 500,
         useNativeDriver: true,
@@ -45,10 +45,10 @@ const PhotoTabBar = ({
     return () => {
       clearTimeout(id);
     };
-  }, [animationValue, positionValue, setIsAnimationFinished]);
+  }, [tabBarY, buttonY, setIsAnimationFinished]);
 
   return (
-    <Animated.View style={{ ...styles.tabsContainer, height: animationValue }}>
+    <Animated.View style={{ ...styles.tabsContainer, height: tabBarY }}>
       <TabContainer
         handleButtonPress={() => console.log("Search Pressed")}
         icon={<AntDesign name="search1" size={30} color={PRIMARY_WHITE} />}
@@ -58,7 +58,7 @@ const PhotoTabBar = ({
         <MainButtonContainer
           animationStyle={[
             styles.button,
-            { transform: [{ translateY: positionValue }] },
+            { transform: [{ translateY: buttonY }] },
           ]}
           handleButtonPress={handleRetake}
           iconStyle={[styles.tab, styles.cameraContainer]}
@@ -68,7 +68,7 @@ const PhotoTabBar = ({
         <MainButtonContainer
           animationStyle={[
             styles.button,
-            { transform: [{ translateY: positionValue }] },
+            { transform: [{ translateY: buttonY }] },
           ]}
           handleButtonPress={handleTakePicture}
           iconStyle={[styles.tab, styles.cameraContainer]}
@@ -78,10 +78,9 @@ const PhotoTabBar = ({
       {isPreview ? (
         <TabContainer
           handleButtonPress={handleUse}
-          icon={
-            <AntDesign name="checkcircleo" size={32} color={PRIMARY_WHITE} />
-          }
+          icon={<AntDesign name="checkcircleo" size={32} color="green" />}
           text="Use"
+          isUseButton={true}
         />
       ) : (
         <TabContainer

@@ -1,5 +1,5 @@
 import debounce from "lodash.debounce";
-import { BACKEND_URL_FOR_DEV } from "@env";
+import { API_SERVER_URL } from "@env";
 
 import showErrorInDevelopment from "./showErrorInDevelopment";
 import generateHeaderOption from "./generateHeaderOption";
@@ -9,7 +9,7 @@ const fetchSearchBeers = debounce(
     try {
       const headers = generateHeaderOption(idToken);
       const response = await fetch(
-        `${BACKEND_URL_FOR_DEV}/beers/search/?text=${encodeURI(searchText)}`,
+        `${API_SERVER_URL}/beers/search/?text=${encodeURI(searchText)}`,
         {
           headers,
         }

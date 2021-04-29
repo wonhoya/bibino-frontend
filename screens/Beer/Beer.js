@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { View, Animated, Easing } from "react-native";
 import { FloatingAction } from "react-native-floating-action";
 import { useNavigationState } from "@react-navigation/native";
+import { API_SERVER_URL } from "@env";
 
-import { SERVER_URL } from "../../config";
 import { selectIdToken } from "../../features/userSlice";
 import { commentsAdded, getComments } from "../../features/commentsSlice";
 import generateHeaderOption from "../../utils/generateHeaderOption";
@@ -57,12 +57,11 @@ const Beer = ({ navigation, route }) => {
       return;
     }
 
-    const serverUrl = SERVER_URL[process.env.NODE_ENV];
     const headers = generateHeaderOption(idToken);
     const fetchUrls = [
-      `${serverUrl}/beers/${beerId}`,
-      `${serverUrl}/beers/${beerId}/comments/`,
-      `${serverUrl}/beers/${beerId}/recommendations/`,
+      `${API_SERVER_URL}/beers/${beerId}`,
+      `${API_SERVER_URL}/beers/${beerId}/comments/`,
+      `${API_SERVER_URL}/beers/${beerId}/recommendations/`,
     ];
 
     const fetchAllData = async () => {
@@ -94,7 +93,7 @@ const Beer = ({ navigation, route }) => {
         let response;
 
         if (userReviewId) {
-          response = await fetch(`${serverUrl}/reviews/${userReviewId}`, {
+          response = await fetch(`${API_SERVER_URL}/reviews/${userReviewId}`, {
             headers: {
               ...headers,
               Accept: "application/json",
