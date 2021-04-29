@@ -6,9 +6,9 @@ import { useNavigationState } from "@react-navigation/native";
 import { API_SERVER_URL } from "@env";
 
 import { selectIdToken } from "../../features/userSlice";
-import { commentsAdded, getComments } from "../../features/commentsSlice";
 import generateHeaderOption from "../../utils/generateHeaderOption";
 import showErrorInDevelopment from "../../utils/showErrorInDevelopment";
+import { commentsAdded, getComments } from "../../features/commentsSlice";
 
 import styles from "./styles";
 import { PRIMARY_ORANGE } from "../../constants/colors";
@@ -124,7 +124,7 @@ const Beer = ({ navigation, route }) => {
   useEffect(() => {
     Animated.timing(moveY, {
       toValue: 0,
-      duration: 500,
+      duration: 1000,
       easing: Easing.inOut(Easing.quad),
       delay: 100,
       useNativeDriver: false,
