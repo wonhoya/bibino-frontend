@@ -7,7 +7,7 @@ import {
   PROFILE_TITLE_FONT_SIZE,
 } from "../../constants/size";
 
-const { height: windowHeight } = Dimensions.get("window");
+const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
@@ -58,6 +58,19 @@ const styles = StyleSheet.create({
   },
   invisiblePhoto: {
     backgroundColor: "transparent",
+  },
+
+  propertyContainer: {
+    width: windowWidth,
+    flexDirection: "row",
+    marginTop: 10,
+  },
+
+  property: {
+    width: windowWidth / 4,
+    minHeight: 80,
+
+    alignItems: "center",
   },
 });
 

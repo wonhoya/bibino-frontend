@@ -22,13 +22,6 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 const styles = StyleSheet.create({
   scrollContainer: { flex: 1, backgroundColor: PRIMARY_WHITE },
   container: { alignItems: "center" },
-  buttonContainer: {
-    position: "absolute",
-    left: windowWidth / 1,
-    top: windowHeight / 1.2,
-    zIndex: 1,
-    backgroundColor: "green",
-  },
   feedbackContainer: {
     alignSelf: "center",
     justifyContent: "center",
@@ -141,10 +134,10 @@ styles.handleOpacity = (scrollY) => {
     opacity: scrollY.interpolate({
       inputRange: [
         windowHeight * 0.8,
-        windowHeight * 0.85,
-        windowHeight * 0.9,
-        windowHeight * 0.95,
-        windowHeight,
+        windowHeight * 1,
+        windowHeight * 1.1,
+        windowHeight * 1.3,
+        windowHeight * 1.4,
       ],
       outputRange: [0, 0.3, 0.5, 0.7, 1],
     }),
@@ -156,7 +149,7 @@ styles.handlePositionX = (scrollY) => {
     transform: [
       {
         translateX: scrollY.interpolate({
-          inputRange: [0, windowHeight * 0.5, windowHeight],
+          inputRange: [0, windowHeight * 0.8, windowHeight * 1.4],
           outputRange: [
             windowWidth,
             -windowWidth * 0.005,
