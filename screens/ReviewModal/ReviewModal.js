@@ -120,7 +120,12 @@ const ReviewModal = ({
             placeholder="How was it? Feel free to leave your thought!"
             onChangeText={(value) => setComment(value)}
           />
-          <Button mode="primary" text="Submit" onPress={handleSubmit} />
+          <Button
+            mode="primary"
+            text="Submit"
+            onPress={handleSubmit}
+            isLoading={isFetching}
+          />
         </View>
       </Modal>
     </View>

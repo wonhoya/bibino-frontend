@@ -1,8 +1,9 @@
 import React from "react";
-import { Text, View, TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity, ActivityIndicator } from "react-native";
+
 import styles from "./styles";
 
-const Button = ({ text, onPress, mode }) => {
+const Button = ({ text, onPress, mode, isLoading }) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <View
@@ -12,15 +13,19 @@ const Button = ({ text, onPress, mode }) => {
             : styles.secondaryContainer
         }
       >
-        <Text
-          style={
-            mode === "primary"
-              ? styles.primaryTextStyle
-              : styles.secondaryTextStyle
-          }
-        >
-          {text}
-        </Text>
+        {isLoading ? (
+          <ActivityIndicator />
+        ) : (
+          <Text
+            style={
+              mode === "primary"
+                ? styles.primaryTextStyle
+                : styles.secondaryTextStyle
+            }
+          >
+            {text}
+          </Text>
+        )}
       </View>
     </TouchableOpacity>
   );
