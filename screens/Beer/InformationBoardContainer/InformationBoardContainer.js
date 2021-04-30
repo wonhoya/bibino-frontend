@@ -5,8 +5,8 @@ import styles from "./styles";
 
 import CommentBoard from "../../../components/CommentBoard/CommentBoard";
 
-const CommentBoardContainer = ({ navigation, commentDatum }) => {
-  const commentNumberDisplayed = 3;
+const InformationBoardContainer = ({ navigation, commentDatum }) => {
+  const commentNumberDisplayed = 5;
 
   return (
     <View style={styles.container}>
@@ -24,4 +24,4 @@ const CommentBoardContainer = ({ navigation, commentDatum }) => {
   );
 };
 
-export default CommentBoardContainer;
+export default InformationBoardContainer;

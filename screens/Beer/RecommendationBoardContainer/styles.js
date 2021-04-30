@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: windowWidth,
     height: windowHeight / 3,
-    marginVertical: windowWidth / 10,
+    marginVertical: windowWidth / 30,
   },
   text: {
     marginVertical: windowWidth / 15,

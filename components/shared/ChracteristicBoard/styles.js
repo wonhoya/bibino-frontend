@@ -28,20 +28,20 @@ const getStyles = (size, color, intensity) => {
       fontSize: WIDTH / 17,
     },
     silderStyleContainer: {
-      flexDirection: "row",
       position: "absolute",
+      flexDirection: "row",
     },
     sliderDummy: {
-      backgroundColor: "#d3d3d3",
+      position: "absolute",
       width: WIDTH,
       height: HEIGHT,
       borderRadius: 50,
-      position: "absolute",
+      backgroundColor: "#d3d3d3",
     },
     sliderReal: {
-      backgroundColor: color,
       width: (intensity * WIDTH) / 10,
       height: HEIGHT,
+      backgroundColor: color,
       borderRadius: 50,
     },
     sliderCore: {

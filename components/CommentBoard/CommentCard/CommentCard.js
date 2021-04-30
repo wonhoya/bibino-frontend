@@ -22,7 +22,6 @@ const CommentCard = ({ commentData }) => {
           <RatingBoard mode="static" rating={rating} size={windowWidth / 20} />
         </View>
       </View>
-
       <View style={styles.descriptionContatiner}>
         <Image id={id} style={styles.image} source={{ uri }} />
         <Text numberOfLines={1} ellipsizeMode="tail" style={styles.userName}>

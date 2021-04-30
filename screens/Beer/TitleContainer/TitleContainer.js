@@ -1,17 +1,12 @@
 import React from "react";
-import { View, Text, Dimensions, Image } from "react-native";
+import { View, Text } from "react-native";
 
 import styles from "./styles";
-import { RUBIK_MEDIUM } from "../../../constants/font";
-
-const { width: windowWidth } = Dimensions.get("window");
 
 const TitleContainer = ({ title, rating, reviewCounts }) => {
   return (
     <View style={styles.container}>
-      <Text style={{ fontFamily: RUBIK_MEDIUM, fontSize: windowWidth / 12 }}>
-        {title}
-      </Text>
+      <Text style={styles.title}>{title}</Text>
 
       <View style={styles.descriptionContainer}>
         <Text style={styles.ratingFont}>

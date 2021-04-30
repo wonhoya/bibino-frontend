@@ -1,10 +1,6 @@
 import { StyleSheet, Dimensions } from "react-native";
 
-import {
-  PRIMARY_ORANGE,
-  PRIMARY_LIGHT_GREY,
-  PRIMARY_GREY,
-} from "../../../constants/colors";
+import { PRIMARY_LIGHT_GREY } from "../../../constants/colors";
 import { RUBIK_REGULAR } from "../../../constants/font";
 
 const { width: windowWidth } = Dimensions.get("window");

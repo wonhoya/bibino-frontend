@@ -2,11 +2,7 @@ import React from "react";
 import { View, Dimensions } from "react-native";
 
 import styles from "./styles";
-import {
-  PRIMARY_ORANGE,
-  PRIMARY_BLACK,
-  PRIMARY_YELLOW,
-} from "../../../constants/colors";
+import { PRIMARY_ORANGE } from "../../../constants/colors";
 import CHRACTERISTIC_TITLES from "../../../constants/chracteristicTitles";
 
 import CharacteristicBoard from "../../../components/shared/ChracteristicBoard/ChracteristicBoard";
@@ -36,7 +32,7 @@ const CharacteristicContainer = ({ characterAverage }) => {
           intensity={averageBody}
           options={{
             size: chracterSize,
-            color: PRIMARY_BLACK,
+            color: PRIMARY_ORANGE,
             isDisabled: true,
           }}
         />
@@ -47,7 +43,7 @@ const CharacteristicContainer = ({ characterAverage }) => {
           intensity={averageSparkling}
           options={{
             size: chracterSize,
-            color: PRIMARY_YELLOW,
+            color: PRIMARY_ORANGE,
             isDisabled: true,
           }}
         />

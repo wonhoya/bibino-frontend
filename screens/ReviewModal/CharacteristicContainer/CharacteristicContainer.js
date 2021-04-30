@@ -2,11 +2,7 @@ import React from "react";
 import { View, Dimensions } from "react-native";
 
 import styles from "./styles";
-import {
-  PRIMARY_ORANGE,
-  PRIMARY_BLACK,
-  PRIMARY_YELLOW,
-} from "../../../constants/colors";
+import { POINT_DARK_ORANGE } from "../../../constants/colors";
 import CHRACTERISTIC_TITLES from "../../../constants/chracteristicTitles";
 
 import CharacteristicBoard from "../../../components/shared/ChracteristicBoard/ChracteristicBoard";
@@ -27,7 +23,7 @@ const CharacteristicContainer = ({ review, setReview }) => {
           setReview={setReview}
           options={{
             size: chracterSize,
-            color: PRIMARY_ORANGE,
+            color: POINT_DARK_ORANGE,
             isDisabled: false,
             isButtonActive: true,
           }}
@@ -41,7 +37,7 @@ const CharacteristicContainer = ({ review, setReview }) => {
           setReview={setReview}
           options={{
             size: chracterSize,
-            color: PRIMARY_BLACK,
+            color: POINT_DARK_ORANGE,
             isDisabled: false,
             isButtonActive: true,
           }}
@@ -55,7 +51,7 @@ const CharacteristicContainer = ({ review, setReview }) => {
           setReview={setReview}
           options={{
             size: chracterSize,
-            color: PRIMARY_YELLOW,
+            color: POINT_DARK_ORANGE,
             isDisabled: false,
             isButtonActive: true,
           }}

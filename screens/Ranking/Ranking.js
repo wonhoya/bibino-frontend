@@ -68,7 +68,7 @@ const Ranking = ({ navigation }) => {
     Animated.sequence([
       Animated.timing(firstOpactiy, {
         toValue: 1,
-        duration: 2000,
+        duration: 1800,
         useNativeDriver: false,
       }),
       Animated.timing(secondOpacity, {

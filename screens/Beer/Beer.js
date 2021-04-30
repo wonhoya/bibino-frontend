@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { View, Animated, Easing, Text, Image } from "react-native";
+import { View, Animated, Text } from "react-native";
 import { FloatingAction } from "react-native-floating-action";
 import { useNavigationState } from "@react-navigation/native";
 import { API_SERVER_URL } from "@env";
@@ -25,6 +25,7 @@ import RatingBoardContainer from "./RatingBoardContainer/RatingBoardContainer";
 import CommentBoardContainer from "./CommentBoardContainer/CommentBoardContainer";
 import CharacteristicContainer from "./CharacteristicContainer/CharacteristicContainer";
 import RecommendationBoardContainer from "./RecommendationBoardContainer/RecommendationBoardContainer";
+import SectionTitleContainer from "./SectionTitleContainer/SectionTitleContainer";
 
 const Beer = ({ navigation, route }) => {
   const { myBeerImageURL, beerId } = route.params;
@@ -42,7 +43,6 @@ const Beer = ({ navigation, route }) => {
   const [myReview, setMyReview] = useState({});
   const [recommendation, setRecommendation] = useState(null);
 
-  const moveY = useRef(new Animated.Value(100)).current;
   const scrollY = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -122,16 +122,6 @@ const Beer = ({ navigation, route }) => {
     fetchAllData();
   }, [idToken, navigation, beerId, userId, dispatch, isModalVisible]);
 
-  useEffect(() => {
-    Animated.timing(moveY, {
-      toValue: 0,
-      duration: 1000,
-      easing: Easing.inOut(Easing.quad),
-      delay: 100,
-      useNativeDriver: false,
-    }).start();
-  }, [moveY, isFetching]);
-
   const handleOnScroll = (event) => {
     Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], {
       useNativeDriver: false,
@@ -185,41 +175,23 @@ const Beer = ({ navigation, route }) => {
           </View>
           <RatingBoardContainer rating={beerInfo.averageRating} />
           <TagBoardContainer characterAverage={characterAverage} />
-
           <SectionDivider direction="right" />
-
-          <View style={styles.beerDescription}>
-            <Text style={styles.summaryFont}>Summary</Text>
-            <View style={styles.beerSummarySub}>
-              <Text style={styles.beerDescriptionFont2}>Description</Text>
-              <Text style={styles.beerDescriptionFont2}> / </Text>
-              <Text style={styles.beerDescriptionFont2}>about</Text>
-            </View>
-          </View>
-          <View style={styles.subLine} />
+          <SectionTitleContainer
+            sectionTitle={"Summary"}
+            sectionDescription={"Description / about"}
+          />
           <View style={styles.flagContainer}>
-            <Image
-              style={{ width: 22, height: 22, marginRight: 10 }}
-              source={require("../../assets/pngs/KR.png")}
-            />
-            <Text style={styles.summaryBeerDescriptionFont}>South Korea </Text>
+            <Text style={styles.summaryBeerDescriptionFont}>🇩🇪 Germany </Text>
           </View>
           <View style={styles.flagContainer}>
             <Text style={styles.summaryBeerDescriptionFont}>Alc. 4.5% </Text>
           </View>
-          <Animated.Text style={{ ...styles.description, top: moveY }}>
-            {beerInfo.description}
-          </Animated.Text>
+          <Text style={styles.description}>{beerInfo.description}</Text>
           <SectionDivider direction="left" />
-          <View style={styles.beerDescription}>
-            <Text style={styles.summaryFont}>Taste Characteristc</Text>
-            <View style={styles.beerSummarySub}>
-              <Text style={styles.beerDescriptionFont2}>
-                Based on user input
-              </Text>
-            </View>
-          </View>
-          <View style={styles.subLine} />
+          <SectionTitleContainer
+            sectionTitle={"Taste Characteristics"}
+            sectionDescription={"Based on user reviews"}
+          />
           <Animated.View style={styles.handlePositionX(scrollY)}>
             <CharacteristicContainer characterAverage={characterAverage} />
           </Animated.View>
@@ -227,24 +199,18 @@ const Beer = ({ navigation, route }) => {
             What is Aroma, Body, Sparkling?
           </Text>
           <SectionDivider direction="right" />
-          <View style={styles.beerDescription}>
-            <Text style={styles.summaryFont}>Beer recommendation</Text>
-            <View style={styles.beerSummarySub}>
-              <Text style={styles.beerDescriptionFont2}>
-                If you like this beer, you might like...
-              </Text>
-            </View>
-          </View>
-          <View style={styles.subLine} />
+          <SectionTitleContainer
+            sectionTitle={"Beer recommendation"}
+            sectionDescription={"If you like this beer, you might like..."}
+          />
           <Animated.View style={styles.handleOpacity(scrollY)}>
             <RecommendationBoardContainer beers={recommendation} />
           </Animated.View>
           <SectionDivider direction="left" />
-          <View style={styles.commentsDescription}>
-            <Text style={styles.summaryFont}>Comment</Text>
-            <Text style={styles.beerDescriptionFont2}>User comments</Text>
-          </View>
-          <View style={styles.subLine} />
+          <SectionTitleContainer
+            sectionTitle={"Comment"}
+            sectionDescription={"User comments"}
+          />
           <CommentBoardContainer
             navigation={navigation}
             commentDatum={commentDatum}

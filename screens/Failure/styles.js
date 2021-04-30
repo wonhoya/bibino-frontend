@@ -21,9 +21,9 @@ const styles = StyleSheet.create({
   },
   description: {
     marginTop: 10,
+    color: PRIMARY_GREY,
     fontSize: FAILURE_DESCRIPTION_FONT_SIZE,
     fontFamily: RUBIK_REGULAR,
-    color: PRIMARY_GREY,
   },
   svgContainer: {
     position: "absolute",

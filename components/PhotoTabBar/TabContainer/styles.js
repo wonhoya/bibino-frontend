@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
   },
-
   useTabName: {
     color: PRIMARY_GREEN,
     fontFamily: RUBIK_REGULAR,

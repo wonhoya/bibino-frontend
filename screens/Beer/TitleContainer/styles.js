@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions } from "react-native";
 
-import { RUBIK_REGULAR } from "../../../constants/font";
+import { RUBIK_REGULAR, RUBIK_MEDIUM } from "../../../constants/font";
 
 const { width: windowWidth } = Dimensions.get("window");
 
@@ -13,21 +13,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: windowWidth / 15,
     marginTop: windowWidth / 20,
   },
+  title: {
+    maxWidth: 200,
+    fontFamily: RUBIK_MEDIUM,
+    fontSize: windowWidth / 12,
+  },
   descriptionContainer: {
     flexDirection: "column",
-
     alignItems: "flex-end",
-    marginLeft: 30,
-    marginTop: 5,
+    fontSize: 20,
   },
   ratingFont: {
     fontFamily: RUBIK_REGULAR,
-    fontSize: 20,
+    fontSize: 15,
   },
-
   descriptionFont: {
     fontFamily: RUBIK_REGULAR,
-    fontSize: 13,
+    fontSize: windowWidth / 30,
   },
 });
 

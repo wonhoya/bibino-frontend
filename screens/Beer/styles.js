@@ -1,16 +1,10 @@
-import {
-  RUBIK_LIGHT_ITALIC,
-  RUBIK_MEDIUM,
-  RUBIK_LIGHT,
-} from "../../constants/font";
+import { RUBIK_LIGHT_ITALIC } from "../../constants/font";
 import { StyleSheet, Dimensions } from "react-native";
 
 import {
   PRIMARY_BLACK,
   PRIMARY_ORANGE,
   PRIMARY_WHITE,
-  PRIMARY_GREY,
-  PRIMARY_LIGHT_GREY,
 } from "../../constants/colors";
 import { RUBIK_REGULAR } from "../../constants/font";
 
@@ -36,12 +30,11 @@ const styles = StyleSheet.create({
   description: {
     textAlign: "justify",
     width: "100%",
-    borderTopWidth: 10,
     lineHeight: windowWidth / 16,
     padding: windowWidth / 20,
     fontSize: windowWidth / 25,
     fontFamily: RUBIK_REGULAR,
-    color: PRIMARY_BLACK,
+    marginTop: 10,
   },
   bannerContainer: {
     marginTop: -1000,
@@ -52,61 +45,19 @@ const styles = StyleSheet.create({
     width: "50%",
     opacity: 0.5,
   },
-
   beerDescription: {
     width: "85%",
   },
-
   flagContainer: {
     width: "85%",
     flexDirection: "row",
     alignItems: "center",
   },
-  commentsDescription: {},
-
-  beerDescriptionFont: {
-    fontFamily: RUBIK_REGULAR,
-    fontSize: 22,
-  },
-
-  summaryFont: {
-    fontFamily: RUBIK_MEDIUM,
-    fontSize: 22,
-  },
-
-  summaryBeerDescriptionFont: {
-    marginVertical: 2,
-    fontFamily: RUBIK_LIGHT,
-    fontSize: 15,
-  },
-
-  beerDescriptionFont2: {
-    fontFamily: RUBIK_MEDIUM,
-    fontSize: 14,
-    color: PRIMARY_GREY,
-  },
-
-  priceFont: {
-    fontSize: 25,
-    fontFamily: RUBIK_REGULAR,
-    color: PRIMARY_BLACK,
-  },
-
   criticQuestionFont: {
     fontSize: 15,
     fontFamily: RUBIK_LIGHT_ITALIC,
     color: PRIMARY_ORANGE,
-
-    borderBottomWidth: 1,
-    borderBottomColor: PRIMARY_BLACK,
   },
-
-  beerSummarySub: {
-    marginTop: 10,
-    width: "100%",
-    flexDirection: "row",
-  },
-
   beerMakerFont: {
     marginTop: 10,
     fontFamily: RUBIK_LIGHT_ITALIC,
@@ -114,11 +65,14 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
     color: PRIMARY_BLACK,
   },
-  subLine: {
-    width: "90%",
-    marginVertical: 10,
-    height: 2,
-    backgroundColor: PRIMARY_LIGHT_GREY,
+  priceFont: {
+    fontSize: 25,
+    fontFamily: RUBIK_REGULAR,
+    color: PRIMARY_BLACK,
+  },
+  beerDescriptionFont: {
+    fontFamily: RUBIK_REGULAR,
+    fontSize: 22,
   },
 });
 

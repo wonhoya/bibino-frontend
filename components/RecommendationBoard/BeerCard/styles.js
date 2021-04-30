@@ -4,8 +4,8 @@ const { width: windowWidth } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   image: {
-    width: windowWidth / 2,
-    height: windowWidth / 1.5,
+    width: windowWidth / 3,
+    height: windowWidth / 1.3,
     marginHorizontal: windowWidth / 60,
   },
 });

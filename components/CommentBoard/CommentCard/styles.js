@@ -1,31 +1,30 @@
 import { StyleSheet, Dimensions } from "react-native";
+import { PRIMARY_BLACK, PRIMARY_WHITE } from "../../../constants/colors";
 
 import {
   RUBIK_MEDIUM,
-  RUBIK_BOLD,
   RUBIK_REGULAR,
+  RUBIK_LIGHT,
 } from "../../../constants/font";
 
 const { width: windowWidth } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: windowWidth / 50,
     width: windowWidth / 1.2,
-    height: windowWidth / 2.8,
-    borderRadius: 5,
-    backgroundColor: "#FFFFFF",
+    marginVertical: windowWidth / 50,
     padding: 10,
+    borderRadius: 5,
+    backgroundColor: PRIMARY_WHITE,
   },
   descriptionContatiner: {
-    height: 50,
-    maxHeight: 110,
     flexDirection: "row",
     alignItems: "flex-end",
+    height: 50,
+    maxHeight: 110,
   },
   mainContainer: {
     justifyContent: "space-between",
-    height: windowWidth / 6,
   },
   imageContainer: {
     flex: 0.8,
@@ -51,7 +50,9 @@ const styles = StyleSheet.create({
     fontSize: 11,
   },
   comment: {
-    fontFamily: RUBIK_REGULAR,
+    marginBottom: 30,
+    color: PRIMARY_BLACK,
+    fontFamily: RUBIK_LIGHT,
     fontSize: 17,
   },
   ratingBoardContainer: {

@@ -23,16 +23,16 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     alignItems: "center",
-    height: itemHeight * 0.69,
     width: itemWidth,
+    height: itemHeight * 0.69,
   },
   descriptionContainer: {
-    height: itemHeight * 0.34,
     width: itemWidth,
+    height: itemHeight * 0.34,
     backgroundColor: PRIMARY_BLACK,
   },
   image: {
-    width: "100%",
+    width: "110%",
     height: "100%",
   },
   name: {

@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import { useSelector } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -20,12 +20,12 @@ const Comments = () => {
         </Text>
         <Text>Sorted By : Ratings</Text>
       </View>
-      <View style={styles.commentsContainer}>
+      <ScrollView contentContainerStyle={styles.commentsContainer}>
         <CommentBoard
           commentDatum={commentDatum}
           commentNumber={commentDatum.length}
         />
-      </View>
+      </ScrollView>
     </View>
   );
 };

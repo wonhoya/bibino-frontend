@@ -73,7 +73,7 @@ const Intro = () => {
           </View>
           <View style={styles.windowContainer}>
             <ImageContainer
-              source={require("../../assets/pngs/introImage1.png")}
+              source={require("../../assets/pngs/introImage3.png")}
             />
             <DescriptionContainer
               title={INTRO_THIRD_TITLE_TEXT}
