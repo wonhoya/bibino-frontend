@@ -2,15 +2,17 @@ import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { View, Text, Animated } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { BACKEND_URL_FOR_DEV } from "@env";
+import { API_SERVER_URL } from "@env";
+
+import { selectIdToken } from "../../features/userSlice";
+import generateHeaderOption from "../../utils/generateHeaderOption";
 
 import styles from "./styles";
+
 import Loading from "../Loading/Loading";
 import FirstRankingContainer from "./FirstRankingContainer/FirstRankingContainer";
 import SecondRankingContainer from "./SecondRankingContainer/SecondRankingContainer";
 import ThirdRankingContainer from "./ThirdRankingContainer/ThirdRankingContainer";
-import generateHeaderOption from "../../utils/generateHeaderOption";
-import { selectIdToken } from "../../features/userSlice";
 
 const Ranking = ({ navigation }) => {
   const [isFetching, setIsFetching] = useState(true);
@@ -38,7 +40,7 @@ const Ranking = ({ navigation }) => {
       const headers = generateHeaderOption(idToken);
 
       try {
-        const response = await fetch(`${BACKEND_URL_FOR_DEV}/beers/rankings`, {
+        const response = await fetch(`${API_SERVER_URL}/beers/rankings`, {
           method: "GET",
           headers: {
             ...headers,
@@ -66,7 +68,7 @@ const Ranking = ({ navigation }) => {
     Animated.sequence([
       Animated.timing(firstOpactiy, {
         toValue: 1,
-        duration: 1200,
+        duration: 2000,
         useNativeDriver: false,
       }),
       Animated.timing(secondOpacity, {

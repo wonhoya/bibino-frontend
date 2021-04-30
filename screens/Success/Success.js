@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Text, View } from "react-native";
 
 import styles from "./styles";
+
 import { SuccessIcon } from "../../assets/svgs/icon";
 import { BeercanSvg } from "../../assets/svgs/ilusts";
 

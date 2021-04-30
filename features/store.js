@@ -12,6 +12,7 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
+
 import { todayBeersSlice } from "./todayBeersSlice";
 import { userSlice } from "./userSlice";
 import { commentsSlice } from "./commentsSlice";
@@ -41,7 +42,7 @@ const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }).concat(logger),
-  devTools: process.env.NODE_ENV !== "production",
+  devTools: process.env.NODE_ENV === "development",
 });
 const persistedStore = persistStore(store);
 

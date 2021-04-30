@@ -4,6 +4,7 @@ import {
   PRIMARY_BLACK,
   PRIMARY_ORANGE,
   PRIMARY_WHITE,
+  PRIMARY_GREEN,
 } from "../../constants/colors";
 import { RUBIK_REGULAR } from "../../constants/font";
 
@@ -17,7 +18,7 @@ const styles = StyleSheet.create({
     left: windowWidth / 1,
     top: windowHeight / 1.2,
     zIndex: 1,
-    backgroundColor: "green",
+    backgroundColor: PRIMARY_GREEN,
   },
   feedbackContainer: {
     alignSelf: "center",
@@ -80,8 +81,8 @@ styles.handlePositionX = (scrollY) => {
           inputRange: [0, windowHeight * 0.5, windowHeight],
           outputRange: [
             windowWidth,
-            -windowWidth * 0.245,
-            -windowWidth * 0.245,
+            -windowWidth * 0.005,
+            -windowWidth * 0.005,
           ],
         }),
       },

@@ -32,20 +32,20 @@ const styles = StyleSheet.create({
   },
   title: {
     marginVertical: 10,
-    fontSize: 30,
+    fontSize: windowHeight * 0.035,
     fontFamily: RUBIK_BOLD,
     color: PRIMARY_BLACK,
   },
   input: {
     width: "90%",
-    height: 60,
+    height: windowHeight * 0.09,
     marginBottom: 30,
-    paddingLeft: 30,
+    paddingLeft: 25,
     borderRadius: 10,
     backgroundColor: PRIMARY_WHITE,
     color: PRIMARY_BLACK,
     fontFamily: RUBIK_REGULAR,
-    fontSize: 15,
+    fontSize: windowHeight * 0.018,
   },
 });
 

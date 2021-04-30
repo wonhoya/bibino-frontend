@@ -2,25 +2,26 @@ import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { View } from "react-native";
 import { Camera } from "expo-camera";
-import { BACKEND_URL_FOR_DEV } from "@env";
+import { API_SERVER_URL } from "@env";
 
-import styles from "./styles";
-import Configuration from "../Configuration/Configuration";
-import PhotoTabBar from "../../components/PhotoTabBar/PhotoTabBar";
-import CameraLoading from "../Loading/CameraLoading";
 import { selectIdToken } from "../../features/userSlice";
 import generateHeaderOption from "../../utils/generateHeaderOption";
 
+import styles from "./styles";
+
+import PhotoTabBar from "../../components/PhotoTabBar/PhotoTabBar";
+import CameraLoading from "../Loading/CameraLoading";
+
 const Photo = ({ navigation }) => {
   const cameraRef = useRef(null);
-  const [hasPermission, setHasPermission] = useState(null);
+  const idToken = useSelector(selectIdToken);
+
   const [isCameraReady, setisCameraReady] = useState(false);
   const [isPreview, setIsPreview] = useState(false);
   const [isParseStarted, setIsParseStarted] = useState(false);
   const [isAnimationFinished, setIsAnimationFinished] = useState(false);
   const [photobase64, setPhotobase64] = useState(null);
 
-  const idToken = useSelector(selectIdToken);
   const headers = generateHeaderOption(idToken);
 
   useEffect(() => {
@@ -37,22 +38,6 @@ const Photo = ({ navigation }) => {
       animationEnabled: false,
     });
   }, [navigation]);
-
-  useEffect(() => {
-    const requestPermission = async () => {
-      const { status } = await Camera.requestPermissionsAsync();
-
-      if (status === "granted") {
-        return setHasPermission(true);
-      }
-
-      if (status === "denied" || "undetermined") {
-        return setHasPermission(false);
-      }
-    };
-
-    requestPermission();
-  }, []);
 
   const handleTakePicture = async () => {
     if (!isCameraReady) {
@@ -78,7 +63,7 @@ const Photo = ({ navigation }) => {
   const handleUse = async () => {
     try {
       setIsParseStarted(true);
-      const response = await fetch(`${BACKEND_URL_FOR_DEV}/beers/scan`, {
+      const response = await fetch(`${API_SERVER_URL}/beers/scan`, {
         method: "POST",
         headers: {
           ...headers,
@@ -108,11 +93,6 @@ const Photo = ({ navigation }) => {
       navigation.navigate("Failure");
     }
   };
-
-  if (hasPermission === false) {
-    //일단 Configuration 으로 보냄.
-    return <Configuration />;
-  }
 
   if (isParseStarted) {
     return <CameraLoading />;

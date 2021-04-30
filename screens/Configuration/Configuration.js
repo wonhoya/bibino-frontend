@@ -3,10 +3,12 @@ import { Text, View, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
 import * as SecureStore from "expo-secure-store";
 
-import styles from "./styles";
 import { userDeleted } from "../../features/userSlice";
 import { removeIdToken } from "../../features/userSlice";
 import { todayBeersDeleted } from "../../features/todayBeersSlice";
+
+import styles from "./styles";
+
 import { LogOutIcon, ResignIcon, ContactIcon } from "../../assets/svgs/icon";
 
 const Configuration = () => {

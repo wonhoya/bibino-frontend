@@ -9,10 +9,11 @@ import {
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
-import styles from "./styles";
 import { fetchMyBeers, getUser } from "../../features/userSlice";
 import formatItems from "../../utils/formatItems";
 import ASYNC_STATUS from "../../constants/asyncStatus";
+
+import styles from "./styles";
 
 const numColumns = 3;
 
@@ -63,9 +64,6 @@ const Profile = ({ navigation }) => {
       return <View style={[styles.photo, styles.invisiblePhoto]} />;
     }
 
-    if (item.phrase) {
-      return <Text>{item.phrase}</Text>;
-    }
     return (
       <TouchableOpacity
         style={styles.photo}
@@ -102,7 +100,7 @@ const Profile = ({ navigation }) => {
             <FlatList
               data={formatItems(user.beers, numColumns, informationPhrase)}
               renderItem={renderItem}
-              keyExtractor={(item) => item.id}
+              keyExtractor={(item) => item._id}
               numColumns={numColumns}
               showsVerticalScrollIndicator={false}
               refreshing={shouldFetch}

@@ -6,6 +6,7 @@ import {
   distributeUserTag,
   distributeBeerTag,
 } from "../../../utils/distributeTag";
+
 import styles from "./styles";
 
 const TagBoard = ({ characterAverage, reviewCount }) => {

@@ -1,10 +1,12 @@
 import React from "react";
-import { View, Text, FlatList } from "react-native";
+import { View, Text } from "react-native";
 import { useSelector } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
 
-import styles from "./styles";
 import { getComments } from "../../features/commentsSlice";
+
+import styles from "./styles";
+
 import CommentBoard from "../../components/CommentBoard/CommentBoard";
 
 const Comments = () => {

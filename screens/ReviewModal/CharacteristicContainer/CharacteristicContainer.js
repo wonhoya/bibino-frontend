@@ -8,10 +8,11 @@ import {
   PRIMARY_YELLOW,
 } from "../../../constants/colors";
 import CHRACTERISTIC_TITLES from "../../../constants/chracteristicTitles";
+
 import CharacteristicBoard from "../../../components/shared/ChracteristicBoard/ChracteristicBoard";
 
-const { width: windowWidth } = Dimensions.get("window");
-const chracterSize = windowWidth * 1.2;
+const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+const chracterSize = windowHeight / 1.7;
 
 const CharacteristicContainer = ({ review, setReview }) => {
   const { aroma, body, sparkling } = review;

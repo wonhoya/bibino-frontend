@@ -2,6 +2,7 @@ import React from "react";
 import { View, TouchableOpacity } from "react-native";
 
 import styles from "./styles";
+
 import TabContainer from "./TabContainer/TabContainer";
 import ButtonContainer from "./ButtonContainer/ButtonContainer";
 

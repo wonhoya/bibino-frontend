@@ -2,6 +2,7 @@ import React from "react";
 import { View, FlatList } from "react-native";
 
 import styles from "./styles";
+
 import SearchCard from "./SearchCard/SearchCard";
 
 const SearchCardBoard = ({ beers }) => {

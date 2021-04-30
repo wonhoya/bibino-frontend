@@ -2,6 +2,7 @@ import React from "react";
 import { View, TouchableOpacity, Text } from "react-native";
 
 import styles from "./styles";
+
 import CommentBoard from "../../../components/CommentBoard/CommentBoard";
 
 const CommentBoardContainer = ({ navigation, commentDatum }) => {

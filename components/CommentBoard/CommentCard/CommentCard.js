@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Image, Text, Dimensions } from "react-native";
+
 import styles from "./styles";
 
 import RatingBoard from "../../shared/RatingBoard/RatingBoard";

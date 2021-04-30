@@ -5,8 +5,7 @@ import {
   TAB_ORANGE,
   PRIMARY_WHITE,
 } from "../../../constants/colors";
-import { RUBIK_REGULAR, RUBIK_BOLD } from "../../../constants/font";
-import { TABBAR_FONT_SIZE } from "../../../constants/size";
+import { RUBIK_REGULAR } from "../../../constants/font";
 
 const { width: windowWidth } = Dimensions.get("window");
 

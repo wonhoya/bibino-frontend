@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { SafeAreaView, View, TextInput } from "react-native";
 import { useSelector } from "react-redux";
 
-import styles from "./styles";
-import { SearchIcon } from "../../assets/svgs/icon";
-import fetchSearchBeers from "../../utils/fetchSearchBeers";
 import { selectIdToken } from "../../features/userSlice";
+import fetchSearchBeers from "../../utils/fetchSearchBeers";
+
+import styles from "./styles";
+
+import { SearchIcon } from "../../assets/svgs/icon";
 import SearchCardBoard from "../../components/SearchCardBoard/SearchCardBoard";
 
 const Search = () => {

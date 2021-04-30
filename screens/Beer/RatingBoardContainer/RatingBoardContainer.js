@@ -2,6 +2,7 @@ import React from "react";
 import { View } from "react-native";
 
 import styles from "./styles";
+
 import RatingBoard from "../../../components/shared/RatingBoard/RatingBoard";
 
 const RatingBoardContainer = ({ rating }) => {

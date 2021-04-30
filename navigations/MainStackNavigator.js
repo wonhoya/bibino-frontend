@@ -2,10 +2,11 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { createStackNavigator } from "@react-navigation/stack";
 
+import MainTabNavigator from "./MainTabNavigator";
+
+import Header from "../components/shared/Header/Header";
 import Intro from "../screens/Intro/Intro";
 import SignIn from "../screens/SignIn/SignIn";
-import Header from "../components/shared/Header/Header";
-import MainTabNavigator from "./MainTabNavigator";
 import Beer from "../screens/Beer/Beer";
 import Configuration from "../screens/Configuration/Configuration";
 import Photo from "../screens/Photo/Photo";

@@ -1,31 +1,18 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as SecureStore from "expo-secure-store";
+import { API_SERVER_URL } from "@env";
 
-import { SERVER_URL } from "../config";
 import ASYNC_STATUS from "../constants/asyncStatus";
 import getGoogleIdToken from "../utils/getGoogleIdToken";
 import generateHeaderOption from "../utils/generateHeaderOption";
 import showErrorInDevelopment from "../utils/showErrorInDevelopment";
-
-const serverUrl = SERVER_URL[process.env.NODE_ENV];
-
-const initialState = {
-  id: null,
-  idToken: null,
-  name: null,
-  avatar: null,
-  characteristic: {},
-  beers: [],
-  status: ASYNC_STATUS.IDLE,
-  error: null,
-};
 
 const signInUser = createAsyncThunk("user/signInUser", async (idToken) => {
   try {
     const googleIdToken = await getGoogleIdToken(idToken);
 
     const headers = generateHeaderOption(googleIdToken);
-    const response = await fetch(`${serverUrl}/users/sign-in`, {
+    const response = await fetch(`${API_SERVER_URL}/users/sign-in`, {
       method: "POST",
       headers,
     });
@@ -59,7 +46,9 @@ const fetchMyBeers = createAsyncThunk(
     try {
       const { id: userId, idToken } = getState().user;
       const headers = generateHeaderOption(idToken);
-      const response = await fetch(`${serverUrl}/users/${userId}`, { headers });
+      const response = await fetch(`${API_SERVER_URL}/users/${userId}`, {
+        headers,
+      });
 
       const { beers } = await response.json();
 
@@ -91,6 +80,17 @@ const removeIdToken = createAsyncThunk("user/removeIdToken", async () => {
     throw err;
   }
 });
+
+const initialState = {
+  id: null,
+  idToken: null,
+  name: null,
+  avatar: null,
+  characteristic: {},
+  beers: [],
+  status: ASYNC_STATUS.IDLE,
+  error: null,
+};
 
 const userSlice = createSlice({
   name: "user",
@@ -150,7 +150,7 @@ const userSlice = createSlice({
   },
 });
 
-const { userStatusSet, userDeleted } = userSlice.actions;
+const { userDeleted } = userSlice.actions;
 
 const getUser = (state) => state.user;
 const selectIdToken = (state) => state.user.idToken;
@@ -158,7 +158,6 @@ const selectIdToken = (state) => state.user.idToken;
 export {
   userSlice,
   signInUser,
-  userStatusSet,
   userDeleted,
   removeIdToken,
   getIdToken,

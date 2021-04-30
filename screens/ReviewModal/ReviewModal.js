@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TextInput } from "react-native";
+import { View, Text, TextInput, Dimensions } from "react-native";
 import { useSelector } from "react-redux";
 import Modal from "react-native-modal";
+import { API_SERVER_URL } from "@env";
 
-import styles from "./styles";
-import { SERVER_URL } from "../../config";
+import { selectIdToken } from "../../features/userSlice";
 import generateHeaderOption from "../../utils/generateHeaderOption";
 import showErrorInDevelopment from "../../utils/showErrorInDevelopment";
-import { selectIdToken } from "../../features/userSlice";
-import RatingBoard from "../../components/shared/RatingBoard/RatingBoard";
+
+import styles from "./styles";
+
 import Button from "../../components/shared/Button/Button";
+import RatingBoard from "../../components/shared/RatingBoard/RatingBoard";
 import CharacteristicContainer from "./CharacteristicContainer/CharacteristicContainer";
+
+const { height: windowHeight } = Dimensions.get("window");
 
 const ReviewModal = ({
   navigation,
@@ -36,8 +40,7 @@ const ReviewModal = ({
     }
 
     const postReview = async () => {
-      const serverUrl = SERVER_URL[process.env.NODE_ENV];
-      const url = `${serverUrl}/reviews/${reviewId || "new"}`;
+      const url = `${API_SERVER_URL}/reviews/${reviewId || "new"}`;
       const method = reviewId ? "PUT" : "POST";
       const headers = generateHeaderOption(idToken);
 
@@ -105,7 +108,12 @@ const ReviewModal = ({
         <View style={styles.modalContainer}>
           <View style={styles.line} />
           <Text style={styles.title}>Leave your review!</Text>
-          <RatingBoard mode="dynamic" review={review} setReview={setReview} />
+          <RatingBoard
+            mode="dynamic"
+            review={review}
+            setReview={setReview}
+            size={windowHeight / 16}
+          />
           <CharacteristicContainer review={review} setReview={setReview} />
           <TextInput
             autoCapitalize="none"
@@ -114,7 +122,12 @@ const ReviewModal = ({
             placeholder="How was it? Feel free to leave your thought!"
             onChangeText={(value) => setComment(value)}
           />
-          <Button mode="primary" text="Submit" onPress={handleSubmit} />
+          <Button
+            mode="primary"
+            text="Submit"
+            onPress={handleSubmit}
+            isLoading={isFetching}
+          />
         </View>
       </Modal>
     </View>

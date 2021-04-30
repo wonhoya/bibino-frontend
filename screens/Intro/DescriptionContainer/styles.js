@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-import { PRIMARY_BLACK, PRIMARY_ORANGE } from "../../../constants/colors";
+import { PRIMARY_BLACK } from "../../../constants/colors";
 import { RUBIK_REGULAR, RUBIK_BOLD } from "../../../constants/font";
 import {
   INTRO_TITLE_FONT_SIZE,

@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { SafeAreaView, View } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
+import { Camera } from "expo-camera";
+import * as Linking from "expo-linking";
 
-import styles from "./styles";
-import isTodayBeerDataOutdated from "../../utils/isTodayBeerDataOutdated";
 import { getUser } from "../../features/userSlice";
 import {
   fetchTodayBeers,
   todayBeersDeleted,
 } from "../../features/todayBeersSlice";
+import isTodayBeerDataOutdated from "../../utils/isTodayBeerDataOutdated";
+
+import styles from "./styles";
+
 import ProfileContainer from "./ProfileContainer/ProfileContainer";
 import ContentsContainer from "./ContentsContainer/ContentsContainer";
 import Loading from "../Loading/Loading";
 
 const Main = ({ navigation }) => {
-  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const todayBeersData = useSelector((state) => {
     const { todayBeers } = state;
@@ -24,6 +27,9 @@ const Main = ({ navigation }) => {
     };
   });
   const user = useSelector(getUser);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasPermission, setHasPermission] = useState(null);
 
   useEffect(() => {
     if (!isLoading) {
@@ -44,6 +50,22 @@ const Main = ({ navigation }) => {
   }, [isLoading, dispatch]);
 
   useEffect(() => {
+    const requestPermission = async () => {
+      const { status } = await Camera.requestPermissionsAsync();
+
+      if (status === "granted") {
+        return setHasPermission(true);
+      }
+
+      if (status === "denied" || "undetermined") {
+        return setHasPermission(false);
+      }
+    };
+
+    requestPermission();
+  }, []);
+
+  useEffect(() => {
     const unsubscribe = navigation.addListener("focus", async () => {
       const nowDate = new Date().toDateString();
       const beerUpdateDate = new Date(todayBeersData.timestamp).toDateString();
@@ -51,6 +73,7 @@ const Main = ({ navigation }) => {
 
       if (!todayBeersData.beers.length || shouldUpdate) {
         setIsLoading(true);
+
         try {
           await dispatch(fetchTodayBeers());
         } catch (err) {
@@ -68,9 +91,13 @@ const Main = ({ navigation }) => {
     return <Loading />;
   }
 
+  if (hasPermission === false) {
+    return Linking.openSettings();
+  }
+
   return (
     <>
-      <SafeAreaView />
+      <SafeAreaView style={styles.safeArewView} />
       <View style={styles.container}>
         <ProfileContainer
           userName={user.name}

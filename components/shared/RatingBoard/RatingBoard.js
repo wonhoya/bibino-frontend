@@ -1,8 +1,9 @@
 import React from "react";
 import { View, Dimensions } from "react-native";
 
-import getStarRatings from "../../../utils/getStarRatings";
 import styles from "./styles";
+
+import getStarRatings from "../../../utils/getStarRatings";
 
 const RatingBoard = ({
   mode = "static",
