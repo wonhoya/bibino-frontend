@@ -6,7 +6,7 @@
 <br>
 ## 2. 기능
 
-<p align="center"><img src="https://github.com/wonhoya/bibino-frontend/blob/features/readme/assets/pngs/workingImage4.png?raw=true" width="50%" height="50%"><img src="https://github.com/wonhoya/bibino-frontend/blob/features/readme/assets/pngs/workingImage3.png?raw=true" width="50%" height="50%"></p>
+<p align="center"><img src="https://github.com/wonhoya/bibino-frontend/blob/readme/assets/pngs/workingImage4.png?raw=true" width="50%" height="50%"><img src="https://github.com/wonhoya/bibino-frontend/blob/readme/assets/pngs/workingImage3.png?raw=true" width="50%" height="50%"></p>
 
 
 
@@ -58,9 +58,12 @@
 <br>
 <br>
 
-<p align="center"><img src="https://github.com/wonhoya/bibino-frontend/blob/features/readme/assets/pngs/sketch1.png?raw=true" width="50%" height="50%">
-<img src="https://github.com/wonhoya/bibino-frontend/blob/features/readme/assets/pngs/mockup2.png?raw=true" width="50%" height="50%"><img src="https://github.com/wonhoya/bibino-frontend/blob/features/readme/assets/pngs/mockup1.png?raw=true" width="50%" height="50%">
-<img src="https://github.com/wonhoya/bibino-frontend/blob/features/readme/assets/pngs/schemaDesign.png?raw=true" width="100%" height="100%"></p>
+<p align="center">
+<img src="https://github.com/wonhoya/bibino-frontend/blob/readme/assets/pngs/implementation1.png?raw=true" width="50%" height="50%">
+<img src="https://github.com/wonhoya/bibino-frontend/blob/readme/assets/pngs/mockup1.png?raw=true" width="50%" height="50%">
+<img src="https://github.com/wonhoya/bibino-frontend/blob/readme/assets/pngs/mockup2.png?raw=true" width="50%" height="50%">
+<img src="https://github.com/wonhoya/bibino-frontend/blob/readme/assets/pngs/schemaDesign.png?raw=true" width="80%" height="100%">
+</p>
 
 
 
