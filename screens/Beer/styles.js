@@ -49,9 +49,9 @@ const styles = StyleSheet.create({
     width: "85%",
   },
   flagContainer: {
-    width: "85%",
     flexDirection: "row",
     alignItems: "center",
+    width: "85%",
   },
   criticQuestionFont: {
     fontSize: 15,

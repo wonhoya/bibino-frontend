@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions } from "react-native";
-import { PRIMARY_BLACK, PRIMARY_WHITE } from "../../../constants/colors";
 
+import { PRIMARY_BLACK, PRIMARY_WHITE } from "../../../constants/colors";
 import {
   RUBIK_MEDIUM,
   RUBIK_REGULAR,
@@ -36,8 +36,8 @@ const styles = StyleSheet.create({
   image: {
     width: windowWidth / 12.5,
     height: windowWidth / 12.5,
-    borderRadius: 50,
     marginRight: 10,
+    borderRadius: 50,
   },
   userName: {
     marginTop: 10,

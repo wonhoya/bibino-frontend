@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
     width: windowWidth,
   },
   sectionTitle: {
-    // marginHorizontal: 10,
     fontFamily: RUBIK_REGULAR,
     fontSize: 20,
     color: PRIMARY_LIGHT_GREY,

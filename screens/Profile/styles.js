@@ -59,18 +59,15 @@ const styles = StyleSheet.create({
   invisiblePhoto: {
     backgroundColor: "transparent",
   },
-
   propertyContainer: {
-    width: windowWidth,
     flexDirection: "row",
+    width: windowWidth,
     marginTop: 10,
   },
-
   property: {
+    alignItems: "center",
     width: windowWidth / 4,
     minHeight: 80,
-
-    alignItems: "center",
   },
 });
 
