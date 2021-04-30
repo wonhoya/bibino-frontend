@@ -6,8 +6,8 @@ import { RUBIK_BOLD } from "../../constants/font";
 const styles = StyleSheet.create({
   description: {
     textAlign: "center",
-    fontFamily: RUBIK_BOLD,
     color: PRIMARY_BLACK,
+    fontFamily: RUBIK_BOLD,
     fontSize: 15,
   },
 });

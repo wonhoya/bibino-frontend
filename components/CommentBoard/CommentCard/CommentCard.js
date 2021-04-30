@@ -16,19 +16,17 @@ const CommentCard = ({ commentData }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.imageContainer}>
-        <Image id={id} style={styles.image} source={{ uri }} />
+      <View style={styles.mainContainer}>
+        <Text style={styles.comment}>{comment}</Text>
+        <View style={styles.ratingBoardContainer}>
+          <RatingBoard mode="static" rating={rating} size={windowWidth / 20} />
+        </View>
       </View>
-      <View style={styles.textContainer}>
+      <View style={styles.descriptionContatiner}>
+        <Image id={id} style={styles.image} source={{ uri }} />
         <Text numberOfLines={1} ellipsizeMode="tail" style={styles.userName}>
           {username}
         </Text>
-        <Text numberOfLines={1} ellipsizeMode="tail" style={styles.comment}>
-          {comment}
-        </Text>
-      </View>
-      <View style={styles.ratingBoardContainer}>
-        <RatingBoard mode="static" rating={rating} size={windowWidth / 20} />
       </View>
     </View>
   );

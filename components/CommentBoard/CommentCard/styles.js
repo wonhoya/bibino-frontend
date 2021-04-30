@@ -1,21 +1,30 @@
 import { StyleSheet, Dimensions } from "react-native";
 
+import { PRIMARY_BLACK, PRIMARY_WHITE } from "../../../constants/colors";
 import {
   RUBIK_MEDIUM,
-  RUBIK_BOLD,
   RUBIK_REGULAR,
+  RUBIK_LIGHT,
 } from "../../../constants/font";
 
 const { width: windowWidth } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    marginVertical: windowWidth / 50,
     width: windowWidth / 1.2,
-    height: windowWidth / 4.8,
+    marginVertical: windowWidth / 50,
+    padding: 10,
     borderRadius: 5,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: PRIMARY_WHITE,
+  },
+  descriptionContatiner: {
+    flexDirection: "row",
+    alignItems: "flex-end",
+    height: 50,
+    maxHeight: 110,
+  },
+  mainContainer: {
+    justifyContent: "space-between",
   },
   imageContainer: {
     flex: 0.8,
@@ -25,19 +34,15 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   image: {
-    width: windowWidth / 6.5,
-    height: windowWidth / 6.5,
+    width: windowWidth / 12.5,
+    height: windowWidth / 12.5,
+    marginRight: 10,
     borderRadius: 50,
   },
-  textContainer: {
-    flex: 1.5,
-    marginTop: "1%",
-    marginLeft: "3%",
-  },
   userName: {
-    marginBottom: "18%",
-    fontFamily: RUBIK_BOLD,
-    fontSize: 18,
+    marginTop: 10,
+    fontFamily: RUBIK_REGULAR,
+    fontSize: 12,
   },
   work: {
     marginBottom: "6%",
@@ -45,13 +50,13 @@ const styles = StyleSheet.create({
     fontSize: 11,
   },
   comment: {
-    fontFamily: RUBIK_REGULAR,
-    fontSize: 16,
+    marginBottom: 30,
+    color: PRIMARY_BLACK,
+    fontFamily: RUBIK_LIGHT,
+    fontSize: 17,
   },
   ratingBoardContainer: {
-    flex: 1,
-    marginTop: "1.5%",
-    marginRight: "4%",
+    height: 10,
   },
 });
 

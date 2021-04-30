@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { View, Animated, Easing } from "react-native";
+import { View, Animated, Text } from "react-native";
 import { FloatingAction } from "react-native-floating-action";
 import { useNavigationState } from "@react-navigation/native";
 import { API_SERVER_URL } from "@env";
+import { CountUp } from "use-count-up";
 
 import { selectIdToken } from "../../features/userSlice";
 import { commentsAdded, getComments } from "../../features/commentsSlice";
@@ -24,6 +25,7 @@ import RatingBoardContainer from "./RatingBoardContainer/RatingBoardContainer";
 import CommentBoardContainer from "./CommentBoardContainer/CommentBoardContainer";
 import CharacteristicContainer from "./CharacteristicContainer/CharacteristicContainer";
 import RecommendationBoardContainer from "./RecommendationBoardContainer/RecommendationBoardContainer";
+import SectionTitleContainer from "./SectionTitleContainer/SectionTitleContainer";
 
 const Beer = ({ navigation, route }) => {
   const { myBeerImageURL, beerId } = route.params;
@@ -41,7 +43,6 @@ const Beer = ({ navigation, route }) => {
   const [myReview, setMyReview] = useState({});
   const [recommendation, setRecommendation] = useState(null);
 
-  const moveY = useRef(new Animated.Value(100)).current;
   const scrollY = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -121,16 +122,6 @@ const Beer = ({ navigation, route }) => {
     fetchAllData();
   }, [idToken, navigation, beerId, userId, dispatch, isModalVisible]);
 
-  useEffect(() => {
-    Animated.timing(moveY, {
-      toValue: 0,
-      duration: 1000,
-      easing: Easing.inOut(Easing.quad),
-      delay: 100,
-      useNativeDriver: false,
-    }).start();
-  }, [moveY, isFetching]);
-
   const handleOnScroll = (event) => {
     Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], {
       useNativeDriver: false,
@@ -171,21 +162,55 @@ const Beer = ({ navigation, route }) => {
             rating={myReview.rating}
             reviewCounts={commentDatum.length}
           />
+          <View style={styles.beerDescription}>
+            <Text style={styles.beerMakerFont}>Anheuser-Busch InBev</Text>
+            <Text style={styles.beerDescriptionFont}>
+              average price{" "}
+              <Text style={styles.priceFont}>
+                {" "}
+                <CountUp isCounting end={4400} duration={2} />
+              </Text>{" "}
+              won
+            </Text>
+          </View>
           <RatingBoardContainer rating={beerInfo.averageRating} />
           <TagBoardContainer characterAverage={characterAverage} />
-          <SectionDivider direction="right" text="Description" />
-          <Animated.Text style={{ ...styles.description, top: moveY }}>
-            {beerInfo.description}
-          </Animated.Text>
-          <SectionDivider direction="left" text="Characteristic" />
+          <SectionDivider direction="right" />
+          <SectionTitleContainer
+            sectionTitle={"Summary"}
+            sectionDescription={"Description / about"}
+          />
+          <View style={styles.flagContainer}>
+            <Text style={styles.summaryBeerDescriptionFont}>🇩🇪 Germany </Text>
+          </View>
+          <View style={styles.flagContainer}>
+            <Text style={styles.summaryBeerDescriptionFont}>Alc. 4.5% </Text>
+          </View>
+          <Text style={styles.description}>{beerInfo.description}</Text>
+          <SectionDivider direction="left" />
+          <SectionTitleContainer
+            sectionTitle={"Taste Characteristics"}
+            sectionDescription={"Based on user reviews"}
+          />
           <Animated.View style={styles.handlePositionX(scrollY)}>
             <CharacteristicContainer characterAverage={characterAverage} />
           </Animated.View>
-          <SectionDivider direction="right" text="Recommendation" />
+          <Text style={styles.criticQuestionFont}>
+            What is Aroma, Body, Sparkling?
+          </Text>
+          <SectionDivider direction="right" />
+          <SectionTitleContainer
+            sectionTitle={"Beer recommendation"}
+            sectionDescription={"If you like this beer, you might like..."}
+          />
           <Animated.View style={styles.handleOpacity(scrollY)}>
             <RecommendationBoardContainer beers={recommendation} />
           </Animated.View>
-          <SectionDivider direction="left" text="Comments" />
+          <SectionDivider direction="left" />
+          <SectionTitleContainer
+            sectionTitle={"Comment"}
+            sectionDescription={"User comments"}
+          />
           <CommentBoardContainer
             navigation={navigation}
             commentDatum={commentDatum}

@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 5,
     backgroundColor: PRIMARY_ORANGE,
   },
-
   cameraName: {
     position: "absolute",
     bottom: 10,

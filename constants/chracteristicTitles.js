@@ -11,8 +11,8 @@ const CHRACTERISTIC_TITLES = {
   },
   sparkling: {
     title: "Sparkling",
-    leftSubTitle: "Sweat",
-    rightSubTitle: "Bitter",
+    leftSubTitle: "Low",
+    rightSubTitle: "High",
   },
 };
 

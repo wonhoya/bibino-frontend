@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   View,
   SafeAreaView,
-  Text,
   Image,
   FlatList,
   TouchableOpacity,
@@ -87,14 +86,6 @@ const Profile = ({ navigation }) => {
     <>
       <SafeAreaView />
       <View style={styles.container}>
-        <View style={styles.infoContainer}>
-          <Image
-            style={styles.avatar}
-            source={{ uri: user.avatar }}
-            resizeMode="contain"
-          />
-          <Text style={styles.title}>{user.name}</Text>
-        </View>
         <View style={styles.galleryContainer}>
           <View style={styles.gallery}>
             <FlatList

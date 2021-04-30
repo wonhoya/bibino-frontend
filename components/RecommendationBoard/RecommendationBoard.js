@@ -27,7 +27,7 @@ const RecommendationBoard = ({ beers }) => {
           showsHorizontalScrollIndicator={false}
         />
       ) : null}
-      {beers?.length ? null : <Text>추천 맥주가 없어요...</Text>}
+      {beers?.length ? null : <Text>There is no beer recommendation</Text>}
     </View>
   );
 };
