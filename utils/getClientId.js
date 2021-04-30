@@ -1,5 +1,6 @@
-import { CLIENT_ID } from "../config";
 import { Platform } from "react-native";
+
+import { CLIENT_ID } from "../config";
 
 const getClientId = () => {
   if (process.env.NODE_ENV === "development") {

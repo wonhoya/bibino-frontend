@@ -10,6 +10,7 @@ import { todayBeersDeleted } from "../../features/todayBeersSlice";
 import styles from "./styles";
 
 import { LogOutIcon, ResignIcon, ContactIcon } from "../../assets/svgs/icon";
+
 const Configuration = () => {
   const dispatch = useDispatch();
   const [method, setMethod] = useState("");
