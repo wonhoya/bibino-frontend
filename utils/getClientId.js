@@ -6,7 +6,7 @@ const getClientId = () => {
   if (process.env.NODE_ENV === "development") {
     return CLIENT_ID.web;
   } else {
-    return CLIENT_ID[Platform.OS];
+    return CLIENT_ID.web;
   }
 };
 
