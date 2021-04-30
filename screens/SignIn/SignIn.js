@@ -1,15 +1,17 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 
+import ASYNC_STATUS from "../../constants/asyncStatus";
+import useGoogleSignIn from "../../hooks/useGoogleSignIn";
+
 import styles from "./styles";
-import { LoginImageSvg } from "../../assets/svgs/ilusts";
+
 import {
   GoogleIcon,
   FacebookIcon,
   InstagramIcon,
 } from "../../assets/svgs/icon";
-import ASYNC_STATUS from "../../constants/asyncStatus";
-import useGoogleSignIn from "../../hooks/useGoogleSignIn";
+import { LoginImageSvg } from "../../assets/svgs/ilusts";
 import Loading from "../Loading/Loading";
 
 const SignIn = () => {

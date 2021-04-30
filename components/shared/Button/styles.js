@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from "react-native";
+
 import { PRIMARY_ORANGE, PRIMARY_BLACK } from "../../../constants/colors";
 import { PRIMARY_BUTTON_FONT_SIZE } from "../../../constants/size";
 import { RUBIK_BOLD } from "../../../constants/font";

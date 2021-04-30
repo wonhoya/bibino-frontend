@@ -9,10 +9,11 @@ import {
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
-import styles from "./styles";
 import { fetchMyBeers, getUser } from "../../features/userSlice";
 import formatItems from "../../utils/formatItems";
 import ASYNC_STATUS from "../../constants/asyncStatus";
+
+import styles from "./styles";
 
 const numColumns = 3;
 

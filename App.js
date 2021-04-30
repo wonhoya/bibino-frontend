@@ -10,9 +10,12 @@ import {
 } from "@expo-google-fonts/rubik";
 
 import "./config/auth";
-import { store, persistedStore } from "./features/store";
-import SplashAnimation from "./screens/SplashAnimation/SplashAnimation";
+
 import AppNavigation from "./navigations/AppNavigation";
+
+import { store, persistedStore } from "./features/store";
+
+import SplashAnimation from "./screens/SplashAnimation/SplashAnimation";
 
 export default function App() {
   const [isAnimationFinished, setIsAnimationFinished] = useState(false);

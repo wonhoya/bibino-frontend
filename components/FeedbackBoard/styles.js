@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+
 import { PRIMARY_BLACK } from "../../constants/colors";
 import { RUBIK_BOLD } from "../../constants/font";
 

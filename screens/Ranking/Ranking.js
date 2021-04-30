@@ -4,13 +4,15 @@ import { View, Text, Animated } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { API_SERVER_URL } from "@env";
 
+import { selectIdToken } from "../../features/userSlice";
+import generateHeaderOption from "../../utils/generateHeaderOption";
+
 import styles from "./styles";
+
 import Loading from "../Loading/Loading";
 import FirstRankingContainer from "./FirstRankingContainer/FirstRankingContainer";
 import SecondRankingContainer from "./SecondRankingContainer/SecondRankingContainer";
 import ThirdRankingContainer from "./ThirdRankingContainer/ThirdRankingContainer";
-import generateHeaderOption from "../../utils/generateHeaderOption";
-import { selectIdToken } from "../../features/userSlice";
 
 const Ranking = ({ navigation }) => {
   const [isFetching, setIsFetching] = useState(true);

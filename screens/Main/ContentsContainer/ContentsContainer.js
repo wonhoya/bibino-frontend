@@ -1,14 +1,16 @@
 import React, { useRef } from "react";
-import Carousel from "react-native-snap-carousel";
 import { View, Text, Dimensions } from "react-native";
+import Carousel from "react-native-snap-carousel";
 
-import styles from "./styles";
-import { TodayPickLogoSvg } from "../../../assets/svgs/ilusts";
 import {
   scrollInterpolator,
   animatedStyles,
 } from "../../../utils/carouselAnimations";
+
+import styles from "./styles";
 import { MAIN_RECOMMENDATION_TEXT } from "../../../constants/text";
+
+import { TodayPickLogoSvg } from "../../../assets/svgs/ilusts";
 import BeerCard from "../../../components/BeerCard/BeerCard";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");

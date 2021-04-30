@@ -1,10 +1,10 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import LottieView from "lottie-react-native";
 
 import styles from "./styles";
 
-const CameraLoading = ({ navigation }) => {
+const CameraLoading = () => {
   return (
     <View style={styles.resultLoadingContainer}>
       <View style={styles.animationContainer}>

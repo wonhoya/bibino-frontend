@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, Image } from "react-native";
 
 import styles from "./styles";
+
 import TagBoard from "../../../components/shared/TagBoard/TagBoard";
 
 const ProfileContainer = ({

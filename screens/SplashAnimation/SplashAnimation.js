@@ -2,8 +2,9 @@ import React from "react";
 import { View, ImageBackground } from "react-native";
 import LottieView from "lottie-react-native";
 
-import styles from "./styles";
 import splash from "../../assets/splashScreen.png";
+
+import styles from "./styles";
 
 const SplashAnimation = ({ handleAnimationFinish }) => {
   return (

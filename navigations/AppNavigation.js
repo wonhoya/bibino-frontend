@@ -3,9 +3,11 @@ import { useDispatch } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 import { unwrapResult } from "@reduxjs/toolkit";
 
-import Loading from "../screens/Loading/Loading";
-import { getIdToken, removeIdToken, userDeleted } from "../features/userSlice";
 import MainStackNavigator from "./MainStackNavigator";
+
+import { getIdToken, removeIdToken, userDeleted } from "../features/userSlice";
+
+import Loading from "../screens/Loading/Loading";
 
 const AppNavigation = () => {
   const [isLoading, setIsLoading] = useState(true);

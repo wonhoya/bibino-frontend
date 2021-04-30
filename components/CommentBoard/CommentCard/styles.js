@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from "react-native";
+
 import {
   RUBIK_MEDIUM,
   RUBIK_BOLD,

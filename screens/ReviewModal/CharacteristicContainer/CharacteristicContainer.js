@@ -8,6 +8,7 @@ import {
   PRIMARY_YELLOW,
 } from "../../../constants/colors";
 import CHRACTERISTIC_TITLES from "../../../constants/chracteristicTitles";
+
 import CharacteristicBoard from "../../../components/shared/ChracteristicBoard/ChracteristicBoard";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");

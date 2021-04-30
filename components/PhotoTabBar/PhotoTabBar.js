@@ -3,13 +3,15 @@ import { Animated } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 import styles from "./styles";
-import MainButtonContainer from "./MainButtonContainer/MainButtonContainer";
-import TabContainer from "./TabContainer/TabContainer";
 import {
   PRIMARY_ORANGE,
   PRIMARY_WHITE,
   POINT_DARK_ORANGE,
+  PRIMARY_GREEN,
 } from "../../constants/colors";
+
+import MainButtonContainer from "./MainButtonContainer/MainButtonContainer";
+import TabContainer from "./TabContainer/TabContainer";
 
 const PhotoTabBar = ({
   handleTakePicture,
@@ -78,7 +80,9 @@ const PhotoTabBar = ({
       {isPreview ? (
         <TabContainer
           handleButtonPress={handleUse}
-          icon={<AntDesign name="checkcircleo" size={32} color="green" />}
+          icon={
+            <AntDesign name="checkcircleo" size={32} color={PRIMARY_GREEN} />
+          }
           text="Use"
           isUseButton={true}
         />

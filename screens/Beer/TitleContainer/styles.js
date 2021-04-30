@@ -1,6 +1,7 @@
 import { StyleSheet, Dimensions } from "react-native";
 
 import { RUBIK_REGULAR } from "../../../constants/font";
+
 const { width: windowWidth } = Dimensions.get("window");
 
 const styles = StyleSheet.create({

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { View, TouchableOpacity, SafeAreaView } from "react-native";
 import { useRoute, useNavigationState } from "@react-navigation/native";
-
 import { AntDesign } from "@expo/vector-icons";
 
 import styles from "./styles";
-import { ShareIcon } from "../../../assets/svgs/icon";
 import { PRIMARY_GREY } from "../../../constants/colors";
+
+import { ShareIcon } from "../../../assets/svgs/icon";
 import { HeaderLogoSvg } from "../../../assets/svgs/ilusts";
 
 const Header = ({ navigation }) => {

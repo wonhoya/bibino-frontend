@@ -4,13 +4,13 @@ import { View } from "react-native";
 import { Camera } from "expo-camera";
 import { API_SERVER_URL } from "@env";
 
+import styles from "./styles";
+
 import { selectIdToken } from "../../features/userSlice";
 import generateHeaderOption from "../../utils/generateHeaderOption";
 
 import PhotoTabBar from "../../components/PhotoTabBar/PhotoTabBar";
 import CameraLoading from "../Loading/CameraLoading";
-
-import styles from "./styles";
 
 const Photo = ({ navigation }) => {
   const cameraRef = useRef(null);

@@ -1,26 +1,17 @@
 import { useEffect, useState } from "react";
 import * as Google from "expo-auth-session/providers/google";
 import { useSelector, useDispatch } from "react-redux";
-import { Platform } from "react-native";
 
 import { signInUser, userDeleted, removeIdToken } from "../features/userSlice";
-import { CLIENT_ID } from "../config/";
 import showErrorInDevelopment from "../utils/showErrorInDevelopment";
-
-let clientId;
-
-if (process.env.NODE_ENV === "development") {
-  clientId = CLIENT_ID.web;
-} else {
-  clientId = CLIENT_ID[Platform.OS];
-}
+import getClientId from "../utils/getClientId";
 
 const useGoogleSignIn = () => {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const userFetchStatus = useSelector((state) => state.user.status);
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-    clientId,
+    clientId: getClientId(),
   });
 
   useEffect(() => {

@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, FlatList, Dimensions } from "react-native";
 
 import styles from "./styles";
+
 import BeerCard from "./BeerCard/BeerCard";
 
 const { width: windowWidth } = Dimensions.get("window");

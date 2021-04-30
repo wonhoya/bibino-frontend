@@ -12,6 +12,7 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
+
 import { todayBeersSlice } from "./todayBeersSlice";
 import { userSlice } from "./userSlice";
 import { commentsSlice } from "./commentsSlice";

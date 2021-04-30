@@ -1,3 +1,5 @@
+import { StyleSheet } from "react-native";
+
 import { PRIMARY_WHITE } from "../../constants/colors";
 import { RUBIK_BOLD, RUBIK_MEDIUM, RUBIK_REGULAR } from "../../constants/font";
 import {
@@ -5,8 +7,6 @@ import {
   CONFIGURATION_BUTTON_TITLE_FONT_SIZE,
   CONFIGURATION_BUTTON_DESCRIPTION_FONT_SIZE,
 } from "../../constants/size";
-
-import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {

@@ -4,13 +4,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { Camera } from "expo-camera";
 import * as Linking from "expo-linking";
 
-import styles from "./styles";
-import isTodayBeerDataOutdated from "../../utils/isTodayBeerDataOutdated";
 import { getUser } from "../../features/userSlice";
 import {
   fetchTodayBeers,
   todayBeersDeleted,
 } from "../../features/todayBeersSlice";
+import isTodayBeerDataOutdated from "../../utils/isTodayBeerDataOutdated";
+
+import styles from "./styles";
+
 import ProfileContainer from "./ProfileContainer/ProfileContainer";
 import ContentsContainer from "./ContentsContainer/ContentsContainer";
 import Loading from "../Loading/Loading";

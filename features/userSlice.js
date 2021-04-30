@@ -46,7 +46,9 @@ const fetchMyBeers = createAsyncThunk(
     try {
       const { id: userId, idToken } = getState().user;
       const headers = generateHeaderOption(idToken);
-      const response = await fetch(`${serverUrl}/users/${userId}`, { headers });
+      const response = await fetch(`${API_SERVER_URL}/users/${userId}`, {
+        headers,
+      });
 
       const { beers } = await response.json();
 

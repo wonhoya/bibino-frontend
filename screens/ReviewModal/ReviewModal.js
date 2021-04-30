@@ -4,12 +4,14 @@ import { useSelector } from "react-redux";
 import Modal from "react-native-modal";
 import { API_SERVER_URL } from "@env";
 
-import styles from "./styles";
+import { selectIdToken } from "../../features/userSlice";
 import generateHeaderOption from "../../utils/generateHeaderOption";
 import showErrorInDevelopment from "../../utils/showErrorInDevelopment";
-import { selectIdToken } from "../../features/userSlice";
-import RatingBoard from "../../components/shared/RatingBoard/RatingBoard";
+
+import styles from "./styles";
+
 import Button from "../../components/shared/Button/Button";
+import RatingBoard from "../../components/shared/RatingBoard/RatingBoard";
 import CharacteristicContainer from "./CharacteristicContainer/CharacteristicContainer";
 
 const { height: windowHeight } = Dimensions.get("window");
