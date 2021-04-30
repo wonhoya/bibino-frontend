@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     width: "90%",
-    height: windowHeight / 1.5,
     marginTop: windowWidth / 10,
     marginBottom: windowHeight / 5,
     borderRadius: 10,

@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { View, Animated, Easing } from "react-native";
+import { View, Animated, Easing, Text, Image } from "react-native";
 import { FloatingAction } from "react-native-floating-action";
 import { useNavigationState } from "@react-navigation/native";
 import { API_SERVER_URL } from "@env";
+import { CountUp } from "use-count-up";
 
 import { selectIdToken } from "../../features/userSlice";
 import { commentsAdded, getComments } from "../../features/commentsSlice";
@@ -171,21 +172,79 @@ const Beer = ({ navigation, route }) => {
             rating={myReview.rating}
             reviewCounts={commentDatum.length}
           />
+          <View style={styles.beerDescription}>
+            <Text style={styles.beerMakerFont}>Anheuser-Busch InBev</Text>
+            <Text style={styles.beerDescriptionFont}>
+              average price{" "}
+              <Text style={styles.priceFont}>
+                {" "}
+                <CountUp isCounting end={4400} duration={2} />
+              </Text>{" "}
+              won
+            </Text>
+          </View>
           <RatingBoardContainer rating={beerInfo.averageRating} />
           <TagBoardContainer characterAverage={characterAverage} />
-          <SectionDivider direction="right" text="Description" />
+
+          <SectionDivider direction="right" />
+
+          <View style={styles.beerDescription}>
+            <Text style={styles.summaryFont}>Summary</Text>
+            <View style={styles.beerSummarySub}>
+              <Text style={styles.beerDescriptionFont2}>Description</Text>
+              <Text style={styles.beerDescriptionFont2}> / </Text>
+              <Text style={styles.beerDescriptionFont2}>about</Text>
+            </View>
+          </View>
+          <View style={styles.subLine} />
+          <View style={styles.flagContainer}>
+            <Image
+              style={{ width: 22, height: 22, marginRight: 10 }}
+              source={require("../../assets/pngs/KR.png")}
+            />
+            <Text style={styles.summaryBeerDescriptionFont}>South Korea </Text>
+          </View>
+          <View style={styles.flagContainer}>
+            <Text style={styles.summaryBeerDescriptionFont}>Alc. 4.5% </Text>
+          </View>
           <Animated.Text style={{ ...styles.description, top: moveY }}>
             {beerInfo.description}
           </Animated.Text>
-          <SectionDivider direction="left" text="Characteristic" />
+          <SectionDivider direction="left" />
+          <View style={styles.beerDescription}>
+            <Text style={styles.summaryFont}>Taste Characteristc</Text>
+            <View style={styles.beerSummarySub}>
+              <Text style={styles.beerDescriptionFont2}>
+                Based on user input
+              </Text>
+            </View>
+          </View>
+          <View style={styles.subLine} />
           <Animated.View style={styles.handlePositionX(scrollY)}>
             <CharacteristicContainer characterAverage={characterAverage} />
           </Animated.View>
-          <SectionDivider direction="right" text="Recommendation" />
+          <Text style={styles.criticQuestionFont}>
+            What is Aroma, Body, Sparkling?
+          </Text>
+          <SectionDivider direction="right" />
+          <View style={styles.beerDescription}>
+            <Text style={styles.summaryFont}>Beer recommendation</Text>
+            <View style={styles.beerSummarySub}>
+              <Text style={styles.beerDescriptionFont2}>
+                If you like this beer, you might like...
+              </Text>
+            </View>
+          </View>
+          <View style={styles.subLine} />
           <Animated.View style={styles.handleOpacity(scrollY)}>
             <RecommendationBoardContainer beers={recommendation} />
           </Animated.View>
-          <SectionDivider direction="left" text="Comments" />
+          <SectionDivider direction="left" />
+          <View style={styles.commentsDescription}>
+            <Text style={styles.summaryFont}>Comment</Text>
+            <Text style={styles.beerDescriptionFont2}>User comments</Text>
+          </View>
+          <View style={styles.subLine} />
           <CommentBoardContainer
             navigation={navigation}
             commentDatum={commentDatum}

@@ -35,8 +35,8 @@ const TabBar = ({ navigation }) => {
         handleTabPress={() => {
           nav.navigate("Profile");
         }}
-        iconName="user"
-        text="Profile"
+        iconName="picture"
+        text="Photos"
         isActive={currentRouteName === "Profile"}
       />
       <TabContainer

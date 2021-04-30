@@ -7,7 +7,6 @@ import RecommendationBoard from "../../../components/RecommendationBoard/Recomme
 const RecommendationBoardContainer = ({ beers }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Similar Beers</Text>
       <RecommendationBoard beers={beers} />
     </View>
   );

@@ -15,12 +15,16 @@ const styles = StyleSheet.create({
   },
   descriptionContainer: {
     flexDirection: "column",
+
     alignItems: "flex-end",
+    marginLeft: 30,
+    marginTop: 5,
   },
   ratingFont: {
     fontFamily: RUBIK_REGULAR,
     fontSize: 20,
   },
+
   descriptionFont: {
     fontFamily: RUBIK_REGULAR,
     fontSize: 13,

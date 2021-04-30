@@ -30,7 +30,7 @@ const Search = () => {
         <View style={styles.innerContainer}>
           <View style={styles.inputContainer}>
             <View style={styles.iconContainer}>
-              <SearchIcon size={30} />
+              <SearchIcon size={20} />
             </View>
             <TextInput
               autoCapitalize="none"

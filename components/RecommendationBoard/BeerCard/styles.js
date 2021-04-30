@@ -4,9 +4,9 @@ const { width: windowWidth } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   image: {
-    width: windowWidth / 3,
-    height: windowWidth / 2,
-    marginHorizontal: windowWidth / 40,
+    width: windowWidth / 2,
+    height: windowWidth / 1.5,
+    marginHorizontal: windowWidth / 60,
   },
 });
 

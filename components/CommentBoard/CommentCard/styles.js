@@ -10,12 +10,22 @@ const { width: windowWidth } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
     marginVertical: windowWidth / 50,
     width: windowWidth / 1.2,
-    height: windowWidth / 4.8,
+    height: windowWidth / 2.8,
     borderRadius: 5,
     backgroundColor: "#FFFFFF",
+    padding: 10,
+  },
+  descriptionContatiner: {
+    height: 50,
+    maxHeight: 110,
+    flexDirection: "row",
+    alignItems: "flex-end",
+  },
+  mainContainer: {
+    justifyContent: "space-between",
+    height: windowWidth / 6,
   },
   imageContainer: {
     flex: 0.8,
@@ -25,19 +35,15 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   image: {
-    width: windowWidth / 6.5,
-    height: windowWidth / 6.5,
+    width: windowWidth / 12.5,
+    height: windowWidth / 12.5,
     borderRadius: 50,
-  },
-  textContainer: {
-    flex: 1.5,
-    marginTop: "1%",
-    marginLeft: "3%",
+    marginRight: 10,
   },
   userName: {
-    marginBottom: "18%",
-    fontFamily: RUBIK_BOLD,
-    fontSize: 18,
+    marginTop: 10,
+    fontFamily: RUBIK_REGULAR,
+    fontSize: 12,
   },
   work: {
     marginBottom: "6%",
@@ -46,12 +52,10 @@ const styles = StyleSheet.create({
   },
   comment: {
     fontFamily: RUBIK_REGULAR,
-    fontSize: 16,
+    fontSize: 17,
   },
   ratingBoardContainer: {
-    flex: 1,
-    marginTop: "1.5%",
-    marginRight: "4%",
+    height: 10,
   },
 });
 

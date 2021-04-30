@@ -1,6 +1,10 @@
 import { StyleSheet } from "react-native";
 
-import { PRIMARY_ORANGE } from "../../constants/colors";
+import {
+  PRIMARY_ORANGE,
+  PRIMARY_GREY,
+  PRIMARY_LIGHT_GREY,
+} from "../../constants/colors";
 import { RUBIK_BOLD } from "../../constants/font";
 import { COMMENTS_RATING_FONT_SIZE } from "../../constants/size";
 
@@ -9,7 +13,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 20,
     borderRadius: 10,
-    backgroundColor: PRIMARY_ORANGE,
+    backgroundColor: PRIMARY_LIGHT_GREY,
   },
   descriptionContainer: {
     flex: 1,

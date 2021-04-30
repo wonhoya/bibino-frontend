@@ -87,7 +87,7 @@ const Profile = ({ navigation }) => {
     <>
       <SafeAreaView />
       <View style={styles.container}>
-        <View style={styles.infoContainer}>
+        {/* <View style={styles.infoContainer}>
           <Image
             style={styles.avatar}
             source={{ uri: user.avatar }}
@@ -95,6 +95,29 @@ const Profile = ({ navigation }) => {
           />
           <Text style={styles.title}>{user.name}</Text>
         </View>
+
+        <View style={styles.propertyContainer}>
+          <View style={styles.property}>
+            <Text>320</Text>
+            <Text>Total photo</Text>
+          </View>
+          <View style={styles.property}>
+            <Text>3.2</Text>
+            <Text>Average </Text>
+            <Text>rating</Text>
+          </View>
+          <View style={styles.property}>
+            <Text>4.2 </Text>
+            <Text>highest</Text>
+            <Text>rating</Text>
+          </View>
+          <View style={styles.property}>
+            <Text>3.2</Text>
+            <Text>lowest</Text>
+            <Text>rating</Text>
+          </View>
+        </View> */}
+
         <View style={styles.galleryContainer}>
           <View style={styles.gallery}>
             <FlatList
