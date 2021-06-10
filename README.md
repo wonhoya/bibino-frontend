@@ -36,6 +36,8 @@
 ## 1. Introduce
 <p align="center"><img src="https://github.com/wonhoya/bibino-frontend/blob/readme/assets/pngs/workingImage4.png?raw=true" width="50%" height="50%"><img src="https://github.com/wonhoya/bibino-frontend/blob/readme/assets/pngs/workingImage3.png?raw=true" width="50%" height="50%"></p>
 
+발표 영상 링크 => https://www.youtube.com/watch?t=3723&v=0G53ypQTac8&feature=youtu.be
+
 비비노는 맥주의 라벨을 찍어서 맥주에 대한 정보를 보고, 평가하고, 댓글을 달 수 있는 모바일 어플리케이션입니다.
 <br>
 <br>
@@ -95,8 +97,8 @@
 **이원호**
 
 - DB schema, backend flow 계획, 구현 및 테스트
-- 사용자로부터 맥주후기를 수집하여 이를 바탕으로 순위를매기고 사용자의 취향에 맞춰 맥주를 추천해주는 서비스 개발
-- 사용자의 취향에 따라 여러가지 기준을 충족하는 맥주를 찾을 수 있는 검색 기능을 구현
+- 사용자로부터 맥주후기를 수집하여 순위를 매기고 취향에 맞춰 맥주를 추천해주는 기능 구현
+- 사용자의 취향에 따라 여러가지 기준을 충족하는 맥주를 찾을 수 있는 검색 기능 구현
 <br>
 <br>
 
@@ -331,7 +333,7 @@ const navState = useNavigationState((state) => state);
 
 맥주 하나를 점으로 인식하고 두 점 사이의 거리를 찾는 공식을 사용하는 것입니다. 이런 식으로 맥주들을 나열하면 거리가 0에 가까울 수록 비슷한 맥주들이므로 사용자가 비슷하지만 다양한 맥주를 경험하도록 도와줄 수 있습니다. 현재는 맥주 추천에 이용하는 게 3가지 특징이라 3차원의 두 점 사이의 거리를 사용했지만 혹여 더 많은 특징을 사용한다할지라도 바로 적용할 수 있다는 장점이 있습니다. 그리고 두 점 사이의 거리가 0에 가까울수록 비슷한 맥주이므로 가장 비슷한 맥주들을 추천해줄 수 있습니다.
 
-$$abs(\sqrt{(b_1-b_2)^2 + (a_1-a_2)^2 + (s_1-s_2)^2})$$
+![equation](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D%20abs(%5Csqrt%7B(b_1-b_2)%5E2%20&plus;%20(a_1-a_2)%5E2%20&plus;%20(s_1-s_2)%5E2%7D))
 
 생각은 했지만 아쉽게도 구현은 못한 최적화 방법이 있는데 그 방법은  점과 점사이의 거리에서 착안한 projection을 사용한 방법입니다. mongoDB에서 지원하는 $near라는 쿼리를 이용하면 2d 평면상에서 점과 점의 거리를 구해 빠른 속도로 쿼리가 가능하여 이걸 이용해 3차원을 2차원에 투영하여 점과 점 사이의 거리를 구해서 쿼리를 이용하면 훨씬 빠른 방식으로 구현할 수 있었습니다.
 <br>
